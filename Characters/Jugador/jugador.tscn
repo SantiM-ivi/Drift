@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://6uo6r46hy2ao"]
+
+[ext_resource type="Script" uid="uid://bgjy77w1skls3" path="res://Scripts/BaseCar.gd" id="1_xvdyt"]
+[ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Characters/Jugador/rueda.tscn" id="2_tanke"]
+[ext_resource type="PackedScene" uid="uid://b1couq4a8l57y" path="res://Characters/Jugador/body_auto.tscn" id="2_ujaia"]
+[ext_resource type="PackedScene" uid="uid://8sl5gmdd6o6w" path="res://Characters/camera/camera_3d.tscn" id="3_47tc2"]
+[ext_resource type="PackedScene" uid="uid://cblx4t5w0pq0v" path="res://Scenes/Importante/torreta.tscn" id="4_xvdyt"]
+[ext_resource type="Shader" uid="uid://ejnc68toa8rh" path="res://Assets/Resources/overlay.gdshader" id="5_8oek3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ujaia"]
+size = Vector3(2.868164, 1.091919, 7.7158203)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tanke"]
+size = Vector3(2.8105469, 1.0693359, 2.2792969)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47tc2"]
+radius = 0.796875
+height = 3.3447266
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8wej"]
+render_priority = 0
+shader = ExtResource("5_8oek3")
+shader_parameter/pixel_size = 1.0
+shader_parameter/levels = 64.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_mxatf"]
+material = SubResource("ShaderMaterial_n8wej")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="Jugador" type="VehicleBody3D" unique_id=1223084414]
+script = ExtResource("1_xvdyt")
+
+[node name="BodyAuto" parent="." unique_id=1255914680 instance=ExtResource("2_ujaia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07528293, 0, -0.08926964)
+
+[node name="right_back" type="VehicleWheel3D" parent="." unique_id=337240041]
+transform = Transform3D(-1.34, 0, -2.4216308e-07, 0, 1.5918467, 0, 2.0233438e-07, 0, -1.6037737, 1.1876068, 0.44157302, 2.1561215)
+use_as_traction = true
+wheel_friction_slip = 2.5
+suspension_stiffness = 20.0
+
+[node name="Rueda" parent="right_back" unique_id=868937687 instance=ExtResource("2_tanke")]
+transform = Transform3D(-0.7462687, 0, 1.1268344e-07, 0, 0.7462687, 0, -1.1268344e-07, 0, -0.7462687, 0.036298633, -0.32953212, 0.112501144)
+
+[node name="left_back" type="VehicleWheel3D" parent="." unique_id=1498953193]
+transform = Transform3D(-1.34, 0, -2.4216308e-07, 0, 1.5918467, 0, 2.0233438e-07, 0, -1.6037737, -0.9335096, 0.44157302, 2.1561215)
+use_as_traction = true
+wheel_friction_slip = 2.5
+suspension_stiffness = 20.0
+
+[node name="Rueda" parent="left_back" unique_id=686719943 instance=ExtResource("2_tanke")]
+transform = Transform3D(-0.7462687, 0, 1.1268344e-07, 0, 0.7462687, 0, -1.1268344e-07, 0, -0.7462687, 0.036298633, -0.32953212, 0.112501144)
+
+[node name="left_front" type="VehicleWheel3D" parent="." unique_id=853614720]
+transform = Transform3D(-1.34, 0, -2.4216308e-07, 0, 1.5918467, 0, 2.0233438e-07, 0, -1.6037737, -0.9335096, 0.44157302, -2.942189)
+use_as_steering = true
+wheel_friction_slip = 3.5
+suspension_stiffness = 20.0
+
+[node name="Rueda" parent="left_front" unique_id=319584521 instance=ExtResource("2_tanke")]
+transform = Transform3D(-0.7462687, 0, 1.1268344e-07, 0, 0.7462687, 0, -1.1268344e-07, 0, -0.7462687, 0.036298633, -0.32953212, 0.112501144)
+
+[node name="right_front" type="VehicleWheel3D" parent="." unique_id=344111651]
+transform = Transform3D(-1.34, 0, -2.4216308e-07, 0, 1.5918467, 0, 2.0233438e-07, 0, -1.6037737, 1.14714, 0.44157302, -2.942189)
+use_as_steering = true
+wheel_friction_slip = 3.5
+suspension_stiffness = 20.0
+
+[node name="Rueda" parent="right_front" unique_id=808426192 instance=ExtResource("2_tanke")]
+transform = Transform3D(-0.7462687, 0, 1.1268344e-07, 0, 0.7462687, 0, -1.1268344e-07, 0, -0.7462687, 0.036298633, -0.32953212, 0.112501144)
+
+[node name="CollisionShapebody" type="CollisionShape3D" parent="." unique_id=2114782371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124400854, 0.9345784, -0.5767784)
+shape = SubResource("BoxShape3D_ujaia")
+
+[node name="CollisionShapetop" type="CollisionShape3D" parent="." unique_id=1756250197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15821481, 2.0756989, -0.07392216)
+shape = SubResource("BoxShape3D_tanke")
+
+[node name="CollisionShape3front" type="CollisionShape3D" parent="." unique_id=680903213]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.05415511, 0.9380152, -4.042431)
+shape = SubResource("CapsuleShape3D_47tc2")
+
+[node name="CollisionShape3back" type="CollisionShape3D" parent="." unique_id=2010092775]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.05415511, 0.9380152, 2.8275728)
+shape = SubResource("CapsuleShape3D_47tc2")
+
+[node name="Camera3D" parent="." unique_id=265022746 node_paths=PackedStringArray("follow_target") instance=ExtResource("3_47tc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110011816, 3.3022087, 5.1453466)
+follow_target = NodePath("..")
+distance = 6.0
+height = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=275277716]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_mxatf")
+
+[node name="Torreta" parent="." unique_id=273071118 node_paths=PackedStringArray("camera") instance=ExtResource("4_xvdyt")]
+transform = Transform3D(0.24639007, 0, 5.5879354e-08, 0, 0.5942588, 0, -5.2154064e-08, 0, 0.20863011, -0.030881047, 2.896021, -0.31357455)
+camera = NodePath("../Camera3D")

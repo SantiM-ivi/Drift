@@ -1,0 +1,81 @@
+
+
+----------------------TOYBOX------------------------------
+Iniciada
+Mundo con rampas y obsataculos
+
+-----------------MOVIMIENTO AUTO-------------------------
+Movimiento de auto
+Entendimiento de implementccion
+VehicleBody 3d
+VehicleWheel 3d
+WorldEnviroment
+DirectionalLight3d
+Disparo desde el auto
+Conectar objetos al vehiculo
+
+-------------------DEBUGGER-----------------------------------
+Empece a hacer una pantalla para hacer desarrolladores. El objetivo es que se puedan hacer cambios mientras se juega 
+para facilitar la iteracion y documentacion de mecanicas. Cambiar estadisticas, valores, ganar, perder, crear enemigos,etc.
+
+
+--------SISTEMA AVANZADO DE ESTADISTICAS----------------
+Implementé un sistema robusto de estadisticas basado en Resources para gestionar los atributos de 
+las entidades, integrando dynamic leveling mediante Curve resources y un sistema flexible de buffs. 
+Diseñé el núcleo del sistema utilizando una class_name Stats global que me permite definir estadísticas 
+base como vida, defensa y ataque, las cuales se pueden cambiar facilmente. 
+Tambien se calcula la progresión de nivel mediante una fórmula de raíz cuadrada para asegurar un avance 
+equilibrado, mientrasse obtienen los valores finales de cada atributo haciendo un sample de los Curve 
+resources específicos.
+
+Otra cosa mas es el sistema de modificadores, es importante para hacer que los buffos se añadan a la vez y 
+en partes, permite aplicar efectos de ADD y MULTIPLY de forma simultánea y dinámica a través de un Array de StatBuff. 
+Cada vez que ejecuto un add_buff o remove_buff, 
+disparo un proceso de recalculate_stats donde primero establezco las estadísticas base según el nivel actual 
+y luego aplico todos los multipliers y addends acumulados. 
+Para garantizar la integridad de los datos, incluí protecciones que evitan multiplicadores negativos 
+y utilicé call_deferred para asegurar que todas las dependencias estén listas antes de actualizar las variables finales.
+Finalmente, optimicé la gestión del estado de salud mediante setters que aplican un clampinteger para 
+restringir la vida actual entre cero y el current_max_health. 
+Complementé esto con un sistema de signals para hacer un emit automático a la interfaz 
+sobre cualquier health_changed o el fallecimiento de la entidad mediante health_depleted. 
+Además, integré funciones de actualización automática al modificar 
+la experience para que el poder de la entidad se mantenga siempre sincronizado con su nivel actual 
+sin necesidad de intervenciones manuales en el código.
+
+DEFINICIONES DE ELEMENTOS USADOS
+	
+	Resource: Un contenedor de datos que se puede guardar como un archivo independiente 
+	(como tus curvas o los objetos de estadísticas). 
+	Es ideal para compartir datos entre muchos objetos.
+	
+	class_name: Una palabra clave que registra tu script como un tipo global en el motor. 
+	Gracias a esto, podés usar Stats en cualquier otro script sin tener que cargar el archivo manualmente.
+	
+	Curve: Un recurso visual de Godot que permite dibujar una línea de progresión. 
+	Se usa para que las estadísticas no suban de forma lineal, sino que tengan "curvas" de poder
+	
+	Enum (Enumeración): Una lista de nombres fijos (como MAX_HEALTH, ATTACK) que internamente representan números. 
+	Sirve para que el código sea mucho más fácil de leer.
+	
+	Signal: El sistema de eventos de Godot. Permite que un objeto "grite" que 
+	algo pasó (como perder vida) para que otros objetos (como la barra de vida) reaccionen.
+	
+	Setter (set): Una función especial que se ejecuta automáticamente cada vez que intentás cambiar el valor de una variable, 
+	permitiendo validar o limitar ese cambio.
+	
+	call_deferred: Un método que le dice a Godot: "no ejecutes esto ahora mismo, esperá al final del frame cuando 
+	todo esté tranquilo". Evita errores de memoria o de carga.
+	
+	clampi: Una función que fuerza a un número entero a mantenerse dentro de un rango mínimo 
+	y máximo (por ejemplo, que la vida nunca sea menor a 0 ni mayor al máximo).
+	
+	Sample: La acción de pedirle a una Curve qué valor tiene en un punto específico (generalmente entre 0.0 y 1.0).
+	
+	Dictionary: Una estructura de datos que guarda pares de "clave y valor". 
+	En tu código, lo usás para asociar un nombre de estadística con su multiplicador correspondiente.
+	
+	Match: Es una estructura de control similar al "if", pero más limpia, 
+	que se usa para comparar una variable contra una lista de posibles valores (en tu caso, los tipos de buff).
+	
+	

@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dqgshxd1qvwul"]
+
+[ext_resource type="Texture2D" uid="uid://o17o611iaadg" path="res://Characters/Models/Texturas/Enviroment/PngTexture/texture_11.png" id="1_g8h5j"]
+[ext_resource type="Texture2D" path="res://EnemigoPrueba/Texturelabs_Soil_133S.jpg" id="2_ikf48"]
+[ext_resource type="PackedScene" uid="uid://b13xrjbkf0nc2" path="res://Characters/Models/Texturas/Enviroment/Container/Super Low Poly Container.fbx" id="7_3jykw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikf48"]
+albedo_texture = ExtResource("1_g8h5j")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ikf48"]
+radial_segments = 20
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jykw"]
+albedo_texture = ExtResource("2_ikf48")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ecn11"]
+size = Vector2(2000, 2000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3jykw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67byq"]
+size = Vector3(1.9598999, 1.7446289, 5.8204346)
+
+[node name="WorldMap" type="Node3D" unique_id=1117146276]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1986343422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0149269, 0.111844, 0.0358543)
+material_override = SubResource("StandardMaterial3D_ikf48")
+use_collision = true
+
+[node name="box" type="CSGBox3D" parent="CSGCombiner3D" unique_id=918618047]
+transform = Transform3D(0.925521, -0.968715, 0, 0.378697, 2.3675, 0, 0, 0, 1, 32.68532, 5.722357, 0)
+size = Vector3(38.839264, 0.135742, 10.8715)
+
+[node name="box3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1137732430]
+transform = Transform3D(0.9999638, 0.021831155, 0, -0.008534759, 2.5579264, 0, 0, 0, 0.99999994, 69.71841, 12.861376, 0)
+size = Vector3(38.839264, 0.135742, 10.8715)
+
+[node name="speedBreaker" type="CSGMesh3D" parent="CSGCombiner3D" unique_id=1042486394]
+transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 24.1159)
+mesh = SubResource("CylinderMesh_ikf48")
+
+[node name="speedBreaker2" type="CSGMesh3D" parent="CSGCombiner3D" unique_id=347357963]
+transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 27.7966)
+mesh = SubResource("CylinderMesh_ikf48")
+
+[node name="speedBreaker3" type="CSGMesh3D" parent="CSGCombiner3D" unique_id=530703362]
+transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 31.6709)
+mesh = SubResource("CylinderMesh_ikf48")
+
+[node name="speedBreaker4" type="CSGMesh3D" parent="CSGCombiner3D" unique_id=495792095]
+transform = Transform3D(-7.29339e-05, -4.8781, 0, 0.41788, -0.000851437, 0, 0, 0, 1.39042, 0, 0, 35.184)
+mesh = SubResource("CylinderMesh_ikf48")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1367437301]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1550149798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34470367, -0.049669743, 20.074036)
+material_override = SubResource("StandardMaterial3D_3jykw")
+mesh = SubResource("PlaneMesh_ecn11")
+
+[node name="floor" type="CollisionShape3D" parent="StaticBody3D" unique_id=699539436]
+transform = Transform3D(7.83, 0, 0, 0, 7.83, 0, 0, 0, 7.83, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_3jykw")
+
+[node name="Super Low Poly Container" parent="." unique_id=157547242 instance=ExtResource("7_3jykw")]
+transform = Transform3D(1.5365162, 0, 0, 0, 1.4035952, 0, 0, 0, 1.435688, 11.848447, -0.22131658, -21.638592)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Super Low Poly Container" unique_id=927800753]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Super Low Poly Container/StaticBody3D" unique_id=1794340970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01113987, 0.9091756, 0.11077881)
+shape = SubResource("BoxShape3D_67byq")

@@ -1,0 +1,110 @@
+extends VehicleBody3D
+class_name BaseCar
+
+@export var STEER_SPEED = 1.0
+@export var STEER_LIMIT = 0.6
+@export var stats: Stats
+var steer_target = 0
+@export var engine_force_value = 400
+
+var gearshift = 3
+var gear_multiplicator = 1
+var gear_locked = false
+
+var fwd_mps : float
+var speed: float
+
+func _ready():
+	# Inicializar stats y conectar señales
+	stats.setup_stats()
+	stats.health_changed.connect(_on_health_changed)
+	stats.health_depleted.connect(_on_player_death)
+
+func _physics_process(delta):
+	speed = linear_velocity.length() * Engine.get_frames_per_second() * delta
+	fwd_mps = transform.basis.x.x
+	traction(speed)
+	process_gear_shift()
+	process_accel(delta)
+	process_steer(delta)
+	process_brake(delta)
+	%Hud/speed.text = str(round(speed * 3.6)) + " KMPH"
+	%Hud/gearshift_label.text = "Gear: " + str(gearshift)
+
+func process_accel(delta):
+	if Input.is_action_pressed("forward"):
+		if fwd_mps >= -1:
+			if speed < 30 and speed != 0:
+				engine_force = clamp(engine_force_value * 10 / speed, 0, 300)
+			else:
+				engine_force = engine_force_value
+		engine_force = engine_force * gear_multiplicator
+
+		# aplicar fuerza a las ruedas traseras
+		$left_back.engine_force = engine_force
+		$right_back.engine_force = engine_force
+		return
+	
+	if Input.is_action_pressed("backward"):
+		if speed < 20 and speed != 0:
+			engine_force = -clamp(engine_force_value * 3 / speed, 0, 300)
+		else:
+			engine_force = -engine_force_value
+
+		$left_back.engine_force = engine_force
+		$right_back.engine_force = engine_force
+		return
+
+	# sin input → sin fuerza
+	$left_back.engine_force = 0
+	$right_back.engine_force = 0
+	engine_force = 0
+	brake = 0
+
+func process_gear_shift():
+	if Input.is_action_pressed("gear"):
+		if gear_locked == false:
+			gear_locked = true
+			gearshift += 1
+			if gearshift == 6: gearshift = 1
+			if gearshift == 1: gear_multiplicator = 0.3
+			elif gearshift == 2: gear_multiplicator = 0.7
+			elif gearshift == 3: gear_multiplicator = 1
+			elif gearshift == 4: gear_multiplicator = 1.3
+			elif gearshift == 5: gear_multiplicator = 1.8
+			await get_tree().create_timer(1.0).timeout
+			gear_locked = false
+
+func process_steer(delta):
+	steer_target = Input.get_action_strength("left") - Input.get_action_strength("right")
+	steer_target *= STEER_LIMIT
+	steering = move_toward(steering, steer_target, STEER_SPEED * delta)
+
+	# aplicar dirección a las ruedas delanteras
+	$left_front.steering = steering
+	$right_front.steering = steering
+
+func process_brake(delta):
+	if Input.is_action_pressed("ui_select"):
+		brake = 0.5
+		$left_back.brake = brake
+		$right_back.brake = brake
+		$left_back.wheel_friction_slip = 2
+		$right_back.wheel_friction_slip = 2
+	else:
+		brake = 0
+		$left_back.brake = brake
+		$right_back.brake = brake
+		$left_back.wheel_friction_slip = 2.9
+		$right_back.wheel_friction_slip = 2.9
+
+func traction(speed):
+	apply_central_force(Vector3.DOWN * speed)
+
+# --- Sistema de muerte/derrota ---
+func _on_health_changed(cur_health: int, max_health: int) -> void:
+	print("Cambio de vida")
+
+func _on_player_death() -> void:
+	print("Jugador derrotado")
+	get_tree().change_scene_to_file("res://scenes/GameOver.tscn")

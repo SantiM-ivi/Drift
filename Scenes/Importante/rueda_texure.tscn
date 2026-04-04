@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dtamcbn6uqlpt"]
+
+[ext_resource type="PackedScene" uid="uid://j4bgjk5b435w" path="res://Characters/Models/Texturas/AutoPlayer/Rueda/Rueda.fbx" id="1_2iwd4"]
+[ext_resource type="Material" uid="uid://ceqo0yr51lrvy" path="res://Characters/Models/Texturas/AutoPlayer/Rueda/rueda_standard_material_3d.tres" id="2_2iwd4"]
+
+[node name="Rueda" unique_id=819189955 instance=ExtResource("1_2iwd4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.065769, 0, 0)
+
+[node name="Cylinder" parent="." index="0" unique_id=88529267]
+transform = Transform3D(0, -1.8918042e-06, 43.165188, -63.478416, 0, -1.2864228e-06, 1.8918042e-06, -63.478416, 0, -0.48993492, 0.73020434, -0.454072)
+material_override = ExtResource("2_2iwd4")

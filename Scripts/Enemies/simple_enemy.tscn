@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cu2jmtx2r877h"]
+
+[ext_resource type="Script" uid="uid://c1poijdogjyww" path="res://Scripts/Enemies/simple_enemy.gd" id="1_2150n"]
+[ext_resource type="Resource" uid="uid://dmbunf7er5veq" path="res://resources/enemy_stats.tres" id="2_83g4e"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_i0nnx"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_83g4e"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_foicl"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="5_2m0j8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nkw65"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jr44v"]
+size = Vector3(1, 1.8475952, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i0nnx"]
+radius = 8.079716
+
+[node name="SimpleEnemy" type="CharacterBody3D" unique_id=675333152]
+script = ExtResource("1_2150n")
+follow_speed = 20.0
+stats = ExtResource("2_83g4e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1017980798]
+transform = Transform3D(1, 0, 0, 0, 1.8045992, 0, 0, 0, 1, 0, 0.8814093, 0)
+mesh = SubResource("BoxMesh_nkw65")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=167168727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8973694, 0)
+shape = SubResource("BoxShape3D_jr44v")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1527399321]
+path_desired_distance = 10.0
+target_desired_distance = 15.0
+
+[node name="StateChart" type="Node" parent="." unique_id=1611313203]
+script = ExtResource("2_i0nnx")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=641469465]
+script = ExtResource("3_83g4e")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateChart/Root" unique_id=1698959377]
+script = ExtResource("4_foicl")
+
+[node name="FollowState" type="Node" parent="StateChart/Root" unique_id=1907009294]
+script = ExtResource("4_foicl")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root" unique_id=404417297]
+script = ExtResource("5_2m0j8")
+to = NodePath("../IdleState")
+event = &"toIdle"
+delay_in_seconds = "0.0"
+
+[node name="ToFollow" type="Node" parent="StateChart/Root" unique_id=1170574842]
+script = ExtResource("5_2m0j8")
+to = NodePath("../FollowState")
+event = &"toFollow"
+delay_in_seconds = "0.0"
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=86094619]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1598747104]
+shape = SubResource("SphereShape3D_i0nnx")
+
+[connection signal="state_physics_processing" from="StateChart/Root/FollowState" to="." method="_on_follow_state_physics_processing"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

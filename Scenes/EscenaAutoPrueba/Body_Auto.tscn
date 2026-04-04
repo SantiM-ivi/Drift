@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bwspq6pbtqtrr"]
+
+[ext_resource type="PackedScene" uid="uid://b53hbonal84jl" path="res://Characters/Models/Texturas/AutoPlayer/Body/BodyAuto.fbx" id="1_36kbq"]
+[ext_resource type="Material" uid="uid://b20v7ycmvr5e8" path="res://Characters/Models/Texturas/AutoPlayer/Body/body_auto_standard_material_3d.tres" id="2_sumpv"]
+
+[node name="Auto completo testo" unique_id=1726602143 instance=ExtResource("1_36kbq")]
+
+[node name="Cube_001" parent="." index="0" unique_id=887864265]
+transform = Transform3D(147.73705, 0, 0, 0, -1.3113249e-05, 110.001915, 0, -110.0019, -1.3113251e-05, 0, 1.5012422, -5.684342e-16)
+material_override = ExtResource("2_sumpv")

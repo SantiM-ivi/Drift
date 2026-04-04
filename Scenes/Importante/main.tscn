@@ -151,12 +151,12 @@ player_path = NodePath("../../Jugador")
 stats = SubResource("Resource_2d5ox")
 
 [node name="SpawnDebugg" type="Node3D" parent="." unique_id=1773461327]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5541611, -44.36746)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.325153, -0.5541611, -44.36746)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=985684761]
 
 [node name="Jugador" parent="." unique_id=1223084414 instance=ExtResource("8_aypnd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.980816, 0.16957904, -23.329887)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.980816, 0.16957904, -10.81992)
 mass = 60.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.5, 0)

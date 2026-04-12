@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bjgukdgblq6yo" path="res://Entidades/Enviroment/PngTexture/sandtexture.jpg" id="1_nyee2"]
 [ext_resource type="Texture2D" uid="uid://45c3yhf7lphk" path="res://Entidades/Enviroment/PngTexture/trashtexture.jpg" id="2_lbcos"]
 [ext_resource type="Texture2D" uid="uid://c8uopio6ta4gy" path="res://Entidades/Enviroment/PngTexture/oxidizetexure.jpg" id="3_lbcos"]
+[ext_resource type="MeshLibrary" uid="uid://cmrekmvh358h2" path="res://Entidades/Enviroment/tiles.tres" id="4_si1mp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbyq2"]
 albedo_texture = ExtResource("1_nyee2")
@@ -20,8 +21,10 @@ uv1_triplanar = true
 uv1_triplanar_sharpness = 0.39229324
 
 [node name="map" type="Node3D" unique_id=1919716652]
+transform = Transform3D(0.60502005, 0, 0, 0, 1, 0, 0, 0, 0.71451896, 0, -35.54723, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=62905542]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=853302560]
@@ -41,3 +44,13 @@ material = SubResource("StandardMaterial3D_j5eki")
 transform = Transform3D(6.4543853, 0, 0, 0, 1, 0, 0, 0, 9.089907, -16.692162, 7.165658, 3.0959945)
 polygon = PackedVector2Array(-2, 0, -0.29172516, 1.1981936, 5.9607525, 1.0550671, 7.7442455, -0.15208149)
 material = SubResource("StandardMaterial3D_pe83k")
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1328658704]
+transform = Transform3D(0.99602866, 0, 0.08903336, 0, 0.99999976, 0, -0.089033365, 0, 0.99602854, 0, 31.488815, 0)
+mesh_library = ExtResource("4_si1mp")
+cell_scale = 10.0
+collision_mask = 22
+data = {
+"cells": PackedInt32Array(65447, 121, 327681, 65477, 145, 327681, 65506, 141, 327681, 65477, 115, 327681, 5, 156, 327681, 65534, 141, 327681, 65505, 151, 327681, 65477, 155, 327681, 65505, 161, 327681, 32, 147, 327681, 65509, 116, 327681, 3, 109, 327681, 65497, 232, 327680, 65507, 299, 1048576, 65524, 301, 1245184, 1, 304, 0, 2, 304, 0, 22, 300, 655360, 65516, 295, 655360, 65487, 301, 917504, 65468, 301, 851968, 65450, 298, 1179648, 65436, 294, 1114112, 65419, 293, 786432, 65402, 293, 786432, 65391, 287, 393216, 65367, 288, 393216, 65346, 286, 1114112, 65330, 283, 1114112, 65355, 287, 786432, 65376, 288, 786432, 65337, 287, 786432, 65314, 286, 786432, 65298, 285, 786432, 65288, 278, 1376256, 65280, 281, 1114112, 47, 65323, 196610, 222, 65484, 458754, 223, 65470, 720898, 99, 65390, 720898, 79, 65379, 983042, 65509, 65348, 196610, 65486, 65337, 458754, 65514, 65310, 720898, 25, 65317, 720898, 254, 70, 1048578, 259, 47, 262146, 281, 25, 262146, 259, 24, 262146, 281, 47, 262146, 246, 77, 262145, 51, 157, 262145, 65523, 148, 262145, 65466, 121, 262145, 21, 110, 262145, 52, 91, 262145, 64, 88, 262145, 83, 88, 1441793, 92, 69, 655361, 103, 47, 655361, 123, 38, 1048577, 142, 38, 1245185, 35, 303, 1245184, 87, 309, 917504, 103, 309, 0, 47, 303, 0, 48, 303, 0, 12, 304, 0, 60, 304, 0, 71, 309, 0, 117, 310, 0, 131, 313, 1441792, 150, 315, 1441792, 169, 311, 1441792, 183, 322, 1441792, 192, 309, 1441792, 209, 313, 1441792, 224, 318, 1441792, 238, 324, 851968, 256, 316, 851968, 267, 307, 786432, 277, 293, 1376256, 275, 280, 393216, 276, 268, 393216, 276, 254, 655360, 278, 236, 655360)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)

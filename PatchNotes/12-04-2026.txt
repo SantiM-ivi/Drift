@@ -1,0 +1,11 @@
+- Evento caida de piedras
+- Barra de vida #
+- Puntuacion de chatarra #
+- sfx sonidos #
+- armar un toque el mapa 
+- 
+
+
+chatarra.gd = autoload que se encarga de mandar señal
+chatarra_hud.gd = actualizacion del label chatarra
+life.gd = calculo de vida heredado del colorrect

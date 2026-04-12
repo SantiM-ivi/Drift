@@ -6,6 +6,11 @@
 
 [sub_resource type="Resource" id="Resource_r5ngx"]
 script = ExtResource("3_jn5hk")
+bonus_damage = 5
+bonus_defense = 10
+bonus_speed = 50.0
+bonus_choque = 5
+nitro_multiplicador = 0.0
 metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ugw7w"]
@@ -78,7 +83,7 @@ nombre_item = "FolaCapo"
 slot = "Capo"
 stats = SubResource("Resource_r5ngx")
 
-[node name="Plane_006" parent="." index="0" unique_id=159544238]
+[node name="Plane_006" parent="." index="0" unique_id=633584882]
 transform = Transform3D(1.46227, 0, 0, 0, 0.3052117, 0, 0, 0, 1.57576, 0, 0, 0)
 mesh = SubResource("ArrayMesh_p2x22")
 

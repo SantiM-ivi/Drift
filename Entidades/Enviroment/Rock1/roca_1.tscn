@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://brpv5cqs73dyt"]
+
+[ext_resource type="PackedScene" uid="uid://c12ks8dlx5weo" path="res://Entidades/Enviroment/Rock1/Roca_1.glb" id="1_qc0mp"]
+
+[node name="Roca_1" unique_id=1060074908 instance=ExtResource("1_qc0mp")]
+
+[node name="Cube" parent="." index="0" unique_id=205883592]
+transform = Transform3D(1.8970438, 0, 0, 0, 1.8970438, 0, 0, 0, 1.8970438, 0, 0, 0)

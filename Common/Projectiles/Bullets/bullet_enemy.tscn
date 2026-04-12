@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dg674ucs3r762"]
 
-[ext_resource type="Script" uid="uid://cleu1ntbsoot6" path="res://Common/Projectiles/Bullets/Enemy_Bullet.gd" id="1_qthd7"]
+[ext_resource type="Script" uid="uid://cleu1ntbsoot6" path="res://Common/Projectiles/Bullets/enemy_bullet.gd" id="1_qthd7"]
 [ext_resource type="PackedScene" uid="uid://bbdq32dx8eym8" path="res://Entidades/Player/AutoPlayer/Lata/textura_bala.tscn" id="1_wd8cw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qthd7"]

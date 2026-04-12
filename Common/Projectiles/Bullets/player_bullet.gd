@@ -6,13 +6,13 @@ extends Area3D
 
 var timer: float = 0.0
 
-func _ready():
-	if not area_entered.is_connected(_on_area_entered):
-		area_entered.connect(_on_area_entered)
+func _ready() -> void:
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
+	if not area_entered.is_connected(_on_area_entered):
+		area_entered.connect(_on_area_entered)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	global_position += -global_transform.basis.z * speed * delta
 	timer += delta
 	if timer > lifetime:
@@ -21,6 +21,7 @@ func _physics_process(delta):
 func _on_body_entered(body: Node) -> void:
 	if body.has_method("apply_damage"):
 		body.apply_damage(damage)
+		print(damage)
 	queue_free()
 
 func _on_area_entered(area: Area3D) -> void:

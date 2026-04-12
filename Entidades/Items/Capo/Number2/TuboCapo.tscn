@@ -10,8 +10,8 @@
 
 [sub_resource type="Resource" id="Resource_d5o17"]
 script = ExtResource("3_bo7dk")
-damage = 10
-defense = 5
+bonus_damage = 15
+bonus_speed = 100.0
 metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_quaks"]
@@ -68,7 +68,7 @@ shadow_mesh = SubResource("ArrayMesh_65pc4")
 [sub_resource type="BoxShape3D" id="BoxShape3D_4pinj"]
 size = Vector3(3.4442215, 2.2737732, 4.248619)
 
-[node name="NoCapo" unique_id=1947901612 instance=ExtResource("1_gk7gj")]
+[node name="TuboCapo" unique_id=1947901612 instance=ExtResource("1_gk7gj")]
 script = ExtResource("2_4pinj")
 nombre_item = "TuboCapo"
 slot = "Capo"

@@ -1,19 +1,18 @@
 [gd_scene format=3 uid="uid://d1g6m8lx4y1sf"]
 
-[ext_resource type="Script" uid="uid://0ahne8fekirx" path="res://Common/Projectiles/Bullets/bullet.gd" id="1_xjght"]
+[ext_resource type="Script" uid="uid://0ahne8fekirx" path="res://Common/Projectiles/Bullets/player_bullet.gd" id="1_xjght"]
 [ext_resource type="PackedScene" uid="uid://bbdq32dx8eym8" path="res://Entidades/Player/AutoPlayer/Lata/textura_bala.tscn" id="2_abfge"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjght"]
 radius = 0.88964844
 height = 1.9841461
 
-[node name="Area3D" type="Area3D" unique_id=445187487]
+[node name="Node3D" type="Area3D" unique_id=445187487]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 collision_layer = 16
-collision_mask = 3
+collision_mask = 5
 script = ExtResource("1_xjght")
 speed = 300.0
-metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1929671522]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.4962609e-07, 0, -1.4962609e-07, 0.5, -0.02725209, -0.0223671, 0.20008005)

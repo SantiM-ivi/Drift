@@ -6,6 +6,8 @@ extends VBoxContainer
 @export var spawn_point_item2: Node3D
 @export var spawn_point_item_aleatorio: Node3D
 
+
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("1"):
 		crear_enemigo()

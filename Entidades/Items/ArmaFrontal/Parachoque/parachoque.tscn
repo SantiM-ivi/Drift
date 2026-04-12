@@ -7,7 +7,9 @@
 
 [sub_resource type="Resource" id="Resource_hw65r"]
 script = ExtResource("3_b8s0f")
-damage = 20
+bonus_defense = 10
+bonus_ram_damage = 20
+nitro_multiplicador = 0.0
 metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b8s0f"]

@@ -17,6 +17,7 @@ const DAMAGE: float = 2.0
 var player: Node3D
 var attack_locked: bool = false
 var can_shoot: bool = true
+var knockback_velocity: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	player = get_node(player_path)
@@ -26,15 +27,25 @@ func _ready() -> void:
 		stats.health_depleted.connect(_on_health_depleted)
 
 func _physics_process(delta: float) -> void:
+	# Aplicar knockback si existe
+	if knockback_velocity.length() > 0.1:
+		velocity = knockback_velocity
+		move_and_slide()
+		knockback_velocity = knockback_velocity.lerp(Vector3.ZERO, 0.15)
+		return
+
 	if stats and stats.health <= 0:
 		state_machine.travel("Death")
 		velocity = Vector3.ZERO
 		move_and_slide()
 		return
+
 	if not player or not is_instance_valid(player):
 		return
+
 	aim_at_player()
 	var distance = global_position.distance_to(player.global_position)
+
 	if distance <= ATTACK_RANGE:
 		velocity = Vector3.ZERO
 		move_and_slide()
@@ -89,6 +100,9 @@ func aim_at_player() -> void:
 	var target = Vector3(player.global_position.x, global_position.y, player.global_position.z)
 	look_at(target, Vector3.UP)
 	rotation.y += PI
+
+func apply_knockback(direccion: Vector3, fuerza: float) -> void:
+	knockback_velocity = direccion * fuerza + Vector3.UP * fuerza * 0.4
 
 func _on_health_changed(cur_health: int, max_health: int) -> void:
 	print("Enemy HP:", cur_health, "/", max_health)

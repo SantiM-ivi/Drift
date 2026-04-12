@@ -6,6 +6,9 @@
 
 [sub_resource type="Resource" id="Resource_860mp"]
 script = ExtResource("3_2i2qc")
+tipo = 1
+vida_cantidad = 50
+nitro_multiplicador = 0.0
 metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_860mp"]
@@ -20,6 +23,8 @@ stats = SubResource("Resource_860mp")
 transform = Transform3D(0.30581683, 0, 0, 0, 0.30581683, 0, 0, 0, 0.30581683, 0, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." index="1" unique_id=507193349]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=272061477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6293945e-05, 0.009216309, 0.018127441)

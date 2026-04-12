@@ -7,13 +7,13 @@ extends Area3D
 var timer: float = 0.0
 var direction: Vector3 = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 	if not area_entered.is_connected(_on_area_entered):
 		area_entered.connect(_on_area_entered)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if direction != Vector3.ZERO:
 		global_position += direction * speed * delta
 	timer += delta

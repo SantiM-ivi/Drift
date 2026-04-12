@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d01wddhar61ao"]
+
+[ext_resource type="PackedScene" uid="uid://cpk6xtjyo7g4i" path="res://Entidades/Enviroment/Pared3/Parede_3.glb" id="1_6puft"]
+[ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="2_20wad"]
+
+[node name="Parede_3" unique_id=183086938 instance=ExtResource("1_6puft")]
+
+[node name="Cube_003" parent="." index="0" unique_id=435245014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_20wad")

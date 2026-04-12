@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cbkcvk2uct43b"]
+
+[ext_resource type="PackedScene" uid="uid://bugawilkrce6j" path="res://Entidades/Enviroment/Rock2/roca_2.tscn" id="1_kg3gk"]
+[ext_resource type="PackedScene" uid="uid://brpv5cqs73dyt" path="res://Entidades/Enviroment/Rock1/roca_1.tscn" id="2_h8ykf"]
+[ext_resource type="PackedScene" uid="uid://div60xkaluw3t" path="res://Entidades/Enviroment/Rock/rock.tscn" id="3_d7mdl"]
+[ext_resource type="PackedScene" uid="uid://d01wddhar61ao" path="res://Entidades/Enviroment/Pared3/parede_3.tscn" id="4_so8tg"]
+[ext_resource type="PackedScene" uid="uid://bxk5qdl6uao5g" path="res://Entidades/Enviroment/Container/container.tscn" id="5_ck5lv"]
+
+[node name="Tiles" type="Node3D" unique_id=1494162986]
+
+[node name="Roca_2" parent="." unique_id=728008290 instance=ExtResource("1_kg3gk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.003048, -1.1920929e-07, 1.5822403)
+
+[node name="Roca_1" parent="." unique_id=1060074908 instance=ExtResource("2_h8ykf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6530889, 1.7681183, -1.8098993)
+
+[node name="Rock" parent="." unique_id=137618474 instance=ExtResource("3_d7mdl")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -4.808136, 0, -65.16559)
+
+[node name="Parede_3" parent="." unique_id=183086938 instance=ExtResource("4_so8tg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99827, 0, 15.46762)
+
+[node name="container" parent="." unique_id=1511698830 instance=ExtResource("5_ck5lv")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 17.975239, 0, -0.18400002)

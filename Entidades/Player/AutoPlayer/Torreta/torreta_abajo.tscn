@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dms4ci7dcqxdv"]
+
+[ext_resource type="PackedScene" uid="uid://dff6cjf6kfqep" path="res://Entidades/Player/AutoPlayer/Torreta/Torreta_abajo.fbx" id="1_dy8av"]
+[ext_resource type="Texture2D" uid="uid://bci1td1whc0j4" path="res://Entidades/Player/AutoPlayer/Torreta/Abajo/DefaultMaterial_BaseColor.png" id="2_pgny7"]
+[ext_resource type="Texture2D" uid="uid://b3u05sj7a36cj" path="res://Entidades/Player/AutoPlayer/Torreta/Abajo/DefaultMaterial_Roughness.png" id="3_hqmpn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dy8av"]
+albedo_texture = ExtResource("2_pgny7")
+roughness_texture = ExtResource("3_hqmpn")
+
+[node name="Torreta_abajo" unique_id=2074404612 instance=ExtResource("1_dy8av")]
+
+[node name="Cube_001" parent="." index="0" unique_id=2107886995]
+transform = Transform3D(33.727364, 0, 0, 0, -4.020615e-06, 155.01414, 0, -33.72736, -1.8479128e-05, 0, 1.4560642, 0)
+material_override = SubResource("StandardMaterial3D_dy8av")

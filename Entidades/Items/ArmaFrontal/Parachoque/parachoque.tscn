@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dtl5eikoxkrc2"]
+
+[ext_resource type="PackedScene" uid="uid://w480xdjey41a" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque.glb" id="1_crcrv"]
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_dcnhb"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_b8s0f"]
+[ext_resource type="ArrayMesh" uid="uid://d4n15t8bbtgo3" path="res://Entidades/Items/ArmaFrontal/Parachoque/mesh_parachoque.tres" id="4_b8s0f"]
+
+[sub_resource type="Resource" id="Resource_hw65r"]
+script = ExtResource("3_b8s0f")
+damage = 20
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8s0f"]
+size = Vector3(3.4442215, 2.2737732, 4.248619)
+
+[node name="parachoque" unique_id=642466694 instance=ExtResource("1_crcrv")]
+script = ExtResource("2_dcnhb")
+nombre_item = "Parachoque"
+slot = "Front"
+stats = SubResource("Resource_hw65r")
+
+[node name="Cube_003" parent="." index="0" unique_id=1761418389]
+transform = Transform3D(1.465605, 0, 0, 0, 0.4044695, 0, 0, 0, 0.06397835, -0.0016690511, 0.112476945, -0.120529175)
+mesh = ExtResource("4_b8s0f")
+
+[node name="Area3D" type="Area3D" parent="." index="1" unique_id=1477139173]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1760688587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06348801, 0.16871643, -0.025173187)
+shape = SubResource("BoxShape3D_b8s0f")

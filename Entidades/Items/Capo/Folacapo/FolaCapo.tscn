@@ -1,0 +1,91 @@
+[gd_scene format=4 uid="uid://bwtvy60ux6a21"]
+
+[ext_resource type="PackedScene" uid="uid://3d7swede3q8l" path="res://Entidades/Items/Capo/Folacapo/Capo_1 (1).glb" id="1_lor1w"]
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_132dw"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_jn5hk"]
+
+[sub_resource type="Resource" id="Resource_r5ngx"]
+script = ExtResource("3_jn5hk")
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ugw7w"]
+load_path = "res://.godot/imported/Capo_1 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png-0bed7fc62cf04ea039ee534f67fe3dbd.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8trt5"]
+load_path = "res://.godot/imported/Capo_1 (1)_DefaultMaterial_Emission.png-a5e2b6bf7d76341131594cd593b566e8.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_43npr"]
+load_path = "res://.godot/imported/Capo_1 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-f746b7d91a9390a584d4c122c423a4cb.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nbl8e"]
+load_path = "res://.godot/imported/Capo_1 (1)_DefaultMaterial_Normal.png-68fa7c26301a9ccb5c979132c7f1b8a8.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtped"]
+resource_name = "Material.001"
+transparency = 4
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_ugw7w")
+metallic = 1.0
+metallic_texture = SubResource("CompressedTexture2D_43npr")
+metallic_texture_channel = 2
+roughness_texture = SubResource("CompressedTexture2D_43npr")
+roughness_texture_channel = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = SubResource("CompressedTexture2D_8trt5")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_nbl8e")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fmh1k"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 0.24468917, 2),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAgADAAQAAgAEAAAAAQAFAAMAAAAEAAYABwAFAAEAAAAHAAEABwAGAAUAAAAGAAcA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("pxD//1fvAABX7///pxAAAFfv//9X7wAA//8AAP//AAAAAAAA//8AAP//AAAAAAAAAAAAAAAAAACnEP//pxAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p2x22"]
+resource_name = "Capo_1 (1)_Plane_006"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 0.24468917, 2),
+"attribute_data": PackedByteArray("pxBX71fvpxBX71fvpxCnEKcQV+8AAAAApxCnEAAA//9X71fvAAD//6cQV+//////V++nEP////9X71fv//8AAKcQpxD//wAAV++nEAAAAAA="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEA"),
+"material": SubResource("StandardMaterial3D_wtped"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("pxD//1fv/79X7///pxD/v1fv//9X7/+/pxD//6cQ/7+nEP//V+/vygAAAAAAAO/KpxD//6cQ78oAAAAA///vylfv//9X7+mTAAAAAP//6ZOnEP//V+/pk///AAD//+mTV+///6cQ78r//wAA///vylfv//9X7+/K//8AAAAA78qnEP//pxAV7P//AAAAABXsV+///6cQFewAAAAAAAAV7P///3////9/////f////38Q3dvFEN3bxRDd28UQ3dvF////f////3////9/////fyK6EV0iuhFdIroRXSK6EV3///9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fmh1k")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_132dw"]
+size = Vector3(3.4442215, 2.2737732, 4.248619)
+
+[node name="FolaCapo" unique_id=630960633 groups=["items"] instance=ExtResource("1_lor1w")]
+script = ExtResource("2_132dw")
+nombre_item = "FolaCapo"
+slot = "Capo"
+stats = SubResource("Resource_r5ngx")
+
+[node name="Plane_006" parent="." index="0" unique_id=159544238]
+transform = Transform3D(1.46227, 0, 0, 0, 0.3052117, 0, 0, 0, 1.57576, 0, 0, 0)
+mesh = SubResource("ArrayMesh_p2x22")
+
+[node name="Area3D" type="Area3D" parent="." index="1" unique_id=430081155]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=430739325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06348801, 0.16871643, -0.025173187)
+shape = SubResource("BoxShape3D_132dw")

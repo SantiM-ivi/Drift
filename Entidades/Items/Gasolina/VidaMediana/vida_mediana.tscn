@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bep2thdof4hkg"]
+
+[ext_resource type="PackedScene" uid="uid://dgncc54qwlhjw" path="res://Entidades/Items/Gasolina/VidaMediana/Vida_mediana.glb" id="1_v0lo0"]
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_2i2qc"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_2i2qc"]
+
+[sub_resource type="Resource" id="Resource_860mp"]
+script = ExtResource("3_2i2qc")
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_860mp"]
+size = Vector3(1.976593, 1.9949951, 2.013794)
+
+[node name="Vida_mediana" unique_id=667060929 instance=ExtResource("1_v0lo0")]
+script = ExtResource("2_2i2qc")
+nombre_item = "VidaMediana"
+stats = SubResource("Resource_860mp")
+
+[node name="Cube" parent="." index="0" unique_id=897252743]
+transform = Transform3D(0.30581683, 0, 0, 0, 0.30581683, 0, 0, 0, 0.30581683, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="1" unique_id=507193349]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=272061477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6293945e-05, 0.009216309, 0.018127441)
+shape = SubResource("BoxShape3D_860mp")

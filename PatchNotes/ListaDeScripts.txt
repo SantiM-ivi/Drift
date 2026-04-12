@@ -1,0 +1,30 @@
+
+-------------Sistema de Vehículos------------------
+BaseCar.gd – lógica principal del auto.
+CarReset.gd – reinicia la posición del vehículo.
+CameraFollow.gd – hace que la cámara siga al coche.
+
+---------Sistema de Gameplay / Escenario--------------
+BobbingPlatform.gd – plataforma flotante con movimiento.
+DiscSpin.gd – controla objetos giratorios.
+hud.gd – interfaz gráfica del jugador.
+debbuger.gd – spawner/debugger para pruebas rápidas.
+
+----------------Sistema de Combate-------------------
+bullet_enemy.gd -balas de los enemigos
+bullet.gd – comportamiento de las balas.
+torreta.gd – lógica de torretas que disparan.
+
+---------------Sistema de Enemigos-----------------
+enemy.gd – enemigo principal, ajustado para soltar ítems.
+genisys_enemy.gd – enemigo tipo “genisys”.
+simple_enemy.gd – enemigo básico.
+
+---------------Sistema de Ítems--------------------
+item_base.gd – ítem en escena, recogible con E.
+ItemPool.gd – devuelve ítems aleatorios, con rarezas.
+ItemResource.gd – recurso que define datos de cada ítem.
+
+------------Sistema de Estadísticas-------------------
+Stats.gd – sistema de estadísticas generales.
+stat_buff.gd – aplica mejoras o buffs a las stats.

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cq0duj1pje36f"]
+
+[ext_resource type="PackedScene" uid="uid://b8x7eb0ngjl6h" path="res://Entidades/Items/Gasolina/VidaChica/Vida_chica.glb" id="1_0vffk"]
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_0gi1a"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_0gi1a"]
+
+[sub_resource type="Resource" id="Resource_0g6en"]
+script = ExtResource("3_0gi1a")
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0g6en"]
+size = Vector3(2.0538979, 2.1478882, 2.0770874)
+
+[node name="Vida_chica" unique_id=437973553 instance=ExtResource("1_0vffk")]
+script = ExtResource("2_0gi1a")
+nombre_item = "VidaChica"
+stats = SubResource("Resource_0g6en")
+
+[node name="Cylinder" parent="." index="0" unique_id=1355133564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="1" unique_id=1779011375]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=880334450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013637543, 0.08023071, -0.054107666)
+shape = SubResource("BoxShape3D_0g6en")

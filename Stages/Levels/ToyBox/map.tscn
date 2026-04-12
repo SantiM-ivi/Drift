@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dwcuy4jbucc5d"]
+
+[ext_resource type="Texture2D" uid="uid://bjgukdgblq6yo" path="res://Entidades/Enviroment/PngTexture/sandtexture.jpg" id="1_nyee2"]
+[ext_resource type="Texture2D" uid="uid://45c3yhf7lphk" path="res://Entidades/Enviroment/PngTexture/trashtexture.jpg" id="2_lbcos"]
+[ext_resource type="Texture2D" uid="uid://c8uopio6ta4gy" path="res://Entidades/Enviroment/PngTexture/oxidizetexure.jpg" id="3_lbcos"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbyq2"]
+albedo_texture = ExtResource("1_nyee2")
+uv1_offset = Vector3(0.705, 0, 0)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.07694669
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5eki"]
+albedo_texture = ExtResource("2_lbcos")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe83k"]
+albedo_texture = ExtResource("3_lbcos")
+uv1_offset = Vector3(1.515, 0.645, 1.18)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.39229324
+
+[node name="map" type="Node3D" unique_id=1919716652]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=62905542]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=853302560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(250, 16, 250)
+material = SubResource("StandardMaterial3D_wbyq2")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1506059655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0009822845, 0, -0.06259632)
+operation = 2
+radius = 25.0
+height = 15.0
+sides = 20
+material = SubResource("StandardMaterial3D_j5eki")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=1800815607]
+transform = Transform3D(6.4543853, 0, 0, 0, 1, 0, 0, 0, 9.089907, -16.692162, 7.165658, 3.0959945)
+polygon = PackedVector2Array(-2, 0, -0.29172516, 1.1981936, 5.9607525, 1.0550671, 7.7442455, -0.15208149)
+material = SubResource("StandardMaterial3D_pe83k")

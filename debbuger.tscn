@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dlke4nh4h6m2i"]
+
+[ext_resource type="Script" uid="uid://bgjsm2afq4wpn" path="res://Common/Tooltips/debugger.gd" id="1_yo3u7"]
+[ext_resource type="PackedScene" uid="uid://3gwqsiola652" path="res://Entidades/Enemies/Soldado/Soldado.tscn" id="2_vrsyd"]
+
+[node name="Debbuger" type="VBoxContainer" unique_id=916813104]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yo3u7")
+enemy_scene = ExtResource("2_vrsyd")
+
+[node name="Label" type="Label" parent="." unique_id=516425453]
+layout_mode = 2
+text = "Herramienta de Prueba de Toybox
+"
+
+[node name="FPS" type="Label" parent="." unique_id=1822291194]
+layout_mode = 2
+text = "V0.1 Items - Enemigo - Swap
+
+"
+
+[node name="VFlowContainer" type="VFlowContainer" parent="." unique_id=1531103621]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="Crear Enemigo" type="Button" parent="VFlowContainer" unique_id=1529693186]
+layout_mode = 2
+text = "1 Crear Enemigo"
+
+[node name="Crear Item Vida" type="Button" parent="VFlowContainer" unique_id=353443548]
+layout_mode = 2
+text = "2 Crear Item Vida"
+
+[node name="Crear Item Armadura" type="Button" parent="VFlowContainer" unique_id=1433578247]
+layout_mode = 2
+text = "3 Crear Item Armadura"
+
+[node name="Crear Item Municion" type="Button" parent="VFlowContainer" unique_id=1108675903]
+layout_mode = 2
+text = "4 Crear Item Municion"
+
+[node name="Crear Item Aleatorio" type="Button" parent="VFlowContainer" unique_id=361882794]
+layout_mode = 2
+text = "5 Crear Item Aleatorio"
+
+[node name="Ganar Partida" type="Button" parent="VFlowContainer" unique_id=344851405]
+layout_mode = 2
+text = "6 Ganar Partida"
+
+[node name="Perder Partida" type="Button" parent="VFlowContainer" unique_id=143436314]
+layout_mode = 2
+text = "7 Perder Partida"
+
+[node name="Perder 1 de Vida" type="Button" parent="VFlowContainer" unique_id=926600871]
+layout_mode = 2
+text = "8 Perder 1 de Vida"
+
+[node name="Perder 10 de Vida" type="Button" parent="VFlowContainer" unique_id=290457378]
+layout_mode = 2
+text = "9 Perder 10 de Vida"
+
+[node name="Perder 100 de Vida" type="Button" parent="VFlowContainer" unique_id=1611921127]
+layout_mode = 2
+text = "0 Exit"
+
+[node name="Guardar Partida" type="Button" parent="VFlowContainer" unique_id=899073495]
+layout_mode = 2
+text = "Guardar Partida"

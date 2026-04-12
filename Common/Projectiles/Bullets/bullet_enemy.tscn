@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dg674ucs3r762"]
+
+[ext_resource type="Script" uid="uid://cleu1ntbsoot6" path="res://Common/Projectiles/Bullets/Enemy_Bullet.gd" id="1_qthd7"]
+[ext_resource type="PackedScene" uid="uid://bbdq32dx8eym8" path="res://Entidades/Player/AutoPlayer/Lata/textura_bala.tscn" id="1_wd8cw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qthd7"]
+radius = 0.6626587
+height = 1.3253174
+
+[node name="Node3D" type="Area3D" unique_id=876573662]
+collision_layer = 16
+collision_mask = 19
+script = ExtResource("1_qthd7")
+damage = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=880808878]
+transform = Transform3D(0.53, 0, 0, 0, 0.53, 2.514571e-08, 0, -2.514571e-08, 0.53, 0, 0.018361796, 0.20008028)
+shape = SubResource("CapsuleShape3D_qthd7")
+
+[node name="Proyectil" parent="." unique_id=959547879 instance=ExtResource("1_wd8cw")]
+transform = Transform3D(0.18248643, 0, 0, 0, 0.0019912976, -0.21172564, 0, 0.17286086, 0.0024390065, -0.010322098, 0.007726198, -8.900347e-05)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

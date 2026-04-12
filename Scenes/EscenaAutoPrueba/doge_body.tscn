@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://d3cc8iiwga85q"]
-
-[ext_resource type="PackedScene" uid="uid://b607v1fjyqadp" path="res://cars/Models/Doge/doge-body.glb" id="1_jifw5"]
-
-[node name="doge-body" unique_id=1186818278 instance=ExtResource("1_jifw5")]

@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://djipdqa2hqf1j"]
-
-[ext_resource type="PackedScene" uid="uid://j4bgjk5b435w" path="res://Characters/Models/Texturas/AutoPlayer/Rueda/Rueda.fbx" id="1_gexck"]
-
-[node name="Rueda" unique_id=456508099 instance=ExtResource("1_gexck")]
-
-[node name="Cylinder" parent="." index="0" unique_id=18701559]
-transform = Transform3D(0, -1.8918042e-06, 43.165188, -63.478416, 0, -1.2864228e-06, 1.8918042e-06, -63.478416, 0, -0.18821871, 0.8360834, 0.0021585226)

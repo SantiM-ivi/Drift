@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dphf460bl6dk0"]
-
-[ext_resource type="PackedScene" uid="uid://c8ujes7b1aoxh" path="res://cars/Models/Doge/Wheel.glb" id="1_8m8ww"]
-
-[node name="Wheel" unique_id=1751956919 instance=ExtResource("1_8m8ww")]

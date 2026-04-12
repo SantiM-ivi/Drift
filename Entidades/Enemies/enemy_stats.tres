@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://dmbunf7er5veq"]
+
+[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="1_umnsp"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_umnsp")
+base_max_health = 25
+base_attack = 5
+metadata/_custom_type_script = "uid://irbhor700bc7"

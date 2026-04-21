@@ -5,14 +5,14 @@ enum BuffableStats {
 	MAX_HEALTH,
 	DEFENSE,
 	ATTACK,
-	RAM_DAMAGE,   # daño al chocar
+	RAM_DAMAGE,
 }
 
 const STAT_CURVES: Dictionary[BuffableStats, Curve] = {
 	BuffableStats.MAX_HEALTH: preload("uid://bl4di0h8srmiu"),
 	BuffableStats.DEFENSE:    preload("uid://dk6jwiov8fm8h"),
 	BuffableStats.ATTACK:     preload("uid://c55yl8ie1k14y"),
-	BuffableStats.RAM_DAMAGE: preload("uid://c55yl8ie1k14y"),  # usá la misma curva de ataque por ahora
+	BuffableStats.RAM_DAMAGE: preload("uid://c55yl8ie1k14y"), 
 }
 
 const BASE_LEVEL_XP: float = 100.0
@@ -77,6 +77,7 @@ func recalculate_stats() -> void:
 	current_defense     = base_defense     * STAT_CURVES[BuffableStats.DEFENSE].sample(stat_sample_pos)
 	current_attack      = base_attack      * STAT_CURVES[BuffableStats.ATTACK].sample(stat_sample_pos)
 	current_ram_damage  = base_ram_damage  * STAT_CURVES[BuffableStats.RAM_DAMAGE].sample(stat_sample_pos)
+
 
 	for stat_name in stat_multipliers:
 		var prop: String = "current_" + stat_name

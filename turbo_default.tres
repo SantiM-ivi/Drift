@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TurboResource" format=3 uid="uid://pvqcts3adrj0"]
+
+[ext_resource type="Script" uid="uid://bncl7mqa004ui" path="res://Assets/ModularSistems/ItemsStatSistem/turbo_stats.gd" id="1_3l1an"]
+
+[resource]
+script = ExtResource("1_3l1an")
+turbo_force = 2000.0
+metadata/_custom_type_script = "uid://bncl7mqa004ui"

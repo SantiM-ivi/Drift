@@ -113,6 +113,11 @@ func _on_health_depleted() -> void:
 	velocity = Vector3.ZERO
 	move_and_slide()
 	await get_tree().create_timer(3.5).timeout
+	var scene = ItemPool.get_random_item()
+	if scene:
+		var item_instance = scene.instantiate()
+		item_instance.global_position = global_position
+		get_tree().current_scene.add_child(item_instance)
 	queue_free()
 
 func apply_damage(amount: int) -> void:

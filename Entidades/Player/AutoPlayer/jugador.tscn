@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://bq1cp37sulwpx" path="res://Assets/Audio/SFX/CrashSFX.wav" id="12_t4ohr"]
 [ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="13_r7cot"]
 [ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="14_43o3v"]
+[ext_resource type="Script" uid="uid://bfcrqkig8f2bg" path="res://Entidades/Player/AutoPlayer/turbo_component.gd" id="15_48gm7"]
+[ext_resource type="Resource" uid="uid://pvqcts3adrj0" path="res://turbo_default.tres" id="16_48gm7"]
 
 [sub_resource type="Resource" id="Resource_t4ohr"]
 script = ExtResource("2_m6y23")
@@ -24,10 +26,6 @@ size = Vector3(2.868164, 1.091919, 7.7158203)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tanke"]
 size = Vector3(2.8105469, 1.0693359, 2.2792969)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47tc2"]
-radius = 0.91552734
-height = 3.3447266
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n8wej"]
 render_priority = 0
@@ -44,10 +42,10 @@ size = Vector2(2, 2)
 size = Vector3(6.2264404, 3.1831055, 10.588196)
 
 [node name="Jugador" type="VehicleBody3D" unique_id=1223084414]
-collision_layer = 21
-collision_mask = 21
+collision_layer = 23
+collision_mask = 23
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.5, 0)
+center_of_mass = Vector3(0, -0.55, 0)
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_xvdyt")
@@ -72,6 +70,7 @@ skeleton = NodePath("../../BodyAuto")
 
 [node name="Parachoque" type="MeshInstance3D" parent="ItemsEquipados" unique_id=1547667319]
 transform = Transform3D(-1.4127891, 0, -1.1432635e-08, 0, 0.80086315, 0, 1.2350995e-07, 0, -0.13077411, -0.06541979, 0.6794119, -4.527852)
+visible = false
 mesh = ExtResource("5_mbvet")
 
 [node name="CollisionShapebody" type="CollisionShape3D" parent="." unique_id=2114782371]
@@ -81,14 +80,6 @@ shape = SubResource("BoxShape3D_ujaia")
 [node name="CollisionShapetop" type="CollisionShape3D" parent="." unique_id=1756250197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15821481, 2.0756989, -0.07392216)
 shape = SubResource("BoxShape3D_tanke")
-
-[node name="CollisionShape3front" type="CollisionShape3D" parent="." unique_id=680903213]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.05415511, 0.9380152, -4.321975)
-shape = SubResource("CapsuleShape3D_47tc2")
-
-[node name="CollisionShape3back" type="CollisionShape3D" parent="." unique_id=2010092775]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.05415511, 0.9380152, 2.8275728)
-shape = SubResource("CapsuleShape3D_47tc2")
 
 [node name="right_back" type="VehicleWheel3D" parent="." unique_id=337240041]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 1.1415844, 0.44157302, 2.1561215)
@@ -139,10 +130,11 @@ suspension_max_force = 5000.0
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -0.08300114, 0.031028181, 0.00764513)
 
 [node name="Camera3D" parent="." unique_id=265022746 node_paths=PackedStringArray("follow_target") instance=ExtResource("3_47tc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110011816, 3.3022087, 5.1453466)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110011816, 3.3022087, 6.6996107)
 follow_target = NodePath("..")
-distance = 6.0
-height = 5.0
+distance = 8.0
+height = 6.0
+sensitivity = 0.007
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=275277716]
 extra_cull_margin = 16384.0
@@ -180,3 +172,7 @@ volume_db = -21.029
 [node name="EquiparSFX" type="AudioStreamPlayer3D" parent="." unique_id=1578363765]
 stream = ExtResource("14_43o3v")
 volume_db = -21.029
+
+[node name="TurboComponent" type="Node" parent="." unique_id=1234654068]
+script = ExtResource("15_48gm7")
+data = ExtResource("16_48gm7")

@@ -1,0 +1,63 @@
+-----------------------------------------------------------------------------------------------------
+item Drop en los enemigos
+-----------------------------------------------------------------------------------------------------
+
+Player Vehicle:
+Refactorizamos player_vehicle.gd a una arquitectura State Stack Machine con StateStack como RefCounted
+Estados del player: DrivingState, DriftState, AirState
+TurboComponent como nodo hijo independiente con TurboResource para configuración
+AirState sin control del jugador, solo auto-nivelación y clamp de velocidad angular
+-----------------------------------------------------------------------------------------------------
+
+Enemy Vehicle:
+AutoEnemigo con StateMachine simple (sin stack, estados excluyentes)
+Estados del enemigo: IdleState, ChaseState, AttackState
+Detección por áreas (DetectionArea, AttackArea) con layers configurados
+Steering corregido (signo de local_dir.x)
+Steering reducido a alta velocidad para evitar vuelcos
+center_of_mass = Vector3(0, -2.0, 0) y Roll Influence = 1.0 para estabilidad
+Auto-enderezar cuando se vuelca
+Proyectiles apuntando directo al player
+-----------------------------------------------------------------------------------------------------
+
+Física general:
+angular_damp, mass, suspension_stiffness, Roll Influence tuneados en el enemigo
+Layers configurados: Enviromet, Player, Enemies, Items, Bullets
+-----------------------------------------------------------------------------------------------------
+
+FPS Label:
+Script simple con Engine.get_frames_per_second()
+-----------------------------------------------------------------------------------------------------
+
+Scripts nuevos:
+
+state_stack.gd
+base_state.gd
+driving_state.gd
+drift_state.gd
+air_state.gd
+turbo_resource.gd
+turbo_component.gd
+base_enemy_state.gd
+state_machine.gd
+auto_enemigo.gd
+idle_state.gd
+chase_state.gd
+attack_state.gd
+fps_label.gd
+-----------------------------------------------------------------------------------------------------
+
+Nodos agregados a la escena:
+
+TurboComponent hijo de PlayerVehicle
+StateMachine hijo de AutoEnemigo
+DetectionArea hijo de AutoEnemigo
+AttackArea hijo de AutoEnemigo
+ShootPoint hijo de AutoEnemigo
+NavigationAgent3D hijo de AutoEnemigo
+Label con fps_label.gd en el HUD
+
+-----------------------------------------------------------------------------------------------------
+
+Resources creados:
+turbo_default.tres (TurboResource)

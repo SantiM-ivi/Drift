@@ -41,7 +41,6 @@ enabled=PackedStringArray()
 folder_colors={
 "res://Assets/": "red",
 "res://Common/": "gray",
-"res://Config/": "blue",
 "res://Entidades/": "green",
 "res://Localizacion/": "yellow",
 "res://PatchNotes/": "pink",

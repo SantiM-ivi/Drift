@@ -8,18 +8,23 @@ func _init(v: VehicleBody3D, stack: StateStack) -> void:
 	_stack = stack
 
 func on_enter() -> void:
-	vehicle.get_node("left_back").brake  = vehicle.freno_fuerza
-	vehicle.get_node("right_back").brake = vehicle.freno_fuerza
+	vehicle.rueda_bl.brake = vehicle.freno_fuerza
+	vehicle.rueda_br.brake = vehicle.freno_fuerza
 	vehicle._set_agarre(vehicle.agarre_derrape)
 
 func on_exit() -> void:
-	vehicle.get_node("left_back").brake  = 0.0
-	vehicle.get_node("right_back").brake = 0.0
+	vehicle.rueda_bl.brake = 0.0
+	vehicle.rueda_br.brake = 0.0
 	vehicle._set_agarre(vehicle.agarre_normal)
 
-func physics_process(_delta: float) -> void:
-	if abs(vehicle.steer_actual) > 0.1:
-		vehicle.apply_torque(Vector3.UP * vehicle.steer_actual * 800.0)
+func physics_process(delta: float) -> void:
+	_aplicar_torque_drift(delta)
 
 	if not Input.is_action_pressed("ui_select"):
-		_stack.pop()  # vuelve a DrivingState
+		_stack.pop()
+
+func _aplicar_torque_drift(delta: float) -> void:
+	if abs(vehicle.steer_actual) <= 0.1:
+		return
+	var torque_fuerza: float = vehicle.steer_actual * vehicle.freno_fuerza * 16.0
+	vehicle.apply_torque(Vector3.UP * torque_fuerza * delta)

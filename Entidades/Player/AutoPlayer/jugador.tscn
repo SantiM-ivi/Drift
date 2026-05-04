@@ -21,8 +21,8 @@
 script = ExtResource("2_m6y23")
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ujaia"]
-size = Vector3(2.868164, 1.091919, 7.7158203)
+[sub_resource type="BoxShape3D" id="BoxShape3D_48gm7"]
+size = Vector3(2.9931679, 7.681977, 1.1609192)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tanke"]
 size = Vector3(2.8105469, 1.0693359, 2.2792969)
@@ -44,11 +44,14 @@ size = Vector3(6.2264404, 3.1831055, 10.588196)
 [node name="Jugador" type="VehicleBody3D" unique_id=1223084414]
 collision_layer = 23
 collision_mask = 23
+mass = 60.0
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.55, 0)
+center_of_mass = Vector3(0, -0.5, 0)
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_xvdyt")
+velocidad_base = 300.0
+steer_speed = 1.0
 stats = SubResource("Resource_t4ohr")
 
 [node name="BodyAuto" parent="." unique_id=1255914680 instance=ExtResource("2_ujaia")]
@@ -74,21 +77,22 @@ visible = false
 mesh = ExtResource("5_mbvet")
 
 [node name="CollisionShapebody" type="CollisionShape3D" parent="." unique_id=2114782371]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124400854, 0.9345784, -0.5767784)
-shape = SubResource("BoxShape3D_ujaia")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.05333495, 0.90433097, -0.563071)
+shape = SubResource("BoxShape3D_48gm7")
 
 [node name="CollisionShapetop" type="CollisionShape3D" parent="." unique_id=1756250197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15821481, 2.0756989, -0.07392216)
 shape = SubResource("BoxShape3D_tanke")
 
 [node name="right_back" type="VehicleWheel3D" parent="." unique_id=337240041]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 1.1415844, 0.44157302, 2.1561215)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.9863901, 0.44157302, 2.1561215)
 use_as_traction = true
-wheel_radius = 0.7
-wheel_friction_slip = 2.5
+wheel_roll_influence = 0.2
+wheel_radius = 1.0
+wheel_friction_slip = 1.0
 suspension_travel = 0.1
-suspension_stiffness = 60.0
-suspension_max_force = 5000.0
+suspension_stiffness = 50.0
+suspension_max_force = 2500.0
 
 [node name="Rueda" parent="right_back" unique_id=868937687 instance=ExtResource("2_tanke")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.036, 0.031, -0.003)
@@ -96,35 +100,38 @@ transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.03
 [node name="left_back" type="VehicleWheel3D" parent="." unique_id=1498953193]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.1234651, 0.44157302, 2.1561215)
 use_as_traction = true
-wheel_radius = 0.7
-wheel_friction_slip = 2.5
+wheel_roll_influence = 0.2
+wheel_radius = 1.0
+wheel_friction_slip = 1.0
 suspension_travel = 0.1
-suspension_stiffness = 60.0
-suspension_max_force = 5000.0
+suspension_stiffness = 50.0
+suspension_max_force = 2500.0
 
 [node name="Rueda" parent="left_back" unique_id=686719943 instance=ExtResource("2_tanke")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -0.0054467916, 0.030999959, 0.041526437)
 
 [node name="left_front" type="VehicleWheel3D" parent="." unique_id=853614720]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.0395436, 0.44157302, -2.7728846)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.04, 0.442, -2.779)
 use_as_steering = true
-wheel_radius = 0.7
-wheel_friction_slip = 3.5
+wheel_roll_influence = 0.2
+wheel_radius = 1.0
+wheel_friction_slip = 1.0
 suspension_travel = 0.1
-suspension_stiffness = 60.0
-suspension_max_force = 5000.0
+suspension_stiffness = 50.0
+suspension_max_force = 2500.0
 
 [node name="Rueda" parent="left_front" unique_id=319584521 instance=ExtResource("2_tanke")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.07988715, 0.030999959, 0.06670439)
 
 [node name="right_front" type="VehicleWheel3D" parent="." unique_id=344111651]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.942636, 0.44157302, -2.942189)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.87612486, 0.44157302, -2.7792284)
 use_as_steering = true
-wheel_radius = 0.7
-wheel_friction_slip = 3.5
+wheel_roll_influence = 0.2
+wheel_radius = 1.0
+wheel_friction_slip = 1.0
 suspension_travel = 0.1
-suspension_stiffness = 60.0
-suspension_max_force = 5000.0
+suspension_stiffness = 50.0
+suspension_max_force = 2500.0
 
 [node name="Rueda" parent="right_front" unique_id=808426192 instance=ExtResource("2_tanke")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -0.08300114, 0.031028181, 0.00764513)

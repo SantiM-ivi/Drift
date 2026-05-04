@@ -1,45 +1,34 @@
 [gd_scene format=3 uid="uid://dwcuy4jbucc5d"]
 
-[ext_resource type="Texture2D" uid="uid://bjgukdgblq6yo" path="res://Entidades/Enviroment/PngTexture/sandtexture.jpg" id="1_nyee2"]
-[ext_resource type="Texture2D" uid="uid://45c3yhf7lphk" path="res://Entidades/Enviroment/PngTexture/trashtexture.jpg" id="2_lbcos"]
-[ext_resource type="Texture2D" uid="uid://c8uopio6ta4gy" path="res://Entidades/Enviroment/PngTexture/oxidizetexure.jpg" id="3_lbcos"]
+[ext_resource type="Texture2D" uid="uid://c7whafp40urco" path="res://addons/terrabrush/Assets/vik-shen-2EpzEKwKPpo-unsplash.jpg" id="1_84lpr"]
+[ext_resource type="Image" uid="uid://bdyk13sbyiteg" path="res://Stages/Levels/ToyBox/map/Splatmap_0_0_0.res" id="3_si1mp"]
+[ext_resource type="PackedScene" uid="uid://c12ks8dlx5weo" path="res://Entidades/Enviroment/Rock1/Roca_1.glb" id="4_0nvhn"]
+[ext_resource type="Image" uid="uid://kqnvv6mq6syt" path="res://Stages/Levels/ToyBox/map/Heightmap_0_0.res" id="4_si1mp"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbyq2"]
-albedo_texture = ExtResource("1_nyee2")
-uv1_offset = Vector3(0.705, 0, 0)
-uv1_triplanar = true
-uv1_triplanar_sharpness = 0.07694669
+[sub_resource type="TextureSetResource" id="TextureSetResource_0nvhn"]
+name = "Sand"
+albedoTexture = ExtResource("1_84lpr")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5eki"]
-albedo_texture = ExtResource("2_lbcos")
+[sub_resource type="TextureSetsResource" id="TextureSetsResource_1lt3a"]
+textureSets = Array[TextureSetResource]([SubResource("TextureSetResource_0nvhn")])
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe83k"]
-albedo_texture = ExtResource("3_lbcos")
-uv1_offset = Vector3(1.515, 0.645, 1.18)
-uv1_triplanar = true
-uv1_triplanar_sharpness = 0.39229324
+[sub_resource type="ZoneResource" id="ZoneResource_84lpr"]
+heightMapImage = ExtResource("4_si1mp")
+splatmapsImage = Array[Image]([ExtResource("3_si1mp")])
+
+[sub_resource type="ZonesResource" id="ZonesResource_si1mp"]
+zones = Array[ZoneResource]([SubResource("ZoneResource_84lpr")])
 
 [node name="map" type="Node3D" unique_id=1919716652]
 transform = Transform3D(0.60502005, 0, 0, 0, 1, 0, 0, 0, 0.71451896, 0, -35.54723, 0)
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=62905542]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-use_collision = true
+[node name="TerraBrush" type="TerraBrush" parent="." unique_id=1438826022]
+dataPath = "res://Stages/Levels/ToyBox/map"
+zonesSize = 1024
+textureSets = SubResource("TextureSetsResource_1lt3a")
+terrainZones = SubResource("ZonesResource_si1mp")
+transform = Transform3D(1, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999999, 0, 28.776321, 0)
+metadata/_edit_lock_ = false
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=853302560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-size = Vector3(250, 16, 250)
-material = SubResource("StandardMaterial3D_wbyq2")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1506059655]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0009822845, 0, -0.06259632)
-operation = 2
-radius = 25.0
-height = 15.0
-sides = 20
-material = SubResource("StandardMaterial3D_j5eki")
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=1800815607]
-transform = Transform3D(6.454385, 0, 0, 0, 1, 0, 0, 0, 9.089908, -16.69216, 6.613023, 3.0959945)
-polygon = PackedVector2Array(-2, 0, -0.29172516, 1.1981936, 5.9607525, 1.0550671, 7.7442455, -0.15208149)
-material = SubResource("StandardMaterial3D_pe83k")
+[node name="Roca_1" parent="." unique_id=1060074908 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(5, 0, 0, 0, 3.024999, 0, 0, 0, 4.235, -328.07803, 20.506027, 52.13071)

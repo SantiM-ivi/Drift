@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoPrueba/auto_enemigo.gd" id="1_ydkk0"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoPrueba/autoenemigo_state_machine.gd" id="2_1g0f4"]
+[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_bwqen"]
 [ext_resource type="Material" uid="uid://b20v7ycmvr5e8" path="res://Entidades/Player/AutoPlayer/Body/body_auto_standard_material_3d.tres" id="3_bwqen"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Player/AutoPlayer/rueda.tscn" id="4_vk40u"]
+
+[sub_resource type="Resource" id="Resource_vk40u"]
+script = ExtResource("2_bwqen")
+metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsm2e"]
 resource_name = "Material.002"
@@ -62,6 +67,7 @@ collision_mask = 23
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_ydkk0")
+stats = SubResource("Resource_vk40u")
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("2_1g0f4")

@@ -6,6 +6,7 @@ extends VehicleBody3D
 @onready var detection_area: Area3D = $DetectionArea
 @onready var attack_area: Area3D = $AttackArea
 @onready var shoot_point: Node3D = $ShootPoint
+@export var stats: Stats
 var proyectil_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet_enemy.tscn")
 
 var player: VehicleBody3D = null
@@ -18,7 +19,9 @@ func _ready() -> void:
 	detection_area.body_exited.connect(_on_detection_exited)
 	attack_area.body_entered.connect(_on_attack_entered)
 	attack_area.body_exited.connect(_on_attack_exited)
-	
+	if stats:
+		stats.health_changed.connect(_on_health_changed)
+		stats.health_depleted.connect(_on_health_depleted)
 	sm.transition_to(IdleState.new(self, sm))
 
 func _physics_process(delta: float) -> void:
@@ -53,3 +56,24 @@ func _auto_enderezar(delta: float) -> void:
 		apply_torque(correction * 10000.0)
 		# Frenamos la rotación existente para que no siga girando
 		angular_velocity = angular_velocity.lerp(Vector3.ZERO, 0.1)
+
+
+func _on_health_changed(cur_health: int, max_health: int) -> void:
+	print("Enemy HP:", cur_health, "/", max_health)
+
+func apply_damage(amount: int) -> void:
+	if stats:
+		var final_damage = max(0, amount - stats.current_defense)
+		stats.health -= final_damage
+		print("Enemy recibió daño:", final_damage, "HP restante:", stats.health)
+		
+		
+func _on_health_depleted() -> void:
+	var scene = ItemPool.get_random_item()
+	if scene:
+		var item_instance = scene.instantiate()
+		item_instance.global_position = global_position
+		get_tree().current_scene.add_child(item_instance)
+	queue_free()
+	
+	

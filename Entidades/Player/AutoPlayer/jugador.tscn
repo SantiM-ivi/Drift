@@ -9,10 +9,12 @@
 [ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="8_cks8u"]
 [ext_resource type="PackedScene" uid="uid://f561fbc0b875" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
 [ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
-[ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Player/AutoPlayer/Torreta/torreta_player.tscn" id="10_tsr6g"]
+[ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Items/ArmaCañon/Torreta/cañon_layer.tscn" id="10_tsr6g"]
 [ext_resource type="Script" uid="uid://r2igklj61rfa" path="res://Entidades/Player/AutoPlayer/player_equipment.gd" id="11_ro61n"]
 [ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capo/Mesh/mesh_fola.tres" id="14_tsr6g"]
 [ext_resource type="ArrayMesh" uid="uid://df03484m3d0bn" path="res://Entidades/Items/Capo/Mesh/mesh_tubo.tres" id="15_ro61n"]
+[ext_resource type="PackedScene" uid="uid://d1g6m8lx4y1sf" path="res://Common/Projectiles/Bullets/bullet.tscn" id="15_twon6"]
+[ext_resource type="PackedScene" uid="uid://brkt4yarrrbwi" path="res://Entidades/Items/ArmaMetralleta/Equipado/metralleta_player.tscn" id="16_48gm7"]
 [ext_resource type="ArrayMesh" uid="uid://d4n15t8bbtgo3" path="res://Entidades/Items/ArmaFrontal/Parachoque/mesh_parachoque.tres" id="16_r6tsw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
@@ -121,6 +123,15 @@ transform = Transform3D(-1.0880566, -9.313226e-10, -1.974634e-08, 1.8626451e-09,
 visible = false
 mesh = ExtResource("16_r6tsw")
 
+[node name="Cañon" parent="VisualRoot/ItemsEquipados" unique_id=1115247385 instance=ExtResource("10_tsr6g")]
+transform = Transform3D(-0.8919283, -9.313226e-10, -1.8820944e-07, -4.656613e-09, 0.54375297, 6.661338e-16, 1.3467746e-07, 0, -1.246456, -0.009241587, 0.8171008, 0.25561142)
+visible = false
+projectile_scene = ExtResource("15_twon6")
+
+[node name="Metralleta" parent="VisualRoot/ItemsEquipados" unique_id=1646838913 instance=ExtResource("16_48gm7")]
+transform = Transform3D(-0.99974406, -0.022617536, -8.7417185e-08, -0.022617536, 0.99974406, -9.887072e-10, 8.7417185e-08, 9.887072e-10, -1, -0.01070034, 0.94607747, 0)
+visible = false
+
 [node name="RayFL" type="RayCast3D" parent="." unique_id=2047864853]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0145948, 0, -2.015172)
 target_position = Vector3(0, -2, 0)
@@ -178,13 +189,6 @@ shape = SubResource("BoxShape3D_tsr6g")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=904499405]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007953376, 0.7032028, 3.9105692)
-
-[node name="Torreta" parent="." unique_id=1115247385 instance=ExtResource("10_tsr6g")]
-transform = Transform3D(-0.6460183, -1.5553087e-07, -6.93318e-08, -8.5216016e-08, 0.46765584, 4.4686477e-14, 5.647668e-08, 8.014186e-16, -0.79306424, 0.06134289, 0.7113717, 0.23083329)
-fire_rate = 0.1
-projectile_speed = 100.0
-target_yaw_speed = 30.0
-target_pitch_speed = 15.0
 
 [node name="PuntodeDisparo" type="Node3D" parent="." unique_id=444535231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00666897, 0.5896413, -2.3175523)

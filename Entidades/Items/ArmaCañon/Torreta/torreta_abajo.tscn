@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dms4ci7dcqxdv"]
 
-[ext_resource type="PackedScene" uid="uid://dff6cjf6kfqep" path="res://Entidades/Player/AutoPlayer/Torreta/Torreta_abajo.fbx" id="1_dy8av"]
-[ext_resource type="Texture2D" uid="uid://bci1td1whc0j4" path="res://Entidades/Player/AutoPlayer/Torreta/Abajo/DefaultMaterial_BaseColor.png" id="2_pgny7"]
-[ext_resource type="Texture2D" uid="uid://b3u05sj7a36cj" path="res://Entidades/Player/AutoPlayer/Torreta/Abajo/DefaultMaterial_Roughness.png" id="3_hqmpn"]
+[ext_resource type="PackedScene" uid="uid://dff6cjf6kfqep" path="res://Entidades/Items/ArmaCañon/Torreta/Torreta_abajo.fbx" id="1_dy8av"]
+[ext_resource type="Texture2D" uid="uid://bci1td1whc0j4" path="res://Entidades/Items/ArmaCañon/Torreta/Abajo/DefaultMaterial_BaseColor.png" id="2_pgny7"]
+[ext_resource type="Texture2D" uid="uid://b3u05sj7a36cj" path="res://Entidades/Items/ArmaCañon/Torreta/Abajo/DefaultMaterial_Roughness.png" id="3_hqmpn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dy8av"]
 albedo_texture = ExtResource("2_pgny7")

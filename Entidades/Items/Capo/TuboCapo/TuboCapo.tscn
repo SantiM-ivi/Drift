@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://de5ies48rqm32"]
 
-[ext_resource type="PackedScene" uid="uid://bsmmbinwi1ev6" path="res://Entidades/Items/Capo/Number2/Capo_2 (1).glb" id="1_gk7gj"]
+[ext_resource type="PackedScene" uid="uid://bsmmbinwi1ev6" path="res://Entidades/Items/Capo/TuboCapo/Capo_2 (1).glb" id="1_gk7gj"]
 [ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_4pinj"]
 [ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_bo7dk"]
-[ext_resource type="Texture2D" uid="uid://ifrbjub0df3h" path="res://Entidades/Items/Capo/Number2/Material/Capo_2 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="3_l7tk2"]
-[ext_resource type="Texture2D" uid="uid://ckvcgohlto8bq" path="res://Entidades/Items/Capo/Number2/Material/Capo_2 (1)_DefaultMaterial_Emission.png" id="4_4pinj"]
-[ext_resource type="Texture2D" uid="uid://d06lp0ds5ap4o" path="res://Entidades/Items/Capo/Number2/Material/Capo_2 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="5_yhves"]
-[ext_resource type="Texture2D" uid="uid://o2cy6mo74r26" path="res://Entidades/Items/Capo/Number2/Material/Capo_2 (1)_DefaultMaterial_Normal.png" id="6_k5yun"]
+[ext_resource type="Texture2D" uid="uid://ifrbjub0df3h" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="3_l7tk2"]
+[ext_resource type="Texture2D" uid="uid://ckvcgohlto8bq" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Emission.png" id="4_4pinj"]
+[ext_resource type="Texture2D" uid="uid://d06lp0ds5ap4o" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="5_yhves"]
+[ext_resource type="Texture2D" uid="uid://o2cy6mo74r26" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Normal.png" id="6_k5yun"]
 
 [sub_resource type="Resource" id="Resource_d5o17"]
 script = ExtResource("3_bo7dk")

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cbbm0xgx3y73l"]
+
+[ext_resource type="PackedScene" uid="uid://bxemd0i3ujqus" path="res://Entidades/Items/ArmaCañon/Torreta/torreta_arriba.tscn" id="1_43vvo"]
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="1_qmpe6"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="2_nk2ou"]
+
+[sub_resource type="Resource" id="Resource_bry0y"]
+script = ExtResource("2_nk2ou")
+tipo = 4
+bonus_ram_damage = 0
+nitro_multiplicador = 0.0
+bullet_damage = 25
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_85xkm"]
+size = Vector3(3.4442215, 2.2737732, 4.248619)
+
+[node name="cañon" type="Node3D" unique_id=2121923189]
+script = ExtResource("1_qmpe6")
+nombre_item = "Cañon"
+slot = "Arma"
+stats = SubResource("Resource_bry0y")
+
+[node name="Torreta_arriba" parent="." unique_id=825465429 instance=ExtResource("1_43vvo")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 1.2897913, -0.03416649, -0.041723132, 0.036544945)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1640231468]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=740003870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06348801, 0.16871643, -0.025173187)
+shape = SubResource("BoxShape3D_85xkm")

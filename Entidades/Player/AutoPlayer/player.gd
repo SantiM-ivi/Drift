@@ -70,7 +70,7 @@ var _tiempo_boost: float        = 0.0
 var _tiempo_cooldown: float     = 0.0
 var _nitro_activo: bool         = false
 var _items_en_rango: Array[ItemMundo] = []
-
+var _cooldown_disparo: float = 0.0
 # ─── INIT ────────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
@@ -127,7 +127,8 @@ func _physics_process(delta: float) -> void:
 		return
 
 	_aplicar_movimiento(delta, giro, accel_inp, frenando)
-
+	_cooldown_disparo -= delta
+	_manejar_disparo()
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
 func _actualizar_estado(en_suelo: bool, accel_inp: float, frenando: bool) -> void:
@@ -169,6 +170,26 @@ func _sincronizar_camara() -> void:
 	camara_pivot.global_position = global_position
 	camara_pivot.rotation.x      = 0.0
 	camara_pivot.rotation.z      = 0.0
+
+# ─── DISPARO ──────────────────────────────────────────────────────────────────
+func _manejar_disparo() -> void:
+	if not Input.is_action_just_pressed("shoot"):
+		return
+	if not equipment or not equipment.arma_activa:
+		return
+	if _cooldown_disparo > 0.0:
+		return
+
+	# Punto de disparo — el MuzzlePoint del ArmaSlot
+	var arma_node = equipment.equipado.get("Arma")
+	if arma_node == null:
+		return
+
+	var muzzle = arma_node.get_node_or_null("Muzzle")
+	var origen = muzzle.global_position if muzzle else global_position
+	var direccion = -global_transform.basis.z  # hacia donde mira el auto
+
+	_cooldown_disparo = equipment.arma_activa.fire_rate
 
 # ─── FLOTACION ───────────────────────────────────────────────────────────────
 
@@ -321,10 +342,10 @@ func activar_nitro(duracion: float, multiplicador: float) -> void:
 # ─── SEÑALES ─────────────────────────────────────────────────────────────────
 
 func _on_area_entered(area: Area3D) -> void:
-	var parent := area.get_parent()
-	if not parent is ItemMundo:
-		return
-	if parent.stats != null and parent.stats.tipo != ItemsStats.TipoItem.EQUIPABLE:
+	var parent = area.get_parent()
+	if not parent is ItemMundo: return
+
+	if parent.stats != null and parent.stats.tipo != ItemsStats.TipoItem.EQUIPABLE and parent.stats.tipo != ItemsStats.TipoItem.ARMA:
 		equipment.equipar(parent.slot, parent.nombre_item, global_position, parent.stats)
 		parent.queue_free()
 	else:

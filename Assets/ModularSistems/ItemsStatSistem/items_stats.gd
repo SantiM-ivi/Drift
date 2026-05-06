@@ -6,6 +6,7 @@ enum TipoItem {
 	CONSUMIBLE_VIDA,
 	CONSUMIBLE_NITRO,
 	CONSUMIBLE_CHATARRA,
+	ARMA,
 }
 
 @export var tipo: TipoItem = TipoItem.EQUIPABLE
@@ -21,3 +22,8 @@ enum TipoItem {
 @export var nitro_duracion: float = 0.0  # segundos de boost
 @export var nitro_multiplicador: float = 1.5
 @export var chatarra_cantidad: int = 0   # cuánto da a la economía
+
+@export var bullet_scene: PackedScene  # el proyectil que dispara
+@export var fire_rate: float = 0.5     # segundos entre disparos
+@export var bullet_speed: float = 30.0
+@export var bullet_damage: int = 15

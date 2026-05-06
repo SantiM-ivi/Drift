@@ -3,10 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://crlcq4pf2jjha" path="res://Entidades/Enemies/AutoPrueba/car_texture_2d.tres" id="1_pvmvt"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vk40u"]
-load_path = "res://.godot/imported/BodyDefaultMaterial_Normal.png-78bffb445659408519a4259db9609006.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nhrnt"]
-load_path = "res://.godot/imported/BodyDefaultMaterial_Roughness.png-7eaa5e89af279d8375da37f4954c1b7a.s3tc.ctex"
 
 [resource]
 albedo_texture = ExtResource("1_pvmvt")

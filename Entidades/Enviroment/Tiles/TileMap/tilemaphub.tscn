@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://bclxqa0g71u0t"]
+
+[ext_resource type="PackedScene" uid="uid://bxljc6o73n5rq" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Caja.glb" id="1_5cwtf"]
+[ext_resource type="PackedScene" uid="uid://8owk4lgyggkl" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Caño metal.glb" id="2_q7its"]
+[ext_resource type="PackedScene" uid="uid://ddvvwfmxp2636" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Luces.glb" id="3_aeh3s"]
+[ext_resource type="PackedScene" uid="uid://ou62u6nvn8py" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Pared_1.glb" id="4_41pnj"]
+[ext_resource type="PackedScene" uid="uid://cg8cnbc5tk3bh" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Pared_2.glb" id="5_drjqa"]
+[ext_resource type="PackedScene" uid="uid://cser784trrbr1" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Pared_3.glb" id="6_74i8s"]
+[ext_resource type="PackedScene" uid="uid://dkxodkgtqcn7r" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Pared_4.glb" id="7_y0xs7"]
+[ext_resource type="PackedScene" uid="uid://cswy6meb5o3os" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Piso_1.glb" id="8_4rm4e"]
+[ext_resource type="PackedScene" uid="uid://visr3jxqrhcr" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Piso_2.glb" id="9_svekk"]
+[ext_resource type="PackedScene" uid="uid://blfmijl6jr4fk" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Piso_3.glb" id="10_b4ioy"]
+[ext_resource type="PackedScene" uid="uid://bchfn5m46xqd0" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Piso_4.glb" id="11_ke0v3"]
+[ext_resource type="PackedScene" uid="uid://dc8g65trrwyir" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Plataforma de metal.glb" id="12_wdrhe"]
+[ext_resource type="PackedScene" uid="uid://bmt33xgkayk26" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Tuberia_1.glb" id="13_dyo3w"]
+[ext_resource type="PackedScene" uid="uid://cq2cww2ariijg" path="res://Entidades/Enviroment/Tiles/ElementosGlb/Tuberia_2.glb" id="14_46lde"]
+
+[node name="Tiles" type="Node3D" unique_id=600183807]
+
+[node name="Caja" parent="." unique_id=611415058 instance=ExtResource("1_5cwtf")]
+
+[node name="Caño metal" parent="." unique_id=488271321 instance=ExtResource("2_q7its")]
+
+[node name="Cylinder_002" parent="Caño metal" index="0" unique_id=1007671689]
+transform = Transform3D(0.6028297, 0, 0, 0, 7.935185, 0, 0, 0, 0.6028297, 0, 0, 0)
+
+[node name="Luces" parent="." unique_id=104837932 instance=ExtResource("3_aeh3s")]
+
+[node name="Cube" parent="Luces" index="0" unique_id=1717672613]
+transform = Transform3D(0.8800624, 0, 0, 0, 0.8800624, 0, 0, 0, 1.8227037, 0, 0, 0)
+
+[node name="Pared_1" parent="." unique_id=1050377445 instance=ExtResource("4_41pnj")]
+
+[node name="Cube_001" parent="Pared_1" index="0" unique_id=1507343762]
+transform = Transform3D(11.749301, 0, 0, 0, 14.839952, 0, 0, 0, 0.60865456, 0, 0, 0)
+
+[node name="Pared_2" parent="." unique_id=233719888 instance=ExtResource("5_drjqa")]
+
+[node name="Cube_002" parent="Pared_2" index="0" unique_id=1619228153]
+transform = Transform3D(11.749301, 0, 0, 0, 14.839952, 0, 0, 0, 0.60865456, 0, 0, 0)
+
+[node name="Pared_3" parent="." unique_id=1574264265 instance=ExtResource("6_74i8s")]
+
+[node name="Cube_003" parent="Pared_3" index="0" unique_id=613052140]
+transform = Transform3D(11.749301, 0, 0, 0, 14.839952, 0, 0, 0, 0.60865456, 0, 0, 0)
+
+[node name="Pared_4" parent="." unique_id=1085481344 instance=ExtResource("7_y0xs7")]
+
+[node name="Cube_004" parent="Pared_4" index="0" unique_id=2116461036]
+transform = Transform3D(11.749301, 0, 0, 0, 14.839952, 0, 0, 0, 0.60865456, 0, 0, 0)
+
+[node name="Piso_1" parent="." unique_id=2119730632 instance=ExtResource("8_4rm4e")]
+
+[node name="Cube_005" parent="Piso_1" index="0" unique_id=1813010554]
+transform = Transform3D(11.711308, 0, 0, 0, -0.111528926, 0, 0, 0, 11.349656, 0, 0, 0)
+
+[node name="Piso_2" parent="." unique_id=610032870 instance=ExtResource("9_svekk")]
+
+[node name="Cube_006" parent="Piso_2" index="0" unique_id=64189170]
+transform = Transform3D(11.711308, 0, 0, 0, -0.111528926, 0, 0, 0, 11.349656, 0, 0, 0)
+
+[node name="Piso_3" parent="." unique_id=548465838 instance=ExtResource("10_b4ioy")]
+
+[node name="Cube_007" parent="Piso_3" index="0" unique_id=906124693]
+transform = Transform3D(11.711308, 0, 0, 0, -0.111528926, 0, 0, 0, 11.349656, 0, 0, 0)
+
+[node name="Piso_4" parent="." unique_id=698072492 instance=ExtResource("11_ke0v3")]
+
+[node name="Cube_008" parent="Piso_4" index="0" unique_id=369014844]
+transform = Transform3D(11.711308, 0, 0, 0, -0.111528926, 0, 0, 0, 11.349656, 0, 0, 0)
+
+[node name="Plataforma de metal" parent="." unique_id=1703079949 instance=ExtResource("12_wdrhe")]
+
+[node name="Cube_023" parent="Plataforma de metal" index="0" unique_id=1214409322]
+transform = Transform3D(9.943304, 0, 0, 0, 0.2295745, 0, 0, 0, 9.638905, 0, 0, 0)
+
+[node name="Tuberia_1" parent="." unique_id=607145874 instance=ExtResource("13_dyo3w")]
+
+[node name="Cylinder" parent="Tuberia_1" index="0" unique_id=19871002]
+transform = Transform3D(1.0300274, 0, 0, 0, 2.4826746, 0, 0, 0, 1.0300274, 0, 0, 0)
+
+[node name="Tuberia_2" parent="." unique_id=67947096 instance=ExtResource("14_46lde")]
+
+[node name="Cylinder_001" parent="Tuberia_2" index="0" unique_id=757187201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[editable path="Caja"]
+[editable path="Caño metal"]
+[editable path="Luces"]
+[editable path="Pared_1"]
+[editable path="Pared_2"]
+[editable path="Pared_3"]
+[editable path="Pared_4"]
+[editable path="Piso_1"]
+[editable path="Piso_2"]
+[editable path="Piso_3"]
+[editable path="Piso_4"]
+[editable path="Plataforma de metal"]
+[editable path="Tuberia_1"]
+[editable path="Tuberia_2"]

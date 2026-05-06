@@ -4,7 +4,8 @@
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoPrueba/autoenemigo_state_machine.gd" id="2_1g0f4"]
 [ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_bwqen"]
 [ext_resource type="Material" uid="uid://b20v7ycmvr5e8" path="res://Entidades/Player/AutoPlayer/Body/body_auto_standard_material_3d.tres" id="3_bwqen"]
-[ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Player/AutoPlayer/rueda.tscn" id="4_vk40u"]
+[ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="4_vk40u"]
+[ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoPrueba/3d_enemylife_bar.gd" id="6_bwqen"]
 
 [sub_resource type="Resource" id="Resource_vk40u"]
 script = ExtResource("2_bwqen")
@@ -61,6 +62,24 @@ radius = 126.04294
 [sub_resource type="SphereShape3D" id="SphereShape3D_31ug3"]
 radius = 90.24422
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_1g0f4"]
+viewport_path = NodePath("3DHud")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwqen"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk40u"]
+bg_color = Color(0.84795487, 0.00021266572, 0.081389375, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.30050156, 0, 0.0101768505, 1)
+
 [node name="AutoEnemigo" type="VehicleBody3D" unique_id=1287735819]
 collision_layer = 4
 collision_mask = 23
@@ -73,7 +92,7 @@ stats = SubResource("Resource_vk40u")
 script = ExtResource("2_1g0f4")
 
 [node name="Esqueleto" type="MeshInstance3D" parent="." unique_id=1904454820]
-transform = Transform3D(147.73705, 0, 0, 0, -1.3113249e-05, 110.001915, 0, -110.0019, -1.3113251e-05, 0, 1.5012422, -5.684342e-16)
+transform = Transform3D(147.73705, 0, 0, 0, -1.3113249e-05, 78.58446, 0, -110.0019, -9.367998e-06, 0, 1.3134458, -5.684342e-16)
 material_override = ExtResource("3_bwqen")
 mesh = SubResource("ArrayMesh_nhrnt")
 skeleton = NodePath("")
@@ -151,3 +170,21 @@ collision_mask = 2
 
 [node name="AttackArea" type="CollisionShape3D" parent="AttackArea" unique_id=1568191370]
 shape = SubResource("SphereShape3D_31ug3")
+
+[node name="3DLifeBar" type="Sprite3D" parent="." unique_id=1782799994]
+transform = Transform3D(1.773726, 0, 0, 0, 1.7082102, 0, 0, 0, 1, 0, 4.0120926, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_1g0f4")
+script = ExtResource("6_bwqen")
+
+[node name="3DHud" type="SubViewport" parent="." unique_id=1486774100]
+size = Vector2i(149, 27)
+
+[node name="LifeBarTexture" type="ProgressBar" parent="3DHud" unique_id=358197603]
+offset_right = 149.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bwqen")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vk40u")
+step = 1.0
+value = 100.0
+show_percentage = false

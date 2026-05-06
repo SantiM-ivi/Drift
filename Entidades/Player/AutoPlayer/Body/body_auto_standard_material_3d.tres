@@ -1,11 +1,15 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://b20v7ycmvr5e8"]
 
-[ext_resource type="Texture2D" uid="uid://d2yjc8h1lkkfi" path="res://Entidades/Player/AutoPlayer/Body/BodyDefaultMaterial_BaseColor.png" id="1_75shg"]
-[ext_resource type="Texture2D" uid="uid://clqftkfblsr48" path="res://Entidades/Player/AutoPlayer/Body/BodyDefaultMaterial_Normal.png" id="2_omkn3"]
-[ext_resource type="Texture2D" uid="uid://b13vl1k626ufv" path="res://Entidades/Player/AutoPlayer/Body/BodyDefaultMaterial_Roughness.png" id="3_tqals"]
+[ext_resource type="Texture2D" uid="uid://crlcq4pf2jjha" path="res://Entidades/Enemies/AutoPrueba/car_texture_2d.tres" id="1_pvmvt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vk40u"]
+load_path = "res://.godot/imported/BodyDefaultMaterial_Normal.png-78bffb445659408519a4259db9609006.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nhrnt"]
+load_path = "res://.godot/imported/BodyDefaultMaterial_Roughness.png-7eaa5e89af279d8375da37f4954c1b7a.s3tc.ctex"
 
 [resource]
-albedo_texture = ExtResource("1_75shg")
-roughness_texture = ExtResource("3_tqals")
+albedo_texture = ExtResource("1_pvmvt")
+roughness_texture = SubResource("CompressedTexture2D_nhrnt")
 normal_enabled = true
-normal_texture = ExtResource("2_omkn3")
+normal_texture = SubResource("CompressedTexture2D_vk40u")

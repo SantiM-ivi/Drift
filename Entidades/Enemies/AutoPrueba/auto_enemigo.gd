@@ -9,7 +9,7 @@ extends VehicleBody3D
 @export var stats: Stats
 var proyectil_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet_enemy.tscn")
 
-var player: VehicleBody3D = null
+var player: RigidBody3D = null
 
 func _ready() -> void:
 	center_of_mass = Vector3(0, -1.0, 0)
@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	_auto_enderezar(delta)
 
 func _on_detection_entered(body: Node) -> void:
-	if body is VehicleBody3D and body != self:
+	if body.is_in_group("Player") and body != self:
 		player = body
 		sm.transition_to(ChaseState.new(self, sm))
 
@@ -39,12 +39,13 @@ func _on_detection_exited(body: Node) -> void:
 		sm.transition_to(IdleState.new(self, sm))
 
 func _on_attack_entered(body: Node) -> void:
-	if body == player:
+	if body == player and body.is_in_group("Player"):
 		sm.transition_to(AttackState.new(self, sm))
 
 func _on_attack_exited(body: Node) -> void:
-	if body == player:
+	if body == player and body.is_in_group("Player"):
 		sm.transition_to(ChaseState.new(self, sm))
+
 
 func _auto_enderezar(delta: float) -> void:
 	var up_local = global_transform.basis.y

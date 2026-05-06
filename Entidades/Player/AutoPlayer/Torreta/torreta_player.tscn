@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://iyvtpior804e"]
 
-[ext_resource type="Script" uid="uid://cwtapv85sy568" path="res://Entidades/Player/AutoPlayer/torreta.gd" id="1_jlfre"]
+[ext_resource type="Script" uid="uid://cwtapv85sy568" path="res://Entidades/Player/AutoPlayer/Torreta/torreta.gd" id="1_jlfre"]
 [ext_resource type="AudioStream" uid="uid://ccq3tf77xhupm" path="res://Assets/Audio/SFX/SonidoDisparo.wav" id="1_o7exq"]
 [ext_resource type="PackedScene" uid="uid://dms4ci7dcqxdv" path="res://Entidades/Player/AutoPlayer/Torreta/torreta_abajo.tscn" id="3_hr2dk"]
 [ext_resource type="PackedScene" uid="uid://bxemd0i3ujqus" path="res://Entidades/Player/AutoPlayer/Torreta/torreta_arriba.tscn" id="4_lh21x"]

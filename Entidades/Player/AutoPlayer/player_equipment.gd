@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerEquipment
 
-@onready var items_equipados: Node3D = $"../ItemsEquipados"
+@onready var items_equipados: Node3D = $"../VisualRoot/ItemsEquipados"
 
 var equipado: Dictionary = {}
 var buffs_activos: Dictionary = {}

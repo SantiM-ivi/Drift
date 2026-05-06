@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
 const SPEED: float = 4.0
-const ATTACK_RANGE: float = 10.0
+const ATTACK_RANGE: float = 100.0
 const DETECTION_RANGE: float = 25.0
 const DAMAGE: float = 2.0
 
-@export var player_path: NodePath
+
 @export var stats: Stats
 @export var bullet_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet_enemy.tscn")
 @export var fire_rate: float = 1.5
@@ -14,17 +14,24 @@ const DAMAGE: float = 2.0
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 
-var player: Node3D
+
 var attack_locked: bool = false
 var can_shoot: bool = true
 var knockback_velocity: Vector3 = Vector3.ZERO
+var player: RigidBody3D = null
 
 func _ready() -> void:
-	player = get_node(player_path)
 	anim_tree.active = true
 	if stats:
 		stats.health_changed.connect(_on_health_changed)
 		stats.health_depleted.connect(_on_health_depleted)
+
+	var players = get_tree().get_nodes_in_group("Player")
+	print("Players encontrados:", players)
+	if players.size() > 0:
+		player = players[0] as RigidBody3D
+		print("Enemy targeting:", player.name)
+
 
 func _physics_process(delta: float) -> void:
 	# Aplicar knockback si existe
@@ -73,6 +80,7 @@ func handle_attack() -> void:
 		if not is_inside_tree():
 			return
 		attack_locked = false
+		print("bala")
 
 func shoot_at_player() -> void:
 	if not is_inside_tree():
@@ -82,6 +90,7 @@ func shoot_at_player() -> void:
 	if not is_instance_valid(player):
 		return
 	var bullet = bullet_scene.instantiate()
+	print("bala")
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = global_position + Vector3(0, 1.5, 0)
 	bullet.direction = (player.global_position - global_position).normalized()

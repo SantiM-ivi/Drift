@@ -1,185 +1,190 @@
-[gd_scene format=3 uid="uid://6uo6r46hy2ao"]
+[gd_scene format=4 uid="uid://c5xen6irvbtlw"]
 
-[ext_resource type="Script" uid="uid://bgjy77w1skls3" path="res://Entidades/Player/AutoPlayer/player_movement.gd" id="1_xvdyt"]
-[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_m6y23"]
-[ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Player/AutoPlayer/rueda.tscn" id="2_tanke"]
-[ext_resource type="PackedScene" uid="uid://b1couq4a8l57y" path="res://Entidades/Player/AutoPlayer/body_auto.tscn" id="2_ujaia"]
-[ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capo/Mesh/mesh_fola.tres" id="3_8wxri"]
-[ext_resource type="PackedScene" uid="uid://8sl5gmdd6o6w" path="res://Entidades/Camera/camera_3d.tscn" id="3_47tc2"]
-[ext_resource type="ArrayMesh" uid="uid://df03484m3d0bn" path="res://Entidades/Items/Capo/Mesh/mesh_tubo.tres" id="4_mbvet"]
-[ext_resource type="Shader" uid="uid://ejnc68toa8rh" path="res://Assets/Shaders/overlay.gdshader" id="5_8oek3"]
-[ext_resource type="ArrayMesh" uid="uid://d4n15t8bbtgo3" path="res://Entidades/Items/ArmaFrontal/Parachoque/mesh_parachoque.tres" id="5_mbvet"]
-[ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Player/AutoPlayer/Torreta/torreta_player.tscn" id="6_8oek3"]
-[ext_resource type="Script" uid="uid://r2igklj61rfa" path="res://Entidades/Player/AutoPlayer/player_equipment.gd" id="8_7prgq"]
-[ext_resource type="AudioStream" uid="uid://bq1cp37sulwpx" path="res://Assets/Audio/SFX/CrashSFX.wav" id="12_t4ohr"]
-[ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="13_r7cot"]
-[ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="14_43o3v"]
-[ext_resource type="Script" uid="uid://bfcrqkig8f2bg" path="res://Entidades/Player/AutoPlayer/turbo_component.gd" id="15_48gm7"]
-[ext_resource type="Resource" uid="uid://pvqcts3adrj0" path="res://turbo_default.tres" id="16_48gm7"]
+[ext_resource type="Script" uid="uid://tanwk50icrp8" path="res://Entidades/Player/AutoPlayer/player.gd" id="1_omvyu"]
+[ext_resource type="Texture2D" uid="uid://dbs8ym6eyy4v1" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
+[ext_resource type="Texture2D" uid="uid://blskpcrqpdk45" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
+[ext_resource type="Texture2D" uid="uid://butryowtykkvn" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
+[ext_resource type="Texture2D" uid="uid://bbqnn0ag6mo4p" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
+[ext_resource type="AudioStream" uid="uid://bq1cp37sulwpx" path="res://Assets/Audio/SFX/CrashSFX.wav" id="7_u02rt"]
+[ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="8_cks8u"]
+[ext_resource type="PackedScene" uid="uid://f561fbc0b875" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
+[ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
+[ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Player/AutoPlayer/Torreta/torreta_player.tscn" id="10_tsr6g"]
+[ext_resource type="Script" uid="uid://r2igklj61rfa" path="res://Entidades/Player/AutoPlayer/player_equipment.gd" id="11_ro61n"]
+[ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capo/Mesh/mesh_fola.tres" id="14_tsr6g"]
+[ext_resource type="ArrayMesh" uid="uid://df03484m3d0bn" path="res://Entidades/Items/Capo/Mesh/mesh_tubo.tres" id="15_ro61n"]
+[ext_resource type="ArrayMesh" uid="uid://d4n15t8bbtgo3" path="res://Entidades/Items/ArmaFrontal/Parachoque/mesh_parachoque.tres" id="16_r6tsw"]
 
-[sub_resource type="Resource" id="Resource_t4ohr"]
-script = ExtResource("2_m6y23")
-metadata/_custom_type_script = "uid://irbhor700bc7"
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
+resource_name = "Material.003"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("3_qw2bf")
+metallic = 1.0
+metallic_texture = ExtResource("5_o2m60")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("5_o2m60")
+roughness_texture_channel = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("4_g5h5a")
+normal_enabled = true
+normal_texture = ExtResource("6_hcpjn")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_48gm7"]
-size = Vector3(2.9931679, 7.681977, 1.1609192)
+[sub_resource type="ArrayMesh" id="ArrayMesh_7poqb"]
+_surfaces = [{
+"aabb": AABB(-1.5016094, -1, -3.856661, 3.0030818, 2, 7.3172503),
+"format": 34896613377,
+"index_count": 492,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEAAAAFAAEABgAEAAMABQAGAAMABwACAAQABwAAAAIABgAHAAQAOgAFAAAABQA7AAYAAAAIADoAOgA8AAUABwAKAAAAAAAKAAgAPQAHAAYABgA7AAsABgALAD0ABQA+ADsAPAA+AAUAPgA/ADsAPQBAAAcAPAA4AD4AOwA/AEEAOwBBAAsAPgBCAD8AOABCAD4APwAsAEEAQgBDAD8APwBDACwAQgBEAEMAQQApAAsAQQBFACkALABFAEEACwApACgAKQBFAEYAKQBGACgACwAoACUAPQALACUAJwAlACgAPQAlAEcARwBAAD0AJQBIAEcASAAlACcARwBJAEAASABJAEcAKABGAEoAKABKACcASAAnADkAOQAnADcASAA5ADgAOQA3ADgAJwA2ADcAJwBKADYAOAA3ADYASAA4ADwASwBIADwASABLAEkASwA8ADoAOgAmAEsAJgBJAEsAOgAIACYAOAA2ADUAOAA1AEIANQBEAEIACAAYACYAGABJACYANQA2ADQASgA0ADYANQAzAEQANQA0ADMASgAvADQAMwA0AC8ARgAvAEoAMwAxAEQARAAxAAkARAAJAEMAMwBMADEATAAJADEAMgBMADMAMwAvADIAQwAJAE0ATABNAAkAQwBNACwAMgAwAEwAMABNAEwALwAwADIAMAAuAE0ALwAuADAALABNAC4ARgAqAC8ALgAvACoARQAqAEYALAAuAC0ALgAqAC0ALAArAEUARQArACoALQArACwALQAqACsAHwAQAE4ATgAQABMATwATABAAHwBPABAATgATAFAATwBRABMAUAATAFEAHQBRAE8AHgAdAE8AHgBPAB8AHAAdAB4AHwAcAB4AHQAUAFEAHAAUAB0AUABRABUAFQBRABQADwBOAFAAEQAfAE4AEQBOAA8AEQAgAB8AHwAgABwADwBQAA4ADgBQABUADQARAA8ADAAPAA4ADQAPAAwADAAOAAoABwAMAAoAQAAMAAcAQAANAAwACgAOABIADgAVABIACgASAAgASQANAEAAEgAWAAgASQAkAA0ACAAWABgASQAiACQASQAYACIAJAAjAA0AJAAiACMADQAjACEAIgAhACMADQAhABEAEQAhACAAIgBSACEAUgAgACEAGABSACIAUgAcACAAGABTAFIAUwAcAFIAFgBTABgAUwAaABwAFgAXAFMAFwAaAFMAEgAXABYAFAAcABoAFQAXABIAFAAaABsAFQAUABsAFwAZABoAFQAZABcAGwAaABkAGwAZABUA"),
+"lods": [0.18234804, PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEAAAAFAAEABgAEAAMABQAGAAMABwACAAQABwAAAAIABgAHAAQACAAFAAAABQAJAAYAAAAKAAgABwAKAAAACwAHAAYABgAJAAsABwAMAAoADQAMAAcACwANAAcADAAOAAoADQAPAAwADAAPAA4ADwAQAA4ADQARAA8AEQAQAA8ACgAOABIACgASAAgAEAATAA4ADgATABQAEAAUABMADgAVABIADgAUABUAEgAWAAgAEgAXABYAFQAXABIACAAWABgAFQAZABcAFgAXABoAFwAZABoAFgAaABgAGwAZABUAGwAaABkAFQAUABsAFAAaABsAFAAcABoAGAAaABwAHQAUABAAHAAUAB0AHgAdABAAHAAdAB4AHgAQAB8AHwAcAB4AEQAfABAAHwAgABwAEQAgAB8AEQAhACAAHAAgACEADQAhABEAIgAcACEAGAAcACIADQAjACEAIgAhACMAJAAjAA0AJAAiACMAJQAkAA0AJQAiACQAJQAYACIAJQANAAsAGAAlACYACAAYACYAJgAFAAgAJgAlACcACwAoACUAJwAlACgACwApACgAKQAqACgAKAAqACcACwArACkAKQArACoALAArAAsALQAqACsALQArACwACQAsAAsALAAuAC0ALAAJAC4ALgAqAC0ALgAvACoAKgAvACcAMAAuAAkALwAuADAAMAAJADEABQAxAAkALwAwADIAMgAwADEAMgAxADMAMwAvADIAMwAxAAUAMwA0AC8AJwAvADQANQAzAAUANQA0ADMAJwA0ADYANQA2ADQAJwA2ADcAOAA1AAUAOAA2ADUAOAA3ADYAJgA4AAUAOQAnADcAJgAnADkAOQA3ADgAJgA5ADgA")],
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("AgBJpeLQAAACAP//8GMAAAIA///etQAA//////BjAAD/////3rUAAAIAKJZlSwAA//8olmVLAAD//0ml4tAAAAIAVlNqxgAA//9abgAAAAACAA2JwdgAAP//oFUSRwAA//8NicHYAAD//1ZTwscAAAIAtYKA8QAA//+1goDxAAD//21n//8AAP//L18k3gAAAgABXyTeAAACAG1n//8AAAIAAAD//wAAAgBLRdrvAAAPWlZTasYAAA9aAV8k3gAAD1oAAFm8AAAPWktF2u8AAA9aAABw7wAAAgAAAHDvAABZqwAAve8AAP//AAD//wAA//8AAL3vAAD//0tF2u8AAFmrS0Xa7wAAWasvXyTeAABZqwAAWbwAAFmrVlPCxwAA//8AAFm8AAD//wAAh04AAAIAAABZvAAARlQAALVPAADrrwAAh04AAOuvoFUSRwAA668AAKIWAADrr1NTahgAAP//U1NqGAAA//8AAKIWAAD//wAAAAAAAEZUAABuFgAAAgAAAAAAAAACAFpuAAAAAAIAAABuFgAAAgAOSmoYAABGVA5KahgAAAIAsl29LAAARlSyXb0sAABGVKBVD0EAAAIAoFUPQQAAAgAAALVPAAACAOlYYL4AAP//0IyzOQAAAgBOWwRVAAD//05bBFUAAAIA0IyzOQAA//9Mg60nAAD//+lYYL4AAP//L2C+LwAAAgBMg60nAAD//8l5pxUAAAIAyXmnFQAA668vYL4vAADrrwAAlTIAAP//AADwYwAAAgAAAPBjAAD//wAA6akAAEZUAACYNAAAAgAAAOmpAAACABpDAAAAAP//GkMAAAAA/P+KdAb6AAD//+Q+//8AAAAAinQG+gAAAgDkPv//AABZqwAAldMAAA9aAACV0wAA")
+}]
+blend_shape_mode = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tanke"]
-size = Vector3(2.8105469, 1.0693359, 2.2792969)
+[sub_resource type="ArrayMesh" id="ArrayMesh_xwd11"]
+resource_name = "Coche_1_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1.5016094, -1, -3.856661, 3.0030818, 2, 7.3172503),
+"attribute_data": PackedByteArray("Qc7S8qbXMs+m19Dol86Fx9/I/e14zVH238lo9e3M6virx/L6vcH//73B0fqXyv//vcHX6hHJScS9wd7IwsnuvRTIlLcvy/GvvcH1tr3B8a+/+waY3e/huN3vBpi/++G4k7Rr6KO9H8ejvb7gPbQdvQ2vxekrsf//265c+Lmn//+5p+r4266HwXSzn7m5p3DnuacYxemyBrffr4e6k7Dxr6et/bS5pwa1uafxr1uuVqIYvHyBGLxWoluufIH12GfanfJB+/XYQfud8mfa9dg2udDwNrnQ8BHa9dgR2q3mBpiH7+C4rebguIfvBpit5gaYrebguDPf4Lgz3waYz4C0f1CM+oTEgOKEv5b+hK6hA4CjoRWFrqH55l+X6d+roeTfl4v/38WACefCgATgvoCh15aL+N3BgP7dk4uc16ChBMpcl8TYVZcIyqehv9ikgAmgiYsBwrOABsKcoVTCUZdZwjWMB6Cnlv+fjKH7n7qADtGTi5zXvoCh15CLCdEm8RHamPo2uZj6Edom8Ta59dgGmIvc4Lj12OC4i9wGmJmh/4q/lv6Eo6EVhbiW7oqQofSQuJbuipmh/4qvluaQp4A8mDWMB6CkgAmgMYxHmKChBMpRl1nCnKFUwlWXCMqroeTfXJfE2Kehv9hfl+nfbrytmvDNdqChx1aiXM4dmj/B2aHEgOKER4zhirmAzopQjPqEs4AGwo2LpMq3gKnKiYsBwu3NXI5czh2abrytmm686I7U1sycodRWorLONaLU1WGVss47krCAwpAxjEeYp4A8mD6M0pDm70GN3e9Vh2n1H4X//0GNbPwihoyh+5+hlgCYiqEDmKeW/5+JvoWH7c1cjm686I4lzUKHt4CpypCLCdG6gA7RjYukyv//sJfm70GN//9Bjf/vsJe5gM6KPozSkLCAwpBHjOGKi9wGmDPf4LiL3OC4M98GmIqhA5ivluaQkKH0kKGWAJhZyXnrvcET5Y7Jh8rLzfzBvcEyz/rMWbwqzLa2e8fxr4qvaeXHs/Pt9a8Q8faylvO5p77gJrI5+Xet//9Vr3bEuafcyrCAsruPob+lmaGiu6aAz6X26Ta59ukR2kLkNrlC5BHajt42uY7eEdqnrf20s7G8shut8a8l6gaYJerguOT2Edrk9ja5qeMGmKnj4bgfx///pKFe0ViXY9G3yzP9H8f//6vH8vobrfGv7czq+KvH8vrfyWj1t8sz/anj4bip4waY36+HurOxvLLpsga3p639tM/FY4YuxaKO68Rpmi7Foo7rxGmass5/mbj4QY24+LCXuPhBjViXY9GkoV7R"),
+"format": 34896613399,
+"index_count": 492,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAtgADAAAAAAAEALYAAAAFAAQABQAGAAQABQAHAAYAtgAEAAwAtgAMALcAtgC4AAMAtwC4ALYAuAC5AAMAtwC6ALgAuAANALkAugANALgAugAOAA0ADQC7ALkADQAPALsADwC8ALsADwAQALwAEAARALwAEAC9ABEAEgC9ABAAEgATAL0AFAAVABYAFAAXABUAGAAZABoAGAAbABkAvgAbABgAGAAcAL4AGAC/ABwAvgAcACMAvwDAABwAvwDBAMAAvgAjAMIAwQAeAMAAwQDDAB4AwwDEAB4AwwAdAMQAHgDEAB8AHgAfACAAwgDFAL4AvgDFABsAwgDGAMUAxQAiABsAxgAhAMUAxQAhACIAxgAkACEAIQAlACIAIQAmACUAKwAsAC0AKwAuACwAxwDIAMkAVgDHAMkAxwBWAFQAVABWAFcAxwBUAFUAxwDKAMgAUwDIAMoAWADIAFMAyABYAFkAyABZAFoALwAwADEALwAyADAAywA1AMwAywA0ADUAzQDLAMwAzQDMAM4AzwDNAM4AzwDOANAAMwDPANAAMwDQADYA0QAnANIA0QDTACcA1AA5ADcA1ADVADkAOgDVANQAOgA4ANUA1gBgAGEA1gDXAGAAXwDXANYAXwBiANcA2AA8ANkA2AA7ADwACAAJAAoACADaAAkAPwBAAEEAPwBCAEAAQgA/AEMAQgBDAEQARQBGAEcARQBIAEYASABFAEkASABJAEoASwBMAE0ASwBOAEwA2wBRAE8A2wDcAFEAWwBcAF0AWwBeAFwA3QDeAN8A3QALAN4AKQDgACgAKQAqAOAAYwBkAGUAYwBmAGQAZwBoAGkAZwBqAGgA4QDiAOMA4QDkAOIAawBsAG0AawBuAGwAbwBwAHEAbwByAHAAPgDlAD0APgDmAOUA5wDoAOkA5wDqAOgA6wCfAOwA6wChAJ8AngDrAOwAngDsAKAAcwB0AHUAcwB2AHQAdwB4AHkAdwB6AHgA7QB8AH0A7QB+AHwAewDtAH0AewB9AH8AgACBAIIAgACDAIEAhACFAIYAhACHAIUA7gCJAO8A7gCIAIkAiwDuAO8AiwDvAIoAjACOAPAAjACNAI4AjwCMAPAAjwDwAJAAkQCSAJMAkQCUAJIA8QCWAJcA8QCVAJYAmADxAJcAmACXAJkAmgCbAJwAmgCdAJsA8gCnAPMA8gCpAKcApgDyAPMApgDzAKgAogCjAKQAogClAKMAUgD0APUAUgBQAPQAqgCrAKwAqgCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMA"),
+"lods": [0.18234804, PackedByteArray("AAABAAIAAAADAAEABAADAAAAAAAFAAQABQAGAAQABQAHAAYABwAIAAYABwAJAAgACAAJAAoABwALAAkADAADAAQADAANAAMADAAOAA0ADQAPAAMADwAQAAMAEAARAAMAEgARABAAEgATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAbABgAGAAdABwAHQAeABwAHgAdAB8AHgAfACAAHAAhABsAIQAiABsAIwAhABwAIwAkACEAIQAlACIAIQAmACUAJgAnACUAJgAoACcAKQAnACgAKQAqACcAKwAsAC0AKwAuACwALwAwADEALwAyADAAMwA0ADUAMwA1ADYANwA4ADkAOgA4ADcAOwA8AD0APgA7AD0APwBAAEEAPwBCAEAAQgA/AEMAQgBDAEQARQBGAEcARQBIAEYASABFAEkASABJAEoASwBMAE0ASwBOAEwATwBQAFEAUgBQAE8AUwBUAFUAUwBWAFQAVABWAFcAWABWAFMAVgBYAFkAVgBZAFoAWwBcAF0AWwBeAFwAXwBgAGEAXwBiAGAAYwBkAGUAYwBmAGQAZwBoAGkAZwBqAGgAawBsAG0AawBuAGwAbwBwAHEAbwByAHAAcwB0AHUAcwB2AHQAdwB4AHkAdwB6AHgAewB8AH0AewB+AHwAewB9AH8AgACBAIIAgACDAIEAhACFAIYAhACHAIUAiACJAIoAiwCIAIoAjACNAI4AjwCMAI4AjwCOAJAAkQCSAJMAkQCUAJIAlQCWAJcAmACVAJcAmACXAJkAmgCbAJwAmgCdAJsAngCfAKAAngChAJ8AogCjAKQAogClAKMApgCnAKgApgCpAKcAqgCrAKwAqgCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMA")],
+"material": SubResource("StandardMaterial3D_6c1h7"),
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(1.9911114, 1.9940108, 0, 0),
+"vertex_count": 246,
+"vertex_data": PackedByteArray("AgBJpeLQStYCAP//8GM31AIA///etdPQAgAolmVLYtUCAFZTasZi2QIADYnB2A7hAgABXyTe/ugCALWCgPG36wIAS0Xa71TVAgAAAP//VNUCAAAAcO9U1QIAbWf//1XVAgAAAFm8VNUCAKBVD0FU1QIAAAC1T1TVAgCyXb0sVNUCAA5KahhU1QIAWm4AAFTVAgAAAG4WVNUCAAAAAABU1QIAKJZlS/Dr//////Bj8OsCAP//8GPw6///KJZlS/Dr//8olmVLZ9X/////3rV92P/////wY1TV//9JpeLQldX//6BVEkdU1f//Wm4AAFTV//9TU2oYVNX//wAAAABU1f//AACiFlTV//9WU8LHOc7//w2Jwdjbxf//AACHTlTV//8AAFm8VNX//7WCgPEGxv//L18k3sbp//9tZ///Utn//0tF2u9U1f//AAC971TV//8AAP//VNX//0ml4tCfxgIA///etZ/G/////961n8YCAEml4tCfxv/////wY1TVAgD//961VNUCAP//8GNU1f/////etVTVAgAolmVLx9gCAFpuAADH2P//Wm4AAMfY//8olmVLx9j//21n////vwIAAAD///+/AgBtZ////7///wAA////v///bWf///vJAgBtZ///+8kCALWCgPEezP//tYKA8R7MAgAAAP///78PWgAAcO//vwIAAABw7/+/WasAAL3v/7///wAA////v///AAC97/+///8AAAAA/7/rrwAAohb/v///AACiFv+/RlQAAG4W/78CAAAAAAD/vwIAAABuFv+/AgAOSmoY/INGVAAAbhb8gwIAAABuFvyDRlQOSmoY/IP//6BVEkcDxeuvU1NqGOe566+gVRJHA8X//1NTahjnuQIAAABZvP+/RlQAALVP/78CAAAAtU//v///AACHTv+/668AAIdO/78PWgAAWbz/v1mrAABZvP+///8AAFm8/78CALJdvSx5tUZUDkpqGHm1AgAOSmoYebVGVLJdvSx5tQIAAAAAAP////9abgAA//8CAFpuAAD/////AAAAAP////9JpeLQIcYCAA2JwdghxgIASaXi0CHG//8NicHYIcb//0tF2u/A/1mrAAC978D///8AAL3vwP9Zq0tF2u/A////L18k3nvPWatLRdrve8///0tF2u97z1mrL18k3nvPAgBWU2rG85APWgAA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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7poqb")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8wej"]
-render_priority = 0
-shader = ExtResource("5_8oek3")
-shader_parameter/pixel_size = 1.0
-shader_parameter/levels = 64.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+size = Vector3(2.3669157, 0.46647644, 5.2766647)
 
-[sub_resource type="QuadMesh" id="QuadMesh_mxatf"]
-material = SubResource("ShaderMaterial_n8wej")
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ey2rf"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_tsr6g"]
 size = Vector3(6.2264404, 3.1831055, 10.588196)
 
-[node name="Jugador" type="VehicleBody3D" unique_id=1223084414]
-collision_layer = 23
-collision_mask = 23
-mass = 60.0
-center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.5, 0)
-contact_monitor = true
-max_contacts_reported = 4
-script = ExtResource("1_xvdyt")
-velocidad_base = 300.0
-steer_speed = 1.0
-stats = SubResource("Resource_t4ohr")
+[node name="Player" type="RigidBody3D" unique_id=1505952561 groups=["Player"]]
+transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 2
+collision_mask = 53
+script = ExtResource("1_omvyu")
+duracion_boost = 2.5
+velocidad_giro_drift = 2.0
+inclinacion_drift = 14.0
+velocidad_giro = 1.0
+suavidad_inclinacion = 20.0
 
-[node name="BodyAuto" parent="." unique_id=1255914680 instance=ExtResource("2_ujaia")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07528293, -0.027920246, -0.08926964)
+[node name="VisualRoot" type="Node3D" parent="." unique_id=708323970]
 
-[node name="ItemsEquipados" type="Node3D" parent="." unique_id=1835503445]
+[node name="BackLeft" parent="VisualRoot" unique_id=475907750 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.0033928484, 0, 0.0033928484, 0.29998082, 0, 0, 0, 0.3, 0.97070235, -0.7524058, 2.2043848)
 
-[node name="FolaCapo" type="MeshInstance3D" parent="ItemsEquipados" unique_id=1726227761]
-transform = Transform3D(1.4711629, 0, 0, 0, 1, 0, 0, 0, 1.6078768, -0.07528293, 1.4945879, -2.830133)
+[node name="FrontLeft" parent="VisualRoot" unique_id=1911472939 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.003392849, 0, 0.003392849, 0.29998082, 0, 0, 0, 0.3, 0.97070235, -0.75240594, -1.7102582)
+
+[node name="BackRight" parent="VisualRoot" unique_id=1850643097 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.003392849, 0, 0.003392849, 0.29998082, 0, 0, 0, 0.3, -0.6739815, -0.7710076, 2.2043848)
+
+[node name="FrontRight" parent="VisualRoot" unique_id=1051359244 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.0033928494, 0, 0.0033928494, 0.29998082, 0, 0, 0, 0.3, -0.6739815, -0.7710077, -1.7102582)
+
+[node name="Cube" type="MeshInstance3D" parent="VisualRoot" unique_id=1704173267]
+transform = Transform3D(0.733491, -9.313226e-10, 0, 2.7939677e-09, 0.54196453, 0, 0, 0, 0.81379366, -0.001837969, 0.16250518, 0)
+mesh = SubResource("ArrayMesh_xwd11")
+skeleton = NodePath("")
+
+[node name="ItemsEquipados" type="Node3D" parent="VisualRoot" unique_id=2075898237]
+
+[node name="FolaCapo" type="MeshInstance3D" parent="VisualRoot/ItemsEquipados" unique_id=1032629143]
+transform = Transform3D(1.1025096, 4.5221765e-05, -0.001117549, 9.116903e-05, 0.5429099, 0.09880886, 0.0015050956, -0.06601239, 0.81263953, -0.0021212623, 0.17414017, -2.2294245)
 visible = false
-mesh = ExtResource("3_8wxri")
+mesh = ExtResource("14_tsr6g")
 skeleton = NodePath("../../BodyAuto")
 
-[node name="TuboCapo" type="MeshInstance3D" parent="ItemsEquipados" unique_id=1020263461]
-transform = Transform3D(1.4711629, 0, 0, 0, 0.46426815, 0, 0, 0, 1.4365907, -0.07528293, 1.4945879, -2.830133)
+[node name="TuboCapo" type="MeshInstance3D" parent="VisualRoot/ItemsEquipados" unique_id=1785492531]
+transform = Transform3D(-1.0982149, 9.116717e-06, 0.00090697047, -5.376339e-05, 0.18535818, -0.080197066, -0.0011545102, -0.017304989, -0.8590105, -0.00212126, 0.17414021, -2.2294245)
 visible = false
-mesh = ExtResource("4_mbvet")
+mesh = ExtResource("15_ro61n")
 skeleton = NodePath("../../BodyAuto")
 
-[node name="Parachoque" type="MeshInstance3D" parent="ItemsEquipados" unique_id=1547667319]
-transform = Transform3D(-1.4127891, 0, -1.1432635e-08, 0, 0.80086315, 0, 1.2350995e-07, 0, -0.13077411, -0.06541979, 0.6794119, -4.527852)
+[node name="Parachoque" type="MeshInstance3D" parent="VisualRoot/ItemsEquipados" unique_id=468169457]
+transform = Transform3D(-1.0880566, -9.313226e-10, -1.974634e-08, 1.8626451e-09, 0.24759647, 1.6653345e-16, 1.6429195e-07, 0, -0.1307741, -0.007194881, -0.1333937, -3.1897883)
 visible = false
-mesh = ExtResource("5_mbvet")
+mesh = ExtResource("16_r6tsw")
 
-[node name="CollisionShapebody" type="CollisionShape3D" parent="." unique_id=2114782371]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.05333495, 0.90433097, -0.563071)
-shape = SubResource("BoxShape3D_48gm7")
+[node name="RayFL" type="RayCast3D" parent="." unique_id=2047864853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0145948, 0, -2.015172)
+target_position = Vector3(0, -2, 0)
 
-[node name="CollisionShapetop" type="CollisionShape3D" parent="." unique_id=1756250197]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15821481, 2.0756989, -0.07392216)
-shape = SubResource("BoxShape3D_tanke")
+[node name="RayBL" type="RayCast3D" parent="." unique_id=77838831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0145948, 0, 1.7478032)
+target_position = Vector3(0, -2, 0)
 
-[node name="right_back" type="VehicleWheel3D" parent="." unique_id=337240041]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.9863901, 0.44157302, 2.1561215)
-use_as_traction = true
-wheel_roll_influence = 0.2
-wheel_radius = 1.0
-wheel_friction_slip = 1.0
-suspension_travel = 0.1
-suspension_stiffness = 50.0
-suspension_max_force = 2500.0
+[node name="RayFR" type="RayCast3D" parent="." unique_id=1817247277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9526291, 0, -2.015172)
+target_position = Vector3(0, -2, 0)
 
-[node name="Rueda" parent="right_back" unique_id=868937687 instance=ExtResource("2_tanke")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.036, 0.031, -0.003)
+[node name="RayBR" type="RayCast3D" parent="." unique_id=1754478645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9526291, 0, 1.7478032)
+target_position = Vector3(0, -2, 0)
 
-[node name="left_back" type="VehicleWheel3D" parent="." unique_id=1498953193]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.1234651, 0.44157302, 2.1561215)
-use_as_traction = true
-wheel_roll_influence = 0.2
-wheel_radius = 1.0
-wheel_friction_slip = 1.0
-suspension_travel = 0.1
-suspension_stiffness = 50.0
-suspension_max_force = 2500.0
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=87170311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003960848, 0.25508392, 0.0073637962)
+shape = SubResource("BoxShape3D_noarx")
 
-[node name="Rueda" parent="left_back" unique_id=686719943 instance=ExtResource("2_tanke")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -0.0054467916, 0.030999959, 0.041526437)
+[node name="DebugLabel" type="Label3D" parent="." unique_id=1526508107]
+transform = Transform3D(1, 0, 0, 0, 0.94005626, 0.34101945, 0, -0.34101945, 0.94005626, 0, 1.6271807, 0)
+visible = false
+text = "Drift"
+font_size = 64
 
-[node name="left_front" type="VehicleWheel3D" parent="." unique_id=853614720]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -1.04, 0.442, -2.779)
-use_as_steering = true
-wheel_roll_influence = 0.2
-wheel_radius = 1.0
-wheel_friction_slip = 1.0
-suspension_travel = 0.1
-suspension_stiffness = 50.0
-suspension_max_force = 2500.0
+[node name="DebugVelocidadLabel" type="Label3D" parent="." unique_id=2082002594]
+transform = Transform3D(1, 0, 0, 0, 0.94005626, 0.34101945, 0, -0.34101945, 0.94005626, 0, 2.1120262, 0)
+visible = false
+text = "Drift"
+font_size = 64
 
-[node name="Rueda" parent="left_front" unique_id=319584521 instance=ExtResource("2_tanke")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.07988715, 0.030999959, 0.06670439)
+[node name="CrashSFX" type="AudioStreamPlayer3D" parent="." unique_id=324415658]
+stream = ExtResource("7_u02rt")
+volume_db = -21.029
 
-[node name="right_front" type="VehicleWheel3D" parent="." unique_id=344111651]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.87612486, 0.44157302, -2.7792284)
-use_as_steering = true
-wheel_roll_influence = 0.2
-wheel_radius = 1.0
-wheel_friction_slip = 1.0
-suspension_travel = 0.1
-suspension_stiffness = 50.0
-suspension_max_force = 2500.0
+[node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1019338284]
+stream = ExtResource("8_cks8u")
+volume_db = -21.029
 
-[node name="Rueda" parent="right_front" unique_id=808426192 instance=ExtResource("2_tanke")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -0.08300114, 0.031028181, 0.00764513)
+[node name="EquiparSFX" type="AudioStreamPlayer3D" parent="." unique_id=607787484]
+stream = ExtResource("9_nugh5")
+volume_db = -21.029
 
-[node name="Camera3D" parent="." unique_id=265022746 node_paths=PackedStringArray("follow_target") instance=ExtResource("3_47tc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110011816, 3.3022087, 6.6996107)
-follow_target = NodePath("..")
-distance = 8.0
-height = 6.0
-sensitivity = 0.007
+[node name="PlayerEquipment" type="Node" parent="." unique_id=1035889082]
+script = ExtResource("11_ro61n")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=275277716]
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_mxatf")
+[node name="AreaDeInteraccion" type="Area3D" parent="." unique_id=104648848]
+collision_layer = 8
+collision_mask = 8
 
-[node name="Torreta" parent="." unique_id=1115247385 node_paths=PackedStringArray("camera") instance=ExtResource("6_8oek3")]
-transform = Transform3D(-0.64816046, 0, -6.933188e-08, 0, 0.66076374, 0, 5.6663986e-08, 0, -0.7930643, -0.14253086, 2.0600953, -0.078445435)
-camera = NodePath("../Camera3D")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaDeInteraccion" unique_id=1473804645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21124268, 1.0915527, 0.022918701)
+shape = SubResource("BoxShape3D_tsr6g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=904499405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007953376, 0.7032028, 3.9105692)
+
+[node name="Torreta" parent="." unique_id=1115247385 instance=ExtResource("10_tsr6g")]
+transform = Transform3D(-0.6460183, -1.5553087e-07, -6.93318e-08, -8.5216016e-08, 0.46765584, 4.4686477e-14, 5.647668e-08, 8.014186e-16, -0.79306424, 0.06134289, 0.7113717, 0.23083329)
 fire_rate = 0.1
 projectile_speed = 100.0
 target_yaw_speed = 30.0
 target_pitch_speed = 15.0
 
-[node name="PlayerEquipment" type="Node" parent="." unique_id=707986427]
-script = ExtResource("8_7prgq")
-
-[node name="PlayerMovement" type="Node" parent="." unique_id=1855106392]
-
-[node name="AreaDeInteraccion" type="Area3D" parent="." unique_id=813625741]
-collision_layer = 8
-collision_mask = 8
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaDeInteraccion" unique_id=1048878253]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21124268, 1.0915527, 0.022918701)
-shape = SubResource("BoxShape3D_ey2rf")
-
-[node name="CrashSFX" type="AudioStreamPlayer3D" parent="." unique_id=1377008340]
-stream = ExtResource("12_t4ohr")
-volume_db = -21.029
-
-[node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1908318863]
-stream = ExtResource("13_r7cot")
-volume_db = -21.029
-
-[node name="EquiparSFX" type="AudioStreamPlayer3D" parent="." unique_id=1578363765]
-stream = ExtResource("14_43o3v")
-volume_db = -21.029
-
-[node name="TurboComponent" type="Node" parent="." unique_id=1234654068]
-script = ExtResource("15_48gm7")
-data = ExtResource("16_48gm7")
+[node name="PuntodeDisparo" type="Node3D" parent="." unique_id=444535231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00666897, 0.5896413, -2.3175523)

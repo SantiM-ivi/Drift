@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dk6qmelpbpsed"]
 
-[ext_resource type="Texture2D" uid="uid://drix0vfr87axg" path="res://Entidades/Player/AutoPlayer/Rueda/DefaultMaterial_BaseColor.png" id="1_c0518"]
-[ext_resource type="Texture2D" uid="uid://dkbf5kyiptpsm" path="res://Entidades/Player/AutoPlayer/Rueda/DefaultMaterial_Normal.png" id="2_q2in3"]
+[ext_resource type="Texture2D" uid="uid://drix0vfr87axg" path="res://Entidades/Enemies/Rueda/DefaultMaterial_BaseColor.png" id="1_c0518"]
+[ext_resource type="Texture2D" uid="uid://dkbf5kyiptpsm" path="res://Entidades/Enemies/Rueda/DefaultMaterial_Normal.png" id="2_q2in3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3j8wa"]
 resource_name = "Material"

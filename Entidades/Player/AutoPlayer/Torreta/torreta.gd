@@ -1,7 +1,7 @@
 extends Node3D
 class_name Turret
 
-@export var camera: Camera3D
+@onready var camera: Camera3D = $"../../CameraRig/Camera3D"
 @export var gun: Node3D        # el cañón (padre del Muzzle)
 @export var muzzle: Node3D     # el punto de salida de la bala
 @export var projectile_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet.tscn")

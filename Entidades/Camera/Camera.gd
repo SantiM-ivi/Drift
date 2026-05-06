@@ -1,11 +1,9 @@
 extends Camera3D
-
-@export var follow_target: VehicleBody3D
+@export var follow_target: RigidBody3D
 @export var distance: float = 5.0
 @export var height: float = 3.0
 @export var sensitivity: float = 0.01
 @export var joystick_sensitivity: float = 2.0  # velocidad del stick
-
 var yaw: float = 0.0
 var pitch: float = 0.0
 

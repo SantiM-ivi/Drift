@@ -78,3 +78,5 @@ func _on_health_depleted() -> void:
 	queue_free()
 	
 	
+func apply_knockback(direccion: Vector3, fuerza: float) -> void:
+	linear_velocity += direccion * fuerza

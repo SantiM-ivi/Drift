@@ -113,7 +113,8 @@ func _physics_process(delta: float) -> void:
 	_aplicar_flotacion()
 	_aplicar_anti_volteo(en_suelo)
 	_actualizar_visual(delta, Input.get_axis("ui_right", "ui_left"))
-
+	_intentar_saltar(en_suelo)
+	
 	var giro = Input.get_axis("ui_right", "ui_left")
 	if en_suelo:
 		if _estado == Estado.DRIFT:
@@ -124,7 +125,7 @@ func _physics_process(delta: float) -> void:
 	_intentar_recoger()
 
 	if not en_suelo:
-		return
+		_aplicar_propulsor(delta)
 
 	_aplicar_movimiento(delta, giro, accel_inp, frenando)
 	_cooldown_disparo -= delta
@@ -163,6 +164,25 @@ func _tick_boost(delta: float, boosting: bool) -> void:
 			_boost_activo    = false
 			_tiempo_cooldown = cooldown_boost
 			_bonus_velocidad = 0.0
+
+
+func _intentar_saltar(en_suelo: bool) -> void:
+	if Input.is_action_just_pressed("jump") and en_suelo:
+		apply_central_impulse(Vector3.UP * 8.0 * mass)
+		# Mantener velocidad horizontal al saltar
+		var vel_horizontal = Vector3(linear_velocity.x, 0.0, linear_velocity.z)
+		apply_central_impulse(vel_horizontal * mass * 0.5)
+
+func _aplicar_propulsor(delta: float) -> void:
+	if not Input.is_action_pressed("boost") or _tiempo_cooldown > 0.0:
+		return
+	var direccion = -camara_pivot.global_basis.z
+	apply_central_force(direccion * fuerza_avance * 1.5)
+	_tiempo_boost -= delta
+	if _tiempo_boost <= 0.0:
+		_boost_activo    = false
+		_tiempo_cooldown = cooldown_boost
+		_bonus_velocidad = 0.0
 
 # ─── CÁMARA ──────────────────────────────────────────────────────────────────
 
@@ -360,6 +380,12 @@ func _on_health_depleted() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node) -> void:
+	print("tiene apply_damage: ", body.has_method("apply_damage"))
+	print("stats: ", stats)
+	print("body: ", body.name, " | clase: ", body.get_class())
+	print("padre: ", body.get_parent().name, " | clase: ", body.get_parent().get_class())
+	print("tiene knockback: ", body.has_method("apply_knockback"))
+	print("padre tiene knockback: ", body.get_parent().has_method("apply_knockback"))
 	if not body.has_method("apply_damage") or not stats:
 		return
 	var velocidad := linear_velocity.length()
@@ -367,9 +393,19 @@ func _on_body_entered(body: Node) -> void:
 		return
 	var dano := int(stats.current_ram_damage * (velocidad / 20.0))
 	body.apply_damage(dano)
+
+	var direccion: Vector3 = (body.global_position - global_position).normalized()
+
+	# Buscar apply_knockback en el body o en su padre
+	var knockback_target = null
 	if body.has_method("apply_knockback"):
-		var direccion: Vector3 = (body.global_position - global_position).normalized()
-		body.apply_knockback(direccion, velocidad * 8.0)
+		knockback_target = body
+	elif body.get_parent() and body.get_parent().has_method("apply_knockback"):
+		knockback_target = body.get_parent()
+
+	if knockback_target:
+		var fuerza = clamp(velocidad * 1.0, 5.0, 50.0)
+		knockback_target.apply_knockback(direccion, fuerza)
 
 # ─── UTILS ───────────────────────────────────────────────────────────────────
 

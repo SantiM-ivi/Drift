@@ -99,6 +99,10 @@ metadata/_custom_type_script = "uid://irbhor700bc7"
 [sub_resource type="BoxShape3D" id="BoxShape3D_axex3"]
 size = Vector3(1164.0768, 158.8294, 1228.5708)
 
+[sub_resource type="Resource" id="Resource_6ej83"]
+script = ExtResource("3_rkloy")
+metadata/_custom_type_script = "uid://irbhor700bc7"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kwsyd"]
 render_priority = 0
 shader = ExtResource("16_kwsyd")
@@ -194,6 +198,7 @@ stats = SubResource("Resource_kwsyd")
 
 [node name="AutoEnemigo" parent="NavigationRegion3D" unique_id=1287735819 instance=ExtResource("9_xncdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 0)
+mass = 20.0
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)
@@ -236,8 +241,11 @@ shape = SubResource("BoxShape3D_axex3")
 
 [node name="Player" parent="." unique_id=1505952561 node_paths=PackedStringArray("camara_pivot") instance=ExtResource("15_sp1my")]
 transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 26.627583, 167.58144)
+contact_monitor = true
+max_contacts_reported = 4
 velocidad_maxima = 45.0
 camara_pivot = NodePath("../CameraRig")
+stats = SubResource("Resource_6ej83")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=2041556240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.833622, 27.456753, 183.6635)

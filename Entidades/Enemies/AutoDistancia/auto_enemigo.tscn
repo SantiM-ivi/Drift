@@ -1,15 +1,23 @@
 [gd_scene format=4 uid="uid://oydyud71mbwb"]
 
-[ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoPrueba/auto_enemigo.gd" id="1_ydkk0"]
-[ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoPrueba/autoenemigo_state_machine.gd" id="2_1g0f4"]
+[ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_ydkk0"]
+[ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="2_1g0f4"]
 [ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_bwqen"]
-[ext_resource type="Material" uid="uid://b20v7ycmvr5e8" path="res://Entidades/Player/AutoPlayer/Body/body_auto_standard_material_3d.tres" id="3_bwqen"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="4_vk40u"]
-[ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoPrueba/3d_enemylife_bar.gd" id="6_bwqen"]
+[ext_resource type="Texture2D" uid="uid://p0nmc7qed03" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_BaseColor.png" id="4_yxoef"]
+[ext_resource type="Texture2D" uid="uid://c172r1iqrrhpe" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_Normal.png" id="5_mqdbq"]
+[ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="6_bwqen"]
+[ext_resource type="Texture2D" uid="uid://d1udy8fqipsed" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_Roughness.png" id="6_fkyr0"]
 
 [sub_resource type="Resource" id="Resource_vk40u"]
 script = ExtResource("2_bwqen")
 metadata/_custom_type_script = "uid://irbhor700bc7"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd2b5"]
+albedo_texture = ExtResource("4_yxoef")
+roughness_texture = ExtResource("6_fkyr0")
+normal_enabled = true
+normal_texture = ExtResource("5_mqdbq")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsm2e"]
 resource_name = "Material.002"
@@ -93,7 +101,7 @@ script = ExtResource("2_1g0f4")
 
 [node name="Esqueleto" type="MeshInstance3D" parent="." unique_id=1904454820]
 transform = Transform3D(147.73705, 0, 0, 0, -1.3113249e-05, 78.58446, 0, -110.0019, -9.367998e-06, 0, 1.3134458, -5.684342e-16)
-material_override = ExtResource("3_bwqen")
+material_override = SubResource("StandardMaterial3D_kd2b5")
 mesh = SubResource("ArrayMesh_nhrnt")
 skeleton = NodePath("")
 

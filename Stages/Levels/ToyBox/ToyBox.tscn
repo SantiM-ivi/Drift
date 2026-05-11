@@ -6,12 +6,13 @@
 [ext_resource type="Script" uid="uid://bymh6anhdgs18" path="res://Common/UI/life.gd" id="3_ijbo1"]
 [ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="3_rkloy"]
 [ext_resource type="Script" uid="uid://bun44j0q5dl12" path="res://Common/UI/chatarra_hud.gd" id="4_06btp"]
-[ext_resource type="PackedScene" uid="uid://3gwqsiola652" path="res://Entidades/Enemies/Soldado/Soldado.tscn" id="4_tvo6m"]
 [ext_resource type="Script" uid="uid://dpenpxpclanjk" path="res://Stages/Levels/ToyBox/fps.gd" id="5_s6gpj"]
 [ext_resource type="Shader" uid="uid://cgdn7iob4ii8w" path="res://Assets/Shaders/Cielo.gdshader" id="6_ov8pn"]
 [ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="6_tvo6m"]
 [ext_resource type="Texture2D" uid="uid://b8n21eb7mnps6" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
-[ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoPrueba/auto_enemigo.tscn" id="9_xncdv"]
+[ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="9_xncdv"]
+[ext_resource type="PackedScene" uid="uid://djd0jh7i4fndh" path="res://Entidades/Enemies/Boss/jefe_nivel1.tscn" id="11_kwsyd"]
+[ext_resource type="PackedScene" uid="uid://b34ftb0lkmj73" path="res://Entidades/Enemies/AutoGrande/auto_enemigo_Camioneta.tscn" id="12_kwsyd"]
 [ext_resource type="Script" uid="uid://bd4dbrek18472" path="res://Common/Events/event_manager.gd" id="13_kwsyd"]
 [ext_resource type="PackedScene" uid="uid://c5xen6irvbtlw" path="res://Entidades/Player/AutoPlayer/jugador.tscn" id="15_sp1my"]
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="16_2py0s"]
@@ -30,12 +31,12 @@ shader_parameter/density = 0.9
 shader_parameter/grayness = 0.2
 shader_parameter/cloud_light = 1.0
 shader_parameter/cloud_distortion = 0.2
-shader_parameter/sky_color_a0 = Color(0.5, 0.8, 1, 1)
+shader_parameter/sky_color_a0 = Color(0.9850556, 0.4022347, 5.7756904e-07, 1)
 shader_parameter/sky_color_b0 = Color(0.3, 0.5, 1, 1)
 shader_parameter/sky_color_a1 = Color(0.125, 0.2, 0.25, 1)
 shader_parameter/sky_color_b1 = Color(0.075, 0.125, 0.25, 1)
-shader_parameter/ground_color_a0 = Color(1, 0.8, 0.5, 1)
-shader_parameter/ground_color_b0 = Color(1, 0.5, 0.3, 1)
+shader_parameter/ground_color_a0 = Color(0.654902, 0.52156866, 0.4117647, 1)
+shader_parameter/ground_color_b0 = Color(0.654902, 0.52156866, 0.4117647, 1)
 shader_parameter/ground_color_a1 = Color(0.25, 0.2, 0.125, 1)
 shader_parameter/ground_color_b1 = Color(0.25, 0.125, 0.075, 1)
 shader_parameter/sun_color_a = Color(1, 0.98, 0.025, 1)
@@ -84,13 +85,6 @@ agent_height = 0.5
 agent_radius = 1.5
 region_min_size = 1.0
 edge_max_length = 4.0
-
-[sub_resource type="Resource" id="Resource_2py0s"]
-resource_local_to_scene = true
-script = ExtResource("3_rkloy")
-base_max_health = 25
-base_attack = 5
-metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="Resource" id="Resource_6ej83"]
 script = ExtResource("3_rkloy")
@@ -185,13 +179,15 @@ navigation_mesh = SubResource("NavigationMesh_qqfgv")
 [node name="Level" parent="NavigationRegion3D" unique_id=1919716652 instance=ExtResource("1_fqv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.762024, 0)
 
-[node name="Enemy" parent="NavigationRegion3D" unique_id=697315807 instance=ExtResource("4_tvo6m")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27.83287, 12.850342, -154.02678)
-stats = SubResource("Resource_2py0s")
-
 [node name="AutoEnemigo" parent="NavigationRegion3D" unique_id=1287735819 instance=ExtResource("9_xncdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 0)
 mass = 20.0
+
+[node name="AutoEnemigoCamioneta" parent="NavigationRegion3D" unique_id=2111903297 instance=ExtResource("12_kwsyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.649108, 0)
+
+[node name="JefeNivel1" parent="NavigationRegion3D" unique_id=1008261279 instance=ExtResource("11_kwsyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.297256, 21.553944, 0)
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)

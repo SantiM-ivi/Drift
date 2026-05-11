@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://b20v7ycmvr5e8"]
 
-[ext_resource type="Texture2D" uid="uid://crlcq4pf2jjha" path="res://Entidades/Enemies/AutoPrueba/car_texture_2d.tres" id="1_pvmvt"]
+[ext_resource type="Texture2D" uid="uid://crlcq4pf2jjha" path="res://Entidades/Enemies/AutoDistancia/car_texture_2d.tres" id="1_pvmvt"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vk40u"]
 

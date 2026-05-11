@@ -1,7 +1,7 @@
 class_name ChaseState
 extends BaseEnemyState
 
-var _engine_force: float = 800.0   # más lento
+var _engine_force: float = 400.0   # más lento
 var _steer_speed: float = 150.0      # gira más rápido
 var _steer_actual: float = 0.5      # limitá el ángulo máximo
 var _steer_limit: float = 0.5 

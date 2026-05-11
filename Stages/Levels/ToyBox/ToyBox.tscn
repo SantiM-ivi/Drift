@@ -12,8 +12,7 @@
 [ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="6_tvo6m"]
 [ext_resource type="Texture2D" uid="uid://b8n21eb7mnps6" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
 [ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoPrueba/auto_enemigo.tscn" id="9_xncdv"]
-[ext_resource type="Script" uid="uid://cv1ccxg717opd" path="res://Common/Events/events.gd" id="10_axex3"]
-[ext_resource type="PackedScene" uid="uid://div60xkaluw3t" path="res://Entidades/Enviroment/Rock/rock.tscn" id="11_axex3"]
+[ext_resource type="Script" uid="uid://bd4dbrek18472" path="res://Common/Events/event_manager.gd" id="13_kwsyd"]
 [ext_resource type="PackedScene" uid="uid://c5xen6irvbtlw" path="res://Entidades/Player/AutoPlayer/jugador.tscn" id="15_sp1my"]
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="16_2py0s"]
 [ext_resource type="Shader" uid="uid://c3mum53ur7nhb" path="res://Assets/Shaders/Outline.gdshader" id="16_kwsyd"]
@@ -69,13 +68,10 @@ fog_light_color = Color(0.65364134, 0.52036005, 0.41074985, 1)
 fog_light_energy = 0.51
 fog_sky_affect = 0.405
 fog_height = -136.53
-volumetric_fog_density = 0.0076
-volumetric_fog_albedo = Color(0.76576144, 0.396984, 0.2129845, 1)
-volumetric_fog_gi_inject = 0.0
-volumetric_fog_anisotropy = -0.9
-volumetric_fog_length = 0.01
-volumetric_fog_detail_spread = 0.5547848
-volumetric_fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.90588236, 0.827451, 0.72156864, 1)
+volumetric_fog_sky_affect = 0.5
 volumetric_fog_temporal_reprojection_amount = 0.672
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_qqfgv"]
@@ -89,15 +85,12 @@ agent_radius = 1.5
 region_min_size = 1.0
 edge_max_length = 4.0
 
-[sub_resource type="Resource" id="Resource_kwsyd"]
+[sub_resource type="Resource" id="Resource_2py0s"]
 resource_local_to_scene = true
 script = ExtResource("3_rkloy")
 base_max_health = 25
 base_attack = 5
 metadata/_custom_type_script = "uid://irbhor700bc7"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_axex3"]
-size = Vector3(1164.0768, 158.8294, 1228.5708)
 
 [sub_resource type="Resource" id="Resource_6ej83"]
 script = ExtResource("3_rkloy")
@@ -194,7 +187,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.762024, 0)
 
 [node name="Enemy" parent="NavigationRegion3D" unique_id=697315807 instance=ExtResource("4_tvo6m")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27.83287, 12.850342, -154.02678)
-stats = SubResource("Resource_kwsyd")
+stats = SubResource("Resource_2py0s")
 
 [node name="AutoEnemigo" parent="NavigationRegion3D" unique_id=1287735819 instance=ExtResource("9_xncdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 0)
@@ -228,17 +221,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.99982, 11.78165, 176.2895
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0, -0.81391907, 0)
 mesh = ExtResource("6_tvo6m")
 
-[node name="Events" type="Area3D" parent="." unique_id=78601159]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-script = ExtResource("10_axex3")
-roca_scene = ExtResource("11_axex3")
-cantidad_rocas = 150
-altura_caida = 100.0
-
-[node name="SpawnRocksEvent" type="CollisionShape3D" parent="Events" unique_id=1804957944]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.67128, 315.4298, 21.733704)
-shape = SubResource("BoxShape3D_axex3")
-
 [node name="Player" parent="." unique_id=1505952561 node_paths=PackedStringArray("camara_pivot") instance=ExtResource("15_sp1my")]
 transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 26.627583, 167.58144)
 contact_monitor = true
@@ -260,3 +242,6 @@ sensitivity = 0.005
 
 [node name="OutlinePostProcesing" type="MeshInstance3D" parent="CameraRig/Camera3D" unique_id=6440849]
 mesh = SubResource("QuadMesh_6ej83")
+
+[node name="EventManager" type="Node" parent="." unique_id=52673366]
+script = ExtResource("13_kwsyd")

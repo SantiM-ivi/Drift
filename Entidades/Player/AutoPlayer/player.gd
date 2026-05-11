@@ -53,7 +53,7 @@ enum Estado { QUIETO, ACELERANDO, FRENANDO, EN_AIRE, BOOST, DRIFT }
 @onready var debug_vel_label: Label3D  = $DebugVelocidadLabel
 @onready var equipment: PlayerEquipment = $PlayerEquipment
 @onready var pickup_area: Area3D        = $AreaDeInteraccion
-
+@onready var bocina_sfx: AudioStreamPlayer3D = $BocinaSFX
 # ─── ESTADO INTERNO ──────────────────────────────────────────────────────────
 
 const MAX_ANGULO_RUEDA: float = 25.0
@@ -95,6 +95,7 @@ func _physics_process(delta: float) -> void:
 	if camara_pivot == null:
 		return
 
+
 	_sincronizar_camara()
 
 	var en_suelo  = _algun_rayo_toca()
@@ -130,6 +131,8 @@ func _physics_process(delta: float) -> void:
 	_aplicar_movimiento(delta, giro, accel_inp, frenando)
 	_cooldown_disparo -= delta
 	_manejar_disparo()
+	if Input.is_action_just_pressed("Bocina"):
+		bocina_sfx.play()
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
 func _actualizar_estado(en_suelo: bool, accel_inp: float, frenando: bool) -> void:

@@ -14,8 +14,14 @@
 [ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capo/Mesh/mesh_fola.tres" id="14_tsr6g"]
 [ext_resource type="ArrayMesh" uid="uid://df03484m3d0bn" path="res://Entidades/Items/Capo/Mesh/mesh_tubo.tres" id="15_ro61n"]
 [ext_resource type="PackedScene" uid="uid://d1g6m8lx4y1sf" path="res://Common/Projectiles/Bullets/bullet.tscn" id="15_twon6"]
+[ext_resource type="AudioStream" uid="uid://bpcfiud4h8hmj" path="res://Assets/Audio/SFX/bocina.mp3" id="16_2u8bg"]
 [ext_resource type="PackedScene" uid="uid://brkt4yarrrbwi" path="res://Entidades/Items/ArmaMetralleta/Equipado/metralleta_player.tscn" id="16_48gm7"]
 [ext_resource type="ArrayMesh" uid="uid://d4n15t8bbtgo3" path="res://Entidades/Items/ArmaFrontal/Parachoque/mesh_parachoque.tres" id="16_r6tsw"]
+[ext_resource type="Script" uid="uid://8aexemf0ota8" path="res://Common/Radio/radio.gd" id="17_k7x2q"]
+[ext_resource type="AudioStream" uid="uid://x1dte5mir4v3" path="res://Assets/Audio/SFX/Radio2.wav" id="18_oedk5"]
+[ext_resource type="AudioStream" uid="uid://u178viogsx5u" path="res://Assets/Audio/SFX/Radio4.wav" id="19_2u8bg"]
+[ext_resource type="AudioStream" uid="uid://yts2x4tgq88u" path="res://Assets/Audio/SFX/Radio6.wav" id="20_lofs7"]
+[ext_resource type="AudioStream" uid="uid://de822lnn3ng25" path="res://Assets/Audio/SFX/Radio 5.wav" id="21_sn0i8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
 resource_name = "Material.003"
@@ -176,6 +182,10 @@ volume_db = -21.029
 stream = ExtResource("9_nugh5")
 volume_db = -21.029
 
+[node name="BocinaSFX" type="AudioStreamPlayer3D" parent="." unique_id=1200402778]
+stream = ExtResource("16_2u8bg")
+volume_db = -21.029
+
 [node name="PlayerEquipment" type="Node" parent="." unique_id=1035889082]
 script = ExtResource("11_ro61n")
 
@@ -192,3 +202,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007953376, 0.7032028, 3.91
 
 [node name="PuntodeDisparo" type="Node3D" parent="." unique_id=444535231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00666897, 0.5896413, -2.3175523)
+
+[node name="Radio" type="Node" parent="." unique_id=2120681982]
+script = ExtResource("17_k7x2q")
+canciones = Array[AudioStream]([ExtResource("18_oedk5"), ExtResource("19_2u8bg"), ExtResource("20_lofs7"), ExtResource("21_sn0i8")])

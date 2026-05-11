@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://3hex67ihxl2q"]
+
+[sub_resource type="GDScript" id="GDScript_s483p"]
+script/source = "extends GPUParticles3D
+
+func _init() -> void:
+	# Todo en código, no necesitás .tscn
+	amount = 500
+	lifetime = 1.2
+	emitting = true
+	
+	var process_mat = ParticleProcessMaterial.new()
+	process_mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	process_mat.emission_box_extents = Vector3(20.0, 1.0, 20.0)
+	process_mat.gravity = Vector3(0, -18.0, 0)
+	process_mat.initial_velocity_min = 8.0
+	process_mat.initial_velocity_max = 12.0
+	process_mat.direction = Vector3(0, -1, 0)
+	process_mat.spread = 5.0
+	process_material = process_mat
+	
+	# Mesh de cada gota — cilindro muy fino
+	var mesh_inst = QuadMesh.new()
+	mesh_inst.size = Vector2(0.02, 0.3)
+	draw_pass_1 = mesh_inst
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.6, 0.8, 1.0, 0.6)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mesh_inst.material = mat
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd45p"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vrt6e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vrt6e"]
+
+[node name="LluviaPlaceholder_tscn" type="Node3D" unique_id=366316790]
+script = SubResource("GDScript_s483p")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1893857210]
+material_override = SubResource("StandardMaterial3D_hd45p")
+process_material = SubResource("ParticleProcessMaterial_vrt6e")
+draw_pass_1 = SubResource("CapsuleMesh_vrt6e")

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dc3j4emewyj66"]
+
+[sub_resource type="GDScript" id="GDScript_fuh63"]
+script/source = "extends Node3D
+
+var _tiempo: float = 0.0
+
+func _ready() -> void:
+	# Crear el cono programáticamente
+	var mesh_instance = MeshInstance3D.new()
+	var cone = CylinderMesh.new()
+	cone.top_radius = 0.1
+	cone.bottom_radius = 3.0
+	cone.height = 8.0
+	mesh_instance.mesh = cone
+	
+	# Material semitransparente grisáceo
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.5, 0.5, 0.6, 0.4)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mesh_instance.material_override = mat
+	add_child(mesh_instance)
+
+func _process(delta: float) -> void:
+	_tiempo += delta
+	# Rotación + wobble lateral suave
+	rotation.y += delta * 3.0
+	position.x += sin(_tiempo * 1.2) * delta * 0.8
+	position.z += cos(_tiempo * 0.9) * delta * 0.8
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qbwo1"]
+
+[node name="TornadoPlaceholder_tscn" type="Node3D" unique_id=1143725644]
+script = SubResource("GDScript_fuh63")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=138074628]
+transform = Transform3D(4.5893426, 0, 0, 0, 6.0051627, 0, 0, 0, 4.5453324, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_qbwo1")

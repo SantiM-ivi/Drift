@@ -3,7 +3,7 @@ extends Node
 
 @export var intervalo: float = 20.0
 @export var duracion_transicion: float = 3.0
-
+var lluvia_particles: GPUParticles3D = null
 var _timer: float = 0.0
 var _ultimo_evento: int = -1
 var _env: Environment
@@ -45,6 +45,12 @@ enum Evento { ROCAS, LLUVIA, TORMENTA }
 func _ready() -> void:
 	var we = get_tree().current_scene.get_node("WorldEnvironment")
 	_env = we.environment
+	var jugador = get_tree().get_first_node_in_group("Player")
+	if jugador:
+		lluvia_particles = jugador.get_node_or_null("GPUParticles3D")
+		print("[EventManager] Lluvia particles: ", lluvia_particles)
+	else:
+		print("[EventManager] No se encontró el jugador")
 	print("[EventManager] Listo. Primer evento en ", intervalo, " segundos.")
 
 func _process(delta: float) -> void:
@@ -86,14 +92,21 @@ func _aplicar_visual(nombre_evento: String) -> void:
 	_t = 0.0
 	_transicionando = true
 
-func _evento_rocas() -> void:
-	print("[Evento] 🪨 ROCAS - Empiezan a caer rocas!")
-	_aplicar_visual("ROCAS")
-
 func _evento_lluvia() -> void:
 	print("[Evento] 🌧️ LLUVIA - Comienza la lluvia intensa!")
 	_aplicar_visual("LLUVIA")
+	if lluvia_particles:
+		lluvia_particles.emitting = true
+		lluvia_particles.show()
+
+func _evento_rocas() -> void:
+	print("[Evento] 🪨 ROCAS - Empiezan a caer rocas!")
+	_aplicar_visual("ROCAS")
+	if lluvia_particles:
+		lluvia_particles.emitting = false
 
 func _evento_tormenta() -> void:
 	print("[Evento] ⚡ TORMENTA - Tormenta eléctrica!")
 	_aplicar_visual("TORMENTA")
+	if lluvia_particles:
+		lluvia_particles.emitting = false

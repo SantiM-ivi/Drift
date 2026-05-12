@@ -54,6 +54,7 @@ enum Estado { QUIETO, ACELERANDO, FRENANDO, EN_AIRE, BOOST, DRIFT }
 @onready var equipment: PlayerEquipment = $PlayerEquipment
 @onready var pickup_area: Area3D        = $AreaDeInteraccion
 @onready var bocina_sfx: AudioStreamPlayer3D = $BocinaSFX
+@onready var hud = $"../HUD"
 # ─── ESTADO INTERNO ──────────────────────────────────────────────────────────
 
 const MAX_ANGULO_RUEDA: float = 25.0
@@ -85,6 +86,7 @@ func _ready() -> void:
 		equipment.inicializar(stats, velocidad_maxima)
 	if stats:
 		stats.health_depleted.connect(_on_health_depleted)
+		stats.health_changed.connect(_on_health_changed)
 	pickup_area.area_entered.connect(_on_area_entered)
 	pickup_area.area_exited.connect(_on_area_exited)
 	body_entered.connect(_on_body_entered)
@@ -133,6 +135,10 @@ func _physics_process(delta: float) -> void:
 	_manejar_disparo()
 	if Input.is_action_just_pressed("Bocina"):
 		bocina_sfx.play()
+	if hud:
+		var vel_kmh = int(Vector2(linear_velocity.x, linear_velocity.z).length() * 3.6)
+		hud.set_speed(vel_kmh)
+		hud.set_compass(rad_to_deg(camara_pivot.global_rotation.y))
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
 func _actualizar_estado(en_suelo: bool, accel_inp: float, frenando: bool) -> void:
@@ -417,3 +423,8 @@ func _algun_rayo_toca() -> bool:
 		if rayo.is_colliding():
 			return true
 	return false
+
+func _on_health_changed(cur_health: int, max_health: int) -> void:
+	if hud:
+		hud.set_health(cur_health)
+		hud.health_bar.max_value = max_health

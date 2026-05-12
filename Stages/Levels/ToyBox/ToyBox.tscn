@@ -1,12 +1,9 @@
 [gd_scene format=3 uid="uid://b53tgeenfprix"]
 
-[ext_resource type="Texture2D" uid="uid://xk71pg3c35vm" path="res://Common/UI/crosshair046.png" id="1_el73g"]
 [ext_resource type="PackedScene" uid="uid://dwcuy4jbucc5d" path="res://Stages/Levels/ToyBox/map.tscn" id="1_fqv2x"]
 [ext_resource type="PackedScene" uid="uid://dlke4nh4h6m2i" path="res://debbuger.tscn" id="2_aippi"]
-[ext_resource type="Script" uid="uid://bymh6anhdgs18" path="res://Common/UI/life.gd" id="3_ijbo1"]
+[ext_resource type="PackedScene" uid="uid://cud5k40cq7agd" path="res://Stages/UI/HUD.tscn" id="2_ov8pn"]
 [ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="3_rkloy"]
-[ext_resource type="Script" uid="uid://bun44j0q5dl12" path="res://Common/UI/chatarra_hud.gd" id="4_06btp"]
-[ext_resource type="Script" uid="uid://dpenpxpclanjk" path="res://Stages/Levels/ToyBox/fps.gd" id="5_s6gpj"]
 [ext_resource type="Shader" uid="uid://cgdn7iob4ii8w" path="res://Assets/Shaders/Cielo.gdshader" id="6_ov8pn"]
 [ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="6_tvo6m"]
 [ext_resource type="Texture2D" uid="uid://b8n21eb7mnps6" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
@@ -112,9 +109,9 @@ size = Vector2(2, 2)
 
 [node name="ToyBox" type="Node3D" unique_id=2123033873]
 
-[node name="Hud" type="CanvasLayer" parent="." unique_id=880527627]
+[node name="HUD" parent="." unique_id=1305346954 instance=ExtResource("2_ov8pn")]
 
-[node name="Debbuger" parent="Hud" unique_id=966775713 node_paths=PackedStringArray("spawn_point", "spawn_point_item", "spawn_point_item2", "spawn_point_item_aleatorio") instance=ExtResource("2_aippi")]
+[node name="Debbuger" parent="HUD" unique_id=966775713 node_paths=PackedStringArray("spawn_point", "spawn_point_item", "spawn_point_item2", "spawn_point_item_aleatorio") instance=ExtResource("2_aippi")]
 visible = false
 offset_left = -1.0
 offset_right = -1.0
@@ -122,50 +119,6 @@ spawn_point = NodePath("../../SpawmDebugg")
 spawn_point_item = NodePath("../../SpawmPoint Item")
 spawn_point_item2 = NodePath("../../SpawmPoint Item 2")
 spawn_point_item_aleatorio = NodePath("../../SpawmPoint ItemAleatorio")
-
-[node name="Vida" type="ColorRect" parent="Hud" unique_id=642039018]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -28.0
-offset_right = 7.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.6707253, 0.21058929, 0.18009827, 1)
-script = ExtResource("3_ijbo1")
-
-[node name="Chatarra" type="Label" parent="Hud" unique_id=1039683899]
-offset_right = 565.0
-offset_bottom = 169.0
-size_flags_horizontal = 4
-script = ExtResource("4_06btp")
-
-[node name="FPS" type="Label" parent="Hud" unique_id=61511515]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -565.0
-offset_bottom = 169.0
-grow_horizontal = 0
-size_flags_horizontal = 4
-horizontal_alignment = 2
-script = ExtResource("5_s6gpj")
-
-[node name="TextureRect" type="TextureRect" parent="Hud" unique_id=17074810]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_el73g")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=848986660]
 environment = SubResource("Environment_rkloy")
@@ -221,8 +174,21 @@ mesh = ExtResource("6_tvo6m")
 transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 26.627583, 167.58144)
 contact_monitor = true
 max_contacts_reported = 4
+altura_flotacion = null
+fuerza_resorte = null
+amortiguacion = null
 velocidad_maxima = 45.0
+fuerza_avance = null
+fuerza_frenado = null
+agarre_lateral = null
+tiempo_aceleracion = null
+tiempo_frenado = null
+bonus_velocidad_boost = null
+cooldown_boost = null
+agarre_drift = null
 camara_pivot = NodePath("../CameraRig")
+inclinacion_lateral = null
+adelanto_giro = null
 stats = SubResource("Resource_6ej83")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=2041556240]

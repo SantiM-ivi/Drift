@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://cud5k40cq7agd"]
+
+[ext_resource type="Script" uid="uid://ctkq2acf5fl67" path="res://Stages/UI/HUD.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://dfrdlub7rangf" path="res://Stages/UI/CompassBar.gd" id="2_compass"]
+[ext_resource type="Texture2D" uid="uid://cp36tys35wd0t" path="res://PantallaNegraFondo.jpeg" id="3_metal"]
+[ext_resource type="Texture2D" uid="uid://dmdfgbe0bt28j" path="res://TexturaOxidada.jpg" id="4_rust"]
+
+[sub_resource type="StyleBoxTexture" id="SBT_metal"]
+texture = ExtResource("3_metal")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="SBF_hp_bg"]
+bg_color = Color(0, 0.1, 0, 0.85)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="SBF_hp_fill"]
+bg_color = Color(0.18, 1, 0.18, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HUD" type="CanvasLayer" unique_id=1305346954]
+script = ExtResource("1_hud")
+
+[node name="TopLeft" type="Control" parent="." unique_id=2145555371]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 240.0
+offset_bottom = 62.0
+
+[node name="BG" type="Panel" parent="TopLeft" unique_id=596031124]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("SBT_metal")
+
+[node name="RustBorder" type="NinePatchRect" parent="TopLeft" unique_id=639755773]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("4_rust")
+draw_center = false
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="Content" type="VBoxContainer" parent="TopLeft" unique_id=1440143760]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 16.0
+offset_right = -11.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MissionTitle" type="Label" parent="TopLeft/Content" unique_id=1805590498]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "ENCUENTRA EL CONVOY"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TopCenter" type="Control" parent="." unique_id=1766558645]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 10.0
+offset_right = 180.0
+offset_bottom = 52.0
+grow_horizontal = 2
+
+[node name="RustBorder" type="NinePatchRect" parent="TopCenter" unique_id=819641850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_right = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.12, 1.3999997)
+texture = ExtResource("4_rust")
+draw_center = false
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="BG" type="Panel" parent="TopCenter" unique_id=1020752786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = 4.0
+offset_right = -15.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0474263, 1.12269)
+theme_override_styles/panel = SubResource("SBT_metal")
+
+[node name="CompassBar" type="Control" parent="TopCenter" unique_id=38954148]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 13.0
+offset_right = -7.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_compass")
+
+[node name="BottomLeft" type="Control" parent="." unique_id=646861431]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -65.0
+offset_right = 240.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="BG" type="Panel" parent="BottomLeft" unique_id=1280944544]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("SBT_metal")
+
+[node name="RustBorder" type="NinePatchRect" parent="BottomLeft" unique_id=928952310]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("4_rust")
+draw_center = false
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="Content" type="VBoxContainer" parent="BottomLeft" unique_id=615093040]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.000006
+offset_top = 7.0
+offset_right = -6.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.95999956, 1)
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="BottomLeft/Content" unique_id=923804263]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+theme_override_styles/background = SubResource("SBF_hp_bg")
+theme_override_styles/fill = SubResource("SBF_hp_fill")
+value = 100.0
+show_percentage = false
+
+[node name="BottomRight" type="Control" parent="." unique_id=1280923945]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -90.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="RustBorder" type="NinePatchRect" parent="BottomRight" unique_id=1014187536]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("4_rust")
+draw_center = false
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="BG" type="Panel" parent="BottomRight" unique_id=564983343]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 6.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.9317293)
+theme_override_styles/panel = SubResource("SBT_metal")
+
+[node name="Content" type="VBoxContainer" parent="BottomRight" unique_id=1387784331]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -5.0
+offset_right = -11.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0800146, 0.92)
+alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="BottomRight/Content" unique_id=1139115574]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.18, 1, 0.18, 1)
+theme_override_font_sizes/font_size = 44
+text = "0"
+horizontal_alignment = 1
+
+[node name="UnitLabel" type="Label" parent="BottomRight/Content" unique_id=1110793515]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.18, 1, 0.18, 0.65)
+theme_override_font_sizes/font_size = 12
+text = "km/h"
+horizontal_alignment = 1

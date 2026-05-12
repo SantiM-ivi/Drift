@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://u178viogsx5u" path="res://Assets/Audio/SFX/Radio4.wav" id="19_2u8bg"]
 [ext_resource type="AudioStream" uid="uid://yts2x4tgq88u" path="res://Assets/Audio/SFX/Radio6.wav" id="20_lofs7"]
 [ext_resource type="AudioStream" uid="uid://de822lnn3ng25" path="res://Assets/Audio/SFX/Radio 5.wav" id="21_sn0i8"]
+[ext_resource type="Script" uid="uid://dawtwk7r3nwc2" path="res://Common/Events/lluvia_particles.gd" id="23_lofs7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
 resource_name = "Material.003"
@@ -79,6 +80,34 @@ size = Vector3(2.3669157, 0.46647644, 5.2766647)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tsr6g"]
 size = Vector3(6.2264404, 3.1831055, 10.588196)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2u8bg"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 0.5, 10)
+direction = Vector3(0, -1, 0)
+spread = 2.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+color = Color(0.0627451, 0.42352942, 1, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="Curve" id="Curve_jge44"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0237467, 0.0515789), 0.398947, 0.398947, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elyy2"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_lofs7"]
+material = SubResource("StandardMaterial3D_elyy2")
+curve = SubResource("Curve_jge44")
 
 [node name="Player" type="RigidBody3D" unique_id=1505952561 groups=["Player"]]
 transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 0, 0, 0)
@@ -206,3 +235,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00666897, 0.5896413, -2.31
 [node name="Radio" type="Node" parent="." unique_id=2120681982]
 script = ExtResource("17_k7x2q")
 canciones = Array[AudioStream]([ExtResource("18_oedk5"), ExtResource("19_2u8bg"), ExtResource("20_lofs7"), ExtResource("21_sn0i8")])
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=1686243316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19624321, -0.44999993, -1.1542969)
+size = Vector3(74.116394, 1, 71.546875)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=953968661]
+transform = Transform3D(5.9803905, -3.7252903e-09, 0, 1.4901161e-08, 2.0769322, 0, 0, 0, 6.6329446, -0.2539372, 41.452026, 0)
+emitting = false
+amount = 500
+lifetime = 2.0
+randomness = 0.44
+visibility_aabb = AABB(-10, -20, -10, 20, 20, 20)
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_2u8bg")
+draw_pass_1 = SubResource("RibbonTrailMesh_lofs7")
+script = ExtResource("23_lofs7")

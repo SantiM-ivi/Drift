@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Drift"
-run/main_scene="uid://b53tgeenfprix"
+run/main_scene="uid://bn38vk5cg2243"
 config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/stretch_mode=4
 boot_splash/image="uid://mkca73rncydy"
@@ -30,9 +30,16 @@ Chatarra="*uid://b6i7j21bsswo0"
 
 window/size/viewport_width=640
 window/size/viewport_height=320
+window/size/mode=3
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/aspect="keep_height"
+
+[drift]
+
+vol_musica=0.55
+vol_sfx=0.78
+fullscreen=false
 
 [editor_plugins]
 

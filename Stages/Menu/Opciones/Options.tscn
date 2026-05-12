@@ -1,0 +1,261 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://ce4uk8smcu5oa" path="res://Stages/Menu/Opciones/Options.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dtkjhgss1w8v0" path="res://Stages/Levels/ToyBox/FondoMenu.png" id="2_bg"]
+
+; ── StyleBox botón normal ──
+[sub_resource type="StyleBoxFlat" id="SB_BtnNormal"]
+bg_color = Color(0.10, 0.07, 0.04, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.38, 0.12, 0.8)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+content_margin_left = 28.0
+content_margin_right = 28.0
+content_margin_top = 13.0
+content_margin_bottom = 13.0
+
+; ── StyleBox hover ──
+[sub_resource type="StyleBoxFlat" id="SB_BtnHover"]
+bg_color = Color(0.20, 0.12, 0.03, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.55, 0.10, 1.0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+content_margin_left = 28.0
+content_margin_right = 28.0
+content_margin_top = 13.0
+content_margin_bottom = 13.0
+
+; ── StyleBox pressed ──
+[sub_resource type="StyleBoxFlat" id="SB_BtnPressed"]
+bg_color = Color(0.30, 0.18, 0.02, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1.0, 0.72, 0.15, 1.0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+content_margin_left = 28.0
+content_margin_right = 28.0
+content_margin_top = 13.0
+content_margin_bottom = 13.0
+
+; ── StyleBox panel central (fondo oscuro semitransparente) ──
+[sub_resource type="StyleBoxFlat" id="SB_Panel"]
+bg_color = Color(0.04, 0.03, 0.02, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.38, 0.12, 0.5)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+content_margin_left = 40.0
+content_margin_right = 40.0
+content_margin_top = 36.0
+content_margin_bottom = 36.0
+
+; ── AnimationPlayer intro ──
+[sub_resource type="Animation" id="Anim_intro"]
+resource_name = "intro"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0, 0.5),
+"transitions": PackedFloat32Array(1.0, 1.0),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
+}
+
+; ════════════════════════════════════════
+;  ÁRBOL DE NODOS
+; ════════════════════════════════════════
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+; ── Fondo imagen (mismo que MainMenu) ──
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+stretch_mode = 6
+
+; ── Overlay oscuro sobre la imagen ──
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+; ── Contenedor central ──
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+; ── Panel con fondo semitransparente ──
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(420, 0)
+theme_override_styles/panel = SubResource("SB_Panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+; ── Título ──
+[node name="LblTitulo" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OPCIONES"
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.95, 0.65, 0.10, 1.0)
+horizontal_alignment = 1
+
+; ── Separador ──
+[node name="HSep" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/separator = Color(0.55, 0.38, 0.12, 0.4)
+theme_override_constants/separation = 8
+
+; ══ FILA: Volumen Música ══
+
+[node name="LblMusica" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "VOLUMEN MÚSICA"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.55, 0.45, 0.28, 1.0)
+
+[node name="RowMusica" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SliderMusica" type="HSlider" parent="CenterContainer/Panel/VBoxContainer/RowMusica"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 28)
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="LblMusicaVal" type="Label" parent="CenterContainer/Panel/VBoxContainer/RowMusica"]
+layout_mode = 2
+custom_minimum_size = Vector2(44, 0)
+text = "80%"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.85, 0.65, 0.20, 1.0)
+horizontal_alignment = 2
+
+; ══ FILA: Volumen SFX ══
+
+[node name="LblSFX" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "VOLUMEN EFECTOS (SFX)"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.55, 0.45, 0.28, 1.0)
+
+[node name="RowSFX" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SliderSFX" type="HSlider" parent="CenterContainer/Panel/VBoxContainer/RowSFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 28)
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="LblSFXVal" type="Label" parent="CenterContainer/Panel/VBoxContainer/RowSFX"]
+layout_mode = 2
+custom_minimum_size = Vector2(44, 0)
+text = "80%"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.85, 0.65, 0.20, 1.0)
+horizontal_alignment = 2
+
+; ══ FILA: Pantalla Completa ══
+
+[node name="RowFullscreen" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LblFullscreen" type="Label" parent="CenterContainer/Panel/VBoxContainer/RowFullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PANTALLA COMPLETA"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.70, 0.58, 0.38, 1.0)
+vertical_alignment = 1
+
+[node name="CheckFullscreen" type="CheckBox" parent="CenterContainer/Panel/VBoxContainer/RowFullscreen"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.85, 0.65, 0.20, 1.0)
+text = ""
+
+; ── Separador inferior ──
+[node name="HSep2" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/separator = Color(0.55, 0.38, 0.12, 0.4)
+theme_override_constants/separation = 4
+
+; ── Botón Volver ──
+[node name="BtnVolver" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(300, 48)
+theme_override_styles/normal = SubResource("SB_BtnNormal")
+theme_override_styles/hover = SubResource("SB_BtnHover")
+theme_override_styles/pressed = SubResource("SB_BtnPressed")
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.70, 0.58, 0.38, 1.0)
+theme_override_colors/font_hover_color = Color(0.90, 0.75, 0.50, 1.0)
+theme_override_colors/font_pressed_color = Color(1.0, 0.88, 0.60, 1.0)
+text = "◀   VOLVER"
+
+; ── AnimationPlayer ──
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("Anim_intro")
+}

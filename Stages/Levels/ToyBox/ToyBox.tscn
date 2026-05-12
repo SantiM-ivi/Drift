@@ -174,21 +174,8 @@ mesh = ExtResource("6_tvo6m")
 transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 26.627583, 167.58144)
 contact_monitor = true
 max_contacts_reported = 4
-altura_flotacion = null
-fuerza_resorte = null
-amortiguacion = null
 velocidad_maxima = 45.0
-fuerza_avance = null
-fuerza_frenado = null
-agarre_lateral = null
-tiempo_aceleracion = null
-tiempo_frenado = null
-bonus_velocidad_boost = null
-cooldown_boost = null
-agarre_drift = null
 camara_pivot = NodePath("../CameraRig")
-inclinacion_lateral = null
-adelanto_giro = null
 stats = SubResource("Resource_6ej83")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=2041556240]

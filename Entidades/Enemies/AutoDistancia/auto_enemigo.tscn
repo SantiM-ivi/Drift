@@ -2,16 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_ydkk0"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="2_1g0f4"]
-[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_bwqen"]
+[ext_resource type="Resource" uid="uid://cuh47fsvgovrq" path="res://Entidades/Enemies/AutoDistancia/autoDistancia.tres" id="2_yxoef"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="4_vk40u"]
 [ext_resource type="Texture2D" uid="uid://p0nmc7qed03" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_BaseColor.png" id="4_yxoef"]
 [ext_resource type="Texture2D" uid="uid://c172r1iqrrhpe" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_Normal.png" id="5_mqdbq"]
 [ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="6_bwqen"]
 [ext_resource type="Texture2D" uid="uid://d1udy8fqipsed" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_Roughness.png" id="6_fkyr0"]
-
-[sub_resource type="Resource" id="Resource_vk40u"]
-script = ExtResource("2_bwqen")
-metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd2b5"]
 albedo_texture = ExtResource("4_yxoef")
@@ -94,7 +90,7 @@ collision_mask = 23
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_ydkk0")
-stats = SubResource("Resource_vk40u")
+stats = ExtResource("2_yxoef")
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("2_1g0f4")
@@ -168,6 +164,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_q5ew6")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270199466]
+avoidance_enabled = true
 
 [node name="ShootPoint" type="Node3D" parent="." unique_id=1872714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2633922, 0)

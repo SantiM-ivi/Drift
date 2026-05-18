@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://djd0jh7i4fndh"]
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_f4xbj"]
-[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_dkhma"]
+[ext_resource type="Resource" uid="uid://cxnvn6pq4m2an" path="res://Entidades/Enemies/Boss/bosslevel1_stats.tres" id="2_7r6q3"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="3_k1am6"]
 [ext_resource type="Texture2D" uid="uid://x00aaitsfovr" path="res://Entidades/Enemies/Boss/Jefe_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="4_7r6q3"]
 [ext_resource type="Texture2D" uid="uid://dgx6w42cldy5" path="res://Entidades/Enemies/Boss/Jefe_DefaultMaterial_Emission.png" id="5_5at2e"]
@@ -9,12 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://ct5j5mer32cmj" path="res://Entidades/Enemies/Boss/Jefe_DefaultMaterial_Normal.png" id="7_c2ynx"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="8_dwjb1"]
 [ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="9_x0myr"]
-
-[sub_resource type="Resource" id="Resource_vk40u"]
-script = ExtResource("2_dkhma")
-base_max_health = 500
-base_attack = 15
-metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h76ht"]
 resource_name = "Material"
@@ -101,7 +95,7 @@ mass = 50.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_f4xbj")
-stats = SubResource("Resource_vk40u")
+stats = ExtResource("2_7r6q3")
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("3_k1am6")
@@ -174,6 +168,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_q5ew6")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270199466]
+avoidance_enabled = true
 
 [node name="ShootPoint" type="Node3D" parent="." unique_id=1872714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2633922, 0)

@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://cgdn7iob4ii8w" path="res://Assets/Shaders/Cielo.gdshader" id="6_ov8pn"]
 [ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="6_tvo6m"]
 [ext_resource type="Texture2D" uid="uid://b8n21eb7mnps6" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
+[ext_resource type="PackedScene" uid="uid://b1uk3ecnyne6e" path="res://Entidades/Enemies/AutoMedio/auto_enemigo_medio.tscn" id="9_sp1my"]
 [ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="9_xncdv"]
 [ext_resource type="PackedScene" uid="uid://djd0jh7i4fndh" path="res://Entidades/Enemies/Boss/jefe_nivel1.tscn" id="11_kwsyd"]
 [ext_resource type="PackedScene" uid="uid://b34ftb0lkmj73" path="res://Entidades/Enemies/AutoGrande/auto_enemigo_Camioneta.tscn" id="12_kwsyd"]
@@ -141,6 +142,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.649108, 0)
 
 [node name="JefeNivel1" parent="NavigationRegion3D" unique_id=1008261279 instance=ExtResource("11_kwsyd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.297256, 21.553944, 0)
+
+[node name="AutoEnemigoMedio" parent="NavigationRegion3D" unique_id=1006424039 instance=ExtResource("9_sp1my")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9169655, 19.47591, -48.142815)
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)

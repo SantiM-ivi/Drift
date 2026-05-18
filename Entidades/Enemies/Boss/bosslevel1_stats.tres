@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://cxnvn6pq4m2an"]
+
+[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="1_f4obu"]
+
+[resource]
+script = ExtResource("1_f4obu")
+base_max_health = 500
+base_defense = 5
+base_attack = 25
+base_ram_damage = 25
+base_attack_speed = 300.0
+base_steer_speed = 800.0
+metadata/_custom_type_script = "uid://irbhor700bc7"

@@ -25,8 +25,17 @@ signal health_changed(cur_health: int, max_health: int)
 @export var base_attack: int = 10
 @export var base_ram_damage: int = 10  # daño base de choque
 @export var bonus_ram_damage: int = 0
-
 @export var experience: int = 0: set = _on_experience_set
+# --- Movimiento ---
+@export var base_speed: float        = 400.0  # engine_force en chase
+@export var base_attack_speed: float = 200.0  # engine_force en attack (más lento)
+@export var base_steer_limit: float  = 0.5    # ángulo máximo de giro
+@export var base_steer_speed: float  = 150.0  # qué tan rápido gira
+
+var current_speed: float        = 400.0
+var current_attack_speed: float = 200.0
+var current_steer_limit: float  = 0.5
+var current_steer_speed: float  = 150.0
 
 var level: int:
 	get(): return floor(max(1.0, sqrt(experience / BASE_LEVEL_XP) + 0.5))
@@ -35,7 +44,6 @@ var current_max_health: int = 100
 var current_defense: int = 10
 var current_attack: int = 10
 var current_ram_damage: int = 10
-
 var health: int = 0: set = _on_health_set
 var stat_buffs: Array[StatBuff]
 
@@ -77,6 +85,10 @@ func recalculate_stats() -> void:
 	current_defense     = base_defense     * STAT_CURVES[BuffableStats.DEFENSE].sample(stat_sample_pos)
 	current_attack      = base_attack      * STAT_CURVES[BuffableStats.ATTACK].sample(stat_sample_pos)
 	current_ram_damage  = base_ram_damage  * STAT_CURVES[BuffableStats.RAM_DAMAGE].sample(stat_sample_pos)
+	current_speed        = base_speed
+	current_attack_speed = base_attack_speed
+	current_steer_limit  = base_steer_limit
+	current_steer_speed  = base_steer_speed
 
 
 	for stat_name in stat_multipliers:

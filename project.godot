@@ -39,7 +39,7 @@ window/stretch/aspect="keep_height"
 
 vol_musica=0.55
 vol_sfx=0.78
-fullscreen=false
+fullscreen=true
 
 [editor_plugins]
 

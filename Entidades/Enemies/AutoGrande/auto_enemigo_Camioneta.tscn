@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://b34ftb0lkmj73"]
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_7k37n"]
-[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_8taj3"]
+[ext_resource type="Resource" uid="uid://c0u87n0va1dim" path="res://Entidades/Enemies/AutoGrande/autoCamioneta.tres" id="2_1cgf8"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="3_nh23d"]
 [ext_resource type="Texture2D" uid="uid://de68g1ybrjtbp" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="4_1cgf8"]
 [ext_resource type="Texture2D" uid="uid://cygdayik6qym6" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Emission.png" id="5_5g5ko"]
@@ -9,13 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://1bvdr4wol6vx" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="6_bhmpw"]
 [ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="6_c51v2"]
 [ext_resource type="Texture2D" uid="uid://dqllxy2esehgg" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Normal.png" id="7_4em7q"]
-
-[sub_resource type="Resource" id="Resource_vk40u"]
-script = ExtResource("2_8taj3")
-base_max_health = 200
-base_attack = 15
-base_ram_damage = 25
-metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqyqa"]
 resource_name = "Material.001"
@@ -101,7 +94,7 @@ collision_mask = 23
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_7k37n")
-stats = SubResource("Resource_vk40u")
+stats = ExtResource("2_1cgf8")
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("3_nh23d")
@@ -174,6 +167,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_q5ew6")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270199466]
+avoidance_enabled = true
 
 [node name="ShootPoint" type="Node3D" parent="." unique_id=1872714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2633922, 0)

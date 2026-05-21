@@ -1,16 +1,17 @@
 [gd_scene format=4 uid="uid://c5xen6irvbtlw"]
 
 [ext_resource type="Script" uid="uid://tanwk50icrp8" path="res://Entidades/Player/AutoPlayer/player.gd" id="1_omvyu"]
-[ext_resource type="Texture2D" uid="uid://dbs8ym6eyy4v1" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
-[ext_resource type="Texture2D" uid="uid://blskpcrqpdk45" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
-[ext_resource type="Texture2D" uid="uid://butryowtykkvn" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
-[ext_resource type="Texture2D" uid="uid://bbqnn0ag6mo4p" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
+[ext_resource type="Texture2D" uid="uid://k6pmns5ouf4c" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
+[ext_resource type="Texture2D" uid="uid://urarojvo8s8s" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
+[ext_resource type="Texture2D" uid="uid://c8srpmcfxep2f" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
+[ext_resource type="Texture2D" uid="uid://ddwuvra25s0p7" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
 [ext_resource type="AudioStream" uid="uid://bq1cp37sulwpx" path="res://Assets/Audio/SFX/CrashSFX.wav" id="7_u02rt"]
 [ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="8_cks8u"]
-[ext_resource type="PackedScene" uid="uid://f561fbc0b875" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
-[ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
+[ext_resource type="PackedScene" uid="uid://djrc002ix1jtr" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
+[ext_resource type="AudioStream" uid="uid://twjy7sd71vv6" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
 [ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Items/ArmaCañon/Torreta/cañon_layer.tscn" id="10_tsr6g"]
 [ext_resource type="Script" uid="uid://r2igklj61rfa" path="res://Entidades/Player/AutoPlayer/player_equipment.gd" id="11_ro61n"]
+[ext_resource type="PackedScene" uid="uid://8hdi840lmuat" path="res://Entidades/Items/ArmaEscopeta/Equipado/escopeta_player.tscn" id="13_sn0i8"]
 [ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capo/Mesh/mesh_fola.tres" id="14_tsr6g"]
 [ext_resource type="ArrayMesh" uid="uid://df03484m3d0bn" path="res://Entidades/Items/Capo/Mesh/mesh_tubo.tres" id="15_ro61n"]
 [ext_resource type="PackedScene" uid="uid://d1g6m8lx4y1sf" path="res://Common/Projectiles/Bullets/bullet.tscn" id="15_twon6"]
@@ -165,6 +166,10 @@ projectile_scene = ExtResource("15_twon6")
 
 [node name="Metralleta" parent="VisualRoot/ItemsEquipados" unique_id=1646838913 instance=ExtResource("16_48gm7")]
 transform = Transform3D(-0.99974406, -0.022617536, -8.7417185e-08, -0.022617536, 0.99974406, -9.887072e-10, 8.7417185e-08, 9.887072e-10, -1, -0.01070034, 0.94607747, 0)
+visible = false
+
+[node name="Escopeta" parent="VisualRoot/ItemsEquipados" unique_id=1231648136 instance=ExtResource("13_sn0i8")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.012430621, 1.0990614, 0)
 visible = false
 
 [node name="RayFL" type="RayCast3D" parent="." unique_id=2047864853]

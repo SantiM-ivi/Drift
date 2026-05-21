@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var health_label: Label     = $BottomLeft/Content/HealthLabel
 @onready var speed_label: Label      = $BottomRight/Content/SpeedLabel
 @onready var mission_label: Label    = $TopLeft/Content/MissionTitle
-@onready var compass: Control        = $TopCenter/CompassBar
+
 
 var max_health: float = 100.0
 
@@ -33,9 +33,7 @@ func set_speed(kmh: int) -> void:
 func set_mission(title: String) -> void:
 	mission_label.text = title.to_upper()
 
-# Pasá rotation_degrees.y del vehículo (Node3D)
-func set_compass(angle_deg: float) -> void:
-	compass.set_angle(angle_deg)
+
 
 # ── Interno ──────────────────────────────────────────
 

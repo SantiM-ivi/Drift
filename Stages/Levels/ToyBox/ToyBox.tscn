@@ -114,7 +114,6 @@ size = Vector2(2, 2)
 [node name="ToyBox" type="Node3D" unique_id=2123033873]
 
 [node name="HUD" parent="." unique_id=1305346954 instance=ExtResource("2_ov8pn")]
-visible = false
 
 [node name="Debbuger" parent="HUD" unique_id=966775713 node_paths=PackedStringArray("spawn_point", "spawn_point_item", "spawn_point_item2", "spawn_point_item_aleatorio") instance=ExtResource("2_aippi")]
 visible = false

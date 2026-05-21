@@ -138,7 +138,7 @@ func _physics_process(delta: float) -> void:
 	if hud:
 		var vel_kmh = int(Vector2(linear_velocity.x, linear_velocity.z).length() * 3.6)
 		hud.set_speed(vel_kmh)
-		hud.set_compass(rad_to_deg(camara_pivot.global_rotation.y))
+
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
 func _actualizar_estado(en_suelo: bool, accel_inp: float, frenando: bool) -> void:

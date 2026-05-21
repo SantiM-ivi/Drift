@@ -12,6 +12,7 @@ var item_paths := {
 	"VidaMediana": "res://Entidades/Items/Gasolina/VidaMediana/vida_mediana.tscn",
 	"Metralleta": "res://Entidades/Items/ArmaMetralleta/metralleta_item.tscn",
 	"Cañon": "res://Entidades/Items/ArmaCañon/Torreta/cañon_item.tscn",
+	"Escopeta": "res://Entidades/Items/ArmaCañon/Torreta/cañon_item.tscn"
 }
 
 func get_random_item() -> PackedScene:

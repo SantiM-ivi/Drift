@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bq8bhitoqmjvf"]
+
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="1_1gtk5"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="2_6dswd"]
+[ext_resource type="PackedScene" uid="uid://bhvxamltechln" path="res://Entidades/Items/ArmaEscopeta/Equipado/Escopetas.glb" id="3_kab08"]
+
+[sub_resource type="Resource" id="Resource_bry0y"]
+script = ExtResource("2_6dswd")
+tipo = 4
+bonus_ram_damage = 0
+nitro_multiplicador = 0.0
+bullet_speed = 20.0
+bullet_damage = 5
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_85xkm"]
+size = Vector3(3.4442215, 2.2737732, 4.248619)
+
+[node name="Escopeta" type="Node3D" unique_id=2121923189]
+script = ExtResource("1_1gtk5")
+nombre_item = "Escopeta"
+slot = "Arma"
+stats = SubResource("Resource_bry0y")
+
+[node name="Escopetas" parent="." unique_id=500959953 instance=ExtResource("3_kab08")]
+
+[node name="Cube" parent="Escopetas" index="0" unique_id=35335514]
+transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, -0.49601293, 0, 0)
+
+[node name="Cube_001" parent="Escopetas" index="1" unique_id=1454043329]
+transform = Transform3D(-8.742262e-08, 0.0038048155, 1.9999964, 1.6631377e-10, 1.9999964, -0.0038048155, -2, 0, -8.742278e-08, 0.52685237, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1640231468]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=740003870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06348801, 0.16871643, -0.025173187)
+shape = SubResource("BoxShape3D_85xkm")
+
+[editable path="Escopetas"]

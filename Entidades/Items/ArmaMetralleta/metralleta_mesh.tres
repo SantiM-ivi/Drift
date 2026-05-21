@@ -1,9 +1,9 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://kc0xoeaqf6hn"]
 
-[ext_resource type="Texture2D" uid="uid://k5ov3ityd3hc" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_bwq03"]
-[ext_resource type="Texture2D" uid="uid://c8y7u4gvambfw" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Emission.png" id="2_xenar"]
-[ext_resource type="Texture2D" uid="uid://b1embw472f5xv" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_7vfol"]
-[ext_resource type="Texture2D" uid="uid://ct7qliy7dnwvl" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Normal.png" id="4_vlpsv"]
+[ext_resource type="Texture2D" uid="uid://cfmdm5xgenuvb" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_bwq03"]
+[ext_resource type="Texture2D" uid="uid://dbvewuqkhsuxt" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Emission.png" id="2_xenar"]
+[ext_resource type="Texture2D" uid="uid://dw0ldrxqx5e7a" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_7vfol"]
+[ext_resource type="Texture2D" uid="uid://ht2o2o4lm8r0" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Normal.png" id="4_vlpsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xaha"]
 resource_name = "Material"

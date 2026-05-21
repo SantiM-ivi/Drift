@@ -6,12 +6,15 @@
 [ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="3_rkloy"]
 [ext_resource type="Shader" uid="uid://cgdn7iob4ii8w" path="res://Assets/Shaders/Cielo.gdshader" id="6_ov8pn"]
 [ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="6_tvo6m"]
-[ext_resource type="Texture2D" uid="uid://b8n21eb7mnps6" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
+[ext_resource type="Texture2D" uid="uid://cifgcarulgk3k" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
 [ext_resource type="PackedScene" uid="uid://b1uk3ecnyne6e" path="res://Entidades/Enemies/AutoMedio/auto_enemigo_medio.tscn" id="9_sp1my"]
 [ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="9_xncdv"]
 [ext_resource type="PackedScene" uid="uid://djd0jh7i4fndh" path="res://Entidades/Enemies/Boss/jefe_nivel1.tscn" id="11_kwsyd"]
 [ext_resource type="PackedScene" uid="uid://b34ftb0lkmj73" path="res://Entidades/Enemies/AutoGrande/auto_enemigo_Camioneta.tscn" id="12_kwsyd"]
 [ext_resource type="Script" uid="uid://bd4dbrek18472" path="res://Common/Events/event_manager.gd" id="13_kwsyd"]
+[ext_resource type="PackedScene" uid="uid://dwsywdu8kcr7y" path="res://Stages/UI/Turbo.glb" id="14_2py0s"]
+[ext_resource type="PackedScene" uid="uid://h7csqxe8hsfv" path="res://Stages/UI/Misiones.glb" id="14_6ej83"]
+[ext_resource type="PackedScene" uid="uid://dvaa7qd5m4n75" path="res://Stages/UI/Vidas.glb" id="15_kwsyd"]
 [ext_resource type="PackedScene" uid="uid://c5xen6irvbtlw" path="res://Entidades/Player/AutoPlayer/jugador.tscn" id="15_sp1my"]
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="16_2py0s"]
 [ext_resource type="Shader" uid="uid://c3mum53ur7nhb" path="res://Assets/Shaders/Outline.gdshader" id="16_kwsyd"]
@@ -111,6 +114,7 @@ size = Vector2(2, 2)
 [node name="ToyBox" type="Node3D" unique_id=2123033873]
 
 [node name="HUD" parent="." unique_id=1305346954 instance=ExtResource("2_ov8pn")]
+visible = false
 
 [node name="Debbuger" parent="HUD" unique_id=966775713 node_paths=PackedStringArray("spawn_point", "spawn_point_item", "spawn_point_item2", "spawn_point_item_aleatorio") instance=ExtResource("2_aippi")]
 visible = false
@@ -192,6 +196,15 @@ script = ExtResource("16_2py0s")
 follow_target = NodePath("../../Player")
 distance = 7.0
 sensitivity = 0.005
+
+[node name="Misiones" parent="CameraRig/Camera3D" unique_id=706006462 instance=ExtResource("14_6ej83")]
+transform = Transform3D(0.014722215, -0.00737005, -0.18755388, -0.023959676, 0.122896, -0.020161241, 0.07968215, 0.038315386, 0.028590506, -1.5365372, 1.0555191, -1.7143707)
+
+[node name="Turbo" parent="CameraRig/Camera3D" unique_id=603894140 instance=ExtResource("14_2py0s")]
+transform = Transform3D(0.037826262, -0.10824604, -0.011535168, -0.0030788146, 0.013246611, -0.09932183, 0.08973322, 0.046084676, 0.0014547429, -0.98822784, -1.0158386, -1.7143707)
+
+[node name="Vidas" parent="CameraRig/Camera3D" unique_id=1873646958 instance=ExtResource("15_kwsyd")]
+transform = Transform3D(-0.043100487, -0.018824195, -0.09310133, 0.018418808, 0.071161084, -0.037740503, 0.08686069, -0.02443032, -0.038194224, 1.0420876, -1.3483009, -1.6823273)
 
 [node name="OutlinePostProcesing" type="MeshInstance3D" parent="CameraRig/Camera3D" unique_id=6440849]
 mesh = SubResource("QuadMesh_6ej83")

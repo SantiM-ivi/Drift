@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://chybxalid0av8"]
 
-[ext_resource type="Texture2D" uid="uid://byqc4ra2kwqsw" path="res://Entidades/Enviroment/Pared3/Parede_3_cacass.jpg" id="1_bd4bw"]
+[ext_resource type="Texture2D" uid="uid://b3wqcu1pggiwk" path="res://Entidades/Enviroment/Pared3/Parede_3_cacass.jpg" id="1_bd4bw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t48lu"]
 resource_name = "Material.002"

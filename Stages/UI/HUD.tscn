@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cud5k40cq7agd"]
 
 [ext_resource type="Script" uid="uid://ctkq2acf5fl67" path="res://Stages/UI/HUD.gd" id="1_hud"]
-[ext_resource type="Texture2D" uid="uid://d833sqssuc6u" path="res://Assets/ModularSistems/ItemsStatSistem/Group 2.png" id="2_6dh48"]
+[ext_resource type="Texture2D" uid="uid://d833sqssuc6u" path="res://Assets/Images/Group 2.png" id="2_6dh48"]
 
 [sub_resource type="StyleBoxFlat" id="SBF_hp_bg"]
 bg_color = Color(0, 0.1, 0, 0.85)

@@ -1,16 +1,22 @@
 [gd_scene format=4 uid="uid://c5xen6irvbtlw"]
 
 [ext_resource type="Script" uid="uid://tanwk50icrp8" path="res://Entidades/Player/AutoPlayer/player.gd" id="1_omvyu"]
-[ext_resource type="Texture2D" uid="uid://k6pmns5ouf4c" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
-[ext_resource type="Texture2D" uid="uid://urarojvo8s8s" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
-[ext_resource type="Texture2D" uid="uid://c8srpmcfxep2f" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
-[ext_resource type="Texture2D" uid="uid://ddwuvra25s0p7" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
+[ext_resource type="PackedScene" uid="uid://pn3puqoaxhx6" path="res://Entidades/Items/Ruedas/Rueda2/Rueda_tanque.glb" id="2_t6120"]
+[ext_resource type="PackedScene" uid="uid://bcrgrsi5kq40w" path="res://Entidades/Items/Ruedas/Rueda3/Rueda_Monster (1).glb" id="3_irr11"]
+[ext_resource type="Texture2D" uid="uid://dbs8ym6eyy4v1" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
+[ext_resource type="Texture2D" uid="uid://blskpcrqpdk45" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
+[ext_resource type="Texture2D" uid="uid://butryowtykkvn" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
+[ext_resource type="Texture2D" uid="uid://bbqnn0ag6mo4p" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
 [ext_resource type="AudioStream" uid="uid://bq1cp37sulwpx" path="res://Assets/Audio/SFX/CrashSFX.wav" id="7_u02rt"]
 [ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="8_cks8u"]
-[ext_resource type="PackedScene" uid="uid://djrc002ix1jtr" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
-[ext_resource type="AudioStream" uid="uid://twjy7sd71vv6" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
+[ext_resource type="PackedScene" uid="uid://f561fbc0b875" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
+[ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
+[ext_resource type="Texture2D" uid="uid://0ku2vgv40xh3" path="res://Entidades/Items/Capo/Capo2/Capo_3 (1)_Material.003_BaseColor-Material.png" id="9_ow3f3"]
+[ext_resource type="Texture2D" uid="uid://byijoejxpnhrh" path="res://Entidades/Items/Capo/Capo2/Capo_3 (1)_Material.png" id="10_bxd5a"]
 [ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Items/ArmaCañon/Torreta/cañon_layer.tscn" id="10_tsr6g"]
+[ext_resource type="Texture2D" uid="uid://brbesyvcxcwdi" path="res://Entidades/Items/Capo/Capo2/Capo_3 (1)_Material.003_Metallic-Material.png" id="11_1kvsu"]
 [ext_resource type="Script" uid="uid://r2igklj61rfa" path="res://Entidades/Player/AutoPlayer/player_equipment.gd" id="11_ro61n"]
+[ext_resource type="Texture2D" uid="uid://c6ixsa8eejjdk" path="res://Entidades/Items/Capo/Capo2/Capo_3 (1)_Material_1.png" id="12_6rwq1"]
 [ext_resource type="PackedScene" uid="uid://8hdi840lmuat" path="res://Entidades/Items/ArmaEscopeta/Equipado/escopeta_player.tscn" id="13_sn0i8"]
 [ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capo/Mesh/mesh_fola.tres" id="14_tsr6g"]
 [ext_resource type="ArrayMesh" uid="uid://df03484m3d0bn" path="res://Entidades/Items/Capo/Mesh/mesh_tubo.tres" id="15_ro61n"]
@@ -76,6 +82,55 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7poqb")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3su6"]
+resource_name = "Material.004"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("9_ow3f3")
+metallic = 1.0
+metallic_texture = ExtResource("11_1kvsu")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("11_1kvsu")
+roughness_texture_channel = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("10_bxd5a")
+normal_enabled = true
+normal_texture = ExtResource("12_6rwq1")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aqvno"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2.1885576, 2),
+"format": 34896613377,
+"index_count": 150,
+"index_data": PackedByteArray("AAABAAIAAwAEAAIABAAFAAIAAAACAAUABAAGAAUAAwACAAcAAQAHAAIACAADAAcABgAIAAkABgAJAAUACAAHAAkACgAFAAkACgAAAAUACwAJAAcACwAKAAkAAQALAAcADAAAAAoADQABAAAADAANAAAADQAOAAEADgALAAEADwAKAAsADgAPAAsADwAMAAoAEAAPAA4AEQAMAA8AEAARAA8AEgANAAwAEQASAAwAEwAOAA0AEwAQAA4AEgATAA0AEAAUABEAFQASABEAEQAUABUAFQAWABIAFgAVABcAFQAUABcAFgAYABIAFgAXABgAEgAYABMAFAAYABcAGQAUABAAFAAaABgAGQAaABQAEwAYABsAGwAYABoAGwAQABMAGQAbABoAGwAZABAA"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("GUKfHBlCAAAZQp8c5b0AAKcQnxxX7wAA//8AAP//AAAAAAAA//8AAKcQnxynEAAAAAAAAAAAAABX758cV+8AAP//AAAAAAAAV++fHKcQAADlvZ8cGUIAAOW9nxzlvQAA5b1aaxlCAAAZQlprGUIAABlCWmvlvQAA5b1aa+W9AACwO8W7TsQAAE7ExbtOxAAATsTFu7A7AACwO8W7sDsAAGht5/6oyQAAhLI+6xfIAACEsj7r5zcAAEKQ//+7yAAAwZY1+0Y3AAB6TT7rF8gAAGFv5/5WNgAAek0+6+c3AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_adcyo"]
+resource_name = "Capo_3 (1)_Plane_002"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2.1885576, 2),
+"attribute_data": PackedByteArray("FHAQqEhvTdoQWqTu3bVO8L1b2JKFoRbbUaLZqIm3gpTzKcNusinjkVEfCZIRM2eRUR8JkrIp45FvF9Nu8ynDbkYgn27zKcNuUR8JkkYgn25VSlilUR8JkhEzZ5ExAwqhUR8JklVKWKXoFReSUR8JkjEDCqEKAMRa8ynDbm8X025MR8NfoTR0bpwG+iwvR4ExoTR0brIp45HzKcNuETNnkWlK9P+9W9iSEFqk7mxKMYNsSjGDibeClL1b2JIwxzGDETNnkUxHw19VSliloTR0bugVF5JGIJ9uUR8Jkm8X026Zb+lKaUpYgGlK6UqZb1iALcf0/xBapO7dtU7waUr0/28X024xAwqhCgDEWugVF5KvlSVImW9YgJlv6UqvlR2DMQMKoTdEF9O/AzDPVUpYpa+VGQ2Zb0xFmW/dD6+VEUgwxzGD3bVO8Im3gpQtx/T/mW/dD2lKTEVpSt0PmW9MRb8DMM+AQfT/CAEO/DdEF9MvR4ExwgkKAFVKkQScBvos"),
+"format": 34896613399,
+"index_count": 150,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAQAAQAFAAMABgAAAAQABQAHAAMABgAEAAcABQAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbABwAHQAeAB8AIAAeAB0AIQAeACAAIAAdACIAIAAiACMAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0A"),
+"material": SubResource("StandardMaterial3D_w3su6"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("GUKfHBlCAMAZQp8c5b3/v6cQnxxX7/+/V++fHFfvAcCnEJ8cpxABwOW9nxzlvQDA5b2fHBlC/79X758cpxD/v2ht5/6oyer7YW/n/lY26vvBljX7Rjfq+3pNPuvnNz0BwZY1+0Y3PQFhb+f+VjY9AYSyPusXyO0JaG3n/qjJ7QlCkP//u8jtCWht5/6oycn9wZY1+0Y3yf1CkP//u8jJ/bA7xbuwO///wZY1+0Y3//96TT7r5zf//07ExbuwO9P/wZY1+0Y30/+wO8W7sDvT/4SyPuvnN8b/wZY1+0Y3xv9OxMW7sDvG/07ExbtOxCz/aG3n/qjJ+vmEsj7rF8iZ87A7xbtOxOr5ek0+6xfIjejlvVpr5b0l/RlCWmvlvSX9ek0+6xfIQfFhb+f+VjYR8Ght5/6oyY7xek0+6+c3xO8AAAAA//9Vw6cQnxynEA3SpxCfHFfvIcIAAAAAAACG0wAAAAAAABXsV++fHKcQFeynEJ8cpxAV7P//AAAAABXsek0+6+c34dSwO8W7TsQx7bA7xbuwO/fNek0+6xfIMfWEsj7r5zfx7kKQ//+7yFzvwZY1+0Y31e6Esj7rF8hz7xlCWmsZQlTVGUKfHOW9VNUZQp8cGUJU1RlCWmvlvVTV//8AAP//65OnEJ8cV+/pk1fvnxxX7+yTAAAAAP//6ZOEsj7rF8iw5k7ExbuwO5fPTsTFu07Ebu+Esj7r5zcEyrA7xbuwOw/XGUJaa+W9D9cZQlprGUIP17A7xbtOxA/XTsTFu7A76P8ZQlprGULo/+W9WmsZQuj/sDvFu7A76P9OxMW7TsSj0+W9WmsZQqPT5b1aa+W9o9NOxMW7sDuj0///AAAAAKTVV++fHFfvScVX758cpxB+2P//AAD//2zE5b1aa+W9VNXlvZ8cGUJU1eW9nxzlvVTV5b1aaxlCVNXlvVprGUL//xlCnxwZQv//5b2fHBlC//8ZQlprGUL//xlCWmvlvST95b2fHOW9JP0ZQp8c5b0k/eW9WmvlvST9cv7nfN//wH9A/4J+OP5zfDj+c3xy/ud83//Af0D/gn4GP/sBBj/7AQY/+wFWbXoXVm16F1ZtehfkAI0B5ACNAeQAjQE/gBjBP4AYwT+AGMHBbf7xwW3+8cFt/vFDeHALQ3hwC0N4cAvun3Hk7p9x5O6fceTzf4F7qn+De3gET/+pf4N7rn6Me9d/gnvXf4J7222BttxuWrebbUy2Hm+St2nKHctZ6K7CSsWOzGnqGcIN/9J+6v/lf+r+pX7///9/22TIuO5UX6EEbE3DmVACm0k49Q/7N1MQXTjdD+o3ZxBU1VTVVNVU1VTVVNVU1VTVFP9ne+r/mX/y/r96/v//f74maid5QOgVlB9JLLdLQg5O1GDXTtRg107UYNdO1GDXXnz+B158/gdefP4HXnz+B54pwyyeKcMsninDLJ4pwyy0vkhto7anUMG/A3HstR1OqiqqKqoqqiqqKqoqqiqqKsCDPfzAgz38wIM9/MCDPfz/f/9//3//f/9//3//f/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_aqvno")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(2.3669157, 0.46647644, 5.2766647)
 
@@ -123,6 +178,47 @@ suavidad_inclinacion = 20.0
 
 [node name="VisualRoot" type="Node3D" parent="." unique_id=708323970]
 
+[node name="Rueda_tanque" parent="VisualRoot" unique_id=684351456 instance=ExtResource("2_t6120")]
+visible = false
+
+[node name="Cube" parent="VisualRoot/Rueda_tanque" index="0" unique_id=1357363526]
+transform = Transform3D(0.40000007, 9.313226e-10, 0, 0, 0.6, 0, 0, 0, 0.8, 1.3242452, -0.3792461, 0)
+
+[node name="Rueda_tanque2" parent="VisualRoot" unique_id=182299753 instance=ExtResource("2_t6120")]
+transform = Transform3D(-0.999744, -0.022617534, 8.7417185e-08, -0.022617534, 0.999744, 9.887072e-10, -8.7417185e-08, -9.887072e-10, -1, 0.023770481, 0.00026884553, 0)
+visible = false
+
+[node name="Cube" parent="VisualRoot/Rueda_tanque2" index="0" unique_id=1357363526]
+transform = Transform3D(0.40000004, 5.185802e-17, 0, 3.4572014e-17, 0.6000001, -5.551115e-17, 0, 0, 0.8, 1.3848226, -0.37856096, -3.001123e-08)
+
+[node name="Rueda_Monster" parent="VisualRoot" unique_id=828507056 instance=ExtResource("3_irr11")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5546497, 0.017583426, 2.0117092)
+visible = false
+
+[node name="Cylinder" parent="VisualRoot/Rueda_Monster" index="0" unique_id=1900603886]
+transform = Transform3D(1.8626451e-09, 0.4873772, 0, -0.95382196, 0, 0, 0, 0, 0.9538217, -0.90723515, -1.2571336, -0.14003658)
+
+[node name="Rueda_Monster2" parent="VisualRoot" unique_id=1193544734 instance=ExtResource("3_irr11")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5546497, 0.017583426, -2.010682)
+visible = false
+
+[node name="Cylinder" parent="VisualRoot/Rueda_Monster2" index="0" unique_id=1900603886]
+transform = Transform3D(9.313226e-10, 0.4873772, 0, -0.95382184, 0, 0, 0, 0, 0.9538217, -0.9072349, -1.2571334, 0)
+
+[node name="Rueda_Monster3" parent="VisualRoot" unique_id=1522791677 instance=ExtResource("3_irr11")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.4451585, -0.016345052, -2.010682)
+visible = false
+
+[node name="Cylinder" parent="VisualRoot/Rueda_Monster3" index="0" unique_id=1900603886]
+transform = Transform3D(1.8626451e-09, 0.4873772, 0, -0.95382196, 0, 0, 0, 0, 0.9538217, 0.8727801, -1.2370012, 0)
+
+[node name="Rueda_Monster4" parent="VisualRoot" unique_id=985458502 instance=ExtResource("3_irr11")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5638931, -0.017687967, 1.9893179)
+visible = false
+
+[node name="Cylinder" parent="VisualRoot/Rueda_Monster4" index="0" unique_id=1900603886]
+transform = Transform3D(2.7939677e-09, 0.4873772, 0, -0.953822, 0, 0, 0, 0, 0.9538217, 1.0805666, -1.2346509, -0.1391406)
+
 [node name="BackLeft" parent="VisualRoot" unique_id=475907750 instance=ExtResource("8_qw2bf")]
 transform = Transform3D(0.29998082, -0.0033928484, 0, 0.0033928484, 0.29998082, 0, 0, 0, 0.3, 0.97070235, -0.7524058, 2.2043848)
 
@@ -141,6 +237,11 @@ mesh = SubResource("ArrayMesh_xwd11")
 skeleton = NodePath("")
 
 [node name="ItemsEquipados" type="Node3D" parent="VisualRoot" unique_id=2075898237]
+
+[node name="Capo" type="MeshInstance3D" parent="VisualRoot/ItemsEquipados" unique_id=541809095]
+transform = Transform3D(1.1241189, 1.4223391e-05, -0.0010131125, 6.302539e-05, 0.25254932, 0.08957502, 0.0012642178, -0.025237277, 0.89637536, -0.0134328315, 0.16860048, -2.2118511)
+mesh = SubResource("ArrayMesh_adcyo")
+skeleton = NodePath("")
 
 [node name="FolaCapo" type="MeshInstance3D" parent="VisualRoot/ItemsEquipados" unique_id=1032629143]
 transform = Transform3D(1.1025096, 4.5221765e-05, -0.001117549, 9.116903e-05, 0.5429099, 0.09880886, 0.0015050956, -0.06601239, 0.81263953, -0.0021212623, 0.17414017, -2.2294245)
@@ -257,3 +358,10 @@ trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_2u8bg")
 draw_pass_1 = SubResource("RibbonTrailMesh_lofs7")
 script = ExtResource("23_lofs7")
+
+[editable path="VisualRoot/Rueda_tanque"]
+[editable path="VisualRoot/Rueda_tanque2"]
+[editable path="VisualRoot/Rueda_Monster"]
+[editable path="VisualRoot/Rueda_Monster2"]
+[editable path="VisualRoot/Rueda_Monster3"]
+[editable path="VisualRoot/Rueda_Monster4"]

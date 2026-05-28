@@ -6,6 +6,7 @@ enum BuffableStats {
 	DEFENSE,
 	ATTACK,
 	RAM_DAMAGE,
+	SPEED,     
 }
 
 const STAT_CURVES: Dictionary[BuffableStats, Curve] = {
@@ -23,7 +24,7 @@ signal health_changed(cur_health: int, max_health: int)
 @export var base_max_health: int = 100
 @export var base_defense: int = 10
 @export var base_attack: int = 10
-@export var base_ram_damage: int = 10  # daño base de choque
+@export var base_ram_damage: int = 10  
 @export var bonus_ram_damage: int = 0
 @export var experience: int = 0: set = _on_experience_set
 # --- Movimiento ---

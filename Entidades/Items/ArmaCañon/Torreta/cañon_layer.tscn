@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ccq3tf77xhupm" path="res://Assets/Audio/SFX/SonidoDisparo.wav" id="4_iii33"]
 
 [node name="Cañon" type="Node3D" unique_id=1115247385 node_paths=PackedStringArray("gun", "muzzle", "sonido_disparo")]
-transform = Transform3D(-2, 0, -3.019916e-07, 0, 2, 0, 3.019916e-07, 0, -2, 0, 0, 0)
+transform = Transform3D(-2.7898695, 0, -4.920752e-07, 0, 1.7625927, 0, 4.2125856e-07, 0, -3.2588663, 0, 0, 0)
 script = ExtResource("1_2x2oe")
 gun = NodePath("cañon_arriba")
 muzzle = NodePath("cañon_arriba/Muzzle")

@@ -1,26 +1,35 @@
-[gd_resource type="ArrayMesh" format=4 uid="uid://df03484m3d0bn"]
+[gd_scene format=4 uid="uid://de5ies48rqm32"]
 
-[ext_resource type="Texture2D" uid="uid://ifrbjub0df3h" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_qmvxl"]
-[ext_resource type="Texture2D" uid="uid://ckvcgohlto8bq" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Emission.png" id="2_71a88"]
-[ext_resource type="Texture2D" uid="uid://d06lp0ds5ap4o" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_l7bq7"]
-[ext_resource type="Texture2D" uid="uid://o2cy6mo74r26" path="res://Entidades/Items/Capo/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Normal.png" id="4_kfqad"]
+[ext_resource type="PackedScene" uid="uid://bsmmbinwi1ev6" path="res://Entidades/Items/Capos/TuboCapo/Capo_2 (1).glb" id="1_gk7gj"]
+[ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_4pinj"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_bo7dk"]
+[ext_resource type="Texture2D" uid="uid://ifrbjub0df3h" path="res://Entidades/Items/Capos/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="3_l7tk2"]
+[ext_resource type="Texture2D" uid="uid://ckvcgohlto8bq" path="res://Entidades/Items/Capos/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Emission.png" id="4_4pinj"]
+[ext_resource type="Texture2D" uid="uid://d06lp0ds5ap4o" path="res://Entidades/Items/Capos/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="5_yhves"]
+[ext_resource type="Texture2D" uid="uid://o2cy6mo74r26" path="res://Entidades/Items/Capos/TuboCapo/Material/Capo_2 (1)_DefaultMaterial_Normal.png" id="6_k5yun"]
+
+[sub_resource type="Resource" id="Resource_d5o17"]
+script = ExtResource("3_bo7dk")
+bonus_damage = 15
+bonus_speed = 100.0
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_quaks"]
 resource_name = "Material.001"
 transparency = 4
 cull_mode = 2
-albedo_texture = ExtResource("1_qmvxl")
+albedo_texture = ExtResource("3_l7tk2")
 metallic = 1.0
-metallic_texture = ExtResource("3_l7bq7")
+metallic_texture = ExtResource("5_yhves")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_l7bq7")
+roughness_texture = ExtResource("5_yhves")
 roughness_texture_channel = 1
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_operator = 1
-emission_texture = ExtResource("2_71a88")
+emission_texture = ExtResource("4_4pinj")
 normal_enabled = true
-normal_texture = ExtResource("4_kfqad")
+normal_texture = ExtResource("6_k5yun")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_65pc4"]
 _surfaces = [{
@@ -37,7 +46,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[resource]
+[sub_resource type="ArrayMesh" id="ArrayMesh_o6a4o"]
 resource_name = "Capo_2 (1)_Plane_001"
 _surfaces = [{
 "aabb": AABB(-1, 0, -1, 2, 2.222077, 2),
@@ -55,3 +64,24 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_65pc4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4pinj"]
+size = Vector3(3.4442215, 2.2737732, 4.248619)
+
+[node name="TuboCapo" unique_id=1947901612 instance=ExtResource("1_gk7gj")]
+script = ExtResource("2_4pinj")
+nombre_item = "TuboCapo"
+slot = "Capo"
+stats = SubResource("Resource_d5o17")
+
+[node name="Plane_001" parent="." index="0" unique_id=911564243]
+transform = Transform3D(1.46227, 0, 0, 0, 0.26211983, 0, 0, 0, 1.57576, 0, 0, 0)
+mesh = SubResource("ArrayMesh_o6a4o")
+
+[node name="Area3D" type="Area3D" parent="." index="1" unique_id=851529818]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=897891498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06348801, 0.16871643, -0.025173187)
+shape = SubResource("BoxShape3D_4pinj")

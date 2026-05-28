@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemsStats" format=3 uid="uid://cfoiunyv2ehrw"]
+
+[ext_resource type="PackedScene" uid="uid://d1g6m8lx4y1sf" path="res://Common/Projectiles/Bullets/bullet.tscn" id="1_mnkfe"]
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="2_3kqcv"]
+
+[resource]
+script = ExtResource("2_3kqcv")
+tipo = 4
+bonus_ram_damage = 0
+nitro_multiplicador = 0.0
+bullet_scene = ExtResource("1_mnkfe")
+fire_rate = 0.05
+bullet_damage = 5
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"

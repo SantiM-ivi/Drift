@@ -2,19 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="1_uf0ka"]
 [ext_resource type="ArrayMesh" uid="uid://kc0xoeaqf6hn" path="res://Entidades/Items/ArmaMetralleta/metralleta_mesh.tres" id="2_4ufwu"]
-[ext_resource type="PackedScene" uid="uid://d1g6m8lx4y1sf" path="res://Common/Projectiles/Bullets/bullet.tscn" id="2_gfllm"]
-[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_q47w6"]
+[ext_resource type="Resource" uid="uid://cfoiunyv2ehrw" path="res://Entidades/Items/ArmaMetralleta/arma_stats.tres" id="2_gfllm"]
 [ext_resource type="Shader" uid="uid://c7lbyrm1kfebh" path="res://Common/Shaders/item.gdshader" id="4_q47w6"]
-
-[sub_resource type="Resource" id="Resource_mkuyj"]
-script = ExtResource("3_q47w6")
-tipo = 4
-bonus_ram_damage = 0
-nitro_multiplicador = 0.0
-bullet_scene = ExtResource("2_gfllm")
-fire_rate = 0.05
-bullet_damage = 5
-metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mkuyj"]
 render_priority = 0
@@ -35,7 +24,7 @@ size = Vector3(3.4442215, 2.2737732, 4.248619)
 script = ExtResource("1_uf0ka")
 nombre_item = "Metralleta"
 slot = "Arma"
-stats = SubResource("Resource_mkuyj")
+stats = ExtResource("2_gfllm")
 
 [node name="Cube_003" type="MeshInstance3D" parent="." unique_id=1664456255]
 transform = Transform3D(0.76249987, 1.5490867e-08, 1.2011772, -1.3206886, 8.943658e-09, 0.6934999, 0, -1.4999996, 1.653981e-08, 0, 0, 0)

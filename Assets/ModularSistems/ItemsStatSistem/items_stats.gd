@@ -7,6 +7,7 @@ enum TipoItem {
 	CONSUMIBLE_NITRO,
 	CONSUMIBLE_CHATARRA,
 	ARMA,
+	RUEDA,
 }
 
 @export var tipo: TipoItem = TipoItem.EQUIPABLE

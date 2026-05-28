@@ -1,9 +1,5 @@
 extends RigidBody3D
 
-# ═══════════════════════════════════════════════════════════════════════════════
-#  HOVER CAR CONTROLLER
-# ═══════════════════════════════════════════════════════════════════════════════
-
 enum Estado { QUIETO, ACELERANDO, FRENANDO, EN_AIRE, BOOST, DRIFT }
 
 @export_group("Flotacion")
@@ -84,6 +80,7 @@ func _ready() -> void:
 	# Sistemas de juego
 	if equipment:
 		equipment.inicializar(stats, velocidad_maxima)
+		equipment.equipar_inicio()
 	if stats:
 		stats.health_depleted.connect(_on_health_depleted)
 		stats.health_changed.connect(_on_health_changed)
@@ -96,8 +93,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if camara_pivot == null:
 		return
-
-
 	_sincronizar_camara()
 
 	var en_suelo  = _algun_rayo_toca()
@@ -178,9 +173,9 @@ func _tick_boost(delta: float, boosting: bool) -> void:
 func _intentar_saltar(en_suelo: bool) -> void:
 	if Input.is_action_just_pressed("jump") and en_suelo:
 		apply_central_impulse(Vector3.UP * 8.0 * mass)
-		# Mantener velocidad horizontal al saltar
 		var vel_horizontal = Vector3(linear_velocity.x, 0.0, linear_velocity.z)
 		apply_central_impulse(vel_horizontal * mass * 0.5)
+
 
 func _aplicar_propulsor(delta: float) -> void:
 	if not Input.is_action_pressed("boost") or _tiempo_cooldown > 0.0:
@@ -233,6 +228,7 @@ func _aplicar_flotacion() -> void:
 		var vel_rel   = Vector3.UP.dot(linear_velocity + angular_velocity.cross(pos_rayo - to_global(center_of_mass)))
 		var fuerza    = max((extension * fuerza_resorte) - (vel_rel * amortiguacion), 0.0)
 		apply_force(Vector3.UP * fuerza, pos_rayo - global_position)
+
 
 # ─── ANTI-VOLTEO ─────────────────────────────────────────────────────────────
 
@@ -352,8 +348,17 @@ func _item_mas_cercano() -> ItemMundo:
 
 func apply_damage(amount: int) -> void:
 	if stats:
-		var final_damage = max(0, amount - int(stats.current_defense))
+		var reduccion = clamp(stats.current_defense / 100.0, 0.0, 0.9)  # max 90% reducción
+		var final_damage = max(1, int(amount * (1.0 - reduccion)))
 		stats.health -= final_damage
+		print("[Player] daño recibido: %d | defensa: %.0f | reduccion: %.0f%% | daño final: %d | vida: %d/%d" % [
+			amount,
+			stats.current_defense,
+			reduccion * 100,
+			final_damage,
+			stats.health,
+			stats.current_max_health,
+		])
 		if stats.health <= 0:
 			print("Jugador muerto")
 
@@ -372,9 +377,17 @@ func activar_nitro(duracion: float, multiplicador: float) -> void:
 
 func _on_area_entered(area: Area3D) -> void:
 	var parent = area.get_parent()
-	if not parent is ItemMundo: return
+	if not parent is ItemMundo:
+		return
 
-	if parent.stats != null and parent.stats.tipo != ItemsStats.TipoItem.EQUIPABLE and parent.stats.tipo != ItemsStats.TipoItem.ARMA:
+	var tipo = parent.stats.tipo if parent.stats != null else -1
+	var es_auto = (
+		tipo != ItemsStats.TipoItem.EQUIPABLE and
+		tipo != ItemsStats.TipoItem.ARMA and
+		tipo != ItemsStats.TipoItem.RUEDA        # <-- esto faltaba
+	)
+
+	if parent.stats != null and es_auto:
 		equipment.equipar(parent.slot, parent.nombre_item, global_position, parent.stats)
 		parent.queue_free()
 	else:
@@ -389,12 +402,6 @@ func _on_health_depleted() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	print("tiene apply_damage: ", body.has_method("apply_damage"))
-	print("stats: ", stats)
-	print("body: ", body.name, " | clase: ", body.get_class())
-	print("padre: ", body.get_parent().name, " | clase: ", body.get_parent().get_class())
-	print("tiene knockback: ", body.has_method("apply_knockback"))
-	print("padre tiene knockback: ", body.get_parent().has_method("apply_knockback"))
 	if not body.has_method("apply_damage") or not stats:
 		return
 	var velocidad := linear_velocity.length()
@@ -428,3 +435,14 @@ func _on_health_changed(cur_health: int, max_health: int) -> void:
 	if hud:
 		hud.set_health(cur_health)
 		hud.health_bar.max_value = max_health
+
+func ajustar_raycasts(nombre_rueda: String) -> void:
+	match nombre_rueda:
+		"Rueda3":
+			altura_flotacion = 1.2   # más alto
+		_:
+			altura_flotacion = 0.6   # valor original
+
+	for rayo in rayos:
+		rayo.target_position = Vector3.DOWN * (altura_flotacion * 2.5)
+	print("[Player] flotacion ajustada para %s — altura: %.1f" % [nombre_rueda, altura_flotacion])

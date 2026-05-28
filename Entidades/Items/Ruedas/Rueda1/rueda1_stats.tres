@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemsStats" format=3 uid="uid://blfo6ioj5tqxk"]
+
+[ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="1_v8pyu"]
+
+[resource]
+script = ExtResource("1_v8pyu")
+tipo = 5
+bonus_damage = 10
+bonus_defense = 10
+bonus_speed = 40.0
+bonus_ram_damage = 0
+nitro_multiplicador = 0.0
+bullet_damage = 25
+metadata/_custom_type_script = "uid://cx5rblxg7yl42"

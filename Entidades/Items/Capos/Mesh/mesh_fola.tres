@@ -1,9 +1,9 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://chw5yc6v1dqxx"]
 
-[ext_resource type="Texture2D" uid="uid://cc6uy6khohfa5" path="res://Entidades/Items/Capo/Folacapo/Material/Capo_1 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_202gx"]
-[ext_resource type="Texture2D" uid="uid://bv5nofm8hf845" path="res://Entidades/Items/Capo/Folacapo/Material/Capo_1 (1)_DefaultMaterial_Emission.png" id="2_vvev3"]
-[ext_resource type="Texture2D" uid="uid://bbfpal6xslh2m" path="res://Entidades/Items/Capo/Folacapo/Material/Capo_1 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_dige8"]
-[ext_resource type="Texture2D" uid="uid://5yxmd5gguw5k" path="res://Entidades/Items/Capo/Folacapo/Material/Capo_1 (1)_DefaultMaterial_Normal.png" id="4_ec7rp"]
+[ext_resource type="Texture2D" uid="uid://cc6uy6khohfa5" path="res://Entidades/Items/Capos/Folacapo/Material/Capo_1 (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_202gx"]
+[ext_resource type="Texture2D" uid="uid://bv5nofm8hf845" path="res://Entidades/Items/Capos/Folacapo/Material/Capo_1 (1)_DefaultMaterial_Emission.png" id="2_vvev3"]
+[ext_resource type="Texture2D" uid="uid://bbfpal6xslh2m" path="res://Entidades/Items/Capos/Folacapo/Material/Capo_1 (1)_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_dige8"]
+[ext_resource type="Texture2D" uid="uid://5yxmd5gguw5k" path="res://Entidades/Items/Capos/Folacapo/Material/Capo_1 (1)_DefaultMaterial_Normal.png" id="4_ec7rp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtped"]
 resource_name = "Material.001"

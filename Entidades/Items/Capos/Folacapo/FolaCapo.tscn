@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bwtvy60ux6a21"]
 
-[ext_resource type="PackedScene" uid="uid://3d7swede3q8l" path="res://Entidades/Items/Capo/Folacapo/Capo_1 (1).glb" id="1_lor1w"]
+[ext_resource type="PackedScene" uid="uid://3d7swede3q8l" path="res://Entidades/Items/Capos/Folacapo/Capo_1 (1).glb" id="1_lor1w"]
 [ext_resource type="Script" uid="uid://dokoatq71k6wd" path="res://Assets/ModularSistems/ItemsStatSistem/item.gd" id="2_132dw"]
 [ext_resource type="Script" uid="uid://cx5rblxg7yl42" path="res://Assets/ModularSistems/ItemsStatSistem/items_stats.gd" id="3_jn5hk"]
 

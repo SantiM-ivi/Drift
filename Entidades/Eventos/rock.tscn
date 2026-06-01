@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://div60xkaluw3t"]
 
+[ext_resource type="Script" uid="uid://bsb62d3r7piul" path="res://Entidades/Eventos/rocas_script.gd" id="1_r2til"]
 [ext_resource type="ArrayMesh" uid="uid://33jspp6tmjup" path="res://Entidades/Enviroment/Rock/rock.tres" id="1_ush26"]
 [ext_resource type="Texture2D" uid="uid://bjgukdgblq6yo" path="res://Entidades/Enviroment/PngTexture/sandtexture.jpg" id="2_1dcng"]
 
@@ -13,10 +14,12 @@ radius = 0.6223688
 
 [node name="Rock" type="RigidBody3D" unique_id=1296176149]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+script = ExtResource("1_r2til")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=263963963]
 mesh = ExtResource("1_ush26")
 surface_material_override/0 = SubResource("StandardMaterial3D_e3orj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1316321535]
+transform = Transform3D(1.385, 0, 0, 0, 1.385, 0, 0, 0, 1.385, 0, 0, 0)
 shape = SubResource("SphereShape3D_e3orj")

@@ -33,7 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://yts2x4tgq88u" path="res://Assets/Audio/SFX/Radio6.wav" id="20_lofs7"]
 [ext_resource type="AudioStream" uid="uid://de822lnn3ng25" path="res://Assets/Audio/SFX/Radio 5.wav" id="21_sn0i8"]
 [ext_resource type="Script" uid="uid://dawtwk7r3nwc2" path="res://Common/Events/lluvia_particles.gd" id="23_lofs7"]
-[ext_resource type="Resource" path="res://Entidades/Items/Ruedas/Rueda1/rueda1_stats.tres" id="28_luh2e"]
+[ext_resource type="Resource" uid="uid://blfo6ioj5tqxk" path="res://Entidades/Items/Ruedas/Rueda1/rueda1_stats.tres" id="28_luh2e"]
 [ext_resource type="Resource" uid="uid://cfoiunyv2ehrw" path="res://Entidades/Items/ArmaMetralleta/arma_stats.tres" id="29_85ju8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
@@ -404,7 +404,7 @@ canciones = Array[AudioStream]([ExtResource("18_oedk5"), ExtResource("19_2u8bg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19624321, -0.44999993, -1.1542969)
 size = Vector3(74.116394, 1, 71.546875)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=953968661]
+[node name="LluviaParticles" type="GPUParticles3D" parent="." unique_id=953968661]
 transform = Transform3D(5.9803905, -3.7252903e-09, 0, 1.4901161e-08, 2.0769322, 0, 0, 0, 6.6329446, -0.2539372, 41.452026, 0)
 emitting = false
 amount = 500

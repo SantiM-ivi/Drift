@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-enum Estado { QUIETO, ACELERANDO, FRENANDO, EN_AIRE, BOOST, DRIFT }
+enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 
 @export_group("Flotacion")
 @export var altura_flotacion: float = 0.6
@@ -10,7 +10,6 @@ enum Estado { QUIETO, ACELERANDO, FRENANDO, EN_AIRE, BOOST, DRIFT }
 @export_group("Movimiento")
 @export var velocidad_maxima: float   = 30.0
 @export var fuerza_avance: float      = 800.0
-@export var fuerza_frenado: float     = 1200.0
 @export var agarre_lateral: float     = 0.95
 @export var tiempo_aceleracion: float = 5.0
 @export var tiempo_frenado: float     = 8.0
@@ -19,11 +18,6 @@ enum Estado { QUIETO, ACELERANDO, FRENANDO, EN_AIRE, BOOST, DRIFT }
 @export var bonus_velocidad_boost: float = 20.0
 @export var duracion_boost: float        = 1.5
 @export var cooldown_boost: float        = 4.0
-
-@export_group("Drift")
-@export var agarre_drift: float         = 0.15
-@export var velocidad_giro_drift: float = 3.5
-@export var inclinacion_drift: float    = 18.0
 
 @export_group("Camara")
 @export var velocidad_giro: float = 2.0
@@ -60,7 +54,6 @@ var _angulo_rueda_actual: float = 0.0
 var _estado: Estado             = Estado.QUIETO
 var _inclinacion_actual: float  = 0.0
 var _velocidad_actual: float    = 0.0
-var _drift_dir: float           = 0.0
 var _boost_activo: bool         = false
 var _bonus_velocidad: float     = 0.0
 var _tiempo_boost: float        = 0.0
@@ -97,35 +90,25 @@ func _physics_process(delta: float) -> void:
 
 	var en_suelo  = _algun_rayo_toca()
 	var accel_inp = Input.get_axis("ui_up", "ui_down")
-	var frenando  = Input.is_action_pressed("ui_accept")
 	var boosting  = Input.is_action_just_pressed("boost")
 
-	_drift_dir = 0.0
-	if Input.is_action_pressed("drift_izq"):
-		_drift_dir = 1.0
-	elif Input.is_action_pressed("drift_der"):
-		_drift_dir = -1.0
 
 	_tick_boost(delta, boosting)
-	_actualizar_estado(en_suelo, accel_inp, frenando)
+	_actualizar_estado(en_suelo, accel_inp)
 	_aplicar_flotacion()
-	_aplicar_anti_volteo(en_suelo)
 	_actualizar_visual(delta, Input.get_axis("ui_right", "ui_left"))
-	_intentar_saltar(en_suelo)
+
 	
 	var giro = Input.get_axis("ui_right", "ui_left")
 	if en_suelo:
-		if _estado == Estado.DRIFT:
-			camara_pivot.rotate_y(_drift_dir * velocidad_giro_drift * delta)
-		else:
-			camara_pivot.rotate_y(giro * velocidad_giro * delta)
-
+		camara_pivot.rotate_y(giro * velocidad_giro * delta)
 	_intentar_recoger()
 
 	if not en_suelo:
+		_estabilizar_en_aire(delta)
 		_aplicar_propulsor(delta)
 
-	_aplicar_movimiento(delta, giro, accel_inp, frenando)
+	_aplicar_movimiento(delta, giro, accel_inp)
 	_cooldown_disparo -= delta
 	_manejar_disparo()
 	if Input.is_action_just_pressed("Bocina"):
@@ -136,16 +119,12 @@ func _physics_process(delta: float) -> void:
 
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
-func _actualizar_estado(en_suelo: bool, accel_inp: float, frenando: bool) -> void:
+func _actualizar_estado(en_suelo: bool, accel_inp: float) -> void:
 	var previo = _estado
 	if _boost_activo:
 		_estado = Estado.BOOST
 	elif not en_suelo:
 		_estado = Estado.EN_AIRE
-	elif _drift_dir != 0.0:
-		_estado = Estado.DRIFT
-	elif frenando:
-		_estado = Estado.FRENANDO
 	elif abs(accel_inp) > 0.05:
 		_estado = Estado.ACELERANDO
 	else:
@@ -169,17 +148,29 @@ func _tick_boost(delta: float, boosting: bool) -> void:
 			_tiempo_cooldown = cooldown_boost
 			_bonus_velocidad = 0.0
 
+func _estabilizar_en_aire(delta: float) -> void:
+	if _algun_rayo_toca():
+		return
 
-func _intentar_saltar(en_suelo: bool) -> void:
-	if Input.is_action_just_pressed("jump") and en_suelo:
-		apply_central_impulse(Vector3.UP * 8.0 * mass)
-		var vel_horizontal = Vector3(linear_velocity.x, 0.0, linear_velocity.z)
-		apply_central_impulse(vel_horizontal * mass * 0.5)
+	# Enderezar eje Y hacia arriba
+	var alineacion = global_basis.y.dot(Vector3.UP)
+	if alineacion < 0.99:
+		var eje = global_basis.y.cross(Vector3.UP).normalized()
+		var fuerza = (1.0 - alineacion) * 600.0
+		apply_torque(eje * fuerza)
 
+	# Frenar rotación en el aire para que no gire a lo loco
+	angular_velocity = angular_velocity.lerp(Vector3.ZERO, delta * 5.0)
 
 func _aplicar_propulsor(delta: float) -> void:
 	if not Input.is_action_pressed("boost") or _tiempo_cooldown > 0.0:
 		return
+
+	# No aplicar fuerza si ya superamos la velocidad máxima con boost
+	var vel_actual = linear_velocity.length()
+	if vel_actual >= velocidad_maxima + bonus_velocidad_boost:
+		return
+
 	var direccion = -camara_pivot.global_basis.z
 	apply_central_force(direccion * fuerza_avance * 1.5)
 	_tiempo_boost -= delta
@@ -230,46 +221,27 @@ func _aplicar_flotacion() -> void:
 		apply_force(Vector3.UP * fuerza, pos_rayo - global_position)
 
 
-# ─── ANTI-VOLTEO ─────────────────────────────────────────────────────────────
-
-func _aplicar_anti_volteo(en_suelo: bool) -> void:
-	var alineacion = global_basis.y.dot(Vector3.UP)
-	if not en_suelo:
-		if alineacion < 0.7:
-			var eje    = global_basis.y.cross(Vector3.UP).normalized()
-			var fuerza = (0.7 - alineacion) / 0.7
-			apply_torque(eje * fuerza * 400.0)
-	else:
-		if alineacion < 0.5:
-			var eje = global_basis.y.cross(Vector3.UP).normalized()
-			apply_torque(eje * 300.0)
 
 # ─── MOVIMIENTO ──────────────────────────────────────────────────────────────
 
-func _aplicar_movimiento(delta: float, giro: float, accel_inp: float, frenando: bool) -> void:
+func _aplicar_movimiento(delta: float, giro: float, accel_inp: float) -> void:
 	var direccion = camara_pivot.global_basis.z
 
 	match _estado:
-		Estado.FRENANDO:
-			_aplicar_frenado(delta, direccion)
 		Estado.BOOST:
 			_aplicar_aceleracion(delta, accel_inp)
 			_aplicar_fuerza_avance(delta, direccion, velocidad_maxima + _bonus_velocidad)
-		Estado.DRIFT:
-			_aplicar_aceleracion(delta, accel_inp)
-			_aplicar_fuerza_avance(delta, direccion, velocidad_maxima)
-			apply_central_force(-camara_pivot.global_basis.x * _drift_dir * fuerza_avance * 0.6)
 		_:
 			_aplicar_aceleracion(delta, accel_inp)
 			_aplicar_fuerza_avance(delta, direccion, velocidad_maxima)
 
 	var ratio_vel     = clamp(abs(_velocidad_actual) / velocidad_maxima, 0.2, 1.0)
-	var agarre_actual = (agarre_drift if _estado == Estado.DRIFT else agarre_lateral * ratio_vel)
+	var agarre_actual = agarre_lateral * ratio_vel
 	var deslizamiento = linear_velocity.dot(camara_pivot.global_basis.x)
 	var fuerza_lat    = mass * (-deslizamiento) / delta
 	apply_central_force(camara_pivot.global_basis.x * clamp(fuerza_lat * agarre_actual, -fuerza_avance, fuerza_avance))
 
-	var offset_giro     = _drift_dir * adelanto_giro * 2.0 if _estado == Estado.DRIFT else giro * adelanto_giro
+	var offset_giro = giro * adelanto_giro
 	var angulo_objetivo = camara_pivot.global_rotation_degrees.y + offset_giro
 	var frente_objetivo = Vector3(sin(deg_to_rad(angulo_objetivo)), 0.0, cos(deg_to_rad(angulo_objetivo)))
 	var frente_actual   = Vector3(global_basis.z.x, 0.0, global_basis.z.z).normalized()
@@ -295,10 +267,6 @@ func _aplicar_fuerza_avance(delta: float, direccion: Vector3, vel_max: float) ->
 		clamp(error.z, -limite, limite)
 	))
 
-func _aplicar_frenado(delta: float, direccion: Vector3) -> void:
-	_velocidad_actual = move_toward(_velocidad_actual, 0.0, velocidad_maxima / tiempo_frenado * delta)
-	var vel_freno     = linear_velocity.dot(-direccion)
-	apply_central_force(direccion * clamp(vel_freno * mass / delta, -fuerza_frenado, fuerza_frenado))
 
 # ─── VISUAL ──────────────────────────────────────────────────────────────────
 
@@ -306,7 +274,7 @@ func _actualizar_visual(delta: float, giro: float) -> void:
 	if raiz_visual == null:
 		return
 
-	var inclin_objetivo  = _drift_dir * inclinacion_drift if _estado == Estado.DRIFT else giro * inclinacion_lateral
+	var inclin_objetivo = giro * inclinacion_lateral
 	_inclinacion_actual  = lerp(_inclinacion_actual, inclin_objetivo, suavidad_inclinacion * delta)
 	raiz_visual.rotation_degrees.z = _inclinacion_actual
 
@@ -402,27 +370,36 @@ func _on_health_depleted() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	if not body.has_method("apply_damage") or not stats:
-		return
 	var velocidad := linear_velocity.length()
 	if velocidad <= 5.0:
 		return
+
+	var objetivo = body
+	while objetivo != null:
+		if objetivo.has_method("apply_damage"):
+			break
+		objetivo = objetivo.get_parent()
+
+	if objetivo == null or not stats:
+		return
+
 	var dano := int(stats.current_ram_damage * (velocidad / 20.0))
-	body.apply_damage(dano)
+	objetivo.apply_damage(dano)
 
-	var direccion: Vector3 = (body.global_position - global_position).normalized()
+	var direccion: Vector3 = (objetivo.global_position - global_position).normalized()
 
-	# Buscar apply_knockback en el body o en su padre
-	var knockback_target = null
-	if body.has_method("apply_knockback"):
-		knockback_target = body
-	elif body.get_parent() and body.get_parent().has_method("apply_knockback"):
-		knockback_target = body.get_parent()
+	if objetivo.has_method("apply_knockback"):
+		var fuerza = clamp(velocidad * 2.0, 20.0, 150.0)
+		objetivo.apply_knockback(direccion, fuerza)
 
-	if knockback_target:
-		var fuerza = clamp(velocidad * 1.0, 5.0, 50.0)
-		knockback_target.apply_knockback(direccion, fuerza)
+	# Rebote explosivo hacia atrás
+	var direccion_rebote = -direccion
+	direccion_rebote.y = 0.0
+	direccion_rebote = direccion_rebote.normalized()
 
+	linear_velocity = linear_velocity * 0.2
+	var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
+	apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
 # ─── UTILS ───────────────────────────────────────────────────────────────────
 
 func _algun_rayo_toca() -> bool:

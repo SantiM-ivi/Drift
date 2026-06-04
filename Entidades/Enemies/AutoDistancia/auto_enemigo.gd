@@ -67,8 +67,7 @@ func apply_damage(amount: int) -> void:
 		var final_damage = max(0, amount - stats.current_defense)
 		stats.health -= final_damage
 		print("Enemy recibió daño:", final_damage, "HP restante:", stats.health)
-		
-		
+
 func _on_health_depleted() -> void:
 	var scene = ItemPool.get_random_item()
 	if scene:

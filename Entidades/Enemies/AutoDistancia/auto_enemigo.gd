@@ -8,7 +8,7 @@ extends VehicleBody3D
 @onready var shoot_point: Node3D = $ShootPoint
 @export var stats: Stats
 var proyectil_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet_enemy.tscn")
-
+signal enemigo_muerto(enemigo: AutoEnemigo)
 var player: RigidBody3D = null
 
 func _ready() -> void:
@@ -69,6 +69,7 @@ func apply_damage(amount: int) -> void:
 		print("Enemy recibió daño:", final_damage, "HP restante:", stats.health)
 
 func _on_health_depleted() -> void:
+	emit_signal("enemigo_muerto", self)  # ← AGREGÁ ESTO PRIMERO
 	var scene = ItemPool.get_random_item()
 	if scene:
 		var item_instance = scene.instantiate()
@@ -79,3 +80,9 @@ func _on_health_depleted() -> void:
 	
 func apply_knockback(direccion: Vector3, fuerza: float) -> void:
 	linear_velocity += direccion * fuerza
+
+func activar_modo_caza() -> void:
+	var shape = detection_area.get_node_or_null("DetectionArea")
+	if shape and shape.shape is SphereShape3D:
+		shape.shape.radius *= 2.5  # ajustá el multiplicador a gusto
+		print("[Enemigo] Modo caza activado — radio ampliado")

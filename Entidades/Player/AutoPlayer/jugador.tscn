@@ -35,6 +35,8 @@
 [ext_resource type="Script" uid="uid://dawtwk7r3nwc2" path="res://Common/Events/lluvia_particles.gd" id="23_lofs7"]
 [ext_resource type="Resource" uid="uid://blfo6ioj5tqxk" path="res://Entidades/Items/Ruedas/Rueda1/rueda1_stats.tres" id="28_luh2e"]
 [ext_resource type="Resource" uid="uid://cfoiunyv2ehrw" path="res://Entidades/Items/ArmaMetralleta/arma_stats.tres" id="29_85ju8"]
+[ext_resource type="Script" uid="uid://chn21x8nym33y" path="res://enemy_spawner.gd" id="36_awid8"]
+[ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="37_8erxf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
 resource_name = "Material.003"
@@ -229,8 +231,6 @@ collision_layer = 2
 collision_mask = 37
 script = ExtResource("1_omvyu")
 duracion_boost = 2.5
-velocidad_giro_drift = 2.0
-inclinacion_drift = 14.0
 velocidad_giro = 1.0
 suavidad_inclinacion = 20.0
 
@@ -416,5 +416,29 @@ trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_2u8bg")
 draw_pass_1 = SubResource("RibbonTrailMesh_lofs7")
 script = ExtResource("23_lofs7")
+
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=1331443721]
+script = ExtResource("36_awid8")
+enemigo_scene = ExtResource("37_8erxf")
+
+[node name="RayCastNorte" type="RayCast3D" parent="EnemySpawner" unique_id=1708172182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.9937, 1.4589466, 0)
+target_position = Vector3(0, -100, 0)
+
+[node name="RayCastSur" type="RayCast3D" parent="EnemySpawner" unique_id=1372688915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.22125, -1.4502102, 0)
+target_position = Vector3(0, -100, 0)
+
+[node name="RayCastEste" type="RayCast3D" parent="EnemySpawner" unique_id=1762832795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -127.62021)
+target_position = Vector3(0, -100, 0)
+
+[node name="RayCastOeste" type="RayCast3D" parent="EnemySpawner" unique_id=701618996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 128.09718)
+target_position = Vector3(0, -100, 0)
+
+[node name="Timer" type="Timer" parent="EnemySpawner" unique_id=1026796962]
+wait_time = 3.0
+autostart = true
 
 [editable path="VisualRoot/ItemsEquipados/Rueda1/BackLeft"]

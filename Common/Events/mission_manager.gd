@@ -18,21 +18,22 @@ var _tiempo_retencion: float = 0.0
 # ─── MISIÓN KILLS ─────────────────────────────────────────────────────────────
 var _enemigos_chocados: int = 0
 @export var enemigos_choque_requeridos: int = 5
+var _enemigos_registrados: Array = []
 
 # ─── REFS ─────────────────────────────────────────────────────────────────────
 var _player: RigidBody3D = null
 
 func _ready() -> void:
+	add_to_group("MissionManager")
 	await get_tree().process_frame
 	_player = get_tree().get_first_node_in_group("Player")
 	if not _player:
 		push_error("[MissionManager] No se encontró el jugador")
 		return
 
-	_iniciar_mision_llave()
 	_iniciar_mision_jefe()
 	_iniciar_mision_kills()
-	print("[MissionManager] Las 3 misiones iniciadas.")
+	print("[MissionManager] Misiones iniciadas — la llave aparecerá al completar JEFE y KILLS.")
 
 
 func _process(delta: float) -> void:
@@ -44,17 +45,13 @@ func _process(delta: float) -> void:
 
 # ─── MISIÓN LLAVE ─────────────────────────────────────────────────────────────
 
-func _iniciar_mision_llave() -> void:
-	var enemigos = get_tree().get_nodes_in_group("Enemigo")
-	if enemigos.is_empty():
-		push_warning("[MissionManager] No hay enemigos para asignar la llave")
-		return
-
-	_portador_llave = enemigos[randi() % enemigos.size()]
+func _configurar_portador_llave(enemigo: AutoEnemigo) -> void:
+	_portador_llave = enemigo
 	_aplicar_color_llave(_portador_llave, true)
+	await get_tree().process_frame
 	if _portador_llave.stats:
 		_portador_llave.stats.health_depleted.connect(_on_portador_muerto)
-	print("[MissionManager] Portador de la llave: ", _portador_llave.name)
+	print("[MissionManager] 🗝️ Portador configurado: ", _portador_llave.name)
 
 func _on_portador_muerto() -> void:
 	if _llave_completada or _jugador_tiene_llave:
@@ -63,18 +60,18 @@ func _on_portador_muerto() -> void:
 	_jugador_tiene_llave = true
 	_activar_modo_caza()
 
+func _completar_mision_llave() -> void:
+	_llave_completada = true
+	print("[MissionManager] ✅ Misión LLAVE completada")
+	emit_signal("mision_completada", "LLAVE")
+	_verificar_todas()
+
 func _activar_modo_caza() -> void:
 	var todos = get_tree().get_nodes_in_group("Enemigo") + get_tree().get_nodes_in_group("Boss")
 	for enemigo in todos:
 		if is_instance_valid(enemigo) and enemigo.has_method("activar_modo_caza"):
 			enemigo.activar_modo_caza()
 	print("[MissionManager] 🚨 Todos los enemigos en modo caza")
-
-func _completar_mision_llave() -> void:
-	_llave_completada = true
-	print("[MissionManager] ✅ Misión LLAVE completada")
-	emit_signal("mision_completada", "LLAVE")
-	_verificar_todas()
 
 func _aplicar_color_llave(enemigo: AutoEnemigo, activar: bool) -> void:
 	for hijo in enemigo.get_children():
@@ -112,10 +109,18 @@ func _on_jefe_muerto(_enemigo: AutoEnemigo) -> void:
 # ─── MISIÓN KILLS ─────────────────────────────────────────────────────────────
 
 func _iniciar_mision_kills() -> void:
+	await get_tree().process_frame
 	for enemigo in get_tree().get_nodes_in_group("Enemigo"):
-		if not enemigo.enemigo_muerto.is_connected(_on_enemigo_muerto):
-			enemigo.enemigo_muerto.connect(_on_enemigo_muerto)
+		_registrar_enemigo_kill(enemigo)
 	print("[MissionManager] Misión kills iniciada — objetivo: ", enemigos_choque_requeridos)
+
+func _registrar_enemigo_kill(enemigo: Node) -> void:
+	if enemigo in _enemigos_registrados:
+		return
+	if not enemigo.has_signal("enemigo_muerto"):
+		return
+	enemigo.enemigo_muerto.connect(_on_enemigo_muerto)
+	_enemigos_registrados.append(enemigo)
 
 func _on_enemigo_muerto(_enemigo: AutoEnemigo) -> void:
 	if _choques_completados:
@@ -132,6 +137,14 @@ func _on_enemigo_muerto(_enemigo: AutoEnemigo) -> void:
 # ─── FIN DE NIVEL ─────────────────────────────────────────────────────────────
 
 func _verificar_todas() -> void:
+	# Cuando jefe Y kills completos, spawnear el portador de la llave
+	if _jefe_completado and _choques_completados and not _portador_llave and not _llave_completada:
+		var spawner = get_tree().get_first_node_in_group("EnemySpawner")
+		if spawner:
+			spawner.spawnear_portador()
+		else:
+			push_error("[MissionManager] No se encontró EnemySpawner")
+
 	if _llave_completada and _jefe_completado and _choques_completados:
 		print("[MissionManager] 🏁 ¡Todas las misiones completadas! Volviendo al menú...")
 		emit_signal("todas_completadas")

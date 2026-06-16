@@ -87,9 +87,21 @@ agent_radius = 1.5
 region_min_size = 1.0
 edge_max_length = 4.0
 
+[sub_resource type="Resource" id="Resource_5qbrc"]
+script = ExtResource("3_rkloy")
+metadata/_custom_type_script = "uid://irbhor700bc7"
+
+[sub_resource type="Resource" id="Resource_afakk"]
+script = ExtResource("3_rkloy")
+metadata/_custom_type_script = "uid://irbhor700bc7"
+
+[sub_resource type="Resource" id="Resource_j4twu"]
+script = ExtResource("3_rkloy")
+metadata/_custom_type_script = "uid://irbhor700bc7"
+
 [sub_resource type="Resource" id="Resource_6ej83"]
 script = ExtResource("3_rkloy")
-base_max_health = 200
+base_max_health = 400
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kwsyd"]
@@ -140,26 +152,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.762024, 0)
 [node name="AutoEnemigo" parent="NavigationRegion3D" unique_id=1287735819 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 0)
 mass = 20.0
+stats = SubResource("Resource_5qbrc")
 
 [node name="AutoEnemigo2" parent="NavigationRegion3D" unique_id=893743994 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.86255, 16.60254, -162.84048)
 mass = 20.0
+stats = SubResource("Resource_afakk")
 
 [node name="AutoEnemigo3" parent="NavigationRegion3D" unique_id=1110480783 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 244.87839)
 mass = 20.0
+stats = SubResource("Resource_j4twu")
 
 [node name="AutoEnemigoCamioneta" parent="NavigationRegion3D" unique_id=2111903297 groups=["Enemigo"] instance=ExtResource("12_kwsyd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.649108, 0)
 
 [node name="JefeNivel1" parent="NavigationRegion3D" unique_id=1008261279 instance=ExtResource("11_kwsyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.297256, 21.553944, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.297256, 34.214077, 79.576096)
 
 [node name="AutoEnemigoMedio" parent="NavigationRegion3D" unique_id=1006424039 groups=["Enemigo"] instance=ExtResource("9_sp1my")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9169655, 19.47591, -48.142815)
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawmDebugg" unique_id=1017451994]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0, -0.66071224, 0)
@@ -167,6 +183,7 @@ mesh = ExtResource("6_tvo6m")
 
 [node name="SpawmPoint ItemAleatorio" type="Node3D" parent="." unique_id=896008733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.851368, 11.66073, 175.09653)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawmPoint ItemAleatorio" unique_id=1796742666]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0, -0.71039057, 0)
@@ -174,6 +191,7 @@ mesh = ExtResource("6_tvo6m")
 
 [node name="SpawmPoint Item" type="Node3D" parent="." unique_id=540424795]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.7361, 11.769501, 175.66776)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawmPoint Item" unique_id=1678342372]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0, -0.79916763, 0)
@@ -181,6 +199,7 @@ mesh = ExtResource("6_tvo6m")
 
 [node name="SpawmPoint Item 2" type="Node3D" parent="." unique_id=797316837]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.99982, 11.78165, 176.28957)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawmPoint Item 2" unique_id=403273213]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0, -0.81391907, 0)

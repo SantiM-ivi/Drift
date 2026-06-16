@@ -9,5 +9,6 @@ base_defense = 5
 base_attack = 25
 base_ram_damage = 25
 base_attack_speed = 300.0
-base_steer_speed = 800.0
+base_steer_limit = 2.0
+base_steer_speed = 5000.0
 metadata/_custom_type_script = "uid://irbhor700bc7"

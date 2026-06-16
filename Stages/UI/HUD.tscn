@@ -26,8 +26,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = 9.0
 offset_top = 19.0
-offset_right = 239.0
-offset_bottom = 71.0
+offset_right = 320.0
+offset_bottom = 94.0
 
 [node name="Content" type="VBoxContainer" parent="TopLeft" unique_id=1440143760]
 layout_mode = 1

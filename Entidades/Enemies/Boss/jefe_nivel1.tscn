@@ -62,7 +62,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lijnw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_05ds3"]
-size = Vector3(13.748886, 12.7669525, 24.840702)
+size = Vector3(13.519829, 12.546064, 23.344452)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q5ew6"]
 radius = 411.01752
@@ -94,6 +94,7 @@ collision_mask = 23
 mass = 50.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
+steering = 2.9722958
 script = ExtResource("1_f4xbj")
 stats = ExtResource("2_7r6q3")
 
@@ -106,10 +107,10 @@ mesh = SubResource("ArrayMesh_8cst1")
 skeleton = NodePath("")
 
 [node name="right_back" type="VehicleWheel3D" parent="." unique_id=456139717]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 7.142, -1.689, 10.417)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 6.959978, -1.5069786, 10.417)
 use_as_traction = true
 wheel_roll_influence = 1.0
-wheel_radius = 3.0
+wheel_radius = 4.0
 wheel_friction_slip = 10.0
 suspension_travel = 0.1
 suspension_stiffness = 50.0
@@ -119,10 +120,10 @@ suspension_max_force = 10000.0
 transform = Transform3D(-5, 0, 7.54979e-07, 0, 5, 0, -7.54979e-07, 0, -5, 0.036, 0.031, 0.042)
 
 [node name="left_back" type="VehicleWheel3D" parent="." unique_id=210189949]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.123465, -1.6888944, 10.5473)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.0506558, -1.506873, 10.5473)
 use_as_traction = true
 wheel_roll_influence = 1.0
-wheel_radius = 3.0
+wheel_radius = 4.0
 wheel_friction_slip = 10.0
 suspension_travel = 0.1
 suspension_stiffness = 50.0
@@ -132,10 +133,11 @@ suspension_max_force = 10000.0
 transform = Transform3D(-5, 0, 7.54979e-07, 0, 5, 0, -7.54979e-07, 0, -5, -0.0054467916, 0.030999959, 0.041526437)
 
 [node name="left_front" type="VehicleWheel3D" parent="." unique_id=976486513]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.04, -1.689, -1.773)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -2.04, -1.5069786, -1.773)
+steering = 2.9722958
 use_as_steering = true
 wheel_roll_influence = 1.0
-wheel_radius = 3.0
+wheel_radius = 4.0
 wheel_friction_slip = 10.0
 suspension_travel = 0.1
 suspension_stiffness = 50.0
@@ -145,10 +147,11 @@ suspension_max_force = 10000.0
 transform = Transform3D(-5, 0, 7.54979e-07, 0, 5, 0, -7.54979e-07, 0, -5, 0.07988715, 0.030999959, 0.06670439)
 
 [node name="right_front" type="VehicleWheel3D" parent="." unique_id=1719833620]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 6.943, -1.689, -1.942)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 6.943, -1.5069786, -1.942)
+steering = 2.9722958
 use_as_steering = true
 wheel_roll_influence = 1.0
-wheel_radius = 3.0
+wheel_radius = 4.0
 suspension_travel = 0.1
 suspension_stiffness = 50.0
 suspension_max_force = 10000.0
@@ -157,7 +160,7 @@ suspension_max_force = 10000.0
 transform = Transform3D(-5, 0, 7.54979e-07, 0, 5, 0, -7.54979e-07, 0, -5, -0.08300114, 0.031028181, 0.00764513)
 
 [node name="Colision" type="CollisionShape3D" parent="." unique_id=187498341]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.484108, 1.8485614, 2.9172764)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3695793, 1.7859135, 3.0494633)
 shape = SubResource("BoxShape3D_05ds3")
 
 [node name="DetectionArea" type="Area3D" parent="." unique_id=1156042350]
@@ -171,7 +174,7 @@ shape = SubResource("SphereShape3D_q5ew6")
 avoidance_enabled = true
 
 [node name="ShootPoint" type="Node3D" parent="." unique_id=1872714489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2633922, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0284443, 0.5492904, -8.82875)
 
 [node name="AttackArea" type="Area3D" parent="." unique_id=1786928853]
 collision_layer = 0

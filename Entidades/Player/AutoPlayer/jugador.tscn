@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://c5xen6irvbtlw"]
 
 [ext_resource type="Script" uid="uid://tanwk50icrp8" path="res://Entidades/Player/AutoPlayer/player.gd" id="1_omvyu"]
+[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_0m7vh"]
 [ext_resource type="Texture2D" uid="uid://dbs8ym6eyy4v1" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
 [ext_resource type="Texture2D" uid="uid://blskpcrqpdk45" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
 [ext_resource type="Texture2D" uid="uid://butryowtykkvn" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
@@ -37,6 +38,12 @@
 [ext_resource type="Resource" uid="uid://cfoiunyv2ehrw" path="res://Entidades/Items/ArmaMetralleta/arma_stats.tres" id="29_85ju8"]
 [ext_resource type="Script" uid="uid://chn21x8nym33y" path="res://enemy_spawner.gd" id="36_awid8"]
 [ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="37_8erxf"]
+
+[sub_resource type="Resource" id="Resource_3vqou"]
+script = ExtResource("2_0m7vh")
+base_max_health = 400
+base_defense = 0
+metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
 resource_name = "Material.003"
@@ -233,6 +240,7 @@ script = ExtResource("1_omvyu")
 duracion_boost = 2.5
 velocidad_giro = 1.0
 suavidad_inclinacion = 20.0
+stats = SubResource("Resource_3vqou")
 
 [node name="VisualRoot" type="Node3D" parent="." unique_id=708323970]
 
@@ -363,19 +371,18 @@ font_size = 64
 
 [node name="CrashSFX" type="AudioStreamPlayer3D" parent="." unique_id=324415658]
 stream = ExtResource("7_u02rt")
-volume_db = -21.029
 
 [node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1019338284]
 stream = ExtResource("8_cks8u")
-volume_db = -21.029
+volume_db = -49.813
+max_db = -10.0
 
 [node name="EquiparSFX" type="AudioStreamPlayer3D" parent="." unique_id=607787484]
 stream = ExtResource("9_nugh5")
-volume_db = -21.029
 
 [node name="BocinaSFX" type="AudioStreamPlayer3D" parent="." unique_id=1200402778]
 stream = ExtResource("16_2u8bg")
-volume_db = -21.029
+volume_db = -14.606
 
 [node name="PlayerEquipment" type="Node" parent="." unique_id=1035889082]
 script = ExtResource("11_ro61n")

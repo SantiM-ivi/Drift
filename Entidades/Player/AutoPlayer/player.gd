@@ -43,12 +43,22 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 @onready var debug_vel_label: Label3D  = $DebugVelocidadLabel
 @onready var equipment: PlayerEquipment = $PlayerEquipment
 @onready var pickup_area: Area3D        = $AreaDeInteraccion
-@onready var bocina_sfx: AudioStreamPlayer3D = $BocinaSFX
+@onready var bocina_sfx: AudioStreamPlayer3D  = $BocinaSFX
+@onready var motor_sfx: AudioStreamPlayer3D   = $MotorSFX
+@onready var crash_sfx: AudioStreamPlayer3D   = $CrashSFX
+@onready var equipar_sfx: AudioStreamPlayer3D = $EquiparSFX
 @onready var hud = $"../HUD"
+
 # ─── ESTADO INTERNO ──────────────────────────────────────────────────────────
 
 const MAX_ANGULO_RUEDA: float = 25.0
 const SUAVIDAD_RUEDA: float   = 8.0
+
+# Audio — motor
+const PITCH_MIN:  float = 0.6
+const PITCH_MAX:  float = 1.8
+const VOL_MIN_DB: float = -18.0
+const VOL_MAX_DB: float = 0.0
 
 var _angulo_rueda_actual: float = 0.0
 var _estado: Estado             = Estado.QUIETO
@@ -61,6 +71,7 @@ var _tiempo_cooldown: float     = 0.0
 var _nitro_activo: bool         = false
 var _items_en_rango: Array[ItemMundo] = []
 var _cooldown_disparo: float = 0.0
+
 # ─── INIT ────────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
@@ -81,6 +92,10 @@ func _ready() -> void:
 	pickup_area.area_exited.connect(_on_area_exited)
 	body_entered.connect(_on_body_entered)
 
+	# Motor en loop desde el inicio
+	if motor_sfx:
+		motor_sfx.play()
+
 # ─── LOOP PRINCIPAL ──────────────────────────────────────────────────────────
 
 func _physics_process(delta: float) -> void:
@@ -92,13 +107,11 @@ func _physics_process(delta: float) -> void:
 	var accel_inp = Input.get_axis("ui_up", "ui_down")
 	var boosting  = Input.is_action_just_pressed("boost")
 
-
 	_tick_boost(delta, boosting)
 	_actualizar_estado(en_suelo, accel_inp)
 	_aplicar_flotacion()
 	_actualizar_visual(delta, Input.get_axis("ui_right", "ui_left"))
 
-	
 	var giro = Input.get_axis("ui_right", "ui_left")
 	if en_suelo:
 		camara_pivot.rotate_y(giro * velocidad_giro * delta)
@@ -111,11 +124,15 @@ func _physics_process(delta: float) -> void:
 	_aplicar_movimiento(delta, giro, accel_inp)
 	_cooldown_disparo -= delta
 	_manejar_disparo()
+
 	if Input.is_action_just_pressed("Bocina"):
 		bocina_sfx.play()
+
 	if hud:
 		var vel_kmh = int(Vector2(linear_velocity.x, linear_velocity.z).length() * 3.6)
 		hud.set_speed(vel_kmh)
+
+	_actualizar_motor_sfx()
 
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
@@ -151,26 +168,19 @@ func _tick_boost(delta: float, boosting: bool) -> void:
 func _estabilizar_en_aire(delta: float) -> void:
 	if _algun_rayo_toca():
 		return
-
-	# Enderezar eje Y hacia arriba
 	var alineacion = global_basis.y.dot(Vector3.UP)
 	if alineacion < 0.99:
 		var eje = global_basis.y.cross(Vector3.UP).normalized()
 		var fuerza = (1.0 - alineacion) * 600.0
 		apply_torque(eje * fuerza)
-
-	# Frenar rotación en el aire para que no gire a lo loco
 	angular_velocity = angular_velocity.lerp(Vector3.ZERO, delta * 5.0)
 
 func _aplicar_propulsor(delta: float) -> void:
 	if not Input.is_action_pressed("boost") or _tiempo_cooldown > 0.0:
 		return
-
-	# No aplicar fuerza si ya superamos la velocidad máxima con boost
 	var vel_actual = linear_velocity.length()
 	if vel_actual >= velocidad_maxima + bonus_velocidad_boost:
 		return
-
 	var direccion = -camara_pivot.global_basis.z
 	apply_central_force(direccion * fuerza_avance * 1.5)
 	_tiempo_boost -= delta
@@ -186,7 +196,8 @@ func _sincronizar_camara() -> void:
 	camara_pivot.rotation.x      = 0.0
 	camara_pivot.rotation.z      = 0.0
 
-# ─── DISPARO ──────────────────────────────────────────────────────────────────
+# ─── DISPARO ─────────────────────────────────────────────────────────────────
+
 func _manejar_disparo() -> void:
 	if not Input.is_action_just_pressed("shoot"):
 		return
@@ -194,16 +205,12 @@ func _manejar_disparo() -> void:
 		return
 	if _cooldown_disparo > 0.0:
 		return
-
-	# Punto de disparo — el MuzzlePoint del ArmaSlot
 	var arma_node = equipment.equipado.get("Arma")
 	if arma_node == null:
 		return
-
 	var muzzle = arma_node.get_node_or_null("Muzzle")
 	var origen = muzzle.global_position if muzzle else global_position
-	var direccion = -global_transform.basis.z  # hacia donde mira el auto
-
+	var direccion = -global_transform.basis.z
 	_cooldown_disparo = equipment.arma_activa.fire_rate
 
 # ─── FLOTACION ───────────────────────────────────────────────────────────────
@@ -219,8 +226,6 @@ func _aplicar_flotacion() -> void:
 		var vel_rel   = Vector3.UP.dot(linear_velocity + angular_velocity.cross(pos_rayo - to_global(center_of_mass)))
 		var fuerza    = max((extension * fuerza_resorte) - (vel_rel * amortiguacion), 0.0)
 		apply_force(Vector3.UP * fuerza, pos_rayo - global_position)
-
-
 
 # ─── MOVIMIENTO ──────────────────────────────────────────────────────────────
 
@@ -267,13 +272,11 @@ func _aplicar_fuerza_avance(delta: float, direccion: Vector3, vel_max: float) ->
 		clamp(error.z, -limite, limite)
 	))
 
-
 # ─── VISUAL ──────────────────────────────────────────────────────────────────
 
 func _actualizar_visual(delta: float, giro: float) -> void:
 	if raiz_visual == null:
 		return
-
 	var inclin_objetivo = giro * inclinacion_lateral
 	_inclinacion_actual  = lerp(_inclinacion_actual, inclin_objetivo, suavidad_inclinacion * delta)
 	raiz_visual.rotation_degrees.z = _inclinacion_actual
@@ -288,6 +291,19 @@ func _actualizar_visual(delta: float, giro: float) -> void:
 		var vel_real = Vector2(linear_velocity.x, linear_velocity.z).length()
 		debug_vel_label.text = "KM %.1f | interna: %.1f | max: %.1f" % [vel_real, abs(_velocidad_actual), velocidad_maxima]
 
+# ─── AUDIO ───────────────────────────────────────────────────────────────────
+
+func _actualizar_motor_sfx() -> void:
+	if not motor_sfx:
+		return
+	# vel_ratio basado en velocidad real del RigidBody (responde a colisiones también)
+	var vel_ratio = clamp(
+		Vector2(linear_velocity.x, linear_velocity.z).length() / velocidad_maxima,
+		0.0, 1.0
+	)
+	motor_sfx.pitch_scale = lerp(PITCH_MIN, PITCH_MAX, vel_ratio)
+	motor_sfx.volume_db   = lerp(VOL_MIN_DB, VOL_MAX_DB, vel_ratio)
+
 # ─── ITEMS / PICKUP ──────────────────────────────────────────────────────────
 
 func _intentar_recoger() -> void:
@@ -299,6 +315,9 @@ func _intentar_recoger() -> void:
 	equipment.equipar(closest.slot, closest.nombre_item, global_position, closest.stats)
 	_items_en_rango.erase(closest)
 	closest.queue_free()
+	# Sonido de item equipado manualmente (Tecla E)
+	if equipar_sfx:
+		equipar_sfx.play()
 
 func _item_mas_cercano() -> ItemMundo:
 	var closest: ItemMundo = null
@@ -316,7 +335,7 @@ func _item_mas_cercano() -> ItemMundo:
 
 func apply_damage(amount: int) -> void:
 	if stats:
-		var reduccion = clamp(stats.current_defense / 100.0, 0.0, 0.9)  # max 90% reducción
+		var reduccion = clamp(stats.current_defense / 100.0, 0.0, 0.9)
 		var final_damage = max(1, int(amount * (1.0 - reduccion)))
 		stats.health -= final_damage
 		print("[Player] daño recibido: %d | defensa: %.0f | reduccion: %.0f%% | daño final: %d | vida: %d/%d" % [
@@ -335,7 +354,7 @@ func activar_nitro(duracion: float, multiplicador: float) -> void:
 		return
 	_nitro_activo     = true
 	velocidad_maxima *= multiplicador
-	_bonus_velocidad  = 0.0  # resetear para que no se apile con boost
+	_bonus_velocidad  = 0.0
 	await get_tree().create_timer(duracion).timeout
 	velocidad_maxima /= multiplicador
 	_nitro_activo     = false
@@ -352,12 +371,15 @@ func _on_area_entered(area: Area3D) -> void:
 	var es_auto = (
 		tipo != ItemsStats.TipoItem.EQUIPABLE and
 		tipo != ItemsStats.TipoItem.ARMA and
-		tipo != ItemsStats.TipoItem.RUEDA        # <-- esto faltaba
+		tipo != ItemsStats.TipoItem.RUEDA
 	)
 
 	if parent.stats != null and es_auto:
 		equipment.equipar(parent.slot, parent.nombre_item, global_position, parent.stats)
 		parent.queue_free()
+		# Sonido de item auto-equipado (colisión con área)
+		if equipar_sfx:
+			equipar_sfx.play()
 	else:
 		_items_en_rango.append(parent)
 
@@ -386,13 +408,16 @@ func _on_body_entered(body: Node) -> void:
 	var dano := int(stats.current_ram_damage * (velocidad / 20.0))
 	objetivo.apply_damage(dano)
 
+	# Crash SFX — solo cuando efectivamente hay daño y velocidad > 5.0
+	if crash_sfx and not crash_sfx.playing:
+		crash_sfx.play()
+
 	var direccion: Vector3 = (objetivo.global_position - global_position).normalized()
 
 	if objetivo.has_method("apply_knockback"):
 		var fuerza = clamp(velocidad * 2.0, 20.0, 150.0)
 		objetivo.apply_knockback(direccion, fuerza)
 
-	# Rebote explosivo hacia atrás
 	var direccion_rebote = -direccion
 	direccion_rebote.y = 0.0
 	direccion_rebote = direccion_rebote.normalized()
@@ -400,6 +425,7 @@ func _on_body_entered(body: Node) -> void:
 	linear_velocity = linear_velocity * 0.2
 	var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
 	apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
+
 # ─── UTILS ───────────────────────────────────────────────────────────────────
 
 func _algun_rayo_toca() -> bool:
@@ -410,16 +436,15 @@ func _algun_rayo_toca() -> bool:
 
 func _on_health_changed(cur_health: int, max_health: int) -> void:
 	if hud:
+		hud.set_max_health(max_health)
 		hud.set_health(cur_health)
-		hud.health_bar.max_value = max_health
 
 func ajustar_raycasts(nombre_rueda: String) -> void:
 	match nombre_rueda:
 		"Rueda3":
-			altura_flotacion = 1.2   # más alto
+			altura_flotacion = 1.2
 		_:
-			altura_flotacion = 0.6   # valor original
-
+			altura_flotacion = 0.6
 	for rayo in rayos:
 		rayo.target_position = Vector3.DOWN * (altura_flotacion * 2.5)
 	print("[Player] flotacion ajustada para %s — altura: %.1f" % [nombre_rueda, altura_flotacion])

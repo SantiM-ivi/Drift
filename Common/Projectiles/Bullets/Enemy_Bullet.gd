@@ -26,4 +26,8 @@ func _on_body_entered(body: Node) -> void:
 	queue_free()
 
 func _on_area_entered(area: Area3D) -> void:
-	queue_free()
+	var parent = area.get_parent()
+	if parent.has_method("apply_damage"):
+		print("[Bala] impacto en: %s | daño: %d" % [parent.name, damage])
+		parent.apply_damage(damage)
+		queue_free()

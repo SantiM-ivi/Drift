@@ -19,10 +19,15 @@ signal evento_finalizado(nombre: String)
 
 # --- Tormenta ---
 @export var tornado_escena: PackedScene = preload("res://Entidades/Eventos/tornado.tscn")
-@export var tornado_cantidad: int = 2
-@export var tornado_spawn_radio: float = 20.0
+@export var tornado_cantidad: int = 10
+@export var tornado_spawn_radio: float = 80.0
 
+# --- Nodos ---
 var lluvia_particles: GPUParticles3D = null
+@onready var lluvia_sfx: AudioStreamPlayer   = $LluviaSFX
+@onready var tormenta_sfx: AudioStreamPlayer = $TormentaSFX
+@onready var rocas_sfx: AudioStreamPlayer    = $RocasSFX
+
 var _timer: float = 0.0
 var _evento_timer: float = 0.0
 var _roca_spawn_timer: float = 0.0
@@ -73,7 +78,7 @@ func _ready() -> void:
 	if we:
 		_env = we.environment
 	else:
-		push_error("[EventManager] No se encontró WorldEnvironment")
+		push_error("[EventManager] No se encontro WorldEnvironment")
 		return
 
 	await get_tree().process_frame
@@ -81,17 +86,16 @@ func _ready() -> void:
 	if player:
 		lluvia_particles = player.get_node_or_null("LluviaParticles")
 	if not lluvia_particles:
-		push_warning("[EventManager] No se encontró LluviaParticles en el jugador")
+		push_warning("[EventManager] No se encontro LluviaParticles en el jugador")
 
 
 func _process(delta: float) -> void:
-	# Lazy load del player
 	if not _player:
 		_player = get_tree().get_first_node_in_group("Player") as RigidBody3D
 		if not _player:
 			return
 
-	# Transición visual
+	# Transicion visual
 	if _transicionando:
 		_t = clamp(_t + delta / duracion_transicion, 0.0, 1.0)
 		_env.fog_light_color     = _fog_color_origen.lerp(_fog_color_destino, _t)
@@ -107,14 +111,14 @@ func _process(delta: float) -> void:
 			_roca_spawn_timer = 0.0
 			_spawnear_roca()
 
-	# Timer duración del evento
+	# Timer duracion del evento
 	if _evento_activo != -1:
 		_evento_timer += delta
 		if _evento_timer >= duracion_evento:
 			_finalizar_evento()
-		return  # no avanza el _timer mientras hay evento activo
+		return
 
-	# Timer entre eventos — solo corre si no hay evento activo
+	# Timer entre eventos
 	_timer += delta
 	if _timer >= intervalo:
 		_timer = 0.0
@@ -166,12 +170,15 @@ func _finalizar_evento() -> void:
 # ─── LLUVIA ───────────────────────────────────────────────────────────────────
 
 func _evento_lluvia() -> void:
-	print("[Evento] 🌧️ LLUVIA")
+	print("[Evento] LLUVIA")
 	_aplicar_visual("LLUVIA")
 	if lluvia_particles:
 		lluvia_particles.activar()
 	if _player:
 		_player.velocidad_maxima += lluvia_speed_bonus
+	if lluvia_sfx:
+		lluvia_sfx.stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		lluvia_sfx.play()
 	emit_signal("evento_iniciado", "LLUVIA")
 
 func _limpiar_lluvia() -> void:
@@ -179,16 +186,20 @@ func _limpiar_lluvia() -> void:
 		lluvia_particles.desactivar()
 	if _player:
 		_player.velocidad_maxima -= lluvia_speed_bonus
+	if lluvia_sfx:
+		lluvia_sfx.stop()
 
 
 # ─── ROCAS ────────────────────────────────────────────────────────────────────
 
 func _evento_rocas() -> void:
-	print("[Evento] 🪨 ROCAS")
+	print("[Evento] ROCAS")
 	_aplicar_visual("ROCAS")
 	if lluvia_particles:
 		lluvia_particles.emitting = false
-	_roca_spawn_timer = roca_intervalo_spawn  # spawnea la primera de inmediato
+	_roca_spawn_timer = roca_intervalo_spawn
+	if rocas_sfx:
+		rocas_sfx.play()
 	emit_signal("evento_iniciado", "ROCAS")
 
 func _spawnear_roca() -> void:
@@ -214,16 +225,20 @@ func _limpiar_rocas() -> void:
 			roca.queue_free()
 	_rocas_activas.clear()
 	_roca_spawn_timer = 0.0
+	if rocas_sfx:
+		rocas_sfx.stop()
 
 
 # ─── TORMENTA ─────────────────────────────────────────────────────────────────
 
 func _evento_tormenta() -> void:
-	print("[Evento] ⚡ TORMENTA")
+	print("[Evento] TORMENTA")
 	_aplicar_visual("TORMENTA")
 	if lluvia_particles:
 		lluvia_particles.emitting = false
 	_spawnear_tornados()
+	if tormenta_sfx:
+		tormenta_sfx.play()
 	emit_signal("evento_iniciado", "TORMENTA")
 
 func _spawnear_tornados() -> void:
@@ -244,8 +259,10 @@ func _spawnear_tornados() -> void:
 func _limpiar_tornados() -> void:
 	for tornado in _tornados_activos:
 		if is_instance_valid(tornado):
-			tornado.queue_free()
+			tornado.iniciar_salida()  # baja y se destruye solo
 	_tornados_activos.clear()
+	if tormenta_sfx:
+		tormenta_sfx.stop()
 
 
 # ─── UTILS ────────────────────────────────────────────────────────────────────

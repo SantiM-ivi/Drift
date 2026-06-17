@@ -62,7 +62,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lijnw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_05ds3"]
-size = Vector3(13.519829, 12.546064, 23.344452)
+size = Vector3(13.519829, 13.003013, 23.344452)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q5ew6"]
 radius = 411.01752
@@ -160,7 +160,7 @@ suspension_max_force = 10000.0
 transform = Transform3D(-5, 0, 7.54979e-07, 0, 5, 0, -7.54979e-07, 0, -5, -0.08300114, 0.031028181, 0.00764513)
 
 [node name="Colision" type="CollisionShape3D" parent="." unique_id=187498341]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3695793, 1.7859135, 3.0494633)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3695793, 1.5574393, 3.0494633)
 shape = SubResource("BoxShape3D_05ds3")
 
 [node name="DetectionArea" type="Area3D" parent="." unique_id=1156042350]

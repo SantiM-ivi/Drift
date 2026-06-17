@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://brkt4yarrrbwi"]
 
 [ext_resource type="Script" uid="uid://1488vay6yb2u" path="res://Entidades/Items/ArmaMetralleta/Equipado/metralleta_player.gd" id="1_cnp2h"]
-[ext_resource type="AudioStream" uid="uid://crfupygpo2t0x" path="res://Assets/Audio/SFX/SonidoDisparo.wav" id="2_kiv7v"]
-[ext_resource type="PackedScene" uid="uid://d0xcttvem05t1" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1.glb" id="3_pdmxy"]
+[ext_resource type="AudioStream" uid="uid://ccq3tf77xhupm" path="res://Assets/Audio/SFX/SonidoDisparo.wav" id="2_kiv7v"]
+[ext_resource type="PackedScene" uid="uid://cvqs1ypww7del" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1.glb" id="3_pdmxy"]
 [ext_resource type="ArrayMesh" uid="uid://kc0xoeaqf6hn" path="res://Entidades/Items/ArmaMetralleta/metralleta_mesh.tres" id="4_bvxnn"]
-[ext_resource type="Texture2D" uid="uid://cfmdm5xgenuvb" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="4_ni7ee"]
-[ext_resource type="Texture2D" uid="uid://dbvewuqkhsuxt" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Emission.png" id="5_2ooma"]
-[ext_resource type="Texture2D" uid="uid://dw0ldrxqx5e7a" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="6_mjupk"]
-[ext_resource type="Texture2D" uid="uid://ht2o2o4lm8r0" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Normal.png" id="7_7qxg0"]
-[ext_resource type="PackedScene" uid="uid://n2mft5kbwm7j" path="res://Entidades/Items/ArmaMetralleta/Equipado/Sosten_Metralladora.glb" id="8_s1j3x"]
+[ext_resource type="Texture2D" uid="uid://k5ov3ityd3hc" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="4_ni7ee"]
+[ext_resource type="Texture2D" uid="uid://c8y7u4gvambfw" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Emission.png" id="5_2ooma"]
+[ext_resource type="Texture2D" uid="uid://b1embw472f5xv" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="6_mjupk"]
+[ext_resource type="Texture2D" uid="uid://ct7qliy7dnwvl" path="res://Entidades/Items/ArmaMetralleta/Equipado/Metralladora_1_DefaultMaterial_Normal.png" id="7_7qxg0"]
+[ext_resource type="PackedScene" uid="uid://1kv8nbtr8rub" path="res://Entidades/Items/ArmaMetralleta/Equipado/Sosten_Metralladora.glb" id="8_s1j3x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hwy2q"]
 resource_name = "Material"
@@ -69,12 +69,11 @@ sonido_disparo = NodePath("AudioStreamPlayer3D")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1171774297]
 transform = Transform3D(1, -9.18534e-38, 7.8142624e-23, 0, 1, 1.1754583e-15, -7.8142624e-23, -1.1754583e-15, 1, 0, 0, 0)
 stream = ExtResource("2_kiv7v")
-volume_db = -10.0
 
 [node name="MetralladoraArriba" parent="." unique_id=1380831821 instance=ExtResource("3_pdmxy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012360394, 0.5419359, 0)
 
-[node name="Cylinder_001" parent="MetralladoraArriba" index="0" unique_id=1112500532]
+[node name="Cylinder_001" parent="MetralladoraArriba" index="0" unique_id=1456317151]
 transform = Transform3D(0, 5.9604645e-08, -1, -1, 0, -5.9604645e-08, 5.9604645e-08, 1, 0, -0.04249841, 0, 0)
 mesh = ExtResource("4_bvxnn")
 
@@ -89,7 +88,7 @@ transform = Transform3D(2.151273, 0, 0, 0, 1.7818588, 0, 0, 0, 0.4329642, -0.068
 [node name="MetralladoraBase" parent="." unique_id=646632576 instance=ExtResource("8_s1j3x")]
 transform = Transform3D(-6.556708e-08, -1.5, 0, 1.5, -6.556708e-08, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="Cube" parent="MetralladoraBase" index="0" unique_id=1505852067]
+[node name="Cube" parent="MetralladoraBase" index="0" unique_id=278853250]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21713416, -9.4912345e-09, 0)
 
 [editable path="MetralladoraArriba"]

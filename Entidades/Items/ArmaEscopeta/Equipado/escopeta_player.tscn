@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://8hdi840lmuat"]
 
 [ext_resource type="Script" uid="uid://trurfs7sqr75" path="res://Entidades/Items/ArmaEscopeta/Equipado/escopeta_player.gd" id="1_8pbgv"]
-[ext_resource type="AudioStream" uid="uid://crfupygpo2t0x" path="res://Assets/Audio/SFX/SonidoDisparo.wav" id="2_677wi"]
+[ext_resource type="AudioStream" uid="uid://dvhsm3bqu0exb" path="res://Assets/Audio/SFX/Escopeta.wav" id="2_8pbgv"]
 [ext_resource type="Texture2D" uid="uid://fsh683ywoo4q" path="res://Entidades/Items/ArmaEscopeta/Equipado/Escopetas_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="3_20iac"]
 [ext_resource type="Texture2D" uid="uid://cua4ycbf1jsgv" path="res://Entidades/Items/ArmaEscopeta/Equipado/Escopetas_DefaultMaterial_Emission.png" id="4_wp4sp"]
 [ext_resource type="Texture2D" uid="uid://dhq60s4qg0kyi" path="res://Entidades/Items/ArmaEscopeta/Equipado/Escopetas_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="5_sydas"]
@@ -89,16 +89,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_idnen")
 
-[node name="Escopeta" type="Node3D" unique_id=1646838913 node_paths=PackedStringArray("gun", "muzzle")]
+[node name="Escopeta" type="Node3D" unique_id=1646838913 node_paths=PackedStringArray("gun", "muzzle", "sonido_disparo")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_8pbgv")
 gun = NodePath("sosten_Escopetas")
 muzzle = NodePath("escepetas/Muzzle")
+sonido_disparo = NodePath("AudioStreamPlayer3D")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1171774297]
 transform = Transform3D(1, -9.18534e-38, 7.8142624e-23, 0, 1, 1.1754583e-15, -7.8142624e-23, -1.1754583e-15, 1, 0, 0, 0)
-stream = ExtResource("2_677wi")
-volume_db = -10.0
+stream = ExtResource("2_8pbgv")
 
 [node name="escepetas" type="Node3D" parent="." unique_id=726106610]
 transform = Transform3D(2.151273, 0, 0, 0, 1.7818588, 0, 0, 0, 0.4329642, -0.056629866, 0.4316525, -1.2824534)
@@ -117,7 +117,7 @@ skeleton = NodePath("")
 
 [node name="sosten_Escopetas" parent="." unique_id=1298471424 instance=ExtResource("7_ufie0")]
 
-[node name="Cube_002" parent="sosten_Escopetas" index="0" unique_id=1949025171]
+[node name="Cube_002" parent="sosten_Escopetas" index="0" unique_id=521353541]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
 
 [editable path="sosten_Escopetas"]

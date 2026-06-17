@@ -19,6 +19,9 @@
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="16_2py0s"]
 [ext_resource type="Shader" uid="uid://c3mum53ur7nhb" path="res://Assets/Shaders/Outline.gdshader" id="16_kwsyd"]
 [ext_resource type="Script" uid="uid://b46027unelpj5" path="res://Common/Events/mission_manager.gd" id="19_5qbrc"]
+[ext_resource type="AudioStream" uid="uid://bj45g3kn448vg" path="res://Assets/Audio/SFX/tormentaarena.wav" id="19_afakk"]
+[ext_resource type="AudioStream" uid="uid://bulqyrdp0bqjk" path="res://Assets/Audio/SFX/Lluvia.wav" id="19_j4twu"]
+[ext_resource type="AudioStream" uid="uid://c1r4sgdu7gw60" path="res://Assets/Audio/SFX/RockaCallendo.wav" id="21_8ndkw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sp1my"]
 shader = ExtResource("6_ov8pn")
@@ -102,6 +105,7 @@ metadata/_custom_type_script = "uid://irbhor700bc7"
 [sub_resource type="Resource" id="Resource_6ej83"]
 script = ExtResource("3_rkloy")
 base_max_health = 400
+base_defense = 0
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kwsyd"]
@@ -248,6 +252,17 @@ mesh = SubResource("QuadMesh_6ej83")
 
 [node name="EventManager" type="Node" parent="." unique_id=52673366]
 script = ExtResource("13_kwsyd")
+
+[node name="LluviaSFX" type="AudioStreamPlayer" parent="EventManager" unique_id=1693907825]
+stream = ExtResource("19_j4twu")
+volume_db = 9.645
+
+[node name="TormentaSFX" type="AudioStreamPlayer" parent="EventManager" unique_id=30698229]
+stream = ExtResource("19_afakk")
+volume_db = 14.677
+
+[node name="RocasSFX" type="AudioStreamPlayer" parent="EventManager" unique_id=1593042409]
+stream = ExtResource("21_8ndkw")
 
 [node name="MissionManager" type="Node" parent="." unique_id=1767604483]
 script = ExtResource("19_5qbrc")

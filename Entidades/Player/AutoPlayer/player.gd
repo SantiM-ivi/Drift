@@ -33,10 +33,10 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 
 # ─── NODOS ───────────────────────────────────────────────────────────────────
 
-@onready var rueda_fl: Node3D          = $VisualRoot/FrontLeft
-@onready var rueda_fr: Node3D          = $VisualRoot/FrontRight
-@onready var rueda_bl: Node3D          = $VisualRoot/BackLeft
-@onready var rueda_br: Node3D          = $VisualRoot/BackRight
+@onready var rueda_fl: Node3D          = $VisualRoot/ItemsEquipados/Rueda1/FrontLeft
+@onready var rueda_fr: Node3D          = $VisualRoot/ItemsEquipados/Rueda1/FrontRight
+@onready var rueda_bl: Node3D          = $VisualRoot/ItemsEquipados/Rueda1/BackLeft
+@onready var rueda_br: Node3D          = $VisualRoot/ItemsEquipados/Rueda1/BackRight
 @onready var raiz_visual: Node3D       = $VisualRoot
 @onready var rayos: Array[RayCast3D]   = [$RayFL, $RayFR, $RayBL, $RayBR]
 @onready var debug_label: Label3D      = $DebugLabel
@@ -47,8 +47,9 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 @onready var motor_sfx: AudioStreamPlayer3D   = $MotorSFX
 @onready var crash_sfx: AudioStreamPlayer3D   = $CrashSFX
 @onready var equipar_sfx: AudioStreamPlayer3D = $EquiparSFX
+@onready var drift_sfx: AudioStreamPlayer3D   = $DriftSFX
 @onready var hud = $"../HUD"
-
+var _rotacion_ruedas: float = 0.0
 # ─── ESTADO INTERNO ──────────────────────────────────────────────────────────
 
 const MAX_ANGULO_RUEDA: float = 25.0
@@ -59,7 +60,7 @@ const PITCH_MIN:  float = 0.6
 const PITCH_MAX:  float = 1.8
 const VOL_MIN_DB: float = -18.0
 const VOL_MAX_DB: float = 0.0
-
+const PANTALLA_DERROTA: PackedScene = preload("res://Stages/UI/PantallaDerrota.tscn")
 var _angulo_rueda_actual: float = 0.0
 var _estado: Estado             = Estado.QUIETO
 var _inclinacion_actual: float  = 0.0
@@ -71,6 +72,7 @@ var _tiempo_cooldown: float     = 0.0
 var _nitro_activo: bool         = false
 var _items_en_rango: Array[ItemMundo] = []
 var _cooldown_disparo: float = 0.0
+var _girando: bool = false
 
 # ─── INIT ────────────────────────────────────────────────────────────────────
 
@@ -116,6 +118,8 @@ func _physics_process(delta: float) -> void:
 	if en_suelo:
 		camara_pivot.rotate_y(giro * velocidad_giro * delta)
 	_intentar_recoger()
+
+	_manejar_drift_sfx(en_suelo, giro)
 
 	if not en_suelo:
 		_estabilizar_en_aire(delta)
@@ -287,9 +291,19 @@ func _actualizar_visual(delta: float, giro: float) -> void:
 	if rueda_fl: rueda_fl.rotation_degrees.y = _angulo_rueda_actual
 	if rueda_fr: rueda_fr.rotation_degrees.y = _angulo_rueda_actual
 
+	# Rotación de avance (las 4 ruedas ruedan según la velocidad real)
+	var vel_real = Vector2(linear_velocity.x, linear_velocity.z).length()
+	var sentido  = -1.0 if _velocidad_actual > 0.0 else 1.0
+	_rotacion_ruedas += vel_real * sentido * delta * 40.0  # 40 = factor de ajuste visual
+
+	if rueda_fl: rueda_fl.rotation_degrees.x = _rotacion_ruedas
+	if rueda_fr: rueda_fr.rotation_degrees.x = _rotacion_ruedas
+	if rueda_bl: rueda_bl.rotation_degrees.x = _rotacion_ruedas
+	if rueda_br: rueda_br.rotation_degrees.x = _rotacion_ruedas
+
 	if debug_vel_label:
-		var vel_real = Vector2(linear_velocity.x, linear_velocity.z).length()
-		debug_vel_label.text = "KM %.1f | interna: %.1f | max: %.1f" % [vel_real, abs(_velocidad_actual), velocidad_maxima]
+		var vel_real_debug = Vector2(linear_velocity.x, linear_velocity.z).length()
+		debug_vel_label.text = "KM %.1f | interna: %.1f | max: %.1f" % [vel_real_debug, abs(_velocidad_actual), velocidad_maxima]
 
 # ─── AUDIO ───────────────────────────────────────────────────────────────────
 
@@ -388,7 +402,11 @@ func _on_area_exited(area: Area3D) -> void:
 	if parent is ItemMundo:
 		_items_en_rango.erase(parent)
 
+
+
 func _on_health_depleted() -> void:
+	var pantalla = PANTALLA_DERROTA.instantiate()
+	get_tree().root.add_child(pantalla)
 	queue_free()
 
 func _on_body_entered(body: Node) -> void:
@@ -448,3 +466,12 @@ func ajustar_raycasts(nombre_rueda: String) -> void:
 	for rayo in rayos:
 		rayo.target_position = Vector3.DOWN * (altura_flotacion * 2.5)
 	print("[Player] flotacion ajustada para %s — altura: %.1f" % [nombre_rueda, altura_flotacion])
+
+
+func _manejar_drift_sfx(en_suelo: bool, giro: float) -> void:
+	if not drift_sfx:
+		return
+	var esta_girando = en_suelo and abs(giro) > 0.05
+	if esta_girando and not _girando:
+		drift_sfx.play()
+	_girando = esta_girando

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c7whafp40urco" path="res://addons/terrabrush/Assets/vik-shen-2EpzEKwKPpo-unsplash.jpg" id="1_84lpr"]
 [ext_resource type="Image" uid="uid://bdyk13sbyiteg" path="res://Stages/Levels/ToyBox/map/Splatmap_0_0_0.res" id="3_si1mp"]
+[ext_resource type="PackedScene" uid="uid://brpv5cqs73dyt" path="res://Entidades/Enviroment/Rock1/roca_1.tscn" id="4_0nvhn"]
 [ext_resource type="Image" uid="uid://kqnvv6mq6syt" path="res://Stages/Levels/ToyBox/map/Heightmap_0_0.res" id="4_si1mp"]
 
 [sub_resource type="TextureSetResource" id="TextureSetResource_0nvhn"]
@@ -28,3 +29,124 @@ textureSets = SubResource("TextureSetsResource_1lt3a")
 terrainZones = SubResource("ZonesResource_si1mp")
 transform = Transform3D(1, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999999, 0, 28.776321, 0)
 metadata/_edit_lock_ = false
+
+[node name="Rocs" type="Node3D" parent="." unique_id=2012014195]
+
+[node name="Roca_1" parent="Rocs" unique_id=1060074908 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.099993, 0, 19.960844, 0, 1.0594802, 529.33875, 41.627064, 511.7535)
+
+[node name="Roca_2" parent="Rocs" unique_id=623666352 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099986, 0, -19.960842, 0, -1.0594785, 553.7973, 38.160397, 384.86038)
+
+[node name="Roca_3" parent="Rocs" unique_id=1373888059 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099985, 0, 11.0637, 0, -14.112011, 553.7973, 41.627037, 249.95815)
+
+[node name="Roca_4" parent="Rocs" unique_id=1528615679 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099982, 0, -3.9580064, 0, -16.604963, 553.7973, 41.62703, 122.599724)
+
+[node name="Roca_5" parent="Rocs" unique_id=391516969 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.09999, 0, 19.960844, 0, 1.0594802, 529.33875, 41.627052, 2.5363193)
+
+[node name="Roca_6" parent="Rocs" unique_id=1174369972 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099984, 0, -19.960842, 0, -1.0594785, 553.7973, 41.627033, -124.35679)
+
+[node name="Roca_7" parent="Rocs" unique_id=1940641227 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099982, 0, 11.0637, 0, -14.112011, 553.7973, 41.627026, -259.25906)
+
+[node name="Roca_8" parent="Rocs" unique_id=372026013 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099979, 0, -3.9580064, 0, -16.604963, 553.7973, 41.627018, -386.61737)
+
+[node name="Roca_9" parent="Rocs" unique_id=1596776789 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661163, 0, -9.370954, 0, 12.099977, 0, 11.063698, 0, -14.112011, 539.54425, 41.627007, -488.78397)
+
+[node name="Rocs2" type="Node3D" parent="." unique_id=542881875]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -1092.9413, 0, 0)
+
+[node name="Roca_1" parent="Rocs2" unique_id=1286643939 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.099993, 0, 19.960844, 0, 1.0594802, 529.33875, 41.627064, 511.7535)
+
+[node name="Roca_2" parent="Rocs2" unique_id=42839441 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099987, 0, -19.960842, 0, -1.0594785, 553.7973, 41.627045, 384.86038)
+
+[node name="Roca_3" parent="Rocs2" unique_id=1924594110 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099986, 0, 11.063699, 0, -14.112011, 553.7973, 34.094048, 249.95815)
+
+[node name="Roca_4" parent="Rocs2" unique_id=458227003 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099982, 0, -3.9580064, 0, -16.604963, 553.7973, 41.62703, 122.599724)
+
+[node name="Roca_5" parent="Rocs2" unique_id=730567793 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.099991, 0, 19.960844, 0, 1.0594802, 529.33875, 36.52984, 2.5363193)
+
+[node name="Roca_6" parent="Rocs2" unique_id=1349419755 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099984, 0, -19.960842, 0, -1.0594785, 553.7973, 41.627033, -124.35679)
+
+[node name="Roca_7" parent="Rocs2" unique_id=347583945 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099983, 0, 11.063699, 0, -14.112011, 553.7973, 35.677517, -259.25906)
+
+[node name="Roca_8" parent="Rocs2" unique_id=750657547 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099979, 0, -3.9580064, 0, -16.604963, 553.7973, 41.627018, -386.61737)
+
+[node name="Roca_9" parent="Rocs2" unique_id=1666582218 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661163, 0, -9.370954, 0, 12.099977, 0, 11.063698, 0, -14.112011, 539.54425, 41.627007, -488.78397)
+
+[node name="Rocs3" type="Node3D" parent="." unique_id=79308557]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 0.99999976, 0, 0.9999999, 0, -4.3711378e-08, -9.905224, 0, 0)
+
+[node name="Roca_1" parent="Rocs3" unique_id=822057128 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.099993, 0, 19.960844, 0, 1.0594802, 529.33875, 41.627064, 511.7535)
+
+[node name="Roca_2" parent="Rocs3" unique_id=906329188 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099987, 0, -19.960842, 0, -1.0594785, 553.7973, 41.627045, 384.86038)
+
+[node name="Roca_3" parent="Rocs3" unique_id=2140256551 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099984, 0, 11.0637, 0, -14.11201, 553.7973, 36.55069, 249.95811)
+
+[node name="Roca_4" parent="Rocs3" unique_id=783168789 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099982, 0, -3.9580064, 0, -16.604963, 553.7973, 41.62703, 122.599724)
+
+[node name="Roca_5" parent="Rocs3" unique_id=2110729913 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.09999, 0, 19.960844, 0, 1.0594802, 529.33875, 41.627052, 2.5363193)
+
+[node name="Roca_6" parent="Rocs3" unique_id=581287125 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.2508609, 0, 16.906836, 0, 12.099983, 0, -19.960842, 0, -1.0594784, 553.7973, 34.553905, -124.35678)
+
+[node name="Roca_7" parent="Rocs3" unique_id=1178218396 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099982, 0, 11.0637, 0, -14.112011, 553.7973, 41.627026, -259.25906)
+
+[node name="Roca_8" parent="Rocs3" unique_id=1341033320 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099979, 0, -3.9580064, 0, -16.604963, 553.7973, 41.627018, -386.61737)
+
+[node name="Roca_9" parent="Rocs3" unique_id=1660886784 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661163, 0, -9.370954, 0, 12.099977, 0, 11.063698, 0, -14.112011, 539.54425, 41.627007, -488.78397)
+
+[node name="Rocs4" type="Node3D" parent="." unique_id=1355550970]
+transform = Transform3D(1.3113414e-07, 0, 0.9999999, 0, 0.9999997, 0, -0.9999999, 0, 1.3113414e-07, -9.905224, 0, 0)
+
+[node name="Roca_1" parent="Rocs4" unique_id=647459785 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.2508628, 0, -16.906836, 0, 12.099993, 0, 19.960844, 0, 1.0594802, 529.33875, 41.627064, 511.7535)
+
+[node name="Roca_2" parent="Rocs4" unique_id=473351018 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099987, 0, -19.960842, 0, -1.0594785, 553.7973, 41.627045, 384.86038)
+
+[node name="Roca_3" parent="Rocs4" unique_id=323665810 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099986, 0, 11.0637, 0, -14.112012, 553.79736, 33.97026, 249.95816)
+
+[node name="Roca_4" parent="Rocs4" unique_id=1334516445 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099982, 0, -3.9580064, 0, -16.604963, 553.7973, 41.62703, 122.599724)
+
+[node name="Roca_5" parent="Rocs4" unique_id=73101194 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(1.250863, 0, -16.906836, 0, 12.099991, 0, 19.960844, 0, 1.0594802, 529.33875, 34.0763, 2.5363193)
+
+[node name="Roca_6" parent="Rocs4" unique_id=377681291 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-1.250861, 0, 16.906836, 0, 12.099984, 0, -19.960842, 0, -1.0594785, 553.7973, 41.627033, -124.35679)
+
+[node name="Roca_7" parent="Rocs4" unique_id=2114998919 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661165, 0, -9.370954, 0, 12.099983, 0, 11.0637, 0, -14.112012, 553.7973, 33.09033, -259.25906)
+
+[node name="Roca_8" parent="Rocs4" unique_id=888686136 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-19.604439, 0, 3.3524332, 0, 12.099979, 0, -3.9580064, 0, -16.604963, 553.7973, 41.627018, -386.61737)
+
+[node name="Roca_9" parent="Rocs4" unique_id=74544806 instance=ExtResource("4_0nvhn")]
+transform = Transform3D(-16.661163, 0, -9.370954, 0, 12.099977, 0, 11.063698, 0, -14.112011, 539.54425, 41.627007, -488.78397)
+
+[editable path="Rocs/Roca_1"]

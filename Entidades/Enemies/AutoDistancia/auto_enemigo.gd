@@ -7,6 +7,7 @@ extends VehicleBody3D
 @onready var attack_area: Area3D = $AttackArea
 @onready var shoot_point: Node3D = $ShootPoint
 @export var stats: Stats
+@export var explosion_scene: PackedScene = preload("res://Common/Effects/explosion_one.tscn")
 var proyectil_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet_enemy.tscn")
 signal enemigo_muerto(enemigo: AutoEnemigo)
 var player: RigidBody3D = null
@@ -69,15 +70,30 @@ func apply_damage(amount: int) -> void:
 		print("Enemy recibió daño:", final_damage, "HP restante:", stats.health)
 
 func _on_health_depleted() -> void:
-	emit_signal("enemigo_muerto", self)  # ← AGREGÁ ESTO PRIMERO
+	emit_signal("enemigo_muerto", self)
+
+	_spawnear_explosion()
+
 	var scene = ItemPool.get_random_item()
 	if scene:
 		var item_instance = scene.instantiate()
 		item_instance.global_position = global_position
 		get_tree().current_scene.add_child(item_instance)
+
 	queue_free()
-	
-	
+
+
+func _spawnear_explosion() -> void:
+	if not explosion_scene:
+		push_error("[AutoEnemigo] No hay explosion_scene asignada")
+		return
+
+	var explosion: Node3D = explosion_scene.instantiate()
+	get_tree().current_scene.add_child(explosion)
+	explosion.global_position = global_position
+	explosion.explode()
+
+
 func apply_knockback(direccion: Vector3, fuerza: float) -> void:
 	linear_velocity += direccion * fuerza
 

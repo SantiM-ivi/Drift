@@ -19,6 +19,11 @@ var _tiempo_retencion: float = 0.0
 var _enemigos_chocados: int = 0
 @export var enemigos_choque_requeridos: int = 5
 var _enemigos_registrados: Array = []
+const PANTALLA_VICTORIA: PackedScene = preload("res://Stages/UI/PantallaVictoria.tscn")
+
+# ─── AUDIO ─────────────────────────────────────────────────────────────────────
+@onready var tic_tac: AudioStreamPlayer = $TicTac
+const DURACION_FADE_OUT: float = 1.0
 
 # ─── REFS ─────────────────────────────────────────────────────────────────────
 var _player: RigidBody3D = null
@@ -33,7 +38,8 @@ func _ready() -> void:
 
 	_iniciar_mision_jefe()
 	_iniciar_mision_kills()
-	print("[MissionManager] Misiones iniciadas — la llave aparecerá al completar JEFE y KILLS.")
+	todas_completadas.connect(_on_todas_completadas_victoria)
+
 
 
 func _process(delta: float) -> void:
@@ -51,18 +57,20 @@ func _configurar_portador_llave(enemigo: AutoEnemigo) -> void:
 	await get_tree().process_frame
 	if _portador_llave.stats:
 		_portador_llave.stats.health_depleted.connect(_on_portador_muerto)
-	print("[MissionManager] 🗝️ Portador configurado: ", _portador_llave.name)
+	print("[MissionManager] Portador configurado: ", _portador_llave.name)
 
 func _on_portador_muerto() -> void:
 	if _llave_completada or _jugador_tiene_llave:
 		return
-	print("[MissionManager] 🗝️ Llave obtenida — retené ", tiempo_retencion_requerido, " segundos")
+	print("[MissionManager] Llave obtenida — retené ", tiempo_retencion_requerido, " segundos")
 	_jugador_tiene_llave = true
 	_activar_modo_caza()
+	_iniciar_musica_tension()
 
 func _completar_mision_llave() -> void:
 	_llave_completada = true
-	print("[MissionManager] ✅ Misión LLAVE completada")
+	print("[MissionManager] Misión LLAVE completada")
+	_detener_musica_tension()
 	emit_signal("mision_completada", "LLAVE")
 	_verificar_todas()
 
@@ -71,7 +79,7 @@ func _activar_modo_caza() -> void:
 	for enemigo in todos:
 		if is_instance_valid(enemigo) and enemigo.has_method("activar_modo_caza"):
 			enemigo.activar_modo_caza()
-	print("[MissionManager] 🚨 Todos los enemigos en modo caza")
+	print("[MissionManager] Todos los enemigos en modo caza")
 
 func _aplicar_color_llave(enemigo: AutoEnemigo, activar: bool) -> void:
 	for hijo in enemigo.get_children():
@@ -83,6 +91,23 @@ func _aplicar_color_llave(enemigo: AutoEnemigo, activar: bool) -> void:
 			else:
 				hijo.material_override = null
 			break
+
+
+# ─── AUDIO — TENSIÓN LLAVE ─────────────────────────────────────────────────────
+
+func _iniciar_musica_tension() -> void:
+	if not tic_tac:
+		return
+	tic_tac.volume_db = 0.0
+	tic_tac.play()
+
+func _detener_musica_tension() -> void:
+	if not tic_tac or not tic_tac.playing:
+		return
+	var tween = create_tween()
+	tween.tween_property(tic_tac, "volume_db", -40.0, DURACION_FADE_OUT)
+	tween.tween_callback(tic_tac.stop)
+	tween.tween_callback(func(): tic_tac.volume_db = 0.0)
 
 
 # ─── MISIÓN JEFE ──────────────────────────────────────────────────────────────
@@ -101,7 +126,7 @@ func _on_jefe_muerto(_enemigo: AutoEnemigo) -> void:
 	if _jefe_completado:
 		return
 	_jefe_completado = true
-	print("[MissionManager] ✅ Misión JEFE completada")
+	print("[MissionManager] Misión JEFE completada")
 	emit_signal("mision_completada", "JEFE")
 	_verificar_todas()
 
@@ -129,7 +154,7 @@ func _on_enemigo_muerto(_enemigo: AutoEnemigo) -> void:
 	print("[MissionManager] Kills: ", _enemigos_chocados, "/", enemigos_choque_requeridos)
 	if _enemigos_chocados >= enemigos_choque_requeridos:
 		_choques_completados = true
-		print("[MissionManager] ✅ Misión KILLS completada")
+		print("[MissionManager] Misión KILLS completada")
 		emit_signal("mision_completada", "KILLS")
 		_verificar_todas()
 
@@ -146,10 +171,8 @@ func _verificar_todas() -> void:
 			push_error("[MissionManager] No se encontró EnemySpawner")
 
 	if _llave_completada and _jefe_completado and _choques_completados:
-		print("[MissionManager] 🏁 ¡Todas las misiones completadas! Volviendo al menú...")
+		print("[MissionManager] Todas las misiones completadas")
 		emit_signal("todas_completadas")
-		await get_tree().create_timer(2.0).timeout
-		get_tree().change_scene_to_file("res://Stages/Menu/MainMenu.tscn")
 
 
 # ─── UTILS ────────────────────────────────────────────────────────────────────
@@ -162,3 +185,7 @@ func get_tiempo_llave() -> String:
 
 func jugador_tiene_llave() -> bool:
 	return _jugador_tiene_llave
+
+func _on_todas_completadas_victoria() -> void:
+	var pantalla = PANTALLA_VICTORIA.instantiate()
+	get_tree().root.add_child(pantalla)

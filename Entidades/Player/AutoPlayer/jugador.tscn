@@ -34,15 +34,17 @@
 [ext_resource type="AudioStream" uid="uid://yts2x4tgq88u" path="res://Assets/Audio/SFX/Radio6.wav" id="20_lofs7"]
 [ext_resource type="AudioStream" uid="uid://de822lnn3ng25" path="res://Assets/Audio/SFX/Radio 5.wav" id="21_sn0i8"]
 [ext_resource type="Script" uid="uid://dawtwk7r3nwc2" path="res://Common/Events/lluvia_particles.gd" id="23_lofs7"]
+[ext_resource type="AudioStream" uid="uid://cqdvuhe4vcibn" path="res://Assets/Audio/SFX/Drift giro.wav" id="26_3vqou"]
 [ext_resource type="Resource" uid="uid://blfo6ioj5tqxk" path="res://Entidades/Items/Ruedas/Rueda1/rueda1_stats.tres" id="28_luh2e"]
 [ext_resource type="Resource" uid="uid://cfoiunyv2ehrw" path="res://Entidades/Items/ArmaMetralleta/arma_stats.tres" id="29_85ju8"]
 [ext_resource type="Script" uid="uid://chn21x8nym33y" path="res://enemy_spawner.gd" id="36_awid8"]
 [ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="37_8erxf"]
 
-[sub_resource type="Resource" id="Resource_3vqou"]
+[sub_resource type="Resource" id="Resource_g4v7s"]
 script = ExtResource("2_0m7vh")
-base_max_health = 400
-base_defense = 0
+base_max_health = 350
+base_speed = 350.0
+base_steer_speed = 100.0
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c1h7"]
@@ -237,10 +239,7 @@ transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0,
 collision_layer = 2
 collision_mask = 37
 script = ExtResource("1_omvyu")
-duracion_boost = 2.5
-velocidad_giro = 1.0
-suavidad_inclinacion = 20.0
-stats = SubResource("Resource_3vqou")
+stats = SubResource("Resource_g4v7s")
 
 [node name="VisualRoot" type="Node3D" parent="." unique_id=708323970]
 
@@ -254,16 +253,28 @@ skeleton = NodePath("")
 [node name="Rueda1" type="Node3D" parent="VisualRoot/ItemsEquipados" unique_id=1696577256]
 
 [node name="BackLeft" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=475907750 instance=ExtResource("8_qw2bf")]
-transform = Transform3D(0.29998082, -0.0033928487, 0, 0.0033928487, 0.29998082, 0, 0, 0, 0.3, 0.97070235, -0.7524059, 2.2043848)
+transform = Transform3D(0.29998082, -0.0033928505, 0, 0.0033928505, 0.29998082, 0, 0, 0, 0.3, 0.85825956, -0.37456143, 1.8877201)
 
-[node name="FrontLeft" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1911472939 instance=ExtResource("8_qw2bf")]
-transform = Transform3D(0.29998082, -0.0033928491, 0, 0.0033928491, 0.29998082, 0, 0, 0, 0.3, 0.97070235, -0.752406, -1.7102582)
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/BackLeft" index="0" unique_id=1161530831]
+transform = Transform3D(-6.217249e-15, 0.4873771, 0, -0.95382166, -2.6645353e-15, 0, 0, 0, 0.95382166, 0.008053303, 0.17772567, 0.050364017)
 
-[node name="BackRight" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1850643097 instance=ExtResource("8_qw2bf")]
-transform = Transform3D(0.29998082, -0.0033928491, 0, 0.0033928491, 0.29998082, 0, 0, 0, 0.3, -0.6739815, -0.77100766, 2.2043848)
+[node name="BackRight" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1379571743 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.0033928512, 0, 0.0033928512, 0.29998082, 0, 0, 0, 0.3, -0.863879, -0.39403924, 1.8877201)
 
-[node name="FrontRight" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1051359244 instance=ExtResource("8_qw2bf")]
-transform = Transform3D(0.29998082, -0.0033928496, 0, 0.0033928496, 0.29998082, 0, 0, 0, 0.3, -0.6739815, -0.7710078, -1.7102582)
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/BackRight" index="0" unique_id=1161530831]
+transform = Transform3D(-7.1054274e-15, 0.4873771, 0, -0.95382166, -2.220446e-15, 0, 0, 0, 0.95382166, 0.008053541, 0.1391648, 0.050364017)
+
+[node name="FrontLeft" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1032941094 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.0033928512, 0, 0.0033928512, 0.29998082, 0, 0, 0, 0.3, -0.863879, -0.39403924, -2.016001)
+
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/FrontLeft" index="0" unique_id=1161530831]
+transform = Transform3D(-7.1054274e-15, 0.4873771, 0, -0.95382166, -2.220446e-15, 0, 0, 0, 0.95382166, 0.008053541, 0.17450023, 0.050364494)
+
+[node name="FrontRight" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=2084281668 instance=ExtResource("8_qw2bf")]
+transform = Transform3D(0.29998082, -0.0033928517, 0, 0.0033928517, 0.29998082, 0, 0, 0, 0.3, 0.84436285, -0.3747186, -2.016001)
+
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/FrontRight" index="0" unique_id=1161530831]
+transform = Transform3D(-7.993606e-15, 0.4873771, 0, -0.95382166, -2.6645353e-15, 0, 0, 0, 0.95382166, 0.008053541, 0.3034649, 0.050364494)
 
 [node name="Rueda2" type="Node3D" parent="VisualRoot/ItemsEquipados" unique_id=76501026]
 visible = false
@@ -374,7 +385,12 @@ stream = ExtResource("7_u02rt")
 
 [node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1019338284]
 stream = ExtResource("8_cks8u")
-volume_db = -49.813
+volume_db = -50.0
+max_db = -20.0
+
+[node name="DriftSFX" type="AudioStreamPlayer3D" parent="." unique_id=855236370]
+stream = ExtResource("26_3vqou")
+volume_db = 61.104
 max_db = -10.0
 
 [node name="EquiparSFX" type="AudioStreamPlayer3D" parent="." unique_id=607787484]
@@ -449,3 +465,6 @@ wait_time = 3.0
 autostart = true
 
 [editable path="VisualRoot/ItemsEquipados/Rueda1/BackLeft"]
+[editable path="VisualRoot/ItemsEquipados/Rueda1/BackRight"]
+[editable path="VisualRoot/ItemsEquipados/Rueda1/FrontLeft"]
+[editable path="VisualRoot/ItemsEquipados/Rueda1/FrontRight"]

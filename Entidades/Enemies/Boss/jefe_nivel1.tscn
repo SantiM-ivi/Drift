@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://djd0jh7i4fndh"]
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_f4xbj"]
-[ext_resource type="Resource" uid="uid://cxnvn6pq4m2an" path="res://Entidades/Enemies/Boss/bosslevel1_stats.tres" id="2_7r6q3"]
+[ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_7r6q3"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="3_k1am6"]
 [ext_resource type="Texture2D" uid="uid://x00aaitsfovr" path="res://Entidades/Enemies/Boss/Jefe_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="4_7r6q3"]
 [ext_resource type="Texture2D" uid="uid://dgx6w42cldy5" path="res://Entidades/Enemies/Boss/Jefe_DefaultMaterial_Emission.png" id="5_5at2e"]
@@ -9,6 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://ct5j5mer32cmj" path="res://Entidades/Enemies/Boss/Jefe_DefaultMaterial_Normal.png" id="7_c2ynx"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="8_dwjb1"]
 [ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="9_x0myr"]
+
+[sub_resource type="Resource" id="Resource_3vqou"]
+script = ExtResource("2_7r6q3")
+base_max_health = 500
+base_defense = 8
+base_attack = 20
+base_speed = 300.0
+base_steer_limit = 1000.0
+metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h76ht"]
 resource_name = "Material"
@@ -96,7 +105,7 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 steering = 2.9722958
 script = ExtResource("1_f4xbj")
-stats = ExtResource("2_7r6q3")
+stats = SubResource("Resource_3vqou")
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("3_k1am6")

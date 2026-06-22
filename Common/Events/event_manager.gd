@@ -10,9 +10,9 @@ signal evento_finalizado(nombre: String)
 
 # --- Rocas ---
 @export var roca_escena: PackedScene = preload("res://Entidades/Eventos/rock.tscn")
-@export var roca_spawn_radio: float = 15.0
+@export var roca_spawn_radio: float = 150.0
 @export var roca_altura: float = 20.0
-@export var roca_intervalo_spawn: float = 2.0
+@export var roca_intervalo_spawn: float = 0.3
 
 # --- Lluvia ---
 @export var lluvia_speed_bonus: float = 3.0

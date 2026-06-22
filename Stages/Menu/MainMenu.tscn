@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bk3ywk4cy6bhe" path="res://Stages/Menu/MainMenu.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dtkjhgss1w8v0" path="res://Stages/Levels/ToyBox/FondoMenu.png" id="2_1vcpm"]
+[ext_resource type="AudioStream" uid="uid://c2nccsl6ra1nj" path="res://Assets/Audio/SFX/Musica Menu.wav" id="3_ppwrp"]
 
 [sub_resource type="StyleBoxFlat" id="SB_BtnNormal"]
 content_margin_left = 28.0
@@ -179,3 +180,7 @@ theme_override_font_sizes/font_size = 11
 text = "v0.1.0"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2107447063]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1159814728]
+stream = ExtResource("3_ppwrp")
+autoplay = true

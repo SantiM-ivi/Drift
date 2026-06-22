@@ -61,13 +61,9 @@ func _actualizar_texto_misiones() -> void:
 
 	if not jefe_ok:
 		lineas.append("JEFE - eliminalo")
-	else:
-		lineas.append("JEFE completado")
 
 	if not kills_ok:
 		lineas.append("KILLS - destruidos: " + mm.get_progreso_choques())
-	else:
-		lineas.append("KILLS completados")
 
 	if jefe_ok and kills_ok:
 		if not llave_ok:
@@ -75,8 +71,6 @@ func _actualizar_texto_misiones() -> void:
 				lineas.append("LLAVE - retener: " + mm.get_tiempo_llave() + "s")
 			else:
 				lineas.append("LLAVE - elimina al portador")
-		else:
-			lineas.append("LLAVE completada")
 
 	mission_label.text = "\n".join(lineas)
 

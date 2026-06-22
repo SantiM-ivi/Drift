@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://bj45g3kn448vg" path="res://Assets/Audio/SFX/tormentaarena.wav" id="19_afakk"]
 [ext_resource type="AudioStream" uid="uid://bulqyrdp0bqjk" path="res://Assets/Audio/SFX/Lluvia.wav" id="19_j4twu"]
 [ext_resource type="AudioStream" uid="uid://c1r4sgdu7gw60" path="res://Assets/Audio/SFX/RockaCallendo.wav" id="21_8ndkw"]
+[ext_resource type="AudioStream" uid="uid://4s8iy5encvpf" path="res://Assets/Audio/SFX/TICTAC.wav" id="23_yhdiq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sp1my"]
 shader = ExtResource("6_ov8pn")
@@ -128,6 +129,9 @@ material = SubResource("ShaderMaterial_kwsyd")
 flip_faces = true
 size = Vector2(2, 2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(19.533703, 94.877144, 987.78534)
+
 [node name="ToyBox" type="Node3D" unique_id=2123033873]
 
 [node name="HUD" parent="." unique_id=1305346954 instance=ExtResource("2_ov8pn")]
@@ -154,17 +158,17 @@ navigation_mesh = SubResource("NavigationMesh_qqfgv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.762024, 0)
 
 [node name="AutoEnemigo" parent="NavigationRegion3D" unique_id=1287735819 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 15.505127, 0)
 mass = 20.0
 stats = SubResource("Resource_5qbrc")
 
 [node name="AutoEnemigo2" parent="NavigationRegion3D" unique_id=893743994 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.86255, 16.60254, -162.84048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.40872, 16.60254, -162.84048)
 mass = 20.0
 stats = SubResource("Resource_afakk")
 
 [node name="AutoEnemigo3" parent="NavigationRegion3D" unique_id=1110480783 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 16.60254, 244.87839)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 10.258015, 244.87839)
 mass = 20.0
 stats = SubResource("Resource_j4twu")
 
@@ -172,10 +176,10 @@ stats = SubResource("Resource_j4twu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.649108, 0)
 
 [node name="JefeNivel1" parent="NavigationRegion3D" unique_id=1008261279 instance=ExtResource("11_kwsyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.297256, 34.214077, 79.576096)
+transform = Transform3D(-0.9659258, 0, 0.25881913, 0, 1, 0, -0.25881913, 0, -0.9659258, 60.297256, 16.67197, -168.84926)
 
 [node name="AutoEnemigoMedio" parent="NavigationRegion3D" unique_id=1006424039 groups=["Enemigo"] instance=ExtResource("9_sp1my")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9169655, 19.47591, -48.142815)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9169655, 11.65424, -48.142815)
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)
@@ -263,9 +267,49 @@ volume_db = 14.677
 
 [node name="RocasSFX" type="AudioStreamPlayer" parent="EventManager" unique_id=1593042409]
 stream = ExtResource("21_8ndkw")
+volume_db = -26.839
 
 [node name="MissionManager" type="Node" parent="." unique_id=1767604483]
 script = ExtResource("19_5qbrc")
+
+[node name="TicTac" type="AudioStreamPlayer" parent="MissionManager" unique_id=969524824]
+stream = ExtResource("23_yhdiq")
+volume_db = 10.903
+
+[node name="Limit" type="StaticBody3D" parent="." unique_id=1557272958]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit" unique_id=27240006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 0.3878251, 0.39119554, 1)
+
+[node name="Limit2" type="StaticBody3D" parent="." unique_id=1825441455]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit2" unique_id=510631906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 0.3878251, 0.39119554, 1)
+
+[node name="Limit3" type="StaticBody3D" parent="." unique_id=1866132618]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit3" unique_id=1911718009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 0.3878251, 0.39119554, 1)
+
+[node name="Limit4" type="StaticBody3D" parent="." unique_id=1102735404]
+transform = Transform3D(-2.1855693e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855693e-07, 0, 0, 0)
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit4" unique_id=1627217132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
+shape = SubResource("BoxShape3D_g4v7s")
+debug_color = Color(1, 0.3878251, 0.39119554, 1)
 
 [editable path="CameraRig/Camera3D/Misiones"]
 [editable path="CameraRig/Camera3D/Turbo"]

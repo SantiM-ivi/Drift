@@ -8,12 +8,6 @@ signal evento_finalizado(nombre: String)
 @export var duracion_transicion: float = 3.0
 @export var duracion_evento: float = 15.0
 
-# --- Rocas ---
-@export var roca_escena: PackedScene = preload("res://Entidades/Eventos/rock.tscn")
-@export var roca_spawn_radio: float = 150.0
-@export var roca_altura: float = 20.0
-@export var roca_intervalo_spawn: float = 0.3
-
 # --- Lluvia ---
 @export var lluvia_speed_bonus: float = 3.0
 
@@ -26,26 +20,17 @@ signal evento_finalizado(nombre: String)
 var lluvia_particles: GPUParticles3D = null
 @onready var lluvia_sfx: AudioStreamPlayer   = $LluviaSFX
 @onready var tormenta_sfx: AudioStreamPlayer = $TormentaSFX
-@onready var rocas_sfx: AudioStreamPlayer    = $RocasSFX
 
 var _timer: float = 0.0
 var _evento_timer: float = 0.0
-var _roca_spawn_timer: float = 0.0
 var _ultimo_evento: int = -1
 var _evento_activo: int = -1
 var _env: Environment
 var _player: RigidBody3D = null
 
-var _rocas_activas: Array = []
 var _tornados_activos: Array = []
 
 const EVENTOS_VISUAL = {
-	"ROCAS": {
-		"fog_color":    Color(0.4, 0.3, 0.2),
-		"fog_density":  0.03,
-		"sky_color":    Color(0.5, 0.4, 0.3),
-		"light_color":  Color(0.6, 0.5, 0.4),
-	},
 	"LLUVIA": {
 		"fog_color":    Color(0.2, 0.25, 0.35),
 		"fog_density":  0.02,
@@ -71,7 +56,7 @@ var _light_color_destino: Color
 var _sky_color_origen:    Color
 var _sky_color_destino:   Color
 
-enum Evento { ROCAS, LLUVIA, TORMENTA }
+enum Evento { LLUVIA, TORMENTA }
 
 func _ready() -> void:
 	var we = get_tree().current_scene.get_node_or_null("WorldEnvironment")
@@ -104,13 +89,6 @@ func _process(delta: float) -> void:
 		if _t >= 1.0:
 			_transicionando = false
 
-	# Spawn de rocas escalonado
-	if _evento_activo == Evento.ROCAS:
-		_roca_spawn_timer += delta
-		if _roca_spawn_timer >= roca_intervalo_spawn:
-			_roca_spawn_timer = 0.0
-			_spawnear_roca()
-
 	# Timer duracion del evento
 	if _evento_activo != -1:
 		_evento_timer += delta
@@ -126,7 +104,7 @@ func _process(delta: float) -> void:
 
 
 func _lanzar_evento_aleatorio() -> void:
-	var opciones = [Evento.ROCAS, Evento.LLUVIA, Evento.TORMENTA]
+	var opciones = [Evento.LLUVIA, Evento.TORMENTA]
 	if _ultimo_evento != -1:
 		opciones.erase(_ultimo_evento)
 	var elegido: int = opciones[randi() % opciones.size()]
@@ -135,7 +113,6 @@ func _lanzar_evento_aleatorio() -> void:
 	_evento_timer  = 0.0
 
 	match elegido:
-		Evento.ROCAS:    _evento_rocas()
 		Evento.LLUVIA:   _evento_lluvia()
 		Evento.TORMENTA: _evento_tormenta()
 
@@ -161,7 +138,6 @@ func _finalizar_evento() -> void:
 
 	match _evento_activo:
 		Evento.LLUVIA:   _limpiar_lluvia()
-		Evento.ROCAS:    _limpiar_rocas()
 		Evento.TORMENTA: _limpiar_tornados()
 
 	_evento_activo = -1
@@ -188,45 +164,6 @@ func _limpiar_lluvia() -> void:
 		_player.velocidad_maxima -= lluvia_speed_bonus
 	if lluvia_sfx:
 		lluvia_sfx.stop()
-
-
-# ─── ROCAS ────────────────────────────────────────────────────────────────────
-
-func _evento_rocas() -> void:
-	print("[Evento] ROCAS")
-	_aplicar_visual("ROCAS")
-	if lluvia_particles:
-		lluvia_particles.emitting = false
-	_roca_spawn_timer = roca_intervalo_spawn
-	if rocas_sfx:
-		rocas_sfx.play()
-	emit_signal("evento_iniciado", "ROCAS")
-
-func _spawnear_roca() -> void:
-	if not _player or not roca_escena:
-		push_error("[Roca] player o escena nulos")
-		return
-
-	var roca: Node3D = roca_escena.instantiate()
-	get_tree().current_scene.add_child(roca)
-
-	var offset = Vector3(
-		randf_range(-roca_spawn_radio, roca_spawn_radio),
-		roca_altura,
-		randf_range(-roca_spawn_radio, roca_spawn_radio)
-	)
-	roca.global_position = _player.global_position + offset
-	_rocas_activas.append(roca)
-	print("[Roca] spawneada en: ", roca.global_position, " | player en: ", _player.global_position)
-
-func _limpiar_rocas() -> void:
-	for roca in _rocas_activas:
-		if is_instance_valid(roca):
-			roca.queue_free()
-	_rocas_activas.clear()
-	_roca_spawn_timer = 0.0
-	if rocas_sfx:
-		rocas_sfx.stop()
 
 
 # ─── TORMENTA ─────────────────────────────────────────────────────────────────

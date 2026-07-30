@@ -2,13 +2,19 @@
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_7k37n"]
 [ext_resource type="Resource" uid="uid://c0u87n0va1dim" path="res://Entidades/Enemies/AutoGrande/autoCamioneta.tres" id="2_1cgf8"]
+[ext_resource type="AudioStream" uid="uid://chd5q4d6mhyc1" path="res://Assets/Audio/SFX/dev_guy-bullet-gunshot-impact-390253.mp3" id="3_a4w8s"]
+[ext_resource type="PackedScene" uid="uid://cvcsiyyeb4is3" path="res://Common/Effects/explosion_three.tscn" id="3_b3uaj"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="3_nh23d"]
 [ext_resource type="Texture2D" uid="uid://de68g1ybrjtbp" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="4_1cgf8"]
+[ext_resource type="AudioStream" uid="uid://ba5uau4wgcxm2" path="res://Assets/Audio/SFX/universfield-epic-cinematic-explosion-454857.mp3" id="4_b3uaj"]
 [ext_resource type="Texture2D" uid="uid://cygdayik6qym6" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Emission.png" id="5_5g5ko"]
+[ext_resource type="AudioStream" uid="uid://btc3jq5hrfddb" path="res://Assets/Audio/SFX/floraphonic-metal-hit-10-193281.mp3" id="5_spxug"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="5_vecjq"]
 [ext_resource type="Texture2D" uid="uid://1bvdr4wol6vx" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="6_bhmpw"]
 [ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="6_c51v2"]
+[ext_resource type="AudioStream" uid="uid://c0fdxeesma4mx" path="res://Assets/Audio/SFX/u_68csiaifb5-bulletimpact2-442718.mp3" id="6_ohfxr"]
 [ext_resource type="Texture2D" uid="uid://dqllxy2esehgg" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Normal.png" id="7_4em7q"]
+[ext_resource type="AudioStream" uid="uid://brjhew2rrhk55" path="res://Assets/Audio/SFX/freesound_community-engine-47745.mp3" id="14_srthd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqyqa"]
 resource_name = "Material.001"
@@ -65,7 +71,7 @@ shadow_mesh = SubResource("ArrayMesh_8skct")
 size = Vector3(3.0287476, 2.8637085, 7.7885895)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q5ew6"]
-radius = 126.04294
+radius = 431.19992
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_31ug3"]
 radius = 90.24422
@@ -91,10 +97,14 @@ border_color = Color(0.30050156, 0, 0.0101768505, 1)
 [node name="AutoEnemigoCamioneta" type="VehicleBody3D" unique_id=1287735819]
 collision_layer = 4
 collision_mask = 23
+mass = 20.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_7k37n")
 stats = ExtResource("2_1cgf8")
+impacto_scene = ExtResource("3_b3uaj")
+disparo_sonidos = Array[AudioStream]([ExtResource("3_a4w8s"), ExtResource("4_b3uaj")])
+golpe_sonidos = Array[AudioStream]([ExtResource("5_spxug"), ExtResource("6_ohfxr")])
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("3_nh23d")
@@ -168,7 +178,8 @@ shape = SubResource("SphereShape3D_q5ew6")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270199466]
 avoidance_enabled = true
-neighbor_distance = 200.0
+radius = 50.21
+neighbor_distance = 1051.06
 
 [node name="ShootPoint" type="Node3D" parent="." unique_id=1872714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2633922, 0)
@@ -197,3 +208,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_vk40u")
 step = 1.0
 value = 100.0
 show_percentage = false
+
+[node name="DisparoSFX" type="AudioStreamPlayer3D" parent="." unique_id=139690198]
+stream = ExtResource("3_a4w8s")
+
+[node name="GolpeSFX" type="AudioStreamPlayer3D" parent="." unique_id=739008877]
+stream = ExtResource("5_spxug")
+
+[node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1710164499]
+stream = ExtResource("14_srthd")

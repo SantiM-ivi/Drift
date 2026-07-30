@@ -1,27 +1,29 @@
 extends Node3D
 class_name ItemMundo
-
 @export var nombre_item: String
 @export var slot: String
 @export var stats: ItemsStats
-
+@export_group("Rotación")
+@export var velocidad_rotacion_x: float = 2.0
+@export var velocidad_rotacion_y: float = 3.5
+@export var velocidad_rotacion_z: float = 2.0
 const OUTLINE_SHADER := preload("res://Common/Shaders/item.gdshader")
-
 func _ready() -> void:
 	_apply_outline_to_meshes(self)
-
+func _process(delta: float) -> void:
+	rotate_x(velocidad_rotacion_x * delta)
+	rotate_y(velocidad_rotacion_y * delta)
+	rotate_z(velocidad_rotacion_z * delta)
 func _apply_outline_to_meshes(node: Node) -> void:
 	if node is MeshInstance3D:
 		_add_outline_material(node)
 	for child in node.get_children():
 		_apply_outline_to_meshes(child)
-
 func _add_outline_material(mesh_instance: MeshInstance3D) -> void:
 	var outline_mat := ShaderMaterial.new()
 	outline_mat.shader = OUTLINE_SHADER
-	outline_mat.set_shader_parameter("color", Color.WHITE)
-	outline_mat.set_shader_parameter("size", 1.05)
-
+	outline_mat.set_shader_parameter("color", Color.YELLOW)
+	outline_mat.set_shader_parameter("size", 1.00)
 	for i in mesh_instance.mesh.get_surface_count():
 		# Obtenemos el material actual de la superficie (original o override)
 		var current_mat := mesh_instance.get_active_material(i)

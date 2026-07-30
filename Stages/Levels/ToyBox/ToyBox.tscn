@@ -7,18 +7,13 @@
 [ext_resource type="Shader" uid="uid://cgdn7iob4ii8w" path="res://Assets/Shaders/Cielo.gdshader" id="6_ov8pn"]
 [ext_resource type="ArrayMesh" uid="uid://chybxalid0av8" path="res://Entidades/Enviroment/Pared3/pared3_array.tres" id="6_tvo6m"]
 [ext_resource type="Texture2D" uid="uid://b8n21eb7mnps6" path="res://Assets/Images/flight-through-clouds-loop-free-video.jpg" id="7_sp1my"]
-[ext_resource type="PackedScene" uid="uid://b1uk3ecnyne6e" path="res://Entidades/Enemies/AutoMedio/auto_enemigo_medio.tscn" id="9_sp1my"]
-[ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="9_xncdv"]
-[ext_resource type="PackedScene" uid="uid://djd0jh7i4fndh" path="res://Entidades/Enemies/Boss/jefe_nivel1.tscn" id="11_kwsyd"]
-[ext_resource type="PackedScene" uid="uid://b34ftb0lkmj73" path="res://Entidades/Enemies/AutoGrande/auto_enemigo_Camioneta.tscn" id="12_kwsyd"]
 [ext_resource type="Script" uid="uid://bd4dbrek18472" path="res://Common/Events/event_manager.gd" id="13_kwsyd"]
-[ext_resource type="PackedScene" uid="uid://dwsywdu8kcr7y" path="res://Stages/UI/Turbo.glb" id="14_2py0s"]
-[ext_resource type="PackedScene" uid="uid://h7csqxe8hsfv" path="res://Stages/UI/Misiones.glb" id="14_6ej83"]
-[ext_resource type="PackedScene" uid="uid://dvaa7qd5m4n75" path="res://Stages/UI/Vidas.glb" id="15_kwsyd"]
 [ext_resource type="PackedScene" uid="uid://c5xen6irvbtlw" path="res://Entidades/Player/AutoPlayer/jugador.tscn" id="15_sp1my"]
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="16_2py0s"]
 [ext_resource type="Shader" uid="uid://c3mum53ur7nhb" path="res://Assets/Shaders/Outline.gdshader" id="16_kwsyd"]
-[ext_resource type="Script" uid="uid://b46027unelpj5" path="res://Common/Events/mission_manager.gd" id="19_5qbrc"]
+[ext_resource type="Texture2D" uid="uid://d0kn0enveum23" path="res://Assets/Images/Mision.png" id="17_kwsyd"]
+[ext_resource type="FontFile" uid="uid://bfnrlaydpdmah" path="res://Assets/Fonts/DJGROSS.ttf" id="18_6ej83"]
+[ext_resource type="Script" uid="uid://b46027unelpj5" path="res://Common/Events/wave_manager.gd" id="19_5qbrc"]
 [ext_resource type="AudioStream" uid="uid://bj45g3kn448vg" path="res://Assets/Audio/SFX/tormentaarena.wav" id="19_afakk"]
 [ext_resource type="AudioStream" uid="uid://bulqyrdp0bqjk" path="res://Assets/Audio/SFX/Lluvia.wav" id="19_j4twu"]
 [ext_resource type="AudioStream" uid="uid://c1r4sgdu7gw60" path="res://Assets/Audio/SFX/RockaCallendo.wav" id="21_8ndkw"]
@@ -91,25 +86,13 @@ agent_radius = 1.5
 region_min_size = 1.0
 edge_max_length = 4.0
 
-[sub_resource type="Resource" id="Resource_5qbrc"]
-script = ExtResource("3_rkloy")
-metadata/_custom_type_script = "uid://irbhor700bc7"
-
-[sub_resource type="Resource" id="Resource_afakk"]
-script = ExtResource("3_rkloy")
-metadata/_custom_type_script = "uid://irbhor700bc7"
-
-[sub_resource type="Resource" id="Resource_j4twu"]
-script = ExtResource("3_rkloy")
-metadata/_custom_type_script = "uid://irbhor700bc7"
-
 [sub_resource type="Resource" id="Resource_6ej83"]
 script = ExtResource("3_rkloy")
 base_max_health = 400
 base_defense = 0
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwsyd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2py0s"]
 render_priority = 0
 shader = ExtResource("16_kwsyd")
 shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
@@ -125,12 +108,9 @@ shader_parameter/grazing_angle_mask_power = 1.0
 shader_parameter/grazing_angle_modulation_factor = 50.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_6ej83"]
-material = SubResource("ShaderMaterial_kwsyd")
+material = SubResource("ShaderMaterial_2py0s")
 flip_faces = true
 size = Vector2(2, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(19.533703, 94.877144, 987.78534)
 
 [node name="ToyBox" type="Node3D" unique_id=2123033873]
 
@@ -156,30 +136,6 @@ navigation_mesh = SubResource("NavigationMesh_qqfgv")
 
 [node name="Level" parent="NavigationRegion3D" unique_id=1919716652 instance=ExtResource("1_fqv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.762024, 0)
-
-[node name="AutoEnemigo" parent="NavigationRegion3D" unique_id=1287735819 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 15.505127, 0)
-mass = 20.0
-stats = SubResource("Resource_5qbrc")
-
-[node name="AutoEnemigo2" parent="NavigationRegion3D" unique_id=893743994 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.40872, 16.60254, -162.84048)
-mass = 20.0
-stats = SubResource("Resource_afakk")
-
-[node name="AutoEnemigo3" parent="NavigationRegion3D" unique_id=1110480783 groups=["Enemigo"] instance=ExtResource("9_xncdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.275, 10.258015, 244.87839)
-mass = 20.0
-stats = SubResource("Resource_j4twu")
-
-[node name="AutoEnemigoCamioneta" parent="NavigationRegion3D" unique_id=2111903297 groups=["Enemigo"] instance=ExtResource("12_kwsyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.649108, 0)
-
-[node name="JefeNivel1" parent="NavigationRegion3D" unique_id=1008261279 instance=ExtResource("11_kwsyd")]
-transform = Transform3D(-0.9659258, 0, 0.25881913, 0, 1, 0, -0.25881913, 0, -0.9659258, 60.297256, 16.67197, -168.84926)
-
-[node name="AutoEnemigoMedio" parent="NavigationRegion3D" unique_id=1006424039 groups=["Enemigo"] instance=ExtResource("9_sp1my")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9169655, 11.65424, -48.142815)
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)
@@ -213,12 +169,15 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0, -0.81391907, 0)
 mesh = ExtResource("6_tvo6m")
 
-[node name="Player" parent="." unique_id=1505952561 node_paths=PackedStringArray("camara_pivot") instance=ExtResource("15_sp1my")]
-transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 26.627583, 167.58144)
+[node name="Player" parent="." unique_id=1505952561 node_paths=PackedStringArray("camara_pivot", "camara", "skid_marks") instance=ExtResource("15_sp1my")]
+transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 8.009136, 167.58144)
 contact_monitor = true
 max_contacts_reported = 4
 velocidad_maxima = 45.0
 camara_pivot = NodePath("../CameraRig")
+camara = NodePath("../CameraRig/Camera3D")
+fov_velocidad_max = 70.0
+skid_marks = [null, null, NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]
 stats = SubResource("Resource_6ej83")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=2041556240]
@@ -232,24 +191,6 @@ script = ExtResource("16_2py0s")
 follow_target = NodePath("../../Player")
 distance = 7.0
 sensitivity = 0.005
-
-[node name="Misiones" parent="CameraRig/Camera3D" unique_id=706006462 instance=ExtResource("14_6ej83")]
-transform = Transform3D(0.014722215, -0.00737005, -0.18755388, -0.023959676, 0.122896, -0.020161241, 0.07968215, 0.038315386, 0.028590506, -1.5365372, 1.0555191, -1.7143707)
-
-[node name="Cube" parent="CameraRig/Camera3D/Misiones" index="0" unique_id=731143307]
-cast_shadow = 0
-
-[node name="Turbo" parent="CameraRig/Camera3D" unique_id=603894140 instance=ExtResource("14_2py0s")]
-transform = Transform3D(0.037826262, -0.10824604, -0.011535168, -0.0030788146, 0.013246611, -0.09932183, 0.08973322, 0.046084676, 0.0014547429, -0.98822784, -1.0158386, -1.7143707)
-
-[node name="Cube" parent="CameraRig/Camera3D/Turbo" index="0" unique_id=141413459]
-cast_shadow = 0
-
-[node name="Vidas" parent="CameraRig/Camera3D" unique_id=1873646958 instance=ExtResource("15_kwsyd")]
-transform = Transform3D(-0.043100487, -0.018824195, -0.09310133, 0.018418808, 0.071161084, -0.037740503, 0.08686069, -0.02443032, -0.038194224, 1.0420876, -1.3483009, -1.6823273)
-
-[node name="Cylinder" parent="CameraRig/Camera3D/Vidas" index="0" unique_id=1594021266]
-cast_shadow = 0
 
 [node name="OutlinePostProcesing" type="MeshInstance3D" parent="CameraRig/Camera3D" unique_id=6440849]
 mesh = SubResource("QuadMesh_6ej83")
@@ -269,48 +210,64 @@ volume_db = 14.677
 stream = ExtResource("21_8ndkw")
 volume_db = -26.839
 
-[node name="MissionManager" type="Node" parent="." unique_id=1767604483]
+[node name="MissionManager" type="Node" parent="." unique_id=1767604483 node_paths=PackedStringArray("texto_oleada", "texto_chatarra")]
 script = ExtResource("19_5qbrc")
+enemigos_base = 10
+incremento_por_oleada = 5
+chatarra_por_oleada = 20
+chatarra_radio = 400.0
+texto_oleada = NodePath("LabelOleada")
+texto_chatarra = NodePath("LabelChatarra")
 
 [node name="TicTac" type="AudioStreamPlayer" parent="MissionManager" unique_id=969524824]
 stream = ExtResource("23_yhdiq")
 volume_db = 10.903
 
-[node name="Limit" type="StaticBody3D" parent="." unique_id=1557272958]
-collision_mask = 7
+[node name="TextureRect3" type="TextureRect" parent="MissionManager" unique_id=161275757]
+offset_left = 219.0
+offset_top = -0.99999905
+offset_right = 1429.7451
+offset_bottom = 2715.2813
+rotation = 1.5707964
+scale = Vector2(0.033172756, 0.080956995)
+texture = ExtResource("17_kwsyd")
+expand_mode = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit" unique_id=27240006]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
-shape = SubResource("BoxShape3D_g4v7s")
-debug_color = Color(1, 0.3878251, 0.39119554, 1)
+[node name="TextureRect4" type="TextureRect" parent="MissionManager" unique_id=1863319387]
+offset_left = 640.0
+offset_top = -0.99999905
+offset_right = 1850.7451
+offset_bottom = 2715.2813
+rotation = 1.5707964
+scale = Vector2(0.033172756, 0.080956995)
+texture = ExtResource("17_kwsyd")
+expand_mode = 1
 
-[node name="Limit2" type="StaticBody3D" parent="." unique_id=1825441455]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-collision_mask = 7
+[node name="LabelOleada" type="Label" parent="MissionManager" unique_id=1904113366]
+offset_left = -12.0
+offset_top = 7.0
+offset_right = 320.0
+offset_bottom = 144.0
+scale = Vector2(0.72, 0.56)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(4.5724212e-07, 0.29485947, 0.004262026, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/font = ExtResource("18_6ej83")
+theme_override_font_sizes/font_size = 32
+text = "hola
+"
+horizontal_alignment = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit2" unique_id=510631906]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
-shape = SubResource("BoxShape3D_g4v7s")
-debug_color = Color(1, 0.3878251, 0.39119554, 1)
-
-[node name="Limit3" type="StaticBody3D" parent="." unique_id=1866132618]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, 0)
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit3" unique_id=1911718009]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
-shape = SubResource("BoxShape3D_g4v7s")
-debug_color = Color(1, 0.3878251, 0.39119554, 1)
-
-[node name="Limit4" type="StaticBody3D" parent="." unique_id=1102735404]
-transform = Transform3D(-2.1855693e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855693e-07, 0, 0, 0)
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Limit4" unique_id=1627217132]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -509.63556, 15.990518, 17.02243)
-shape = SubResource("BoxShape3D_g4v7s")
-debug_color = Color(1, 0.3878251, 0.39119554, 1)
-
-[editable path="CameraRig/Camera3D/Misiones"]
-[editable path="CameraRig/Camera3D/Turbo"]
-[editable path="CameraRig/Camera3D/Vidas"]
+[node name="LabelChatarra" type="Label" parent="MissionManager" unique_id=749074347]
+offset_left = 440.0
+offset_top = 4.0
+offset_right = 772.0
+offset_bottom = 141.0
+scale = Vector2(0.72, 0.56)
+theme_override_colors/font_color = Color(0.31643918, 0.24999818, 0.22437978, 1)
+theme_override_colors/font_shadow_color = Color(0.6117647, 0.5058824, 0.47058824, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/font = ExtResource("18_6ej83")
+theme_override_font_sizes/font_size = 32
+text = "hola
+"

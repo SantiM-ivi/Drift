@@ -22,12 +22,16 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 @export_group("Camara")
 @export var velocidad_giro: float = 2.0
 @export var camara_pivot: Node3D
+@export var camara: Camera3D
+@export var fov_base: float      = 75.0
+@export var fov_velocidad_max: float = 90.0
+@export var suavidad_fov: float  = 5.0
 
 @export_group("Visual")
 @export var inclinacion_lateral: float  = 8.0
 @export var adelanto_giro: float        = 25.0
 @export var suavidad_inclinacion: float = 100.0
-
+@export var skid_marks: Array[GPUParticles3D]
 @export_group("Referencias")
 @export var stats: Stats
 
@@ -73,12 +77,17 @@ var _nitro_activo: bool         = false
 var _items_en_rango: Array[ItemMundo] = []
 var _cooldown_disparo: float = 0.0
 var _girando: bool = false
+var chatarra: int = 0
+var _tiempo_aturdido: float = 0.0
+@export var duracion_aturdimiento: float = 0.4
 
 # ─── INIT ────────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
 	if camara_pivot == null:
 		push_error("Player: asigná CameraRig en el Inspector")
+	if camara:
+		camara.fov = fov_base
 	for rayo in rayos:
 		rayo.target_position = Vector3.DOWN * (altura_flotacion * 2.5)
 		rayo.enabled = true
@@ -120,12 +129,16 @@ func _physics_process(delta: float) -> void:
 	_intentar_recoger()
 
 	_manejar_drift_sfx(en_suelo, giro)
+	_actualizar_skid_marks(en_suelo, accel_inp)
 
 	if not en_suelo:
 		_estabilizar_en_aire(delta)
 		_aplicar_propulsor(delta)
 
-	_aplicar_movimiento(delta, giro, accel_inp)
+	if _tiempo_aturdido > 0.0:
+		_tiempo_aturdido -= delta
+	else:
+		_aplicar_movimiento(delta, giro, accel_inp, en_suelo)
 	_cooldown_disparo -= delta
 	_manejar_disparo()
 
@@ -137,7 +150,8 @@ func _physics_process(delta: float) -> void:
 		hud.set_speed(vel_kmh)
 
 	_actualizar_motor_sfx()
-
+	_actualizar_fov(delta)
+	ApplySpeedEffect.set_boost_activo(_boost_activo)
 # ─── STATE MACHINE ───────────────────────────────────────────────────────────
 
 func _actualizar_estado(en_suelo: bool, accel_inp: float) -> void:
@@ -174,7 +188,15 @@ func _estabilizar_en_aire(delta: float) -> void:
 		return
 	var alineacion = global_basis.y.dot(Vector3.UP)
 	if alineacion < 0.99:
-		var eje = global_basis.y.cross(Vector3.UP).normalized()
+		var eje: Vector3
+		if alineacion < -0.9:
+			# Casi invertido: el cross product con Vector3.UP es casi nulo y
+			# normalized() amplifica ruido numérico, dando un eje errático.
+			# Usamos un eje de respaldo fijo del propio auto para que la
+			# corrección sea consistente en vez de aleatoria.
+			eje = global_basis.x
+		else:
+			eje = global_basis.y.cross(Vector3.UP).normalized()
 		var fuerza = (1.0 - alineacion) * 600.0
 		apply_torque(eje * fuerza)
 	angular_velocity = angular_velocity.lerp(Vector3.ZERO, delta * 5.0)
@@ -199,6 +221,18 @@ func _sincronizar_camara() -> void:
 	camara_pivot.global_position = global_position
 	camara_pivot.rotation.x      = 0.0
 	camara_pivot.rotation.z      = 0.0
+
+# ── FOV dinámico: se achica a medida que aumenta la velocidad ────────────────
+func _actualizar_fov(delta: float) -> void:
+	if not camara:
+		return
+	var vel_max_actual = velocidad_maxima + _bonus_velocidad
+	var vel_ratio = clamp(
+		Vector2(linear_velocity.x, linear_velocity.z).length() / vel_max_actual,
+		0.0, 1.0
+	)
+	var fov_objetivo = lerp(fov_base, fov_velocidad_max, vel_ratio)
+	camara.fov = lerp(camara.fov, fov_objetivo, delta * suavidad_fov)
 
 # ─── DISPARO ─────────────────────────────────────────────────────────────────
 
@@ -233,7 +267,7 @@ func _aplicar_flotacion() -> void:
 
 # ─── MOVIMIENTO ──────────────────────────────────────────────────────────────
 
-func _aplicar_movimiento(delta: float, giro: float, accel_inp: float) -> void:
+func _aplicar_movimiento(delta: float, giro: float, accel_inp: float, en_suelo: bool) -> void:
 	var direccion = camara_pivot.global_basis.z
 
 	match _estado:
@@ -243,6 +277,11 @@ func _aplicar_movimiento(delta: float, giro: float, accel_inp: float) -> void:
 		_:
 			_aplicar_aceleracion(delta, accel_inp)
 			_aplicar_fuerza_avance(delta, direccion, velocidad_maxima)
+
+	# Agarre lateral y torque de rumbo: solo con tracción real (ruedas en el piso).
+	# En el aire compite con _estabilizar_en_aire() y suma al descontrol.
+	if not en_suelo:
+		return
 
 	var ratio_vel     = clamp(abs(_velocidad_actual) / velocidad_maxima, 0.2, 1.0)
 	var agarre_actual = agarre_lateral * ratio_vel
@@ -352,6 +391,7 @@ func apply_damage(amount: int) -> void:
 		var reduccion = clamp(stats.current_defense / 100.0, 0.0, 0.9)
 		var final_damage = max(1, int(amount * (1.0 - reduccion)))
 		stats.health -= final_damage
+		GameStats.dano_recibido += final_damage
 		print("[Player] daño recibido: %d | defensa: %.0f | reduccion: %.0f%% | daño final: %d | vida: %d/%d" % [
 			amount,
 			stats.current_defense,
@@ -381,14 +421,31 @@ func _on_area_entered(area: Area3D) -> void:
 	if not parent is ItemMundo:
 		return
 
-	var tipo = parent.stats.tipo if parent.stats != null else -1
+	if parent.stats == null:
+		_items_en_rango.append(parent)
+		return
+
+	var tipo = parent.stats.tipo
+	var es_consumible = (
+		tipo == ItemsStats.TipoItem.CONSUMIBLE_VIDA or
+		tipo == ItemsStats.TipoItem.CONSUMIBLE_NITRO or
+		tipo == ItemsStats.TipoItem.CONSUMIBLE_CHATARRA
+	)
+
+	if es_consumible:
+		_aplicar_consumible(parent.stats)
+		parent.queue_free()
+		if equipar_sfx:
+			equipar_sfx.play()
+		return
+
 	var es_auto = (
 		tipo != ItemsStats.TipoItem.EQUIPABLE and
 		tipo != ItemsStats.TipoItem.ARMA and
 		tipo != ItemsStats.TipoItem.RUEDA
 	)
 
-	if parent.stats != null and es_auto:
+	if es_auto:
 		equipment.equipar(parent.slot, parent.nombre_item, global_position, parent.stats)
 		parent.queue_free()
 		# Sonido de item auto-equipado (colisión con área)
@@ -396,6 +453,21 @@ func _on_area_entered(area: Area3D) -> void:
 			equipar_sfx.play()
 	else:
 		_items_en_rango.append(parent)
+
+# ── Aplica el efecto de un consumible y lo descarta (no ocupa slot) ────────────
+func _aplicar_consumible(item_stats: ItemsStats) -> void:
+	match item_stats.tipo:
+		ItemsStats.TipoItem.CONSUMIBLE_VIDA:
+			if stats:
+				stats.health += item_stats.vida_cantidad
+		ItemsStats.TipoItem.CONSUMIBLE_NITRO:
+			activar_nitro(item_stats.nitro_duracion, item_stats.nitro_multiplicador)
+		ItemsStats.TipoItem.CONSUMIBLE_CHATARRA:
+			chatarra += item_stats.chatarra_cantidad
+			var wave_manager = get_tree().get_first_node_in_group("WaveManager")
+			if wave_manager:
+				wave_manager.agregar_chatarra(item_stats.chatarra_cantidad)
+			print("[Player] Chatarra: ", chatarra)
 
 func _on_area_exited(area: Area3D) -> void:
 	var parent := area.get_parent()
@@ -405,6 +477,7 @@ func _on_area_exited(area: Area3D) -> void:
 
 
 func _on_health_depleted() -> void:
+	GameStats.fijar_tiempo_final()
 	var pantalla = PANTALLA_DERROTA.instantiate()
 	get_tree().root.add_child(pantalla)
 	queue_free()
@@ -414,6 +487,21 @@ func _on_body_entered(body: Node) -> void:
 	if velocidad <= 5.0:
 		return
 
+	# Rebote general: pasa siempre que choques fuerte, sea pared, mapa o enemigo.
+	var direccion_rebote = -linear_velocity.normalized()
+	direccion_rebote.y = 0.0
+	direccion_rebote = direccion_rebote.normalized()
+
+	if crash_sfx and not crash_sfx.playing:
+		crash_sfx.play()
+
+	linear_velocity = Vector3.ZERO
+	_velocidad_actual = 0.0
+	_tiempo_aturdido = duracion_aturdimiento
+	var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
+	apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
+
+	# Daño y knockback: solo si lo que chocamos puede recibirlo (ej. un enemigo).
 	var objetivo = body
 	while objetivo != null:
 		if objetivo.has_method("apply_damage"):
@@ -426,23 +514,10 @@ func _on_body_entered(body: Node) -> void:
 	var dano := int(stats.current_ram_damage * (velocidad / 20.0))
 	objetivo.apply_damage(dano)
 
-	# Crash SFX — solo cuando efectivamente hay daño y velocidad > 5.0
-	if crash_sfx and not crash_sfx.playing:
-		crash_sfx.play()
-
-	var direccion: Vector3 = (objetivo.global_position - global_position).normalized()
-
 	if objetivo.has_method("apply_knockback"):
+		var direccion_hacia_objetivo: Vector3 = (objetivo.global_position - global_position).normalized()
 		var fuerza = clamp(velocidad * 2.0, 20.0, 150.0)
-		objetivo.apply_knockback(direccion, fuerza)
-
-	var direccion_rebote = -direccion
-	direccion_rebote.y = 0.0
-	direccion_rebote = direccion_rebote.normalized()
-
-	linear_velocity = linear_velocity * 0.2
-	var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
-	apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
+		objetivo.apply_knockback(direccion_hacia_objetivo, fuerza)
 
 # ─── UTILS ───────────────────────────────────────────────────────────────────
 
@@ -475,3 +550,10 @@ func _manejar_drift_sfx(en_suelo: bool, giro: float) -> void:
 	if esta_girando and not _girando:
 		drift_sfx.play()
 	_girando = esta_girando
+
+func _actualizar_skid_marks(en_suelo: bool, accel_inp: float) -> void:
+	var vel_real = Vector2(linear_velocity.x, linear_velocity.z).length()
+	var avanzando = en_suelo and vel_real > 1.0 and abs(accel_inp) > 0.05
+	for particula in skid_marks:
+		if particula:
+			particula.emitting = avanzando

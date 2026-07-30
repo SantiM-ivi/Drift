@@ -75,7 +75,7 @@ nombre_item = "Tuerca"
 stats = SubResource("Resource_njc3j")
 
 [node name="Cylinder_001" parent="." index="0" unique_id=1155961987]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.8779856, 0)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 3.4397082, 0)
 mesh = SubResource("ArrayMesh_0yelt")
 
 [node name="Area3D" type="Area3D" parent="." index="1" unique_id=918494526]
@@ -83,5 +83,4 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=1003433989]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02481842, -0.29138184, 0.018508911)
 shape = SubResource("BoxShape3D_hvpgc")

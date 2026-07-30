@@ -1,26 +1,20 @@
 extends Control
-
 # ─────────────────────────────────────────
 #  DRIFT - Options Menu
 #  Godot 4.6
 # ─────────────────────────────────────────
+@onready var slider_musica   : HSlider  = $Panel/VBoxContainer/RowMusica/SliderMusica
+@onready var slider_sfx      : HSlider  = $Panel/VBoxContainer/RowSFX/SliderSFX
+@onready var check_fullscreen: CheckBox = $Panel/VBoxContainer/RowFullscreen/CheckFullscreen
+@onready var btn_volver      : Button   = $Panel/VBoxContainer/BtnVolver
+@onready var lbl_musica_val  : Label    = $Panel/VBoxContainer/RowMusica/LblMusicaVal
+@onready var lbl_sfx_val     : Label    = $Panel/VBoxContainer/RowSFX/LblSFXVal
 
-@onready var slider_musica   : HSlider  = $CenterContainer/Panel/VBoxContainer/RowMusica/SliderMusica
-@onready var slider_sfx      : HSlider  = $CenterContainer/Panel/VBoxContainer/RowSFX/SliderSFX
-@onready var check_fullscreen: CheckBox = $CenterContainer/Panel/VBoxContainer/RowFullscreen/CheckFullscreen
-@onready var btn_volver      : Button   = $CenterContainer/Panel/VBoxContainer/BtnVolver
-@onready var lbl_musica_val  : Label    = $CenterContainer/Panel/VBoxContainer/RowMusica/LblMusicaVal
-@onready var lbl_sfx_val     : Label    = $CenterContainer/Panel/VBoxContainer/RowSFX/LblSFXVal
-
-const SCENE_MENU := "res://Stages/Menu/MainMenu.tscn"
-
-# Bus de audio — verificá que coincidan con los nombres en Project > Audio
 const BUS_MUSICA := "Music"
 const BUS_SFX    := "SFX"
 
 func _ready() -> void:
 	_cargar_ajustes()
-
 	slider_musica.value_changed.connect(_on_musica_changed)
 	slider_sfx.value_changed.connect(_on_sfx_changed)
 	check_fullscreen.toggled.connect(_on_fullscreen_toggled)
@@ -32,14 +26,11 @@ func _cargar_ajustes() -> void:
 	var vol_musica : float = ProjectSettings.get_setting("drift/vol_musica", 0.8)
 	var vol_sfx    : float = ProjectSettings.get_setting("drift/vol_sfx",    0.8)
 	var fullscreen : bool  = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-
 	slider_musica.value = vol_musica
 	slider_sfx.value    = vol_sfx
 	check_fullscreen.button_pressed = fullscreen
-
 	lbl_musica_val.text = "%d%%" % int(vol_musica * 100)
 	lbl_sfx_val.text    = "%d%%" % int(vol_sfx * 100)
-
 	_aplicar_volumen(BUS_MUSICA, vol_musica)
 	_aplicar_volumen(BUS_SFX,    vol_sfx)
 
@@ -63,7 +54,7 @@ func _on_fullscreen_toggled(pressed: bool) -> void:
 	_guardar("drift/fullscreen", pressed)
 
 func _on_volver_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_MENU)
+	visible = false
 
 # ── Helpers ──────────────────────────────
 

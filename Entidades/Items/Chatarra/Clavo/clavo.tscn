@@ -20,12 +20,13 @@ nombre_item = "Clavo"
 stats = SubResource("Resource_gfv6j")
 
 [node name="Cylinder" parent="." index="0" unique_id=764256965]
-transform = Transform3D(0.48905826, 0.25251392, 0.8349005, -0.4587817, 0.88854903, -1.4901161e-08, -0.74185, -0.38303703, 0.550401, 0, 0, 0)
+transform = Transform3D(2.0418181, 1.0542456, 3.4857097, -1.9154136, 3.7096925, -1.727698e-07, -3.097224, -1.5991796, 2.2979243, 0, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." index="1" unique_id=190671654]
+transform = Transform3D(1.45, 0, 0, 0, 1.45, 0, 0, 0, 1.45, 0, 0, 0)
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=540219443]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.012573242)
+transform = Transform3D(1.45, 0, 0, 0, 1.45, 0, 0, 0, 1.45, 0, 0, 0.012573242)
 shape = SubResource("BoxShape3D_bnbpf")

@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ctkq2acf5fl67" path="res://Stages/UI/HUD.gd" id="1_hud"]
 [ext_resource type="Texture2D" uid="uid://d833sqssuc6u" path="res://Assets/Images/Group 2.png" id="2_6dh48"]
+[ext_resource type="Texture2D" uid="uid://gre6pcuxqe1d" path="res://Assets/Images/Velocidad.png" id="2_f0rc2"]
+[ext_resource type="Texture2D" uid="uid://c2poo7lcqfh6g" path="res://Assets/Images/turbo.png" id="3_wtcfi"]
+[ext_resource type="FontFile" uid="uid://bfnrlaydpdmah" path="res://Assets/Fonts/DJGROSS.ttf" id="4_f0rc2"]
+[ext_resource type="Shader" uid="uid://ccmsuftmryduk" path="res://Common/Shaders/speedline.gdshader" id="6_y4jjo"]
+[ext_resource type="Texture2D" uid="uid://do6sjqfufe8ak" path="res://T_VFX_WindNoise1.png" id="7_go1ct"]
 
 [sub_resource type="StyleBoxFlat" id="SBF_hp_bg"]
 bg_color = Color(0, 0.1, 0, 0.85)
@@ -17,17 +22,51 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="HUD" type="CanvasLayer" unique_id=1305346954]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5uvnc"]
+shader = ExtResource("6_y4jjo")
+shader_parameter/noise = ExtResource("7_go1ct")
+shader_parameter/line_count = 2.0
+shader_parameter/distortion_power = 0.034
+shader_parameter/line_falloff = 1.0
+shader_parameter/mask_size = 0.175
+shader_parameter/mask_edge = 0.195
+shader_parameter/animation_speed = 20.0
+shader_parameter/blur_strength = 0.01
+shader_parameter/effect_power = 0.5
+
+[node name="HUD" type="CanvasLayer" unique_id=1305346954 node_paths=PackedStringArray("speed_effect_color_rect")]
+follow_viewport_enabled = true
 script = ExtResource("1_hud")
+speed_effect_color_rect = NodePath("SpeedDistortEffect")
 metadata/_edit_horizontal_guides_ = [10.0]
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1221772395]
+offset_left = 389.0
+offset_top = 211.0
+offset_right = 2683.232
+offset_bottom = 1150.4534
+scale = Vector2(0.11815382, 0.11815382)
+texture = ExtResource("2_f0rc2")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1973380019]
+offset_left = 168.58473
+offset_top = 267.07822
+offset_right = 1591.1531
+offset_bottom = 2410.497
+rotation = 1.4608742
+scale = Vector2(0.033172756, 0.080956995)
+texture = ExtResource("3_wtcfi")
+
 [node name="TopLeft" type="Control" parent="." unique_id=2145555371]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 9.0
 offset_top = 19.0
 offset_right = 320.0
 offset_bottom = 94.0
+scale = Vector2(0.5199996, 0.6800003)
 
 [node name="Content" type="VBoxContainer" parent="TopLeft" unique_id=1440143760]
 layout_mode = 1
@@ -45,8 +84,7 @@ alignment = 1
 [node name="MissionTitle" type="Label" parent="TopLeft/Content" unique_id=1805590498]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
-theme_override_font_sizes/font_size = 30
-text = "ENCUENTRA EL CONVOY"
+theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -55,12 +93,13 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -96.0
-offset_right = 240.0
-offset_bottom = -41.0
+offset_left = 28.999998
+offset_top = -35.0
+offset_right = 259.0
+offset_bottom = 20.0
 grow_vertical = 0
 rotation = -0.1290282
+scale = Vector2(0.24457859, 0.329028)
 
 [node name="Content" type="VBoxContainer" parent="BottomLeft" unique_id=615093040]
 layout_mode = 1
@@ -93,22 +132,23 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -198.0
-offset_top = -171.0
-offset_right = -78.0
-offset_bottom = -91.0
+offset_left = -100.0
+offset_top = -53.0
+offset_right = 20.0
+offset_bottom = 27.0
 grow_horizontal = 0
 grow_vertical = 0
+scale = Vector2(0.41731143, 0.41731143)
 
 [node name="Content" type="VBoxContainer" parent="BottomRight" unique_id=1387784331]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6.0
-offset_top = -66.0
-offset_right = -22.0
-offset_bottom = 23.0
+offset_left = 35.944324
+offset_top = -91.05909
+offset_right = 19.944336
+offset_bottom = -2.0590897
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.0800146, 0.92)
@@ -117,6 +157,7 @@ alignment = 1
 [node name="SpeedLabel" type="Label" parent="BottomRight/Content" unique_id=1139115574]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.18, 1, 0.18, 1)
+theme_override_fonts/font = ExtResource("4_f0rc2")
 theme_override_font_sizes/font_size = 80
 text = "0"
 horizontal_alignment = 1
@@ -124,28 +165,39 @@ horizontal_alignment = 1
 [node name="UnitLabel" type="Label" parent="BottomRight/Content" unique_id=1110793515]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.18, 1, 0.18, 0.65)
+theme_override_fonts/font = ExtResource("4_f0rc2")
 theme_override_font_sizes/font_size = 40
 text = "km/h"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=353156264]
-anchors_preset = 8
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1898381174]
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -12.000015
-offset_right = 435.0
-offset_bottom = 340.0
+offset_top = 180.0
+offset_right = 487.0
+offset_bottom = 532.0
 grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.15521023, 0.18434997)
+scale = Vector2(0.077144586, 0.077144586)
 size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-239.275, -178.065)
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1531044560]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1531044560]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+offset_transform_enabled = true
 texture = ExtResource("2_6dh48")
+stretch_mode = 5
+
+[node name="SpeedDistortEffect" type="ColorRect" parent="." unique_id=561169309]
+material = SubResource("ShaderMaterial_5uvnc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

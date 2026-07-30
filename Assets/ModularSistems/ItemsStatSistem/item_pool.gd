@@ -1,5 +1,4 @@
 extends Node
-
 var item_paths := {
 	"Capo":  "res://Entidades/Items/Capos/Capo/Capo.tscn",
 	"FolaCapo": "res://Entidades/Items/Capos/Folacapo/FolaCapo.tscn",
@@ -18,12 +17,13 @@ var item_paths := {
 	"Rueda2": "res://Entidades/Items/Ruedas/Rueda2/rueda2.tscn",
 	"Rueda3": "res://Entidades/Items/Ruedas/Rueda3/rueda3.tscn",
 }
-
-
-
 func get_random_item() -> PackedScene:
 	if item_paths.is_empty():
 		return null
 	var keys = item_paths.keys()
 	var key = keys[randi() % keys.size()]
 	return load(item_paths[key]) as PackedScene
+
+# ── La moneda de la oleada es siempre la Tuerca ────────────────────────────────
+func get_random_chatarra() -> PackedScene:
+	return load(item_paths["Tuerca"]) as PackedScene

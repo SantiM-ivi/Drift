@@ -1,24 +1,15 @@
 [gd_scene format=3 uid="uid://bn38vk5cg2243"]
 
 [ext_resource type="Script" uid="uid://bk3ywk4cy6bhe" path="res://Stages/Menu/MainMenu.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://dtkjhgss1w8v0" path="res://Stages/Levels/ToyBox/FondoMenu.png" id="2_1vcpm"]
+[ext_resource type="VideoStream" uid="uid://dmixe7vide3f2" path="res://Stages/Menu/Menu0001-0155.ogv" id="2_pluk6"]
+[ext_resource type="FontFile" uid="uid://bfnrlaydpdmah" path="res://Assets/Fonts/DJGROSS.ttf" id="3_pluk6"]
 [ext_resource type="AudioStream" uid="uid://c2nccsl6ra1nj" path="res://Assets/Audio/SFX/Musica Menu.wav" id="3_ppwrp"]
+[ext_resource type="Texture2D" uid="uid://bg1xsfvaae530" path="res://Assets/Images/metaltexture.jpg" id="4_o0wdi"]
+[ext_resource type="Script" uid="uid://ce4uk8smcu5oa" path="res://Stages/Menu/Opciones/Options.gd" id="6_8vhrd"]
 
-[sub_resource type="StyleBoxFlat" id="SB_BtnNormal"]
-content_margin_left = 28.0
-content_margin_top = 13.0
-content_margin_right = 28.0
-content_margin_bottom = 13.0
-bg_color = Color(0.1, 0.07, 0.04, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.55, 0.38, 0.12, 0.8)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0wdi"]
+texture = ExtResource("4_o0wdi")
+modulate_color = Color(0.3180198, 0.31801978, 0.31801975, 1)
 
 [sub_resource type="StyleBoxFlat" id="SB_BtnPressed"]
 content_margin_left = 28.0
@@ -52,17 +43,73 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[sub_resource type="StyleBoxFlat" id="SB_BtnSalirNormal"]
-content_margin_left = 28.0
-content_margin_top = 13.0
-content_margin_right = 28.0
-content_margin_bottom = 13.0
-bg_color = Color(0.1, 0.04, 0.04, 0.85)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2cmg6"]
+texture = ExtResource("4_o0wdi")
+modulate_color = Color(0.31764707, 0.31764707, 0.31764707, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7t6k"]
+texture = ExtResource("4_o0wdi")
+modulate_color = Color(0.31764707, 0.31764707, 0.31764707, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngg0e"]
+content_margin_left = 40.0
+content_margin_top = 36.0
+content_margin_right = 40.0
+content_margin_bottom = 36.0
+bg_color = Color(0.039215688, 0.03137255, 0.019607844, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.45, 0.15, 0.1, 0.8)
+border_color = Color(0.55, 0.38, 0.12, 0.5)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cmg6"]
+content_margin_left = 28.0
+content_margin_top = 13.0
+content_margin_right = 28.0
+content_margin_bottom = 13.0
+bg_color = Color(0.1, 0.07, 0.04, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.38, 0.12, 0.8)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d7t6k"]
+content_margin_left = 28.0
+content_margin_top = 13.0
+content_margin_right = 28.0
+content_margin_bottom = 13.0
+bg_color = Color(0.3, 0.18, 0.02, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.72, 0.15, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj260"]
+content_margin_left = 28.0
+content_margin_top = 13.0
+content_margin_right = 28.0
+content_margin_bottom = 13.0
+bg_color = Color(0.2, 0.12, 0.03, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.55, 0.1, 1)
 corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
@@ -77,22 +124,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1821575286]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_1vcpm")
-expand_mode = 1
-stretch_mode = 6
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1945442852]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 320.0
+stream = ExtResource("2_pluk6")
+autoplay = true
+expand = true
+loop = true
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1184674411]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = 2.0
+offset_right = -142.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -104,83 +153,198 @@ theme_override_constants/separation = 10
 [node name="LblDrift" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1368202262]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.95, 0.65, 0.1, 1)
+theme_override_colors/font_color = Color(0.8527998, 0.580061, 0.054397248, 1)
+theme_override_colors/font_shadow_color = Color(0.30588236, 0.2, 0.003921569, 0.44705883)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
 theme_override_constants/outline_size = 19
+theme_override_constants/shadow_outline_size = 27
+theme_override_fonts/font = ExtResource("3_pluk6")
 theme_override_font_sizes/font_size = 64
 text = "DRIFT"
 horizontal_alignment = 1
 
-[node name="LblTagline" type="Label" parent="CenterContainer/VBoxContainer" unique_id=420256079]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.45, 0.35, 0.22, 1)
-theme_override_colors/font_outline_color = Color(0.6509804, 0.5764706, 0.5058824, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 11
-text = "SURVIVE THE WASTELAND"
-horizontal_alignment = 1
-
-[node name="HSep" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=23892491]
-layout_mode = 2
-theme_override_constants/separation = 18
-
 [node name="BtnJugar" type="Button" parent="CenterContainer/VBoxContainer" unique_id=993114852]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.95, 0.75, 0.2, 1)
+theme_override_colors/font_color = Color(0.8509804, 0.5803922, 0.05490196, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 0.6, 1)
 theme_override_colors/font_hover_color = Color(1, 0.88, 0.4, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_pluk6")
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("SB_BtnNormal")
+theme_override_styles/normal = SubResource("StyleBoxTexture_o0wdi")
 theme_override_styles/pressed = SubResource("SB_BtnPressed")
 theme_override_styles/hover = SubResource("SB_BtnHover")
 text = "JUGAR"
 
 [node name="BtnOpciones" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1452804686]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.7, 0.58, 0.38, 1)
+theme_override_colors/font_color = Color(0.78431374, 0.5411765, 0.06666667, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.88, 0.6, 1)
 theme_override_colors/font_hover_color = Color(0.9, 0.75, 0.5, 1)
-theme_override_font_sizes/font_size = 17
-theme_override_styles/normal = SubResource("SB_BtnNormal")
+theme_override_colors/font_outline_color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_2cmg6")
 theme_override_styles/pressed = SubResource("SB_BtnPressed")
 theme_override_styles/hover = SubResource("SB_BtnHover")
 text = "OPCIONES"
 
 [node name="BtnSalir" type="Button" parent="CenterContainer/VBoxContainer" unique_id=530611262]
-custom_minimum_size = Vector2(300, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.55, 0.3, 0.22, 1)
+theme_override_colors/font_color = Color(0.8509804, 0.5803922, 0.05490196, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.5, 0.3, 1)
 theme_override_colors/font_hover_color = Color(0.8, 0.4, 0.28, 1)
-theme_override_font_sizes/font_size = 17
-theme_override_styles/normal = SubResource("SB_BtnSalirNormal")
+theme_override_colors/font_outline_color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_d7t6k")
 theme_override_styles/pressed = SubResource("SB_BtnPressed")
 theme_override_styles/hover = SubResource("SB_BtnHover")
 text = "SALIR"
-
-[node name="LblVersion" type="Label" parent="." unique_id=1450641914]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = -26.0
-offset_right = 100.0
-offset_bottom = -6.0
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.28, 0.22, 0.14, 1)
-theme_override_font_sizes/font_size = 11
-text = "v0.1.0"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2107447063]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1159814728]
 stream = ExtResource("3_ppwrp")
 autoplay = true
+
+[node name="Opciones" type="CenterContainer" parent="." unique_id=1390253996]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -128.0
+offset_right = 164.0
+offset_bottom = 307.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.60438895, 0.60438895)
+script = ExtResource("6_8vhrd")
+
+[node name="Panel" type="PanelContainer" parent="Opciones" unique_id=1464465675]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ngg0e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Opciones/Panel" unique_id=1199546576]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="LblTitulo" type="Label" parent="Opciones/Panel/VBoxContainer" unique_id=337097206]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.95, 0.65, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 32
+text = "OPCIONES"
+horizontal_alignment = 1
+
+[node name="HSep" type="HSeparator" parent="Opciones/Panel/VBoxContainer" unique_id=896715511]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblMusica" type="Label" parent="Opciones/Panel/VBoxContainer" unique_id=620320690]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.45, 0.28, 1)
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 12
+text = "VOLUMEN MÚSICA"
+
+[node name="RowMusica" type="HBoxContainer" parent="Opciones/Panel/VBoxContainer" unique_id=1366132669]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SliderMusica" type="HSlider" parent="Opciones/Panel/VBoxContainer/RowMusica" unique_id=2053662508]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="LblMusicaVal" type="Label" parent="Opciones/Panel/VBoxContainer/RowMusica" unique_id=1249635132]
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "80%"
+horizontal_alignment = 2
+
+[node name="LblSFX" type="Label" parent="Opciones/Panel/VBoxContainer" unique_id=1501815345]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.45, 0.28, 1)
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 12
+text = "VOLUMEN EFECTOS (SFX)"
+
+[node name="RowSFX" type="HBoxContainer" parent="Opciones/Panel/VBoxContainer" unique_id=195380558]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SliderSFX" type="HSlider" parent="Opciones/Panel/VBoxContainer/RowSFX" unique_id=1382133631]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="LblSFXVal" type="Label" parent="Opciones/Panel/VBoxContainer/RowSFX" unique_id=1070667749]
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 13
+text = "80%"
+horizontal_alignment = 2
+
+[node name="RowFullscreen" type="HBoxContainer" parent="Opciones/Panel/VBoxContainer" unique_id=538155322]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LblFullscreen" type="Label" parent="Opciones/Panel/VBoxContainer/RowFullscreen" unique_id=229115073]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.7, 0.58, 0.38, 1)
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 13
+text = "PANTALLA COMPLETA"
+vertical_alignment = 1
+
+[node name="CheckFullscreen" type="CheckBox" parent="Opciones/Panel/VBoxContainer/RowFullscreen" unique_id=2062606000]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.65, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+
+[node name="HSep2" type="HSeparator" parent="Opciones/Panel/VBoxContainer" unique_id=1951367278]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnVolver" type="Button" parent="Opciones/Panel/VBoxContainer" unique_id=947130269]
+custom_minimum_size = Vector2(300, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.7, 0.58, 0.38, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.88, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0.9, 0.75, 0.5, 1)
+theme_override_fonts/font = ExtResource("3_pluk6")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_2cmg6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d7t6k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mj260")
+text = "◀   VOLVER"

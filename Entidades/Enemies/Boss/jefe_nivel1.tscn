@@ -17,6 +17,7 @@ base_defense = 8
 base_attack = 20
 base_speed = 300.0
 base_steer_limit = 1000.0
+base_steer_speed = 1500.0
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h76ht"]
@@ -100,7 +101,7 @@ border_color = Color(0.30050156, 0, 0.0101768505, 1)
 [node name="JefeNivel1" type="VehicleBody3D" unique_id=1287735819 groups=["Boss"]]
 collision_layer = 4
 collision_mask = 23
-mass = 50.0
+mass = 30.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 steering = 2.9722958

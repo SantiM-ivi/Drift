@@ -3,11 +3,20 @@
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_ydkk0"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="2_1g0f4"]
 [ext_resource type="Resource" uid="uid://cuh47fsvgovrq" path="res://Entidades/Enemies/AutoDistancia/autoDistancia.tres" id="2_yxoef"]
+[ext_resource type="PackedScene" uid="uid://cvcsiyyeb4is3" path="res://Common/Effects/explosion_three.tscn" id="3_4glay"]
+[ext_resource type="AudioStream" uid="uid://ba5uau4wgcxm2" path="res://Assets/Audio/SFX/universfield-epic-cinematic-explosion-454857.mp3" id="4_0soiq"]
 [ext_resource type="PackedScene" uid="uid://dk6qmelpbpsed" path="res://Entidades/Enemies/Rueda/rueda.tscn" id="4_vk40u"]
 [ext_resource type="Texture2D" uid="uid://p0nmc7qed03" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_BaseColor.png" id="4_yxoef"]
 [ext_resource type="Texture2D" uid="uid://c172r1iqrrhpe" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_Normal.png" id="5_mqdbq"]
+[ext_resource type="AudioStream" uid="uid://c0fdxeesma4mx" path="res://Assets/Audio/SFX/u_68csiaifb5-bulletimpact2-442718.mp3" id="6_4glay"]
 [ext_resource type="Script" uid="uid://f5rt1tyhjhop" path="res://Entidades/Enemies/AutoDistancia/3d_enemylife_bar.gd" id="6_bwqen"]
 [ext_resource type="Texture2D" uid="uid://d1udy8fqipsed" path="res://Entidades/Enemies/AutoDistancia/BodyDefaultMaterial_Roughness.png" id="6_fkyr0"]
+[ext_resource type="ArrayMesh" uid="uid://0h4qipncgiv4" path="res://Entidades/Items/Capos/Mesh/capo2.tres" id="9_kd2b5"]
+[ext_resource type="ArrayMesh" uid="uid://d4n15t8bbtgo3" path="res://Entidades/Items/ArmaFrontal/Parachoque/mesh_parachoque.tres" id="10_0x2ny"]
+[ext_resource type="ArrayMesh" uid="uid://chw5yc6v1dqxx" path="res://Entidades/Items/Capos/Mesh/mesh_fola.tres" id="11_h20uu"]
+[ext_resource type="AudioStream" uid="uid://chd5q4d6mhyc1" path="res://Assets/Audio/SFX/dev_guy-bullet-gunshot-impact-390253.mp3" id="12_vpvap"]
+[ext_resource type="AudioStream" uid="uid://btc3jq5hrfddb" path="res://Assets/Audio/SFX/floraphonic-metal-hit-10-193281.mp3" id="13_yjntl"]
+[ext_resource type="AudioStream" uid="uid://brjhew2rrhk55" path="res://Assets/Audio/SFX/freesound_community-engine-47745.mp3" id="14_0soiq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd2b5"]
 albedo_texture = ExtResource("4_yxoef")
@@ -61,7 +70,7 @@ shadow_mesh = SubResource("ArrayMesh_2rf7a")
 size = Vector3(3.0287476, 2.3563232, 7.7885895)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q5ew6"]
-radius = 126.04294
+radius = 391.96695
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_31ug3"]
 radius = 90.24422
@@ -87,10 +96,14 @@ border_color = Color(0.30050156, 0, 0.0101768505, 1)
 [node name="AutoEnemigo" type="VehicleBody3D" unique_id=1287735819]
 collision_layer = 4
 collision_mask = 23
+mass = 20.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_ydkk0")
 stats = ExtResource("2_yxoef")
+impacto_scene = ExtResource("3_4glay")
+disparo_sonidos = Array[AudioStream]([ExtResource("12_vpvap"), ExtResource("4_0soiq")])
+golpe_sonidos = Array[AudioStream]([ExtResource("13_yjntl"), ExtResource("6_4glay")])
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("2_1g0f4")
@@ -165,7 +178,8 @@ shape = SubResource("SphereShape3D_q5ew6")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=270199466]
 avoidance_enabled = true
-neighbor_distance = 200.0
+radius = 50.0
+neighbor_distance = 1000.0
 
 [node name="ShootPoint" type="Node3D" parent="." unique_id=1872714489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2633922, 0)
@@ -194,3 +208,31 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_vk40u")
 step = 1.0
 value = 100.0
 show_percentage = false
+
+[node name="Capo" type="MeshInstance3D" parent="." unique_id=1581202852]
+transform = Transform3D(1.4242753, 1.4135517e-05, -0.0015566107, -6.1383216e-05, 0.25222662, 0.015921298, 0.0016025968, -0.0029015008, 1.3840165, -0.013528029, 1.2964675, -2.7724843)
+mesh = ExtResource("9_kd2b5")
+skeleton = NodePath("")
+
+[node name="Parachoque" type="MeshInstance3D" parent="." unique_id=1169768527]
+transform = Transform3D(-1.4641663, -1.4344668e-09, -1.974634e-08, 2.5065077e-09, 0.38135973, 1.6653345e-16, 2.2108291e-07, 0, -0.1307741, -0.007194881, 0.9223325, -4.3590393)
+mesh = ExtResource("10_0x2ny")
+
+[node name="FolaCapo" type="MeshInstance3D" parent="." unique_id=399985108]
+transform = Transform3D(1.3392649, 4.487761e-05, -0.0014103082, -0.00011644773, 0.5427436, -0.0032248702, 0.0018279491, 0.0016942918, 1.0330708, -0.0021212623, 2.048813, 0.019901395)
+mesh = ExtResource("11_h20uu")
+skeleton = NodePath("../../BodyAuto")
+
+[node name="FolaCapo2" type="MeshInstance3D" parent="." unique_id=1363550809]
+transform = Transform3D(-0.0014645964, -0.0030435806, -1.4391558, -0.32739583, 0.92849237, -0.0036790366, 1.0218496, 0.29748046, -0.0032414598, -0.0021212623, 1.7209938, 1.8712497)
+mesh = ExtResource("11_h20uu")
+skeleton = NodePath("../../BodyAuto")
+
+[node name="DisparoSFX" type="AudioStreamPlayer3D" parent="." unique_id=2032999974]
+stream = ExtResource("12_vpvap")
+
+[node name="GolpeSFX" type="AudioStreamPlayer3D" parent="." unique_id=313340897]
+stream = ExtResource("13_yjntl")
+
+[node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1403616232]
+stream = ExtResource("14_0soiq")

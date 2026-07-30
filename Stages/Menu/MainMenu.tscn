@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bk3ywk4cy6bhe" path="res://Stages/Menu/MainMenu.gd" id="1_script"]
 [ext_resource type="VideoStream" uid="uid://dmixe7vide3f2" path="res://Stages/Menu/Menu0001-0155.ogv" id="2_pluk6"]
+[ext_resource type="FontFile" uid="uid://oapyjbcsfm4h" path="res://Assets/Fonts/Jaro-Regular-VariableFont_opsz.ttf" id="3_ngg0e"]
 [ext_resource type="FontFile" uid="uid://bfnrlaydpdmah" path="res://Assets/Fonts/DJGROSS.ttf" id="3_pluk6"]
 [ext_resource type="AudioStream" uid="uid://c2nccsl6ra1nj" path="res://Assets/Audio/SFX/Musica Menu.wav" id="3_ppwrp"]
 [ext_resource type="Texture2D" uid="uid://bg1xsfvaae530" path="res://Assets/Images/metaltexture.jpg" id="4_o0wdi"]
@@ -153,15 +154,15 @@ theme_override_constants/separation = 10
 [node name="LblDrift" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1368202262]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.8527998, 0.580061, 0.054397248, 1)
-theme_override_colors/font_shadow_color = Color(0.30588236, 0.2, 0.003921569, 0.44705883)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.74509805, 0.64705884, 0.44705883, 1)
+theme_override_colors/font_shadow_color = Color(0.5254902, 0.45490196, 0.3019608, 1)
+theme_override_colors/font_outline_color = Color(0.09411765, 0.08627451, 0.08235294, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/outline_size = 19
 theme_override_constants/shadow_outline_size = 27
-theme_override_fonts/font = ExtResource("3_pluk6")
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("3_ngg0e")
+theme_override_font_sizes/font_size = 89
 text = "DRIFT"
 horizontal_alignment = 1
 

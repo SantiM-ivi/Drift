@@ -46,13 +46,13 @@ shader_parameter/sun_size = 0.995
 shader_parameter/sun_softness = 0.002
 shader_parameter/sunset_range = Vector2(-0.1, 0.3)
 
-[sub_resource type="Sky" id="Sky_06btp"]
+[sub_resource type="Sky" id="Sky_6ej83"]
 sky_material = SubResource("ShaderMaterial_sp1my")
 
 [sub_resource type="Environment" id="Environment_rkloy"]
 background_mode = 2
 background_color = Color(0.49209166, 0.76643527, 0.99960023, 1)
-sky = SubResource("Sky_06btp")
+sky = SubResource("Sky_6ej83")
 ambient_light_source = 3
 ambient_light_color = Color(0.3527627, 0.55275166, 1, 1)
 tonemap_mode = 2
@@ -92,7 +92,7 @@ base_max_health = 400
 base_defense = 0
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2py0s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5qbrc"]
 render_priority = 0
 shader = ExtResource("16_kwsyd")
 shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
@@ -108,7 +108,7 @@ shader_parameter/grazing_angle_mask_power = 1.0
 shader_parameter/grazing_angle_modulation_factor = 50.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_6ej83"]
-material = SubResource("ShaderMaterial_2py0s")
+material = SubResource("ShaderMaterial_5qbrc")
 flip_faces = true
 size = Vector2(2, 2)
 
@@ -170,7 +170,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1, 0, 1, -4.3711392e-08, 0,
 mesh = ExtResource("6_tvo6m")
 
 [node name="Player" parent="." unique_id=1505952561 node_paths=PackedStringArray("camara_pivot", "camara", "skid_marks") instance=ExtResource("15_sp1my")]
-transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 8.009136, 167.58144)
+transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 40.532555, 14.582945, 167.58144)
 contact_monitor = true
 max_contacts_reported = 4
 velocidad_maxima = 45.0
@@ -259,15 +259,17 @@ text = "hola
 horizontal_alignment = 1
 
 [node name="LabelChatarra" type="Label" parent="MissionManager" unique_id=749074347]
-offset_left = 440.0
+offset_left = 411.0
 offset_top = 4.0
-offset_right = 772.0
+offset_right = 743.0
 offset_bottom = 141.0
 scale = Vector2(0.72, 0.56)
-theme_override_colors/font_color = Color(0.31643918, 0.24999818, 0.22437978, 1)
-theme_override_colors/font_shadow_color = Color(0.6117647, 0.5058824, 0.47058824, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.30588236, 0.22745098, 0.2, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_fonts/font = ExtResource("18_6ej83")
-theme_override_font_sizes/font_size = 32
-text = "hola
+theme_override_font_sizes/font_size = 28
+text = "chatarra
+0
 "
+horizontal_alignment = 1

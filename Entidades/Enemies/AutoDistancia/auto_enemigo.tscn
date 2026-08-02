@@ -95,7 +95,7 @@ border_color = Color(0.30050156, 0, 0.0101768505, 1)
 
 [node name="AutoEnemigo" type="VehicleBody3D" unique_id=1287735819]
 collision_layer = 4
-collision_mask = 23
+collision_mask = 151
 mass = 20.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)

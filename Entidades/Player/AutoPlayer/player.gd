@@ -16,7 +16,7 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 
 @export_group("Boost")
 @export var bonus_velocidad_boost: float = 20.0
-@export var duracion_boost: float        = 1.5
+@export var duracion_boost: float        = 5.5
 @export var cooldown_boost: float        = 4.0
 
 @export_group("Camara")
@@ -80,6 +80,8 @@ var _girando: bool = false
 var chatarra: int = 0
 var _tiempo_aturdido: float = 0.0
 @export var duracion_aturdimiento: float = 0.4
+
+const LAYER_PAREDES: int = 1 << 7  # Layer 8 en el editor (1-indexed)
 
 # ─── INIT ────────────────────────────────────────────────────────────────────
 
@@ -391,7 +393,6 @@ func apply_damage(amount: int) -> void:
 		var reduccion = clamp(stats.current_defense / 100.0, 0.0, 0.9)
 		var final_damage = max(1, int(amount * (1.0 - reduccion)))
 		stats.health -= final_damage
-		GameStats.dano_recibido += final_damage
 		print("[Player] daño recibido: %d | defensa: %.0f | reduccion: %.0f%% | daño final: %d | vida: %d/%d" % [
 			amount,
 			stats.current_defense,
@@ -477,7 +478,6 @@ func _on_area_exited(area: Area3D) -> void:
 
 
 func _on_health_depleted() -> void:
-	GameStats.fijar_tiempo_final()
 	var pantalla = PANTALLA_DERROTA.instantiate()
 	get_tree().root.add_child(pantalla)
 	queue_free()
@@ -487,19 +487,20 @@ func _on_body_entered(body: Node) -> void:
 	if velocidad <= 5.0:
 		return
 
-	# Rebote general: pasa siempre que choques fuerte, sea pared, mapa o enemigo.
-	var direccion_rebote = -linear_velocity.normalized()
-	direccion_rebote.y = 0.0
-	direccion_rebote = direccion_rebote.normalized()
+	# Rebote: solo contra paredes (layer 8), no contra enemigos.
+	if body.collision_layer & LAYER_PAREDES != 0:
+		var direccion_rebote = -linear_velocity.normalized()
+		direccion_rebote.y = 0.0
+		direccion_rebote = direccion_rebote.normalized()
 
-	if crash_sfx and not crash_sfx.playing:
-		crash_sfx.play()
+		if crash_sfx and not crash_sfx.playing:
+			crash_sfx.play()
 
-	linear_velocity = Vector3.ZERO
-	_velocidad_actual = 0.0
-	_tiempo_aturdido = duracion_aturdimiento
-	var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
-	apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
+		linear_velocity = Vector3.ZERO
+		_velocidad_actual = 0.0
+		_tiempo_aturdido = duracion_aturdimiento
+		var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
+		apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
 
 	# Daño y knockback: solo si lo que chocamos puede recibirlo (ej. un enemigo).
 	var objetivo = body

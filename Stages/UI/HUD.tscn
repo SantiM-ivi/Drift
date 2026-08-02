@@ -59,13 +59,10 @@ scale = Vector2(0.033172756, 0.080956995)
 texture = ExtResource("3_wtcfi")
 
 [node name="TopLeft" type="Control" parent="." unique_id=2145555371]
-visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = 9.0
-offset_top = 19.0
-offset_right = 320.0
-offset_bottom = 94.0
+offset_right = 311.0
+offset_bottom = 75.0
 scale = Vector2(0.5199996, 0.6800003)
 
 [node name="Content" type="VBoxContainer" parent="TopLeft" unique_id=1440143760]
@@ -79,11 +76,13 @@ offset_right = 328.0
 offset_bottom = 48.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2.0000014, 1)
 alignment = 1
 
 [node name="MissionTitle" type="Label" parent="TopLeft/Content" unique_id=1805590498]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_fonts/font = ExtResource("4_f0rc2")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 autowrap_mode = 2

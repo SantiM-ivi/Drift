@@ -45,10 +45,16 @@ var player: RigidBody3D = null
 @export var torque_giro: float = 1200.0
 @export var amortiguacion_giro: float = 900.0
 
+# ─── REBOTE CONTRA PAREDES ───────────────────────────────────────────────────
+@export_group("Rebote")
+@export var duracion_aturdimiento: float = 0.4
+const LAYER_PAREDES: int = 1 << 7  # Layer 8 en el editor (1-indexed)
+
 var _tiempo_atascado: float = 0.0
 var _retrocediendo: bool = false
 var _tiempo_retroceso: float = 0.0
 var _retroceso_steering_dir: float = 1.0
+var _tiempo_aturdido: float = 0.0
 
 func _ready() -> void:
 	center_of_mass = Vector3(0, -1.0, 0)
@@ -56,6 +62,7 @@ func _ready() -> void:
 	angular_damp = 5.0
 	attack_area.body_entered.connect(_on_attack_entered)
 	attack_area.body_exited.connect(_on_attack_exited)
+	body_entered.connect(_on_body_entered)
 	if stats:
 		stats.health_changed.connect(_on_health_changed)
 		stats.health_depleted.connect(_on_health_depleted)
@@ -63,9 +70,12 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	sm.transition_to(ChaseState.new(self, sm))
 func _physics_process(delta: float) -> void:
-	sm.physics_process(delta)
+	if _tiempo_aturdido > 0.0:
+		_tiempo_aturdido -= delta
+	else:
+		sm.physics_process(delta)
+		_manejar_atasco(delta)
 	_auto_enderezar(delta)
-	_manejar_atasco(delta)
 	_actualizar_motor_sfx()
 func _on_attack_entered(body: Node) -> void:
 	if body == player and body.is_in_group("Player"):
@@ -73,6 +83,24 @@ func _on_attack_entered(body: Node) -> void:
 func _on_attack_exited(body: Node) -> void:
 	if body == player and body.is_in_group("Player"):
 		sm.transition_to(ChaseState.new(self, sm))
+
+# ── Rebote contra paredes (layer 8): mismo mecanismo que el del jugador ───────
+func _on_body_entered(body: Node) -> void:
+	var velocidad := linear_velocity.length()
+	if velocidad <= 5.0:
+		return
+	if body.collision_layer & LAYER_PAREDES == 0:
+		return
+
+	var direccion_rebote = -linear_velocity.normalized()
+	direccion_rebote.y = 0.0
+	direccion_rebote = direccion_rebote.normalized()
+
+	linear_velocity = Vector3.ZERO
+	_tiempo_aturdido = duracion_aturdimiento
+	var fuerza_rebote = clamp(velocidad * 2.0, 15.0, 60.0)
+	apply_central_impulse(direccion_rebote * fuerza_rebote * mass)
+
 func _auto_enderezar(delta: float) -> void:
 	var up_local = global_transform.basis.y
 	var dot = up_local.dot(Vector3.UP)

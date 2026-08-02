@@ -377,7 +377,7 @@ color_ramp = SubResource("GradientTexture1D_qumuu")
 [node name="Player" type="RigidBody3D" unique_id=1505952561 node_paths=PackedStringArray("skid_marks") groups=["Player"]]
 transform = Transform3D(0.99993604, 0.011309492, 0, -0.011309492, 0.99993604, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 2
-collision_mask = 37
+collision_mask = 165
 gravity_scale = 2.0
 script = ExtResource("1_omvyu")
 skid_marks = [null, null, NodePath("SkidMarks/GPUParticles3D3"), NodePath("SkidMarks/GPUParticles3D4")]

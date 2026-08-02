@@ -143,7 +143,8 @@ func agregar_chatarra(cantidad: int = 1) -> void:
 func _actualizar_texto_chatarra() -> void:
 	if not texto_chatarra:
 		return
-	texto_chatarra.text = "Chatarra: %d" % _chatarra_recolectada
+	texto_chatarra.text = "Chatarra 
+		%d" % _chatarra_recolectada
 
 
 func get_chatarra_recolectada() -> int:

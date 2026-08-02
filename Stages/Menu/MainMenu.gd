@@ -9,7 +9,9 @@ extends Control
 @onready var anim        : AnimationPlayer = $AnimationPlayer
 @onready var opciones    : Control = $Opciones  # ajustá el path si es distinto
 
-const SCENE_JUEGO := "res://Stages/Levels/ToyBox/ToyBox.tscn"
+# "Jugar" ahora lleva al tutorial en vez de ir directo al nivel.
+# El tutorial es el que hace la transición final a ToyBox.tscn.
+const SCENE_TUTORIAL := "res://Stages/Levels/Tutorial/TutorialEscena.tscn"  # <- ajustá el path si es distinto
 
 func _ready() -> void:
 	btn_jugar.pressed.connect(_on_jugar_pressed)
@@ -21,9 +23,8 @@ func _ready() -> void:
 		anim.play("intro")
 
 # ── Botones ──────────────────────────────
-
 func _on_jugar_pressed() -> void:
-	_cambiar_escena(SCENE_JUEGO)
+	_cambiar_escena(SCENE_TUTORIAL)
 
 func _on_opciones_pressed() -> void:
 	if opciones:
@@ -33,7 +34,6 @@ func _on_salir_pressed() -> void:
 	get_tree().quit()
 
 # ── Helpers ──────────────────────────────
-
 func _cambiar_escena(path: String) -> void:
 	if anim and anim.has_animation("fade_out"):
 		anim.play("fade_out")

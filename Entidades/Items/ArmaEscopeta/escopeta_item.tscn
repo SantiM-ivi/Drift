@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_bry0y"]
 script = ExtResource("2_6dswd")
 tipo = 4
+bonus_damage = 50
 bonus_ram_damage = 0
 nitro_multiplicador = 0.0
 bullet_speed = 20.0
@@ -24,10 +25,10 @@ stats = SubResource("Resource_bry0y")
 
 [node name="Escopetas" parent="." unique_id=500959953 instance=ExtResource("3_kab08")]
 
-[node name="Cube" parent="Escopetas" index="0" unique_id=35335514]
+[node name="Cube" parent="Escopetas" index="0" unique_id=225941784]
 transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, -0.49601293, 0, 0)
 
-[node name="Cube_001" parent="Escopetas" index="1" unique_id=1454043329]
+[node name="Cube_001" parent="Escopetas" index="1" unique_id=429264447]
 transform = Transform3D(-8.742262e-08, 0.0038048155, 1.9999964, 1.6631377e-10, 1.9999964, -0.0038048155, -2, 0, -8.742278e-08, 0.52685237, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1640231468]

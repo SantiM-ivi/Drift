@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://c0fdxeesma4mx" path="res://Assets/Audio/SFX/u_68csiaifb5-bulletimpact2-442718.mp3" id="6_ohfxr"]
 [ext_resource type="Texture2D" uid="uid://dqllxy2esehgg" path="res://Entidades/Enemies/AutoGrande/Enemigo_1_DefaultMaterial_Normal.png" id="7_4em7q"]
 [ext_resource type="AudioStream" uid="uid://brjhew2rrhk55" path="res://Assets/Audio/SFX/freesound_community-engine-47745.mp3" id="14_srthd"]
+[ext_resource type="ArrayMesh" uid="uid://datr1v8vb4443" path="res://Assets/humo1.tres" id="16_spxug"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqyqa"]
 resource_name = "Material.001"
@@ -93,6 +94,32 @@ border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.30050156, 0, 0.0101768505, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohfxr"]
+albedo_color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+albedo_texture_force_srgb = true
+
+[sub_resource type="Gradient" id="Gradient_srthd"]
+offsets = PackedFloat32Array(0.11508951, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.4509804)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2e7iw"]
+gradient = SubResource("Gradient_srthd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j1c2g"]
+lifetime_randomness = 0.1
+angle_min = -532.5
+angle_max = 487.30002
+use_rotation_3d = true
+rotation_3d_min = Vector3(45, 45, 45)
+rotation_3d_max = Vector3(360, 360, 360)
+gravity = Vector3(0, 0, 0)
+use_scale_3d = true
+scale_3d_min = Vector3(150, 150, 150)
+scale_3d_max = Vector3(200, 200, 200)
+scale_min = 154.55
+scale_max = 199.34999
+color_ramp = SubResource("GradientTexture1D_2e7iw")
 
 [node name="AutoEnemigoCamioneta" type="VehicleBody3D" unique_id=1287735819]
 collision_layer = 4
@@ -192,7 +219,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_31ug3")
 
 [node name="3DLifeBar" type="Sprite3D" parent="." unique_id=1782799994]
-transform = Transform3D(1.773726, 0, 0, 0, 1.7082102, 0, 0, 0, 1, 0, 4.0120926, 0)
+transform = Transform3D(4.069269, 0, 0, 0, 2.6667202, 0, 0, 0, 2.5471814, 0, 4.0120926, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_1g0f4")
 script = ExtResource("6_c51v2")
@@ -217,3 +244,17 @@ stream = ExtResource("5_spxug")
 
 [node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1710164499]
 stream = ExtResource("14_srthd")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="." unique_id=1034151451]
+transform = Transform3D(2.1426084, 1.1175871e-08, 0, -9.313226e-09, 2.1687505, 0, 0, 0, 1, -0.9785648, 0.27564895, 1.9096687)
+material_override = SubResource("StandardMaterial3D_ohfxr")
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_j1c2g")
+draw_pass_1 = ExtResource("16_spxug")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="." unique_id=1919663106]
+transform = Transform3D(2.142608, 1.3038516e-08, 0, -1.1175871e-08, 2.16875, 0, 0, 0, 1, 0.76397246, 0.19702473, 1.9085519)
+material_override = SubResource("StandardMaterial3D_ohfxr")
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_j1c2g")
+draw_pass_1 = ExtResource("16_spxug")

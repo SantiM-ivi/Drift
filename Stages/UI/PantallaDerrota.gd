@@ -20,10 +20,11 @@ func _ready() -> void:
 	Input.mouse_mode   = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused  = true
 	process_mode       = Node.PROCESS_MODE_ALWAYS
-
+	GameStats.fijar_tiempo_final()   # <-- agregar esto antes de _mostrar_stats()
 	btn_reintentar.pressed.connect(_on_reintentar)
 	btn_menu.pressed.connect(_on_menu)
 	btn_reintentar.grab_focus()
+	_mostrar_stats()
 
 	_mostrar_stats()
 

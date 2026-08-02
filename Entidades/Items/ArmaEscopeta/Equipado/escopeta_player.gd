@@ -9,10 +9,10 @@ var camera: Camera3D
 @export var target_yaw_speed: float = 30.0
 @export var target_pitch_speed: float = 15.0
 @export var sonido_disparo: AudioStreamPlayer3D
-@export var max_balas_por_disparo: int = 8
+@export var max_balas_por_disparo: int = 1
 var can_fire: bool = true
 var activa: bool = false
-var balas_por_disparo: int = 1
+var balas_por_disparo: int = 10
 
 func _ready() -> void:
 	hide()

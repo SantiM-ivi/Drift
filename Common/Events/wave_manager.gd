@@ -25,7 +25,9 @@ var _enemigos_vivos_oleada: int = 0
 
 @export var texto_oleada: Label
 @export var texto_chatarra: Label
+const SONIDO_OLEADA_COMPLETA: AudioStream = preload("res://Assets/Audio/Music/ventacorrecta (1).wav")
 
+@export var oleada_sfx: AudioStreamPlayer
 var _chatarra_recolectada: int = 0
 
 const PANTALLA_DERROTA: PackedScene = preload("res://Stages/UI/PantallaDerrota.tscn")
@@ -176,6 +178,10 @@ func _on_enemigo_muerto(_enemigo: AutoEnemigo) -> void:
 func _completar_oleada() -> void:
 	print("[WaveManager] Oleada ", _oleada_actual, " completada")
 	emit_signal("oleada_completada", _oleada_actual)
+
+	if oleada_sfx:
+		oleada_sfx.stream = SONIDO_OLEADA_COMPLETA
+		oleada_sfx.play()
 
 	if _oleada_actual % oleada_boss_cada == 0:
 		emit_signal("evento_especial_completado", "BOSS")

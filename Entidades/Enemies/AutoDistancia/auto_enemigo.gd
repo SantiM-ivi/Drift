@@ -1,15 +1,19 @@
 class_name AutoEnemigo
 extends VehicleBody3D
+
 @onready var sm: StateMachine = $StateMachine
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var detection_area: Area3D = $DetectionArea
 @onready var attack_area: Area3D = $AttackArea
 @onready var shoot_point: Node3D = $ShootPoint
+
 @export var stats: Stats
 @export var explosion_scene: PackedScene = preload("res://Common/Effects/explosion_one.tscn")
 @export var impacto_scene: PackedScene
 var proyectil_scene: PackedScene = preload("res://Common/Projectiles/Bullets/bullet_enemy.tscn")
+
 signal enemigo_muerto(enemigo: AutoEnemigo)
+
 var player: RigidBody3D = null
 
 # ─── AUDIO ───────────────────────────────────────────────────────────────────
@@ -35,19 +39,21 @@ var player: RigidBody3D = null
 # ─── ATASCO / RETROCESO ─────────────────────────────────────────────────────
 @export_group("Atasco")
 @export var atasco_velocidad_umbral: float = 1.0
-@export var atasco_tiempo_umbral: float = 1.0
-@export var retroceso_duracion: float = 1.0
-@export var retroceso_fuerza: float = -800.0
-@export var retroceso_steering: float = 0.5
+@export var atasco_tiempo_umbral: float = 0.8
+@export var retroceso_duracion: float = 0.8
+@export var retroceso_fuerza: float = -1200.0
+@export var retroceso_steering: float = 0.6
 
-# ─── PERSECUCIÓN ─────────────────────────────────────────────────────────────
+# ─── PERSECUCIÓN / EMBESTIDA ─────────────────────────────────────────────────
 @export_group("Persecución")
-@export var torque_giro: float = 1200.0
-@export var amortiguacion_giro: float = 900.0
+@export var torque_giro: float = 8000.0
+@export var amortiguacion_giro: float = 150.0
+@export var fuerza_motor: float = 2500.0
 
-# ─── REBOTE CONTRA PAREDES ───────────────────────────────────────────────────
+# ─── REBOTE CONTRA PAREDES Y OTROS ENEMIGOS ──────────────────────────────────
 @export_group("Rebote")
-@export var duracion_aturdimiento: float = 0.4
+@export var duracion_aturdimiento: float = 0.3
+@export var fuerza_rebote_enemigos: float = 30.0
 const LAYER_PAREDES: int = 1 << 7  # Layer 8 en el editor (1-indexed)
 
 var _tiempo_atascado: float = 0.0
@@ -58,18 +64,28 @@ var _tiempo_aturdido: float = 0.0
 
 func _ready() -> void:
 	center_of_mass = Vector3(0, -1.0, 0)
-	mass = 100.0          # más pesado = más estable
-	angular_damp = 5.0
+	mass = 100.0
+	angular_damp = 1.0
 	attack_area.body_entered.connect(_on_attack_entered)
 	attack_area.body_exited.connect(_on_attack_exited)
 	body_entered.connect(_on_body_entered)
 	if stats:
 		stats.health_changed.connect(_on_health_changed)
 		stats.health_depleted.connect(_on_health_depleted)
-	# Siempre sabe dónde estás desde que nace, sin esperar a detectarte.
-	player = get_tree().get_first_node_in_group("Player")
+		
+	_buscar_jugador()
 	sm.transition_to(ChaseState.new(self, sm))
+
+func _buscar_jugador() -> void:
+	if player == null or not is_instance_valid(player):
+		player = get_tree().get_first_node_in_group("Player") as RigidBody3D
+
 func _physics_process(delta: float) -> void:
+	_buscar_jugador()
+	
+	if player and is_instance_valid(player) and nav:
+		nav.target_position = player.global_position
+
 	if _tiempo_aturdido > 0.0:
 		_tiempo_aturdido -= delta
 	else:
@@ -77,15 +93,29 @@ func _physics_process(delta: float) -> void:
 		_manejar_atasco(delta)
 	_auto_enderezar(delta)
 	_actualizar_motor_sfx()
+
 func _on_attack_entered(body: Node) -> void:
 	if body == player and body.is_in_group("Player"):
 		sm.transition_to(AttackState.new(self, sm))
+
 func _on_attack_exited(body: Node) -> void:
 	if body == player and body.is_in_group("Player"):
 		sm.transition_to(ChaseState.new(self, sm))
 
-# ── Rebote contra paredes (layer 8): mismo mecanismo que el del jugador ───────
 func _on_body_entered(body: Node) -> void:
+	# Rebote entre enemigos (AutoEnemigo)
+	if body is AutoEnemigo:
+		var direccion_empuje = (global_position - body.global_position).normalized()
+		direccion_empuje.y = 100.0
+		if direccion_empuje.length_squared() < 0.001:
+			direccion_empuje = Vector3.RIGHT
+		else:
+			direccion_empuje = direccion_empuje.normalized()
+
+		apply_central_impulse(direccion_empuje * fuerza_rebote_enemigos * mass)
+		return
+
+	# Rebote contra paredes (layer 8)
 	var velocidad := linear_velocity.length()
 	if velocidad <= 5.0:
 		return
@@ -105,14 +135,11 @@ func _auto_enderezar(delta: float) -> void:
 	var up_local = global_transform.basis.y
 	var dot = up_local.dot(Vector3.UP)
 	
-	# Si el auto está volcado (dot cercano a -1) o de lado (dot cercano a 0)
 	if dot < 0.5:
 		var correction = up_local.cross(Vector3.UP)
 		apply_torque(correction * 10000.0)
-		# Frenamos la rotación existente para que no siga girando
 		angular_velocity = angular_velocity.lerp(Vector3.ZERO, 0.1)
 
-# ── Si lleva atascado (casi sin moverse mientras persigue) retrocede y gira ──
 func _manejar_atasco(delta: float) -> void:
 	if _retrocediendo:
 		_tiempo_retroceso -= delta
@@ -126,7 +153,6 @@ func _manejar_atasco(delta: float) -> void:
 			_tiempo_atascado = 0.0
 		return
 
-	# Solo chequeamos atasco si el enemigo está activamente tratando de moverse
 	if player == null:
 		_tiempo_atascado = 0.0
 		return
@@ -143,23 +169,34 @@ func _iniciar_retroceso() -> void:
 	_retrocediendo = true
 	_tiempo_retroceso = retroceso_duracion
 	_retroceso_steering_dir = 1.0 if randf() < 0.5 else -1.0
-	print("[AutoEnemigo] Atascado — retrocediendo")
 
-# ── Rota el auto directo hacia una dirección, sin depender solo de las ruedas ──
-# Llamar desde ChaseState/AttackState con la dirección deseada (al player o al
-# próximo punto del path). Se suma al steering de las ruedas, no lo reemplaza.
 func aplicar_giro_directo(direccion_deseada: Vector3) -> void:
+	if _retrocediendo:
+		return
+
 	var frente_actual = Vector3(-global_basis.z.x, 0.0, -global_basis.z.z).normalized()
 	var objetivo = Vector3(direccion_deseada.x, 0.0, direccion_deseada.z).normalized()
 	if objetivo.length_squared() < 0.0001:
 		return
+
 	var diferencia = frente_actual.signed_angle_to(objetivo, Vector3.UP)
 	var torque = clamp(diferencia * torque_giro - angular_velocity.y * amortiguacion_giro, -torque_giro, torque_giro)
 	apply_torque(Vector3.UP * torque)
 
-# ─── AUDIO ───────────────────────────────────────────────────────────────────
+	var steer_angle = clamp(diferencia, -0.6, 0.6)
+	get_node("left_front").steering = steer_angle
+	get_node("right_front").steering = steer_angle
 
-# ── Llamar desde AttackState al instanciar el proyectil ───────────────────────
+	var alineado = frente_actual.dot(objetivo)
+	var motor = stats.current_speed if stats else fuerza_motor
+	
+	if alineado > -0.2:
+		get_node("left_back").engine_force = motor
+		get_node("right_back").engine_force = motor
+	else:
+		get_node("left_back").engine_force = motor * 0.6
+		get_node("right_back").engine_force = motor * 0.6
+
 func reproducir_disparo() -> void:
 	_reproducir_random(disparo_sfx, disparo_sonidos, disparo_pitch_min, disparo_pitch_max)
 
@@ -191,6 +228,7 @@ func _actualizar_motor_sfx() -> void:
 
 func _on_health_changed(cur_health: int, max_health: int) -> void:
 	print("Enemy HP:", cur_health, "/", max_health)
+
 func apply_damage(amount: int) -> void:
 	if stats:
 		var final_damage = max(0, amount - stats.current_defense)
@@ -198,7 +236,7 @@ func apply_damage(amount: int) -> void:
 		GameStats.dano_hecho += final_damage
 		_reproducir_golpe()
 		_spawnear_impacto()
-		print("Enemy recibió daño:", final_damage, "HP restante:", stats.health)
+
 func _on_health_depleted() -> void:
 	emit_signal("enemigo_muerto", self)
 	_spawnear_explosion()
@@ -208,6 +246,7 @@ func _on_health_depleted() -> void:
 		item_instance.global_position = global_position
 		get_tree().current_scene.add_child(item_instance)
 	queue_free()
+
 func _spawnear_explosion() -> void:
 	if not explosion_scene:
 		push_error("[AutoEnemigo] No hay explosion_scene asignada")
@@ -225,13 +264,13 @@ func _spawnear_impacto() -> void:
 	impacto.global_position = global_position
 	if impacto.has_method("explode"):
 		impacto.explode()
+
 func apply_knockback(direccion: Vector3, fuerza: float) -> void:
 	linear_velocity += direccion * fuerza
+
 func activar_modo_caza() -> void:
 	for hijo in detection_area.get_children():
 		if hijo is CollisionShape3D and hijo.shape is SphereShape3D:
-			# Duplicamos el shape para no pisar el radio de otras instancias
-			# que puedan estar compartiendo el mismo recurso.
 			hijo.shape = hijo.shape.duplicate()
 			hijo.shape.radius *= 2.5
 			print("[Enemigo] Modo caza activado — radio ampliado")

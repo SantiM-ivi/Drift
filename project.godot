@@ -17,6 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Drift"
 run/main_scene="uid://bn38vk5cg2243"
 config/features=PackedStringArray("4.7", "Mobile")
+boot_splash/bg_color=Color(0.8509804, 0.5803922, 0.05490196, 1)
 boot_splash/stretch_mode=4
 boot_splash/image="uid://mkca73rncydy"
 config/icon="uid://mkca73rncydy"

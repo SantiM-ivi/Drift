@@ -393,6 +393,7 @@ func apply_damage(amount: int) -> void:
 		var reduccion = clamp(stats.current_defense / 100.0, 0.0, 0.9)
 		var final_damage = max(1, int(amount * (1.0 - reduccion)))
 		stats.health -= final_damage
+		GameStats.dano_recibido += final_damage
 		print("[Player] daño recibido: %d | defensa: %.0f | reduccion: %.0f%% | daño final: %d | vida: %d/%d" % [
 			amount,
 			stats.current_defense,

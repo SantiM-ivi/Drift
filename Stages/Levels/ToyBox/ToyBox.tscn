@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d0kn0enveum23" path="res://Assets/Images/Mision.png" id="17_kwsyd"]
 [ext_resource type="FontFile" uid="uid://bfnrlaydpdmah" path="res://Assets/Fonts/DJGROSS.ttf" id="18_6ej83"]
 [ext_resource type="Script" uid="uid://b46027unelpj5" path="res://Common/Events/wave_manager.gd" id="19_5qbrc"]
+[ext_resource type="AudioStream" uid="uid://dk1ff6jwawyc6" path="res://Assets/Audio/Music/ventacorrecta (1).wav" id="19_8ndkw"]
 [ext_resource type="AudioStream" uid="uid://bj45g3kn448vg" path="res://Assets/Audio/SFX/tormentaarena.wav" id="19_afakk"]
 [ext_resource type="AudioStream" uid="uid://bulqyrdp0bqjk" path="res://Assets/Audio/SFX/Lluvia.wav" id="19_j4twu"]
 [ext_resource type="AudioStream" uid="uid://c1r4sgdu7gw60" path="res://Assets/Audio/SFX/RockaCallendo.wav" id="21_8ndkw"]
@@ -90,6 +91,7 @@ edge_max_length = 4.0
 script = ExtResource("3_rkloy")
 base_max_health = 400
 base_defense = 0
+base_attack = 15
 metadata/_custom_type_script = "uid://irbhor700bc7"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5qbrc"]
@@ -135,7 +137,7 @@ transform = Transform3D(-0.023306478, -0.80936444, -0.5868443, -0.9163907, -0.21
 navigation_mesh = SubResource("NavigationMesh_qqfgv")
 
 [node name="Level" parent="NavigationRegion3D" unique_id=1919716652 instance=ExtResource("1_fqv2x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.762024, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6887207, -23.762024, 0)
 
 [node name="SpawmDebugg" type="Node3D" parent="." unique_id=1857521648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1799865, 11.629683, 175.13223)
@@ -273,3 +275,8 @@ text = "chatarra
 0
 "
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MissionManager" unique_id=427201970]
+stream = ExtResource("19_8ndkw")
+
+[editable path="NavigationRegion3D/Level"]

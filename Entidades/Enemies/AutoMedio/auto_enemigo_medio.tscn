@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://chd5q4d6mhyc1" path="res://Assets/Audio/SFX/dev_guy-bullet-gunshot-impact-390253.mp3" id="10_d0soc"]
 [ext_resource type="AudioStream" uid="uid://btc3jq5hrfddb" path="res://Assets/Audio/SFX/floraphonic-metal-hit-10-193281.mp3" id="11_wsa7n"]
 [ext_resource type="AudioStream" uid="uid://brjhew2rrhk55" path="res://Assets/Audio/SFX/freesound_community-engine-47745.mp3" id="12_kc86o"]
+[ext_resource type="ArrayMesh" uid="uid://datr1v8vb4443" path="res://Assets/humo1.tres" id="16_mg53u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlvw7"]
 resource_name = "Material"
@@ -94,6 +95,32 @@ border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.30050156, 0, 0.0101768505, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbbje"]
+albedo_color = Color(0.13682577, 0.13682574, 0.13682571, 1)
+albedo_texture_force_srgb = true
+
+[sub_resource type="Gradient" id="Gradient_yslbc"]
+offsets = PackedFloat32Array(0.11508951, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.4509804)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qumuu"]
+gradient = SubResource("Gradient_yslbc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ep5jn"]
+lifetime_randomness = 0.1
+angle_min = -532.5
+angle_max = 487.30002
+use_rotation_3d = true
+rotation_3d_min = Vector3(45, 45, 45)
+rotation_3d_max = Vector3(360, 360, 360)
+gravity = Vector3(0, 0, 0)
+use_scale_3d = true
+scale_3d_min = Vector3(150, 150, 150)
+scale_3d_max = Vector3(200, 200, 200)
+scale_min = 154.55
+scale_max = 199.34999
+color_ramp = SubResource("GradientTexture1D_qumuu")
+
 [node name="AutoEnemigoMedio" type="VehicleBody3D" unique_id=1287735819]
 collision_layer = 4
 collision_mask = 151
@@ -105,6 +132,7 @@ stats = ExtResource("2_brctf")
 impacto_scene = ExtResource("3_1ywyf")
 disparo_sonidos = Array[AudioStream]([ExtResource("10_d0soc"), ExtResource("4_kc86o")])
 golpe_sonidos = Array[AudioStream]([ExtResource("11_wsa7n"), ExtResource("6_1ywyf")])
+torque_giro = 10000.0
 
 [node name="StateMachine" type="Node" parent="." unique_id=158606469]
 script = ExtResource("3_o0rts")
@@ -192,7 +220,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_31ug3")
 
 [node name="3DLifeBar" type="Sprite3D" parent="." unique_id=1782799994]
-transform = Transform3D(1.773726, 0, 0, 0, 1.7082102, 0, 0, 0, 1, 0, 4.0120926, 0)
+transform = Transform3D(3.233182, 0, 0, 0, 1.7082102, 0, 0, 0, 1, 0, 4.4431534, -1.2075416)
 billboard = 1
 texture = SubResource("ViewportTexture_1g0f4")
 script = ExtResource("9_kluew")
@@ -217,3 +245,17 @@ stream = ExtResource("11_wsa7n")
 
 [node name="MotorSFX" type="AudioStreamPlayer3D" parent="." unique_id=1195601550]
 stream = ExtResource("12_kc86o")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="." unique_id=790588475]
+transform = Transform3D(2.1426084, 1.1175871e-08, 0, -9.313226e-09, 2.1687505, 0, 0, 0, 1, -0.9785648, 0.37565184, 0.16423965)
+material_override = SubResource("StandardMaterial3D_gbbje")
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_ep5jn")
+draw_pass_1 = ExtResource("16_mg53u")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="." unique_id=2049225427]
+transform = Transform3D(2.142608, 1.3038516e-08, 0, -1.1175871e-08, 2.16875, 0, 0, 0, 1, 0.76397246, 0.29702762, 0.16312289)
+material_override = SubResource("StandardMaterial3D_gbbje")
+amount = 150
+process_material = SubResource("ParticleProcessMaterial_ep5jn")
+draw_pass_1 = ExtResource("16_mg53u")

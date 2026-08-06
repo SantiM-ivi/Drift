@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="8_hfkg8"]
 [ext_resource type="Shader" uid="uid://c3mum53ur7nhb" path="res://Assets/Shaders/Outline.gdshader" id="9_w1iso"]
 [ext_resource type="PackedScene" uid="uid://cud5k40cq7agd" path="res://Stages/UI/HUD.tscn" id="10_hfkg8"]
-[ext_resource type="PackedScene" uid="uid://dlke4nh4h6m2i" path="res://debbuger.tscn" id="11_w1iso"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3qju2"]
 shader = ExtResource("6_jlttl")
@@ -125,11 +124,6 @@ script = ExtResource("1_w1iso")
 
 [node name="HUD" parent="." unique_id=1305346954 instance=ExtResource("10_hfkg8")]
 
-[node name="Debbuger" parent="HUD" unique_id=916813104 instance=ExtResource("11_w1iso")]
-visible = false
-offset_left = -1.0
-offset_right = -1.0
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=749516468]
 environment = SubResource("Environment_5jrk3")
 
@@ -142,7 +136,7 @@ collisionMask = 3
 textureSets = SubResource("TextureSetsResource_v225v")
 textureDetail = 3
 terrainZones = SubResource("ZonesResource_osuy4")
-metadata/_edit_lock_ = true
+metadata/_edit_lock_ = false
 
 [node name="GridMap2" type="GridMap" parent="TerraBrush" unique_id=840960835]
 mesh_library = ExtResource("4_mg6p8")

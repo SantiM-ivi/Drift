@@ -55,10 +55,7 @@ folder_colors={
 "res://Assets/": "red",
 "res://Common/": "gray",
 "res://Entidades/": "green",
-"res://Localizacion/": "yellow",
-"res://PatchNotes/": "pink",
 "res://Stages/": "purple",
-"res://Utilidades/": "orange",
 "res://addons/": "teal"
 }
 

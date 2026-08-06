@@ -48,7 +48,6 @@
 [ext_resource type="Script" uid="uid://chn21x8nym33y" path="res://enemy_spawner.gd" id="36_awid8"]
 [ext_resource type="PackedScene" uid="uid://oydyud71mbwb" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.tscn" id="37_8erxf"]
 [ext_resource type="PackedScene" uid="uid://b1uk3ecnyne6e" path="res://Entidades/Enemies/AutoMedio/auto_enemigo_medio.tscn" id="40_ky6yl"]
-[ext_resource type="PackedScene" uid="uid://djd0jh7i4fndh" path="res://Entidades/Enemies/Boss/jefe_nivel1.tscn" id="40_pd7hw"]
 [ext_resource type="PackedScene" uid="uid://b34ftb0lkmj73" path="res://Entidades/Enemies/AutoGrande/auto_enemigo_Camioneta.tscn" id="41_qumuu"]
 [ext_resource type="ArrayMesh" uid="uid://datr1v8vb4443" path="res://Assets/humo1.tres" id="43_qumuu"]
 
@@ -617,7 +616,6 @@ script = ExtResource("36_awid8")
 enemigo_scene = ExtResource("37_8erxf")
 enemigo_scene_2 = ExtResource("40_ky6yl")
 enemigo_scene_3 = ExtResource("41_qumuu")
-jefe_scene = ExtResource("40_pd7hw")
 
 [node name="RayCastNorte" type="RayCast3D" parent="EnemySpawner" unique_id=1708172182]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.9937, 1.4589466, 0)

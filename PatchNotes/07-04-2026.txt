@@ -1,4 +1,0 @@
-Loot
-Enemigo muerto - soltar loot
-Equipar loot con tecla E
-El enemigo puede disparar y hacer daño

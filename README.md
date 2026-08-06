@@ -1,2 +1,0 @@
-# Drift
-Juego del año

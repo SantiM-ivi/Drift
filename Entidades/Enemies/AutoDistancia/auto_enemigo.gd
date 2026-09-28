@@ -105,14 +105,17 @@ func _on_attack_exited(body: Node) -> void:
 func _on_body_entered(body: Node) -> void:
 	# Rebote entre enemigos (AutoEnemigo)
 	if body is AutoEnemigo:
-		var direccion_empuje = (global_position - body.global_position).normalized()
-		direccion_empuje.y = 100.0
+		var direccion_empuje = (global_position - body.global_position)
+		direccion_empuje.y = 0.0 # CRÍTICO: 0 para no volcar los coches
+		
 		if direccion_empuje.length_squared() < 0.001:
-			direccion_empuje = Vector3.RIGHT
+			# Si están exactamente en el mismo punto (raro pero posible), empuje aleatorio horizontal
+			direccion_empuje = Vector3(randf_range(-1, 1), 0.0, randf_range(-1, 1))
 		else:
 			direccion_empuje = direccion_empuje.normalized()
 
-		apply_central_impulse(direccion_empuje * fuerza_rebote_enemigos * mass)
+		# Aplicamos un impulso más controlado y corto
+		apply_central_impulse(direccion_empuje * (fuerza_rebote_enemigos * 0.5) * mass)
 		return
 
 	# Rebote contra paredes (layer 8)
@@ -190,10 +193,17 @@ func aplicar_giro_directo(direccion_deseada: Vector3) -> void:
 	var alineado = frente_actual.dot(objetivo)
 	var motor = stats.current_speed if stats else fuerza_motor
 	
-	if alineado > -0.2:
-		get_node("left_back").engine_force = motor
-		get_node("right_back").engine_force = motor
+	# CONDUCCIÓN AGRESIVA: Solo frenan si el giro es extremadamente cerrado
+	if alineado > 0.7:
+		# Si van en recta hacia el objetivo, ganan un 20% extra de velocidad
+		get_node("left_back").engine_force = motor * 1.2
+		get_node("right_back").engine_force = motor * 1.2
+	elif alineado > -0.2:
+		# En curvas normales, apenas pierden velocidad (90%)
+		get_node("left_back").engine_force = motor * 0.9
+		get_node("right_back").engine_force = motor * 0.9
 	else:
+		# Curvas muy bruscas, derrapan pero mantienen fuerza (60%)
 		get_node("left_back").engine_force = motor * 0.6
 		get_node("right_back").engine_force = motor * 0.6
 

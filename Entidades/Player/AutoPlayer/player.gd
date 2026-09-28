@@ -4,7 +4,7 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 
 @export_group("Flotacion")
 @export var altura_flotacion: float = 0.6
-@export var fuerza_resorte: float   = 600.0
+@export var fuerza_resorte: float   = 601.0
 @export var amortiguacion: float    = 30.0
 
 @export_group("Movimiento")

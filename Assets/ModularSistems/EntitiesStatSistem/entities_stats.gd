@@ -21,17 +21,34 @@ const BASE_LEVEL_XP: float = 100.0
 signal health_depleted
 signal health_changed(cur_health: int, max_health: int)
 
-@export var base_max_health: int = 100
-@export var base_defense: int = 10
-@export var base_attack: int = 10
-@export var base_ram_damage: int = 10  
-@export var bonus_ram_damage: int = 0
+# --- IDENTIFICADOR DE ENTIDAD ---
+# En tu archivo "player_stats.tres", cambia esto a "Jugador"
+# En tu archivo "enemy_stats.tres", déjalo como "Enemigo"
+@export var tipo_entidad: String = "Enemigo"
+
+# --- STATS BASE CON SETTERS PARA RECALCULAR EN VIVO ---
+@export var base_max_health: int = 100:
+	set(value): base_max_health = value; _intentar_recalcular()
+@export var base_defense: int = 10:
+	set(value): base_defense = value; _intentar_recalcular()
+@export var base_attack: int = 10:
+	set(value): base_attack = value; _intentar_recalcular()
+@export var base_ram_damage: int = 10:
+	set(value): base_ram_damage = value; _intentar_recalcular()
+@export var bonus_ram_damage: int = 0:
+	set(value): bonus_ram_damage = value; _intentar_recalcular()
+
 @export var experience: int = 0: set = _on_experience_set
+
 # --- Movimiento ---
-@export var base_speed: float        = 400.0  # engine_force en chase
-@export var base_attack_speed: float = 200.0  # engine_force en attack (más lento)
-@export var base_steer_limit: float  = 0.5    # ángulo máximo de giro
-@export var base_steer_speed: float  = 150.0  # qué tan rápido gira
+@export var base_speed: float        = 400.0:
+	set(value): base_speed = value; _intentar_recalcular()
+@export var base_attack_speed: float = 200.0:
+	set(value): base_attack_speed = value; _intentar_recalcular()
+@export var base_steer_limit: float  = 0.5:
+	set(value): base_steer_limit = value; _intentar_recalcular()
+@export var base_steer_speed: float  = 150.0:
+	set(value): base_steer_speed = value; _intentar_recalcular()
 
 var current_speed: float        = 400.0
 var current_attack_speed: float = 200.0
@@ -46,14 +63,21 @@ var current_defense: int = 10
 var current_attack: int = 10
 var current_ram_damage: int = 10
 var health: int = 0: set = _on_health_set
-var stat_buffs: Array[StatBuff]
+
+var stat_buffs: Array[StatBuff] = []
+var _is_setup_done: bool = false
 
 func _init() -> void:
 	setup_stats.call_deferred()
 
 func setup_stats() -> void:
+	_is_setup_done = true
 	recalculate_stats()
 	health = current_max_health
+
+func _intentar_recalcular() -> void:
+	if _is_setup_done:
+		recalculate_stats()
 
 func add_buff(buff: StatBuff) -> void:
 	stat_buffs.append(buff)
@@ -81,16 +105,18 @@ func recalculate_stats() -> void:
 				if stat_multipliers[stat_name] < 0.0:
 					stat_multipliers[stat_name] = 0.0
 
-	var stat_sample_pos: float = (float(level) / 100.0) - 0.1
-	current_max_health  = base_max_health  * STAT_CURVES[BuffableStats.MAX_HEALTH].sample(stat_sample_pos)
-	current_defense     = base_defense     * STAT_CURVES[BuffableStats.DEFENSE].sample(stat_sample_pos)
-	current_attack      = base_attack      * STAT_CURVES[BuffableStats.ATTACK].sample(stat_sample_pos)
-	current_ram_damage  = base_ram_damage  * STAT_CURVES[BuffableStats.RAM_DAMAGE].sample(stat_sample_pos)
+	var stat_sample_pos: float = (float(level) - 1.0) / 100.0
+	stat_sample_pos = clamp(stat_sample_pos, 0.0, 1.0)
+
+	current_max_health  = int(base_max_health  * STAT_CURVES[BuffableStats.MAX_HEALTH].sample(stat_sample_pos))
+	current_defense     = int(base_defense     * STAT_CURVES[BuffableStats.DEFENSE].sample(stat_sample_pos))
+	current_attack      = int(base_attack      * STAT_CURVES[BuffableStats.ATTACK].sample(stat_sample_pos))
+	current_ram_damage  = int(base_ram_damage  * STAT_CURVES[BuffableStats.RAM_DAMAGE].sample(stat_sample_pos)) + bonus_ram_damage
+	
 	current_speed        = base_speed
 	current_attack_speed = base_attack_speed
 	current_steer_limit  = base_steer_limit
 	current_steer_speed  = base_steer_speed
-
 
 	for stat_name in stat_multipliers:
 		var prop: String = "current_" + stat_name
@@ -99,6 +125,9 @@ func recalculate_stats() -> void:
 	for stat_name in stat_addends:
 		var prop: String = "current_" + stat_name
 		set(prop, get(prop) + stat_addends[stat_name])
+		
+	if health > current_max_health:
+		health = current_max_health
 
 func _on_health_set(new_value: int) -> void:
 	health = clampi(new_value, 0, current_max_health)

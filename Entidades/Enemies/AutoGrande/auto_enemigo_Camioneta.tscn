@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6546pisjid7d" path="res://Entidades/Enemies/AutoDistancia/auto_enemigo.gd" id="1_7k37n"]
 [ext_resource type="Resource" uid="uid://c0u87n0va1dim" path="res://Entidades/Enemies/AutoGrande/autoCamioneta.tres" id="2_1cgf8"]
+[ext_resource type="PackedScene" uid="uid://cw1w36auokc4a" path="res://Entidades/Enemies/efecto_humo.tscn" id="2_ohfxr"]
 [ext_resource type="AudioStream" uid="uid://chd5q4d6mhyc1" path="res://Assets/Audio/SFX/dev_guy-bullet-gunshot-impact-390253.mp3" id="3_a4w8s"]
 [ext_resource type="PackedScene" uid="uid://cvcsiyyeb4is3" path="res://Common/Effects/explosion_three.tscn" id="3_b3uaj"]
 [ext_resource type="Script" uid="uid://bxls51iyqui8y" path="res://Entidades/Enemies/AutoDistancia/autoenemigo_state_machine.gd" id="3_nh23d"]
@@ -128,6 +129,7 @@ mass = 20.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_7k37n")
+humo_spawn_scene = ExtResource("2_ohfxr")
 stats = ExtResource("2_1cgf8")
 impacto_scene = ExtResource("3_b3uaj")
 disparo_sonidos = Array[AudioStream]([ExtResource("3_a4w8s"), ExtResource("4_b3uaj")])

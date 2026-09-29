@@ -98,14 +98,19 @@ func _ready() -> void:
 	if equipment:
 		equipment.inicializar(stats, velocidad_maxima)
 		equipment.equipar_inicio()
+		
 	if stats:
 		stats.health_depleted.connect(_on_health_depleted)
 		stats.health_changed.connect(_on_health_changed)
+		
+		# --- NUEVO: Sincronizar el HUD manualmente al arrancar ---
+		# Forzamos a que el HUD lea los valores actuales del .tres
+		_on_health_changed(stats.health, stats.current_max_health)
+
 	pickup_area.area_entered.connect(_on_area_entered)
 	pickup_area.area_exited.connect(_on_area_exited)
 	body_entered.connect(_on_body_entered)
 
-	# Motor en loop desde el inicio
 	if motor_sfx:
 		motor_sfx.play()
 

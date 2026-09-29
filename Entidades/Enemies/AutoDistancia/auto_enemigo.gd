@@ -1,5 +1,10 @@
 class_name AutoEnemigo
 extends VehicleBody3D
+# ─── EFECTO DE APARICIÓN ─────────────────────────────────────────────────────
+@export_group("Aparición")
+@export var tiempo_aparicion: float = 1.5 # Segundos que tarda en hacerse visible
+@export var humo_spawn_scene: PackedScene # Aquí puedes poner tu escena de humo
+var _esta_apareciendo: bool = true # Bloquea la IA mientras aparece
 
 @onready var sm: StateMachine = $StateMachine
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
@@ -74,13 +79,66 @@ func _ready() -> void:
 		stats.health_depleted.connect(_on_health_depleted)
 		
 	_buscar_jugador()
+	
+	# NUEVO: Iniciamos el efecto de aparición antes de empezar a perseguir
+	_iniciar_aparicion()
+	
 	sm.transition_to(ChaseState.new(self, sm))
+
+# --- NUEVAS FUNCIONES DE APARICIÓN ---
+
+func _iniciar_aparicion() -> void:
+	_esta_apareciendo = true
+	
+	# 1. Instanciar la bomba de humo si tienes una asignada
+	if humo_spawn_scene:
+		var humo = humo_spawn_scene.instantiate()
+		get_tree().current_scene.call_deferred("add_child", humo)
+		humo.global_position = global_position
+		# Si tu humo tiene un método explode() o emit(), llámalo aquí.
+
+	# 2. Buscar todas las mallas (MeshInstance3D) del auto
+	var meshes = _obtener_todas_las_mallas(self)
+	
+	# 3. Crear un Tween para animar la transparencia
+	var tween = create_tween()
+	tween.set_parallel(true) # Anima todas las piezas al mismo tiempo
+	
+	for mesh in meshes:
+		mesh.transparency = 1.0 # 1.0 = Totalmente invisible al inicio
+		# Animamos de 1.0 a 0.0 (opaco)
+		tween.tween_property(mesh, "transparency", 0.0, tiempo_aparicion)
+		
+	# Cuando termina la animación, habilitamos la IA
+	tween.chain().tween_callback(func(): _esta_apareciendo = false)
+
+# Función recursiva para encontrar la carrocería, ruedas, etc. (todo lo que sea Mesh)
+func _obtener_todas_las_mallas(nodo: Node) -> Array[MeshInstance3D]:
+	var lista: Array[MeshInstance3D] = []
+	for hijo in nodo.get_children():
+		if hijo is MeshInstance3D:
+			lista.append(hijo)
+		# Buscar dentro de los hijos de los hijos (por si las ruedas están anidadas)
+		lista.append_array(_obtener_todas_las_mallas(hijo))
+	return lista
 
 func _buscar_jugador() -> void:
 	if player == null or not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group("Player") as RigidBody3D
 
 func _physics_process(delta: float) -> void:
+	# NUEVO: Si está apareciendo, no hacemos nada y frenamos
+	if _esta_apareciendo:
+		get_node("left_back").engine_force = 0
+		get_node("right_back").engine_force = 0
+		get_node("left_back").brake = 10.0
+		get_node("right_back").brake = 10.0
+		return
+	else:
+		# Soltar el freno cuando ya apareció
+		get_node("left_back").brake = 0.0
+		get_node("right_back").brake = 0.0
+
 	_buscar_jugador()
 	
 	if player and is_instance_valid(player) and nav:

@@ -5,4 +5,5 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_umnsp")
+tipo_entidad = "Enemigo"
 metadata/_custom_type_script = "uid://irbhor700bc7"

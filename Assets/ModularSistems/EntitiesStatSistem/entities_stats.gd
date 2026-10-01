@@ -9,22 +9,13 @@ enum BuffableStats {
 	SPEED,     
 }
 
-const STAT_CURVES: Dictionary[BuffableStats, Curve] = {
-	BuffableStats.MAX_HEALTH: preload("uid://bl4di0h8srmiu"),
-	BuffableStats.DEFENSE:    preload("uid://dk6jwiov8fm8h"),
-	BuffableStats.ATTACK:     preload("uid://c55yl8ie1k14y"),
-	BuffableStats.RAM_DAMAGE: preload("uid://c55yl8ie1k14y"), 
-}
-
 const BASE_LEVEL_XP: float = 100.0
 
 signal health_depleted
 signal health_changed(cur_health: int, max_health: int)
 
 # --- IDENTIFICADOR DE ENTIDAD ---
-# En tu archivo "player_stats.tres", cambia esto a "Jugador"
-# En tu archivo "enemy_stats.tres", déjalo como "Enemigo"
-@export var tipo_entidad: String = "Enemigo"
+@export var tipo_entidad: String = "Jugador"
 
 # --- STATS BASE CON SETTERS PARA RECALCULAR EN VIVO ---
 @export var base_max_health: int = 100:
@@ -105,19 +96,18 @@ func recalculate_stats() -> void:
 				if stat_multipliers[stat_name] < 0.0:
 					stat_multipliers[stat_name] = 0.0
 
-	var stat_sample_pos: float = (float(level) - 1.0) / 100.0
-	stat_sample_pos = clamp(stat_sample_pos, 0.0, 1.0)
-
-	current_max_health  = int(base_max_health  * STAT_CURVES[BuffableStats.MAX_HEALTH].sample(stat_sample_pos))
-	current_defense     = int(base_defense     * STAT_CURVES[BuffableStats.DEFENSE].sample(stat_sample_pos))
-	current_attack      = int(base_attack      * STAT_CURVES[BuffableStats.ATTACK].sample(stat_sample_pos))
-	current_ram_damage  = int(base_ram_damage  * STAT_CURVES[BuffableStats.RAM_DAMAGE].sample(stat_sample_pos)) + bonus_ram_damage
+	# --- Aplicación directa de los valores base del Inspector ---
+	current_max_health  = base_max_health
+	current_defense     = base_defense
+	current_attack      = base_attack
+	current_ram_damage  = base_ram_damage + bonus_ram_damage
 	
 	current_speed        = base_speed
 	current_attack_speed = base_attack_speed
 	current_steer_limit  = base_steer_limit
 	current_steer_speed  = base_steer_speed
 
+	# --- Aplicación de Buffs (si los hay) ---
 	for stat_name in stat_multipliers:
 		var prop: String = "current_" + stat_name
 		set(prop, get(prop) * stat_multipliers[stat_name])
@@ -131,6 +121,9 @@ func recalculate_stats() -> void:
 
 func _on_health_set(new_value: int) -> void:
 	health = clampi(new_value, 0, current_max_health)
+	
+	print("[Stats] " + tipo_entidad + " - Vida actual: " + str(health) + " / " + str(current_max_health))
+	
 	health_changed.emit(health, current_max_health)
 	if health <= 0:
 		health_depleted.emit()

@@ -8,7 +8,7 @@ radius = 0.88964844
 height = 1.9841461
 
 [node name="Node3D" type="Area3D" unique_id=445187487]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_xjght")
@@ -19,7 +19,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.4962609e-07, 0, -1.4962609e-07, 0.5
 shape = SubResource("CapsuleShape3D_xjght")
 
 [node name="Proyectil" parent="." unique_id=959547879 instance=ExtResource("2_abfge")]
-transform = Transform3D(0.18248643, 0, 0, 0, 0.0019912976, -0.21172564, 0, 0.17286086, 0.0024390065, -0.010322098, 0.007726198, -8.900347e-05)
+transform = Transform3D(0.18248643, 0, 0, 0, 0.0019912983, -0.21172564, 0, 0.17286086, 0.0024390074, -0.010322098, 0.007726198, -8.900347e-05)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

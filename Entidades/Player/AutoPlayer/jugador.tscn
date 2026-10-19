@@ -508,7 +508,6 @@ mesh = ExtResource("16_r6tsw")
 
 [node name="Cañon" parent="VisualRoot/ItemsEquipados" unique_id=1115247385 instance=ExtResource("10_tsr6g")]
 transform = Transform3D(-0.8919283, -9.313226e-10, -1.8820944e-07, -4.656613e-09, 0.54375297, 6.661338e-16, 1.3467746e-07, 0, -1.246456, -0.009241587, 0.8171008, 0.25561142)
-visible = false
 projectile_scene = ExtResource("15_twon6")
 
 [node name="Metralleta" parent="VisualRoot/ItemsEquipados" unique_id=1646838913 instance=ExtResource("16_48gm7")]

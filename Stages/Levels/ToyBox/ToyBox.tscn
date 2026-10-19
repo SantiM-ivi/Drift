@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c5xen6irvbtlw" path="res://Entidades/Player/AutoPlayer/jugador.tscn" id="15_sp1my"]
 [ext_resource type="Script" uid="uid://bnv3pdic1imts" path="res://Entidades/Camera/Camera.gd" id="16_2py0s"]
 [ext_resource type="Shader" uid="uid://c3mum53ur7nhb" path="res://Assets/Shaders/Outline.gdshader" id="16_kwsyd"]
+[ext_resource type="Texture2D" uid="uid://cdx54clnjf601" path="res://Assets/Images/fondo_negro.jpg" id="17_6ej83"]
 [ext_resource type="Texture2D" uid="uid://d0kn0enveum23" path="res://Assets/Images/Mision.png" id="17_kwsyd"]
 [ext_resource type="FontFile" uid="uid://bfnrlaydpdmah" path="res://Assets/Fonts/DJGROSS.ttf" id="18_6ej83"]
 [ext_resource type="Script" uid="uid://b46027unelpj5" path="res://Common/Events/wave_manager.gd" id="19_5qbrc"]
@@ -118,6 +119,43 @@ loop_mode = 1
 loop_end = 69714
 mix_rate = 96000
 stereo = true
+
+[sub_resource type="Animation" id="Animation_2cmg6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d7t6k"]
+resource_name = "fade"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwsyd"]
+_data = {
+&"RESET": SubResource("Animation_2cmg6"),
+&"fade": SubResource("Animation_d7t6k")
+}
 
 [node name="ToyBox" type="Node3D" unique_id=2123033873]
 
@@ -242,5 +280,14 @@ horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MissionManager" unique_id=427201970]
 stream = ExtResource("19_8ndkw")
+
+[node name="Transicion" type="Sprite2D" parent="." unique_id=302613969]
+position = Vector2(311.5, 163)
+scale = Vector2(1.3411553, 1)
+texture = ExtResource("17_6ej83")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transicion" unique_id=1570266821]
+libraries/ = SubResource("AnimationLibrary_kwsyd")
+autoplay = &"fade"
 
 [editable path="NavigationRegion3D/Level"]

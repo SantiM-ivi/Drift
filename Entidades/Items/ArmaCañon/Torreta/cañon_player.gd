@@ -75,7 +75,6 @@ func fire() -> void:
 	projectile.global_transform = muzzle.global_transform
 	projectile.global_position += muzzle.global_transform.basis * offset
 
-	projectile.scale = Vector3(0.8, 0.8, 0.8)
 	if projectile.has_method("set_initial_direction"):
 		projectile.set_initial_direction(-muzzle.global_transform.basis.z, projectile_speed)
 	if projectile.has_method("set_damage"):

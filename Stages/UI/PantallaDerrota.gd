@@ -50,7 +50,7 @@ func _on_reintentar() -> void:
 	get_tree().reload_current_scene()
 
 func _on_menu() -> void:
-	Input.mouse_mode  = _mouse_mode_previo
+	Input.mouse_mode  = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = false
 	GameStats.reiniciar()
 	queue_free()

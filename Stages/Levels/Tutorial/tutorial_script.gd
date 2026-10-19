@@ -1,70 +1,70 @@
 extends Control
 
 @onready var hud            : CanvasLayer = $HUD  
-@onready var mission_label  : Label = $HUD/TopLeft/Content/MissionTitle
+@onready var mission_label  : Label = $Label
 
 const SCENE_JUEGO := "res://Stages/Levels/ToyBox/ToyBox.tscn"
 
 var missions: Array[Dictionary] = [
 	{
 		"id": "mover",
-		"texto": "Movete por el escenario",
-		"hint": "Flechas / WASD",
+		"texto": "Arrancá moviendo el auto, probá a ver cómo responde",
+		"hint": "Flechas o WASD",
 		"actions": ["ui_up", "ui_down", "ui_left", "ui_right"],
 		"require_all": true,
 	},
 	{
-		"id": "disparar",
-		"texto": "Probá tu arma",
-		"hint": "Click Izquierdo / F",
-		"actions": ["shoot"],
-		"require_all": false,
-	},
-	{
 		"id": "turbo",
-		"texto": "Activá el turbo",
+		"texto": "Si necesitás salir rápido de un lío, tirate un turbo",
 		"hint": "Shift",
 		"actions": ["boost"],
 		"require_all": false,
 	},
 	{
+		"id": "bocina",
+		"texto": "Pegale un bocinazo a alguien, que se enteren que llegaste",
+		"hint": "Espacio",
+		"actions": ["Bocina"],
+		"require_all": false,
+	},
+	{
 		"id": "equipar_arma",
-		"texto": "Equipate un arma",
+		"texto": "Ahora agarrá un arma, sin eso no vas a durar mucho",
 		"hint": "E",
 		"actions": [],
 		"require_all": false,
 		"key": KEY_E,
 	},
 	{
+		"id": "disparar",
+		"texto": "Listo, probala a ver qué tal dispara",
+		"hint": "Click izquierdo o F",
+		"actions": ["shoot"],
+		"require_all": false,
+	},
+	{
 		"id": "radio",
-		"texto": "Prendé la radio",
+		"texto": "Para el camino viene bien un poco de música, prendé la radio",
 		"hint": "U",
 		"actions": [],
 		"require_all": false,
 		"key": KEY_U,
 	},
 	{
-		"id": "radio_apagar",
-		"texto": "Apagá la radio",
-		"hint": "U de nuevo",
-		"actions": [],
-		"require_all": false,
-		"key": KEY_U,
-	},
-	{
 		"id": "cambiar_canal",
-		"texto": "Cambiá de música/canal",
+		"texto": "¿No te gusta lo que suena? Cambiá de canal",
 		"hint": "I",
 		"actions": [],
 		"require_all": false,
 		"key": KEY_I,
 	},
 	{
-		"id": "bocina",
-		"texto": "Tocá la bocina",
-		"hint": "Espacio",
-		"actions": ["Bocina"],
+		"id": "radio_apagar",
+		"texto": "Cuando necesites concentrarte, apagala",
+		"hint": "U otra vez",
+		"actions": [],
 		"require_all": false,
+		"key": KEY_U,
 	},
 ]
 

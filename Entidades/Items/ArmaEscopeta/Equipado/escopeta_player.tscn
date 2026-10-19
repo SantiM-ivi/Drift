@@ -94,7 +94,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 script = ExtResource("1_8pbgv")
 gun = NodePath("sosten_Escopetas")
 muzzle = NodePath("escepetas/Muzzle")
-fire_rate = 0.05
+fire_rate = 0.15
 sonido_disparo = NodePath("AudioStreamPlayer3D")
 max_balas_por_disparo = 10
 

@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c2nccsl6ra1nj" path="res://Assets/Audio/SFX/Musica Menu.wav" id="3_ppwrp"]
 [ext_resource type="Texture2D" uid="uid://bg1xsfvaae530" path="res://Assets/Images/metaltexture.jpg" id="4_o0wdi"]
 [ext_resource type="Script" uid="uid://ce4uk8smcu5oa" path="res://Stages/Menu/Opciones/Options.gd" id="6_8vhrd"]
+[ext_resource type="Texture2D" uid="uid://cdx54clnjf601" path="res://Assets/Images/fondo_negro.jpg" id="8_2cmg6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0wdi"]
 texture = ExtResource("4_o0wdi")
@@ -116,6 +117,43 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="Animation" id="Animation_2cmg6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d7t6k"]
+resource_name = "fade"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tooc0"]
+_data = {
+&"RESET": SubResource("Animation_2cmg6"),
+&"fade": SubResource("Animation_d7t6k")
+}
+
 [node name="MainMenu" type="Control" unique_id=471429842]
 layout_mode = 3
 anchors_preset = 15
@@ -214,17 +252,16 @@ stream = ExtResource("3_ppwrp")
 autoplay = true
 
 [node name="Opciones" type="CenterContainer" parent="." unique_id=1390253996]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -128.0
-offset_right = 164.0
-offset_bottom = 307.0
+offset_left = -273.0
+offset_top = -137.0
+offset_right = 175.12756
+offset_bottom = 312.8911
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.60438895, 0.60438895)
@@ -342,3 +379,12 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2cmg6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_d7t6k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mj260")
 text = "◀   VOLVER"
+
+[node name="Transicion" type="Sprite2D" parent="." unique_id=762286836]
+position = Vector2(311.5, 163)
+scale = Vector2(1.3411553, 1)
+texture = ExtResource("8_2cmg6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transicion" unique_id=231444042]
+libraries/ = SubResource("AnimationLibrary_tooc0")
+autoplay = &"fade"

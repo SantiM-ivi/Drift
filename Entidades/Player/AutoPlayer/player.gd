@@ -26,6 +26,7 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 @export var fov_base: float      = 75.0
 @export var fov_velocidad_max: float = 90.0
 @export var suavidad_fov: float  = 5.0
+@export var fov_boost_extra: float = 45.0
 
 @export_group("Visual")
 @export var inclinacion_lateral: float  = 8.0
@@ -228,12 +229,14 @@ func _sincronizar_camara() -> void:
 func _actualizar_fov(delta: float) -> void:
 	if not camara:
 		return
-	var vel_max_actual = velocidad_maxima + _bonus_velocidad
 	var vel_ratio = clamp(
-		Vector2(linear_velocity.x, linear_velocity.z).length() / vel_max_actual,
+		Vector2(linear_velocity.x, linear_velocity.z).length() / velocidad_maxima,
 		0.0, 1.0
 	)
 	var fov_objetivo = lerp(fov_base, fov_velocidad_max, vel_ratio)
+	if _boost_activo:
+		fov_objetivo += fov_boost_extra
+	fov_objetivo = clamp(fov_objetivo, 30.0, 120.0)
 	camara.fov = lerp(camara.fov, fov_objetivo, delta * suavidad_fov)
 
 # ─── DISPARO ─────────────────────────────────────────────────────────────────

@@ -19,7 +19,7 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.074953824, 0, 0.0304
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.03416649, 1.1662431, 0.036544945)
 
 [node name="Muzzle" type="Marker3D" parent="cañon_arriba" unique_id=1301026945]
-transform = Transform3D(-3.5854547, 0, -6.308488e-08, 0, 2.9697645, 0, 3.134504e-07, 0, -0.72160697, -0.05458072, 0.37261868, -0.21406054)
+transform = Transform3D(-3.5854547, 0, -6.30849e-08, 0, 2.9697645, 0, 3.1345036e-07, 0, -0.72160697, -0.054581083, 0.37261856, 1.8316405)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2095458860]
 transform = Transform3D(1, -9.18534e-38, 7.8142624e-23, 0, 1, 1.1754583e-15, -7.8142624e-23, -1.1754583e-15, 1, 0, 0, 0)

@@ -1,5 +1,10 @@
 class_name AutoEnemigo
 extends VehicleBody3D
+# ─── EFECTO DE APARICIÓN ─────────────────────────────────────────────────────
+@export_group("Aparición")
+@export var tiempo_aparicion: float = 1.5 # Segundos que tarda en hacerse visible
+@export var humo_spawn_scene: PackedScene # Aquí puedes poner tu escena de humo
+var _esta_apareciendo: bool = true # Bloquea la IA mientras aparece
 
 @onready var sm: StateMachine = $StateMachine
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
@@ -74,13 +79,66 @@ func _ready() -> void:
 		stats.health_depleted.connect(_on_health_depleted)
 		
 	_buscar_jugador()
+	
+	# NUEVO: Iniciamos el efecto de aparición antes de empezar a perseguir
+	_iniciar_aparicion()
+	
 	sm.transition_to(ChaseState.new(self, sm))
+
+# --- NUEVAS FUNCIONES DE APARICIÓN ---
+
+func _iniciar_aparicion() -> void:
+	_esta_apareciendo = true
+	
+	# 1. Instanciar la bomba de humo si tienes una asignada
+	if humo_spawn_scene:
+		var humo = humo_spawn_scene.instantiate()
+		get_tree().current_scene.call_deferred("add_child", humo)
+		humo.global_position = global_position
+		# Si tu humo tiene un método explode() o emit(), llámalo aquí.
+
+	# 2. Buscar todas las mallas (MeshInstance3D) del auto
+	var meshes = _obtener_todas_las_mallas(self)
+	
+	# 3. Crear un Tween para animar la transparencia
+	var tween = create_tween()
+	tween.set_parallel(true) # Anima todas las piezas al mismo tiempo
+	
+	for mesh in meshes:
+		mesh.transparency = 1.0 # 1.0 = Totalmente invisible al inicio
+		# Animamos de 1.0 a 0.0 (opaco)
+		tween.tween_property(mesh, "transparency", 0.0, tiempo_aparicion)
+		
+	# Cuando termina la animación, habilitamos la IA
+	tween.chain().tween_callback(func(): _esta_apareciendo = false)
+
+# Función recursiva para encontrar la carrocería, ruedas, etc. (todo lo que sea Mesh)
+func _obtener_todas_las_mallas(nodo: Node) -> Array[MeshInstance3D]:
+	var lista: Array[MeshInstance3D] = []
+	for hijo in nodo.get_children():
+		if hijo is MeshInstance3D:
+			lista.append(hijo)
+		# Buscar dentro de los hijos de los hijos (por si las ruedas están anidadas)
+		lista.append_array(_obtener_todas_las_mallas(hijo))
+	return lista
 
 func _buscar_jugador() -> void:
 	if player == null or not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group("Player") as RigidBody3D
 
 func _physics_process(delta: float) -> void:
+	# NUEVO: Si está apareciendo, no hacemos nada y frenamos
+	if _esta_apareciendo:
+		get_node("left_back").engine_force = 0
+		get_node("right_back").engine_force = 0
+		get_node("left_back").brake = 10.0
+		get_node("right_back").brake = 10.0
+		return
+	else:
+		# Soltar el freno cuando ya apareció
+		get_node("left_back").brake = 0.0
+		get_node("right_back").brake = 0.0
+
 	_buscar_jugador()
 	
 	if player and is_instance_valid(player) and nav:
@@ -105,14 +163,17 @@ func _on_attack_exited(body: Node) -> void:
 func _on_body_entered(body: Node) -> void:
 	# Rebote entre enemigos (AutoEnemigo)
 	if body is AutoEnemigo:
-		var direccion_empuje = (global_position - body.global_position).normalized()
-		direccion_empuje.y = 100.0
+		var direccion_empuje = (global_position - body.global_position)
+		direccion_empuje.y = 0.0 # CRÍTICO: 0 para no volcar los coches
+		
 		if direccion_empuje.length_squared() < 0.001:
-			direccion_empuje = Vector3.RIGHT
+			# Si están exactamente en el mismo punto (raro pero posible), empuje aleatorio horizontal
+			direccion_empuje = Vector3(randf_range(-1, 1), 0.0, randf_range(-1, 1))
 		else:
 			direccion_empuje = direccion_empuje.normalized()
 
-		apply_central_impulse(direccion_empuje * fuerza_rebote_enemigos * mass)
+		# Aplicamos un impulso más controlado y corto
+		apply_central_impulse(direccion_empuje * (fuerza_rebote_enemigos * 0.5) * mass)
 		return
 
 	# Rebote contra paredes (layer 8)
@@ -190,10 +251,17 @@ func aplicar_giro_directo(direccion_deseada: Vector3) -> void:
 	var alineado = frente_actual.dot(objetivo)
 	var motor = stats.current_speed if stats else fuerza_motor
 	
-	if alineado > -0.2:
-		get_node("left_back").engine_force = motor
-		get_node("right_back").engine_force = motor
+	# CONDUCCIÓN AGRESIVA: Solo frenan si el giro es extremadamente cerrado
+	if alineado > 0.7:
+		# Si van en recta hacia el objetivo, ganan un 20% extra de velocidad
+		get_node("left_back").engine_force = motor * 1.2
+		get_node("right_back").engine_force = motor * 1.2
+	elif alineado > -0.2:
+		# En curvas normales, apenas pierden velocidad (90%)
+		get_node("left_back").engine_force = motor * 0.9
+		get_node("right_back").engine_force = motor * 0.9
 	else:
+		# Curvas muy bruscas, derrapan pero mantienen fuerza (60%)
 		get_node("left_back").engine_force = motor * 0.6
 		get_node("right_back").engine_force = motor * 0.6
 

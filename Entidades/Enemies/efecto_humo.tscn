@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cw1w36auokc4a"]
+
+[ext_resource type="Script" uid="uid://c5budnhvkcfo7" path="res://Entidades/Enemies/efecto_humo.gd" id="1_ut1xh"]
+
+[node name="EfectoHumo" type="GPUParticles3D" unique_id=610280764]
+emitting = false
+one_shot = true
+explosiveness = 0.9
+script = ExtResource("1_ut1xh")

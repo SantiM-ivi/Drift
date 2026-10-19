@@ -1,9 +1,9 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://d4n15t8bbtgo3"]
 
-[ext_resource type="Texture2D" uid="uid://ciusqrhct86ec" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_y4ynj"]
-[ext_resource type="Texture2D" uid="uid://cq760x8yjxx8y" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_Emission.png" id="2_1ow6l"]
-[ext_resource type="Texture2D" uid="uid://yib1r8yom2qs" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_mm8tv"]
-[ext_resource type="Texture2D" uid="uid://cvwfl6wqir3ks" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_Normal.png" id="4_hc07o"]
+[ext_resource type="Texture2D" uid="uid://c5mkp35abo2lx" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="1_y4ynj"]
+[ext_resource type="Texture2D" uid="uid://2e7o872v84jp" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_Emission.png" id="2_1ow6l"]
+[ext_resource type="Texture2D" uid="uid://ddamp13wclotm" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="3_mm8tv"]
+[ext_resource type="Texture2D" uid="uid://dng5ar0j13gxi" path="res://Entidades/Items/ArmaFrontal/Parachoque/parachoque_DefaultMaterial_Normal.png" id="4_hc07o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lybe"]
 resource_name = "Material.001"

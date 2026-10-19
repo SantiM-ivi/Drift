@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" uid="uid://tanwk50icrp8" path="res://Entidades/Player/AutoPlayer/player.gd" id="1_omvyu"]
 [ext_resource type="Script" uid="uid://irbhor700bc7" path="res://Assets/ModularSistems/EntitiesStatSistem/entities_stats.gd" id="2_0m7vh"]
-[ext_resource type="Texture2D" uid="uid://dbs8ym6eyy4v1" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
-[ext_resource type="Texture2D" uid="uid://blskpcrqpdk45" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
-[ext_resource type="Texture2D" uid="uid://butryowtykkvn" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
-[ext_resource type="Texture2D" uid="uid://bbqnn0ag6mo4p" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
+[ext_resource type="Texture2D" uid="uid://k6pmns5ouf4c" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="3_qw2bf"]
+[ext_resource type="Texture2D" uid="uid://urarojvo8s8s" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Emission.png" id="4_g5h5a"]
+[ext_resource type="Texture2D" uid="uid://c8srpmcfxep2f" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="5_o2m60"]
+[ext_resource type="Texture2D" uid="uid://ddwuvra25s0p7" path="res://Entidades/Player/AutoPlayer/Body/Coche_1_DefaultMaterial_Normal.png" id="6_hcpjn"]
 [ext_resource type="Texture2D" uid="uid://dxqdbbpdsob35" path="res://Entidades/Items/Ruedas/Rueda2/Rueda_tanque_DefaultMaterial_BaseColor.png-DefaultMaterial_Alpha.png" id="7_6rwq1"]
 [ext_resource type="AudioStream" uid="uid://bq1cp37sulwpx" path="res://Assets/Audio/SFX/CrashSFX.wav" id="7_u02rt"]
 [ext_resource type="AudioStream" uid="uid://d0xlg4fka54er" path="res://Assets/Audio/SFX/MotorSFX.wav" id="8_cks8u"]
 [ext_resource type="Texture2D" uid="uid://cacn5ghym4axf" path="res://Entidades/Items/Ruedas/Rueda2/Rueda_tanque_DefaultMaterial_Emission.png" id="8_luh2e"]
-[ext_resource type="PackedScene" uid="uid://f561fbc0b875" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
+[ext_resource type="PackedScene" uid="uid://djrc002ix1jtr" path="res://Entidades/Player/AutoPlayer/RuedaJugador/Rueda_Monster.glb" id="8_qw2bf"]
 [ext_resource type="Texture2D" uid="uid://qurpases375q" path="res://Entidades/Items/Ruedas/Rueda2/Rueda_tanque_DefaultMaterial_Metallic.png-DefaultMaterial_Roughness.png" id="9_85ju8"]
 [ext_resource type="ArrayMesh" uid="uid://0h4qipncgiv4" path="res://Entidades/Items/Capos/Mesh/capo2.tres" id="9_irr11"]
-[ext_resource type="AudioStream" uid="uid://dq1ldk05xovbe" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
+[ext_resource type="AudioStream" uid="uid://twjy7sd71vv6" path="res://Assets/Audio/SFX/EquiparSFX.wav" id="9_nugh5"]
 [ext_resource type="Texture2D" uid="uid://b8t3t52cc1elr" path="res://Entidades/Items/Ruedas/Rueda2/Rueda_tanque_DefaultMaterial_Normal.png" id="10_awid8"]
 [ext_resource type="PackedScene" uid="uid://iyvtpior804e" path="res://Entidades/Items/ArmaCañon/Torreta/cañon_layer.tscn" id="10_tsr6g"]
 [ext_resource type="Texture2D" uid="uid://c1dqwkdwpw5om" path="res://Entidades/Items/Ruedas/Rueda3/Rueda_Monster (1)_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="11_8erxf"]
@@ -426,25 +426,25 @@ skeleton = NodePath("")
 [node name="BackLeft" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=475907750 instance=ExtResource("8_qw2bf")]
 transform = Transform3D(0.29998082, -0.0033928505, 0, 0.0033928505, 0.29998082, 0, 0, 0, 0.3, 0.85825956, -0.37456143, 1.8877201)
 
-[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/BackLeft" index="0" unique_id=1161530831]
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/BackLeft" index="0" unique_id=1868836790]
 transform = Transform3D(-6.217249e-15, 0.4873771, 0, -0.95382166, -2.6645353e-15, 0, 0, 0, 0.95382166, 0.008053303, 0.17772567, 0.050364017)
 
 [node name="BackRight" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1379571743 instance=ExtResource("8_qw2bf")]
 transform = Transform3D(0.29998082, -0.0033928512, 0, 0.0033928512, 0.29998082, 0, 0, 0, 0.3, -0.863879, -0.39403924, 1.8877201)
 
-[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/BackRight" index="0" unique_id=1161530831]
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/BackRight" index="0" unique_id=1868836790]
 transform = Transform3D(-7.1054274e-15, 0.4873771, 0, -0.95382166, -2.220446e-15, 0, 0, 0, 0.95382166, 0.008053541, 0.1391648, 0.050364017)
 
 [node name="FrontLeft" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=1032941094 instance=ExtResource("8_qw2bf")]
 transform = Transform3D(0.29998082, -0.0033928512, 0, 0.0033928512, 0.29998082, 0, 0, 0, 0.3, -0.863879, -0.39403924, -2.016001)
 
-[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/FrontLeft" index="0" unique_id=1161530831]
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/FrontLeft" index="0" unique_id=1868836790]
 transform = Transform3D(-7.1054274e-15, 0.4873771, 0, -0.95382166, -2.220446e-15, 0, 0, 0, 0.95382166, 0.008053541, 0.17450023, 0.050364494)
 
 [node name="FrontRight" parent="VisualRoot/ItemsEquipados/Rueda1" unique_id=2084281668 instance=ExtResource("8_qw2bf")]
 transform = Transform3D(0.29998082, -0.0033928517, 0, 0.0033928517, 0.29998082, 0, 0, 0, 0.3, 0.84436285, -0.3747186, -2.016001)
 
-[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/FrontRight" index="0" unique_id=1161530831]
+[node name="Cylinder" parent="VisualRoot/ItemsEquipados/Rueda1/FrontRight" index="0" unique_id=1868836790]
 transform = Transform3D(-7.993606e-15, 0.4873771, 0, -0.95382166, -2.6645353e-15, 0, 0, 0, 0.95382166, 0.008053541, 0.3034649, 0.050364494)
 
 [node name="Rueda2" type="Node3D" parent="VisualRoot/ItemsEquipados" unique_id=76501026]

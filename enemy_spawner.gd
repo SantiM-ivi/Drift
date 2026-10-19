@@ -4,7 +4,7 @@ extends Node3D
 @export var enemigo_scene: PackedScene
 @export var enemigo_scene_2: PackedScene
 @export var enemigo_scene_3: PackedScene
-@export var max_enemigos: int = 10
+@export var max_enemigos: int = 30
 
 var _enemigos_activos: int = 0
 @onready var timer: Timer = $Timer

@@ -10,5 +10,6 @@ bonus_ram_damage = 0
 nitro_multiplicador = 0.0
 bullet_scene = ExtResource("1_mnkfe")
 fire_rate = 0.05
+bullet_speed = 60.0
 bullet_damage = 5
 metadata/_custom_type_script = "uid://cx5rblxg7yl42"

@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_ayjd3")
+base_max_health = 50
+base_defense = 0
 base_speed = 1000.0
 base_steer_limit = 100.0
 base_steer_speed = 1000.0

@@ -35,7 +35,9 @@ enum Estado { QUIETO, ACELERANDO, EN_AIRE, BOOST }
 @export var skid_marks: Array[GPUParticles3D]
 @export_group("Referencias")
 @export var stats: Stats
-
+@export var tiempo_max_en_aire: float = 5.0
+@export var altura_rescate: float = 20.0
+var _tiempo_en_aire: float = 0.0
 # ─── NODOS ───────────────────────────────────────────────────────────────────
 
 @onready var rueda_fl: Node3D          = $VisualRoot/ItemsEquipados/Rueda1/FrontLeft
@@ -134,8 +136,9 @@ func _physics_process(delta: float) -> void:
 	var giro = Input.get_axis("ui_right", "ui_left")
 	if en_suelo:
 		camara_pivot.rotate_y(giro * velocidad_giro * delta)
+	_vigilar_tiempo_en_aire(delta, en_suelo)
 	_intentar_recoger()
-
+	
 	_manejar_drift_sfx(en_suelo, giro)
 	_actualizar_skid_marks(en_suelo, accel_inp)
 
@@ -567,3 +570,21 @@ func _actualizar_skid_marks(en_suelo: bool, accel_inp: float) -> void:
 	for particula in skid_marks:
 		if particula:
 			particula.emitting = avanzando
+
+func _vigilar_tiempo_en_aire(delta: float, en_suelo: bool) -> void:
+	if en_suelo:
+		_tiempo_en_aire = 0.0
+		return
+	_tiempo_en_aire += delta
+	if _tiempo_en_aire >= tiempo_max_en_aire:
+		_tiempo_en_aire = 0.0
+		_rescatar_en_y()
+
+func _rescatar_en_y() -> void:
+	var pos = global_position
+	pos.y = altura_rescate
+	global_position = pos
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	global_rotation = Vector3(0.0, global_rotation.y, 0.0)
+	_velocidad_actual = 0.0

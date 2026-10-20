@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_uw57w")
-base_max_health = 200
 base_defense = 5
 base_attack = 15
 base_ram_damage = 25

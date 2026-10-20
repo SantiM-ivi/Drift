@@ -10,8 +10,9 @@ tipo = 4
 bonus_damage = 50
 bonus_ram_damage = 0
 nitro_multiplicador = 0.0
+fire_rate = 1.0
 bullet_speed = 20.0
-bullet_damage = 5
+bullet_damage = 50
 metadata/_custom_type_script = "uid://cx5rblxg7yl42"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_85xkm"]

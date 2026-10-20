@@ -192,3 +192,7 @@ Bocina={
 3d_physics/layer_4="Items"
 3d_physics/layer_5="Bullet Jugador"
 3d_physics/layer_6="Bullet Enemiga"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
